@@ -39,8 +39,8 @@ function MyTabBar({ state, descriptors, navigation }) {
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-            ? options.title
-            : route.name;
+              ? options.title
+              : route.name;
 
         const isFocused = state.index === index;
 
@@ -72,25 +72,25 @@ function MyTabBar({ state, descriptors, navigation }) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1,backgroundColor:BackgroundColor, justifyContent:"center", alignItems:"center", height:56 }}
+            style={{ flex: 1, backgroundColor: BackgroundColor, justifyContent: "center", alignItems: "center", height: 56 }}
           >
-            {label === "Home"? isFocused?
-            <HOMEACTIVE />
-            :<HOME />
-            :label === "Wallet"?isFocused?
-            <WALLETACTIVE />
-            :<WALLET /> :
-            label ==="Compaign"?isFocused?
-            <COMPAIGNACTIVE />
-            :<COMPAIGN />:
-            label === "Profile"?isFocused?
-            <USERACTIVE />:<USER />:null}
-            <CustomText 
-              text={label} 
-              locations={[0,1]} 
-              colors={isFocused?["#70A2FF", "#F76E64"]:["gray","gray"]} 
-              style={{fontSize:13,fontWeight:simpletext, textAlign:"center"}} 
-        />
+            {label === "Home" ? isFocused ?
+              <HOMEACTIVE />
+              : <HOME />
+              : label === "Wallet" ? isFocused ?
+                <WALLETACTIVE />
+                : <WALLET /> :
+                label === "Compaign" ? isFocused ?
+                  <COMPAIGNACTIVE />
+                  : <COMPAIGN /> :
+                  label === "Profile" ? isFocused ?
+                    <USERACTIVE /> : <USER /> : null}
+            <CustomText
+              text={label}
+              locations={[0, 1]}
+              colors={isFocused ? ["gray", "gray"] : ["#70A2FF", "#F76E64"]}
+              style={{ fontSize: 13, fontFamily: simpletext, textAlign: "center" }}
+            />
           </TouchableOpacity>
         );
       })}
