@@ -31,12 +31,12 @@ const AssetsModal = ({visible, setVisible}) => {
     const renderItem = ({item}) => {
      
         return (
-            <View style={styles.flatlistitemmain}>
+            <TouchableOpacity style={styles.flatlistitemmain} onPress={() => setVisible()}>
                 <View style={{marginHorizontal:10,flexDirection:'row',alignItems: 'center'}}>
                     <View style={{height:12,width:12, marginRight:15,borderRadius:7,backgroundColor:item.color}}></View>
                     <Text style={{color:'#fff',fontSize:14,fontFamily:simpletext}}>{item.name}</Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 

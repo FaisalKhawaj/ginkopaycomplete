@@ -27,6 +27,8 @@ import RequestPaymentModal from '../../components/RequestPaymentModal';
 import SentModalConfirm from '../../components/SentModalConfirm';
 import CopyLinkModal from '../../components/LinkCopyModal'
 import PurchaseMethod from '../../components/PurchaseMethod'
+import TokenModal from '../../components/SendModalToken'
+import TokenModal2 from '../../components/SendModalToken2'
 const {width, height} = Dimensions.get("window");
 
 let protfiliodata = [
@@ -91,7 +93,8 @@ const Home = ({navigation}) => {
   const [sendmodalconfirm, setSendModalConfirm] = useState(false) 
   const [copylink, setCopyLink] = useState(false)
   const [requestPayment, setRequestPayment] = useState(false)
-  
+  const [tokenmodal,setTokenModal] = useState(false)
+  const [tokenmodal2,setTokenModal2] = useState(false)
   const [modaldata, setModalData] = useState({
       key:1,
       name: "Beexay",
@@ -194,6 +197,19 @@ const Home = ({navigation}) => {
     setBuyModal1(!buymodal1)
     setBuyModal2(!buymodal2)
   }
+  const setsendModalToken2 = () =>{
+    
+    setTokenModal2(true)
+  }
+  const setSendMessageModalFun = () => {
+    setSentModal(true);
+    setTokenModal2(false)
+  }
+  const setsendModalConfirmfun = () => {
+    setSendModalConfirm(false);
+    setSentModal(false)
+    setSendMessageModal(false)
+  }
   return (
     <Container style={styles.container}>
       <StatusBar hidden />
@@ -295,16 +311,17 @@ const Home = ({navigation}) => {
         }
         </View>
         <AssetsModal visible={assetsmodal} setVisible={setAssetsModal} />
-        <SentModal visible={sentmodal} setVisible={setSentModal} setSendMessageModal={setSendMessageModal} setModalData={setModalData} />
+        <SentModal visible={sentmodal} setVisible={setSentModal} setSendMessageModal={setSendMessageModal} setModalData={setModalData} tokenmodal={tokenmodal} setTokenModal={setTokenModal} setTokenModal2={setTokenModal2} />
         <RecievedModal visible={recievemodal} setVisible={setRecievedModal} setCopyLink={setCopyLink} setRequestPayment={setRequestPayment} />
         <PurchaseMethod visible={pruchasemodal} setVisible={setPurchaseModall} setBuyModall={setBuyModall} />
         <BuyModal visible={buymodal} setVisible={setBuyModal} setBuyModal11={setBuyModal11} />
         <BuyModal1 visible={buymodal1} setVisible={setBuyModal1} setBuyModal22={setBuyModal22} />
         <BuyModal2 visible={buymodal2} setVisible={setBuyModal2} />
-        <SentModalMessage visible={sendmessagemodal} setVisible={setSendMessageModal} data={modaldata} setReqPayModal={setReqPayModal} /> 
-        <RequestPaymentModalusemax  visible={reqpaymodal}  setVisible={setReqPayModal} setSendModalConfirm={setSendModalConfirm} /> 
-        <SentModalConfirm visible={sendmodalconfirm} setVisible={setSendModalConfirm} />
-
+        <SentModalMessage visible={sendmessagemodal} setVisible={setSendMessageModalFun} data={modaldata} setReqPayModal={setReqPayModal} /> 
+        <RequestPaymentModalusemax  visible={reqpaymodal}  setVisible={setReqPayModal} setSendModalConfirm={setSendModalConfirm} setTokenModal={setsendModalToken2} /> 
+        <SentModalConfirm visible={sendmodalconfirm} setVisible={setsendModalConfirmfun} />
+        <TokenModal visible={tokenmodal} setVisible={setTokenModal} /> 
+        <TokenModal2 visible={tokenmodal2} setVisible={setTokenModal2} opensendmodal={setSendMessageModalFun} />
         <CopyLinkModal visible={copylink}  setVisible={setCopyLink} />
         <RequestPaymentModal visible={requestPayment}  setVisible={setRequestPayment}  setVisible2={setRecievedModal} />
     </Container>

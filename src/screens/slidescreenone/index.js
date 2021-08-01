@@ -16,7 +16,7 @@ import SplashScreen from 'react-native-splash-screen'
    return (
      <SafeAreaView style={styles.container}>
         <ScrollView>
-            <View style={{...styles.container, paddingBottom:50}} >
+            <View style={{...styles.container, paddingBottom:50 , paddingHorizontal:30,}} >
                 <Image source={require("../../assets/slider1.png")} style={{width:width/1.3, height:width/1.3, resizeMode:"cover"}} />
                 <CustomText 
                     text={"For the gamers and streamers"}

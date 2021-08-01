@@ -155,11 +155,11 @@ const {width, height} = Dimensions.get("window");
           
 
           <View style={styles.faceidsignin}>
-              <Text style={{color:"#fff", fontFamily:fontmedium, fontSize:18}}>Sign in with Face ID?</Text>
+              <Text style={{color:"#fff", fontFamily:fontmedium, fontSize:16}}>Sign in with Face ID?</Text>
               <ToggleButton check={check} unchecked={uncheck} />
            </View>
           
-          <View style={{flexDirection:"row", marginVertical:10,width:width-60,alignSelf:"center" }}>
+          <View style={{flexDirection:"row", marginVertical:10,width:width-20,alignSelf:"center" }}>
               <Checkbox
                   status={checked ? 'checked' : 'unchecked'}
                   uncheckedColor={graycolor}

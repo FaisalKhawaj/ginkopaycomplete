@@ -10,9 +10,10 @@ import CustomButton from './Button'
 import CustomText from './Text'
 const {width, height} = Dimensions.get("window");
 
-const RequestPaymentModal = ({visible, setVisible,setSendModalConfirm}) => { 
+const RequestPaymentModal = ({visible, setVisible,setSendModalConfirm , setTokenModal}) => { 
   const [value, setValue] = React.useState("")
- const closeModal= () => {
+ 
+  const closeModal= () => {
     setSendModalConfirm(true)
     setVisible(false)
  }
@@ -42,7 +43,7 @@ const RequestPaymentModal = ({visible, setVisible,setSendModalConfirm}) => {
                 contentContainerStyle={styles.contentContainerStyle} 
                 style={{flexGrow:1}}>
                 <View style={{flexDirection:"row", justifyContent:"space-between",width:width/2,marginLeft:width/4}}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => {setVisible(false), setTokenModal()}}>
                         <Text style={{...styles.bnb}}>
                             BNB
                         </Text>

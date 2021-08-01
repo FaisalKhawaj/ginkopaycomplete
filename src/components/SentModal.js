@@ -4,8 +4,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
 import { boldtext, simpletext } from '../constants/fonts';
 import { graycolor, green } from '../constants/colors';
-import TokenModal from './SendModalToken'
-import SentModalMessage from './SentModalMessage';
 
 const {width, height} = Dimensions.get("window");
 
@@ -30,10 +28,7 @@ var obj = [
     },
 ]
 
-const SentModal = ({visible, setVisible, setSendMessageModal, setModalData}) => {
-const [tokenmodal, setTokenModal] = useState(false)
-
-
+const SentModal = ({visible, setVisible, setSendMessageModal, setModalData, tokenmodal, setTokenModal}) => {
 const openmodal = (item) => {
     setVisible(false)
     setSendMessageModal(true)
@@ -79,7 +74,7 @@ const renderItem = (item) => {
             <View style={styles.mainview}>
                 <Text style={styles.sentto}>Sent To</Text>
                 <Text style={styles.from}>From</Text>
-                <TouchableOpacity style={styles.fromselect} onPress={() => setTokenModal(true)}>
+                <TouchableOpacity style={styles.fromselect} onPress={() => {setTokenModal(true), setVisible(false)}}>
                     <View style={{flexDirection:"row"}}>
                     <Image 
                         style={{width:40, height:40, resizeMode:"cover", borderRadius:60,}}
@@ -114,7 +109,7 @@ const renderItem = (item) => {
                     keyExtractor={(item,index) => index.toString()}
                 />
             </View>  
-            <TokenModal visible={tokenmodal} setVisible={setTokenModal} /> 
+            
             
         </Modal>
     )

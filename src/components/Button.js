@@ -20,7 +20,7 @@ const CustomButton = (props) => {
     <LinearGradient 
       start={{x: 0, y: 0}} end={{x: 1, y: 0}}
       colors={[LinearGradientColorOne,LinearGradientColorTwo]} 
-      style={{...styles.container, width:dimensions.window.width-20}}>
+      style={{...styles.container, width:dimensions.window.width-80}}>
       <TouchableOpacity style={{...styles.container, width:dimensions.window.width-20}} onPress={() => props.onPress()}>
           <Text style={styles.text}>{props.text}</Text>
       </TouchableOpacity>
@@ -34,6 +34,7 @@ const CustomButton = (props) => {
    container:{
      alignSelf:"center",
      height:50,
+     marginHorizontal:30,
      justifyContent:"center",
      alignItems:"center",
      borderRadius:8,

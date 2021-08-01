@@ -12,7 +12,7 @@ import styles,{width} from './styles'
    return (
     <SafeAreaView style={styles.container}>
         <ScrollView>
-            <View style={{...styles.container,  paddingBottom:50}}>
+            <View style={{...styles.container,  paddingBottom:50,paddingHorizontal:30,}}>
                 <Image source={require("../../assets/slider3.png")} 
                     style={{width:width/1.3, height:width/1.3,  resizeMode:"cover"}} />
                 <CustomText 
