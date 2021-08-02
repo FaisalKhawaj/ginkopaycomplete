@@ -36,3 +36,5 @@ const SliderScreenOne = ({ navigation }) => {
 
 };
 export default SliderScreenOne;
+
+   

@@ -20,6 +20,7 @@ const SliderScreenOne = ({ navigation }) => {
     navigation.navigate("DashBoardScreen")
   }
 
+
   return (
     <SafeAreaView style={styles.container}>
       <Content contentContainerStyle={{ flex: 1, justifyContent: 'center', }}>
