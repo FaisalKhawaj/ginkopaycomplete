@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Content } from 'native-base'
-import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { BackgroundColor } from '../../constants/colors';
 import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay';
@@ -107,14 +107,14 @@ const CompaignMainPage = ({ navigation }) => {
         }
 
     ])
-    
+
     const TopRatedCompaignShowHandler = () => {
         // setBtnSelect('TopRatedCompaign')
         setShowCompaign(!showCompaign)
     }
 
     const [showCompaign, setShowCompaign] = useState(false)
-    
+
     const RecentCompaignShowHandler = () => {
         setShowCompaign(!showCompaign)
     }
@@ -122,11 +122,8 @@ const CompaignMainPage = ({ navigation }) => {
 
     }
     return (
-        <Container style={{ backgroundColor: BackgroundColor }}>
-            <View style={{
-                // flex: 1,
-                backgroundColor: BackgroundColor
-            }}>
+        <SafeAreaView style={mystyles.container}>
+            <Content contentContainerStyle={{ backgroundColor: "#17171A" }}>
 
                 <HeaderBackBtnWithLogo backBtn={backBtn} />
 
@@ -211,8 +208,8 @@ const CompaignMainPage = ({ navigation }) => {
                 }
 
 
-            </View>
-        </Container >
+            </Content>
+        </SafeAreaView >
     )
 }
 

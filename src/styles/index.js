@@ -1,6 +1,7 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions, } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
+import { BackgroundColor } from '../constants/colors';
+export const { width, height } = Dimensions.get("window");
 export const mystyles = StyleSheet.create(
     {
         TopRatedRecentBtnText:
@@ -57,5 +58,14 @@ export const mystyles = StyleSheet.create(
             margin: 10,
             alignSelf: 'flex-end'
         },
+        container: {
+            flex: 1,
+            alignItems: "center",
+            width: width,
+            height: height,
+            justifyContent: "flex-end",
+            backgroundColor: BackgroundColor
+
+        }
     }
 )

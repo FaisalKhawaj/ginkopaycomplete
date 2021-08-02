@@ -89,7 +89,11 @@ function MyTabBar({ state, descriptors, navigation }) {
               text={label}
               locations={[0, 1]}
               colors={isFocused ? ["#70A2FF", "#F76E64"] : ["gray", "gray"]}
-              style={{ fontSize: 13, fontFamily: simpletext, textAlign: "center" }}
+              style={{
+                fontSize: 13,
+                colors: isFocused ? ["#70A2FF", "#F76E64"] : ["gray", "gray"],
+                fontFamily: simpletext, textAlign: "center"
+              }}
             />
           </TouchableOpacity>
         );

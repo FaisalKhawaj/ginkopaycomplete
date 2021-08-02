@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { View, FlatList, StatusBar, Dimensions, StyleSheet, Image, Text, TouchableOpacity, Touchable } from 'react-native';
+import { View, FlatList, StatusBar, Dimensions, StyleSheet, Image, Text, TouchableOpacity, Touchable, SafeAreaView } from 'react-native';
 import { Container, Content } from 'native-base'
 import Feather from 'react-native-vector-icons/Feather';
 import { boldtext, fontmedium, simpletext } from '../../constants/fonts';
@@ -29,6 +29,7 @@ import CopyLinkModal from '../../components/LinkCopyModal'
 import PurchaseMethod from '../../components/PurchaseMethod'
 import TokenModal from '../../components/SendModalToken'
 import TokenModal2 from '../../components/SendModalToken2'
+import { mystyles } from '../../styles';
 const { width, height } = Dimensions.get("window");
 
 let protfiliodata = [
@@ -212,8 +213,8 @@ const Home = ({ navigation }) => {
     setSendMessageModal(false)
   }
   return (
-    <Container style={styles.container}>
-      <Content contentContainerStyle={{ backgroundColor: "#17171A" }}>
+    <SafeAreaView style={[mystyles.container, { width: width }]}>
+      <Content contentContainerStyle={{ width: width, backgroundColor: "#17171A" }}>
         <StatusBar hidden />
 
         <View style={styles.header}>
@@ -331,7 +332,7 @@ const Home = ({ navigation }) => {
         <CopyLinkModal visible={copylink} setVisible={setCopyLink} />
         <RequestPaymentModal visible={requestPayment} setVisible={setRequestPayment} setVisible2={setRecievedModal} />
       </Content>
-    </Container>
+    </SafeAreaView>
   );
 };
 export default Home;

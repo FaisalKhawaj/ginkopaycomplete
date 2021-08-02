@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { View, FlatList, BackHandler, Dimensions, StyleSheet, Image, Text, TouchableOpacity, Touchable, ImageBackground, ScrollView } from 'react-native';
+import { View, FlatList, BackHandler, Dimensions, SafeAreaView, StyleSheet, Image, Text, TouchableOpacity, Touchable, ImageBackground, ScrollView } from 'react-native';
 import CustomText from '../../components/Text'
+import { Content } from 'native-base'
 import { useFocusEffect } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay';
 import { boldtext, simpletext } from '../../constants/fonts';
 import { graycolor, green } from '../../constants/colors';
+import { mystyles } from '../../styles';
 const { width, height } = Dimensions.get("screen");
 
 let marketdata = [
@@ -304,120 +306,122 @@ const Home = ({ navigation }) => {
     navigation.goBack()
   }
   return (
-    <View style={styles.container}>
-      <HeaderBackBtnWithLogo backBtn={backBtn} />
-      <Text style={{ color: '#fff', fontSize: 22, marginHorizontal: 20, fontFamily: boldtext }}>
-        Watchlist
+    <SafeAreaView style={mystyles.container}>
+      <Content contentContainerStyle={{ flex: 1, justifyContent: 'center', }}>
+        <HeaderBackBtnWithLogo backBtn={backBtn} />
+        <Text style={{ color: '#fff', fontSize: 22, marginHorizontal: 20, fontFamily: boldtext }}>
+          Watchlist
         </Text>
-      <View>
-        <FlatList
-          data={watchlistdata}
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          style={{ height: 60, marginTop: 0, }}
-          contentContainerStyle={{ height: 60 }}
-          renderItem={watchListrenderItem}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
-      <Text style={{ color: '#fff', margin: 20, fontSize: 20, fontFamily: boldtext }}>
-        Top Movers
-          </Text>
-      <View style={styles.horizantalListView}>
-        <FlatList
-          data={data}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          renderItem={renderTopMoversItem}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
-      <View style={styles.tabView}>
-        <TouchableOpacity
-          onPress={() => marketPress()}
-          style={{
-            borderBottomWidth: !newsTab ? 2 : 0, margin: 10, paddingHorizontal: 20,
-            borderBottomColor: !newsTab ? "#fff" : "#000",
-          }}>
-          <Text style={{ color: !newsTab ? "#fff" : graycolor, fontFamily: simpletext, fontSize: 16 }}>
-            Market
-              </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => setNewsTab(true)}
-          style={{
-            borderBottomWidth: newsTab ? 2 : 0, margin: 10, paddingHorizontal: 20,
-            borderBottomColor: newsTab ? "#fff" : graycolor,
-          }}>
-          <Text style={{ color: newsTab ? "#fff" : graycolor, fontFamily: simpletext, fontSize: 16 }}>
-            News
-              </Text>
-        </TouchableOpacity>
-      </View>
-      <View style={{ flex: 1, width: '100%', borderTopWidth: newsTab && !itemView ? 1 : 0, borderTopColor: '#fff' }}>
-        {!newsTab ? (
+        <View>
           <FlatList
-            data={marketdata}
-            renderItem={renderMarketItem}
+            data={watchlistdata}
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+            style={{ height: 60, marginTop: 0, }}
+            contentContainerStyle={{ height: 60 }}
+            renderItem={watchListrenderItem}
             keyExtractor={(item, index) => index.toString()}
           />
-        ) :
-          <>
-            {!itemView ? (
-              <View>
-                <FlatList
-                  data={newsdata}
-                  renderItem={renderNewsItem}
-                  keyExtractor={(item, index) => index.toString()}
-                />
-                <TouchableOpacity
-                  style={styles.viewmore}
+        </View>
+        <Text style={{ color: '#fff', margin: 20, fontSize: 20, fontFamily: boldtext }}>
+          Top Movers
+          </Text>
+        <View style={styles.horizantalListView}>
+          <FlatList
+            data={data}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={renderTopMoversItem}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
+        <View style={styles.tabView}>
+          <TouchableOpacity
+            onPress={() => marketPress()}
+            style={{
+              borderBottomWidth: !newsTab ? 2 : 0, margin: 10, paddingHorizontal: 20,
+              borderBottomColor: !newsTab ? "#fff" : "#000",
+            }}>
+            <Text style={{ color: !newsTab ? "#fff" : graycolor, fontFamily: simpletext, fontSize: 16 }}>
+              Market
+              </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setNewsTab(true)}
+            style={{
+              borderBottomWidth: newsTab ? 2 : 0, margin: 10, paddingHorizontal: 20,
+              borderBottomColor: newsTab ? "#fff" : graycolor,
+            }}>
+            <Text style={{ color: newsTab ? "#fff" : graycolor, fontFamily: simpletext, fontSize: 16 }}>
+              News
+              </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flex: 1, width: '100%', borderTopWidth: newsTab && !itemView ? 1 : 0, borderTopColor: '#fff' }}>
+          {!newsTab ? (
+            <FlatList
+              data={marketdata}
+              renderItem={renderMarketItem}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          ) :
+            <>
+              {!itemView ? (
+                <View>
+                  <FlatList
+                    data={newsdata}
+                    renderItem={renderNewsItem}
+                    keyExtractor={(item, index) => index.toString()}
+                  />
+                  <TouchableOpacity
+                    style={styles.viewmore}
 
-                >
-                  <Text style={{ fontSize: 16, fontFamily: boldtext, color: graycolor }}>
-                    View more
+                  >
+                    <Text style={{ fontSize: 16, fontFamily: boldtext, color: graycolor }}>
+                      View more
                     </Text>
-                  <MaterialIcons name="chevron-right" size={30} color="#fff" style={{ color: graycolor }} />
-                </TouchableOpacity>
-              </View>
-            ) :
-              <ScrollView>
-                <ImageBackground //remove backGroundColor and change image source
-                  source={require('../../assets/news1.png')}
-                  style={{ marginHorizontal: 20, marginTop: 10, height: 140, borderRadius: 10, overflow: "hidden", resizeMode: 'cover', backgroundColor: '#fff' }}
-                ></ImageBackground>
-                <View style={{ marginBottom: 20, marginHorizontal: 35, paddingVertical: 30, borderBottomWidth: 1, borderBottomColor: '#fff' }}>
-                  <Text style={{ color: '#fff', fontSize: 14, fontFamily: simpletext, textAlign: 'justify' }}>
-                    Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-                    </Text>
-                  <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-                    <View style={{ height: 13, width: 13, borderRadius: 8, backgroundColor: "#F7931A" }}>
-                    </View>
-                    <Text style={{ marginLeft: 10, fontSize: 12, fontFamily: simpletext, color: '#fff' }}>
-                      BTC
-                      </Text>
-                    <Text style={{ marginLeft: 20, fontSize: 12, fontFamily: simpletext, color: '#fff' }}>
-                      16h ago
-                      </Text>
-                    <Text style={{ marginLeft: 20, fontSize: 12, fontFamily: simpletext, color: '#fff' }}>
-                      News Source
-                      </Text>
-                  </View>
+                    <MaterialIcons name="chevron-right" size={30} color="#fff" style={{ color: graycolor }} />
+                  </TouchableOpacity>
                 </View>
-
-                <TouchableOpacity style={styles.viewmore} onPress={() => setItemView(false)}>
-                  <Text style={{ fontSize: 16, fontFamily: boldtext, color: graycolor }}>
-                    All News
+              ) :
+                <ScrollView>
+                  <ImageBackground //remove backGroundColor and change image source
+                    source={require('../../assets/news1.png')}
+                    style={{ marginHorizontal: 20, marginTop: 10, height: 140, borderRadius: 10, overflow: "hidden", resizeMode: 'cover', backgroundColor: '#fff' }}
+                  ></ImageBackground>
+                  <View style={{ marginBottom: 20, marginHorizontal: 35, paddingVertical: 30, borderBottomWidth: 1, borderBottomColor: '#fff' }}>
+                    <Text style={{ color: '#fff', fontSize: 14, fontFamily: simpletext, textAlign: 'justify' }}>
+                      Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                    </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+                      <View style={{ height: 13, width: 13, borderRadius: 8, backgroundColor: "#F7931A" }}>
+                      </View>
+                      <Text style={{ marginLeft: 10, fontSize: 12, fontFamily: simpletext, color: '#fff' }}>
+                        BTC
                       </Text>
-                  <MaterialIcons name="chevron-right" size={30} color="#fff" style={{ color: graycolor }} />
-                </TouchableOpacity>
-              </ScrollView>
-            }
-          </>
-        }
+                      <Text style={{ marginLeft: 20, fontSize: 12, fontFamily: simpletext, color: '#fff' }}>
+                        16h ago
+                      </Text>
+                      <Text style={{ marginLeft: 20, fontSize: 12, fontFamily: simpletext, color: '#fff' }}>
+                        News Source
+                      </Text>
+                    </View>
+                  </View>
 
-      </View>
-    </View>
+                  <TouchableOpacity style={styles.viewmore} onPress={() => setItemView(false)}>
+                    <Text style={{ fontSize: 16, fontFamily: boldtext, color: graycolor }}>
+                      All News
+                      </Text>
+                    <MaterialIcons name="chevron-right" size={30} color="#fff" style={{ color: graycolor }} />
+                  </TouchableOpacity>
+                </ScrollView>
+              }
+            </>
+          }
+
+        </View>
+      </Content>
+    </SafeAreaView>
   );
 };
 export default Home;
