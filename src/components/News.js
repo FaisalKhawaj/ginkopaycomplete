@@ -29,6 +29,7 @@ const CryptoNews = ({ item, handler }) => {
     )
 }
 export default CryptoNews;
+
 const styles = StyleSheet.create(
     {
         newsMainView:
