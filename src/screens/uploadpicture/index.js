@@ -31,7 +31,7 @@ const UploadImageScreen = ({ navigation }) => {
 
   return (
     <Container style={styles.container}>
-      <Header num={2} />
+      <Header num={2} navigation={navigation} />
       <Content style={{ flexGrow: 1 }}  >
 
         <CustomText
@@ -58,8 +58,8 @@ const UploadImageScreen = ({ navigation }) => {
           </TouchableOpacity>
         </ImageBackground>
       </Content>
-      <View style={{alignSelf:"center", position:"absolute", bottom:20}}>
-          <CustomButton text={"skip"} onPress={() => gotonextScreen()} />
+      <View style={{ alignSelf: "center", position: "absolute", bottom: 20 }}>
+        <CustomButton text={"skip"} onPress={() => gotonextScreen()} />
       </View>
     </Container>
   );

@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import CustomText from './Text';
 
-const DonateBtn = ({ setVisible }) => {
+const DonateBtn = ({setVisible}) => {
     return (
         <TouchableOpacity style={styles.donateBtn} onPress={() => setVisible()}>
             <Image style={styles.donateFlameImage} resizeMode="contain"

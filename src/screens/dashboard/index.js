@@ -301,17 +301,18 @@ const Home = ({ navigation }) => {
   }
 
   const backBtn = () => {
-
+    navigation.goBack()
   }
   return (
     <View style={styles.container}>
       <HeaderBackBtnWithLogo backBtn={backBtn} />
       <Text style={{ color: '#fff', fontSize: 22, marginHorizontal: 20, fontFamily: boldtext }}>
         Watchlist
-          </Text>
+        </Text>
       <View>
         <FlatList
           data={watchlistdata}
+          showsHorizontalScrollIndicator={false}
           horizontal={true}
           style={{ height: 60, marginTop: 0, }}
           contentContainerStyle={{ height: 60 }}
@@ -326,6 +327,7 @@ const Home = ({ navigation }) => {
         <FlatList
           data={data}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
           renderItem={renderTopMoversItem}
           keyExtractor={(item, index) => index.toString()}
         />
@@ -480,7 +482,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: '#FFF',
+    borderBottomColor: 'lightgray',
     alignItems: 'center',
     justifyContent: 'space-between',
   },

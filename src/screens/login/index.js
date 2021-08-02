@@ -46,7 +46,7 @@ const SliderScreenOne = ({navigation}) => {
                 />
                 
                 <View style={{flexDirection:"row", width:width-40, justifyContent:"space-between", alignItems:"center"}}>
-                    <Text style={{color:"#fff",fontFamily:boldtext,fontSize:20}}>Sign in with Face ID?</Text>
+                    <Text style={{color:"#fff",fontFamily:boldtext,fontSize:16}}>Sign in with Face ID?</Text>
                     <ToggleButton check={check} unchecked={uncheck} />
                 </View>
               

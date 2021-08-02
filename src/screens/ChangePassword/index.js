@@ -45,6 +45,7 @@ const {width, height} = Dimensions.get("window");
     setLoadChangingPassword(true)
     setTimeout(() => {
         setLoadChangingPassword(false)
+       
     }, 3000);
   };
 
@@ -54,7 +55,7 @@ const {width, height} = Dimensions.get("window");
     setLoadChangingPassword(true)
     setTimeout(() => {
         setLoadChangingPassword(false)
-        navigation.goBack();
+        navigation.navigate("Login")
     }, 3000);
    // navigation.goBack();
   }

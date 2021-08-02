@@ -42,6 +42,7 @@ const Preferences = ({ navigation }) => {
     }
 
     const functionshowverificationmodal = () =>{
+        
         setShowVerificatonModal(!showverificationModal)
     }
     const [open, setOpen] = useState(false);
@@ -109,7 +110,7 @@ const Preferences = ({ navigation }) => {
                 >
                
                     <View style={{ height: height / 1,backgroundColor: '#17171A' }}>
-                        <HeaderBackTextCloseBtn text="General" closeModal={closeModalHandler} />
+                        <HeaderBackTextCloseBtn text="General" closeModal={closeModalHandler} setShowBannerModal={closeModalHandler} />
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <Text style={styles.headingText}>Currency Conversion</Text>
                             <Text style={styles.descriptionText}>
@@ -247,7 +248,7 @@ const Preferences = ({ navigation }) => {
                                 <Text style={{ alignSelf: 'center', color: '#FFFF' }}>No</Text>
                             </View>
                         </View>
-                           <CustomButton text={"Update"} onPress={UpdateGeneralHandler}
+                           <CustomButton text={"Update"} onPress={closeModalHandler}
                             />
                         
                     </View>
