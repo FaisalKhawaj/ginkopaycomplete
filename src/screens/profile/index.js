@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, Image, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
+import { View, Text, TextInput, FlatList, Image, Dimensions, SafeAreaView, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
 import { Container, Content, Thumbnail } from 'native-base';
 import Modal from 'react-native-modal';
 import Svg, { Rect, Defs, Use, image, Path, Pattern } from 'react-native-svg';
@@ -18,7 +18,7 @@ import CustomText from '../../components/Text';
 import CustomButton from '../../components/Button';
 import SvgImg from '../../components/Svg';
 import DoneSvg from '../../components/DoneSvg';
-
+const { width, height } = Dimensions.get("window");
 const Profile = ({ navigation }) => {
 
     const [showCompaign, setShowCompaign] = useState(false)
@@ -100,10 +100,8 @@ const Profile = ({ navigation }) => {
     }
     console.log("Comp  " + showCompaignModal + " Banner  " + showBannerModal + " referal  " + ReferalModal)
     return (
-        <Container style={{ backgroundColor: BackgroundColor }}>
-            <View style={{
-                backgroundColor: BackgroundColor
-            }}>
+        <SafeAreaView style={[mystyles.container, { width: width }]}>
+            <Content contentContainerStyle={{ width: width, backgroundColor: "#17171A" }}>
                 <HeaderBackBtnWithLogo backBtn={BackBtnHandler} />
 
                 <View style={styles.MainUserSettingsView}>
@@ -589,8 +587,8 @@ const Profile = ({ navigation }) => {
 
 
 
-            </View>
-        </Container>
+            </Content>
+        </SafeAreaView>
     )
 }
 
