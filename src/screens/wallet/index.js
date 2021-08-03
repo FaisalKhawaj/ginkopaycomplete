@@ -29,8 +29,10 @@ import CopyLinkModal from '../../components/LinkCopyModal'
 import PurchaseMethod from '../../components/PurchaseMethod'
 import TokenModal from '../../components/SendModalToken'
 import TokenModal2 from '../../components/SendModalToken2'
+
 import { mystyles } from '../../styles';
 const { width, height } = Dimensions.get("window");
+
 
 let protfiliodata = [
   {
@@ -95,8 +97,10 @@ const Home = ({ navigation }) => {
   const [sendmodalconfirm, setSendModalConfirm] = useState(false)
   const [copylink, setCopyLink] = useState(false)
   const [requestPayment, setRequestPayment] = useState(false)
+
   const [tokenmodal, setTokenModal] = useState(false)
   const [tokenmodal2, setTokenModal2] = useState(false)
+
   const [modaldata, setModalData] = useState({
     key: 1,
     name: "Beexay",
@@ -199,8 +203,8 @@ const Home = ({ navigation }) => {
     setBuyModal1(!buymodal1)
     setBuyModal2(!buymodal2)
   }
-  const setsendModalToken2 = () => {
 
+  const setsendModalToken2 = () => {
     setTokenModal2(true)
   }
   const setSendMessageModalFun = () => {
@@ -324,6 +328,7 @@ const Home = ({ navigation }) => {
         <BuyModal visible={buymodal} setVisible={setBuyModal} setBuyModal11={setBuyModal11} />
         <BuyModal1 visible={buymodal1} setVisible={setBuyModal1} setBuyModal22={setBuyModal22} />
         <BuyModal2 visible={buymodal2} setVisible={setBuyModal2} />
+
         <SentModalMessage visible={sendmessagemodal} setVisible={setSendMessageModalFun} data={modaldata} setReqPayModal={setReqPayModal} />
         <RequestPaymentModalusemax visible={reqpaymodal} setVisible={setReqPayModal} setSendModalConfirm={setSendModalConfirm} setTokenModal={setsendModalToken2} />
         <SentModalConfirm visible={sendmodalconfirm} setVisible={setsendModalConfirmfun} />
@@ -333,6 +338,7 @@ const Home = ({ navigation }) => {
         <RequestPaymentModal visible={requestPayment} setVisible={setRequestPayment} setVisible2={setRecievedModal} />
       </Content>
     </SafeAreaView>
+
   );
 };
 export default Home;

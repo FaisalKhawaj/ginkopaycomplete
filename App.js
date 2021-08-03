@@ -6,9 +6,7 @@ import { navigationRef } from './src/Navigations/NavigationObject';
 const App = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <RootStackNavigator>
-        
-      </RootStackNavigator>
+      <RootStackNavigator />
     </NavigationContainer>
   );
 

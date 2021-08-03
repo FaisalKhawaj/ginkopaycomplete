@@ -12,6 +12,7 @@ const SliderScreenOne = ({ navigation }) => {
   }
   return (
     <SafeAreaView style={styles.container}>
+
       <Content contentContainerStyle={{ flex: 1, justifyContent: 'center', }}>
         {/* <ScrollView>
             <View style={{...styles.container,  paddingBottom:50,paddingHorizontal:30,}}> */}
@@ -27,6 +28,7 @@ const SliderScreenOne = ({ navigation }) => {
         {/* </View>
         </ScrollView> */}
       </Content>
+
     </SafeAreaView>
   );
 
