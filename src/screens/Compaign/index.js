@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Content } from 'native-base'
 import { View, Text, Image, StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -9,9 +9,16 @@ import CustomText from '../../components/Text';
 import DonateBtn from '../../components/DonateBtn';
 import Compaign from '../../components/compaign';
 import { mystyles } from '../../styles';
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const CompaignMainPage = ({ navigation }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(Actions.getCampaign())
+  }, [])
+
     const [btnSelect, setBtnSelect] = useState('TopRated')
     const [TopCompaigns, setTopCompaigns] = useState([
         {

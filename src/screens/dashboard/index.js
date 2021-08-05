@@ -8,6 +8,9 @@ import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay'
 import { boldtext, simpletext } from '../../constants/fonts';
 import { graycolor, green } from '../../constants/colors';
 import { mystyles } from '../../styles';
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
+
 const { width, height } = Dimensions.get("screen");
 
 let marketdata = [
@@ -160,6 +163,10 @@ const Home = ({ navigation }) => {
   const [data, setData] = useState(obj)
   const [newsTab, setNewsTab] = useState(false)
   const [itemView, setItemView] = useState(false)
+  const news = useSelector(state => state.home.news);
+  const newsDetail = useSelector(state => state.home.newsDetail);
+
+  const dispatch = useDispatch();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -183,6 +190,10 @@ const Home = ({ navigation }) => {
       };
     }),
   );
+  useEffect(() => {
+    dispatch(Actions.getNews())
+    dispatch(Actions.getNewsDetails())
+  }, [])
 
   const renderTopMoversItem = (item) => {
     return (
