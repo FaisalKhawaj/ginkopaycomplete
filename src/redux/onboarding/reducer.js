@@ -21,11 +21,6 @@ export default (state = INITIAL_STATE, action) => {
     case USER_REGISTER_SUCCESS:
       return { ...state, loading: false, };
 
-    case BUSINESS_REGISTER:
-      return { ...state, loading: true };
-    case BUSINESS_REGISTER_SUCCESS:
-      return { ...state, loading: false, };
-
     case LOGOUT_USER:
       return { ...state, loading: false, userToken: null };
       

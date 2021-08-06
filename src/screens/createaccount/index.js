@@ -11,9 +11,13 @@ import Feather from 'react-native-vector-icons/Feather'
 import { boldtext, fontmedium, simpletext } from '../../constants/fonts';
 import ToggleButton from '../../components/ToggleButton'
 const { width, height } = Dimensions.get("window");
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
+import Toast from 'react-native-root-toast';
 
 const CreateAccountScreen = ({ navigation }) => {
 
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [emailerror, setEmailError] = useState("");
 
@@ -39,9 +43,26 @@ const CreateAccountScreen = ({ navigation }) => {
     setModalVisible(!isModalVisible);
   };
 
-
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
   const gotonextScreen = () => {
-    navigation.navigate("UploadImage")
+    if (email && password && confrimpassword && name) {
+      if (!validateEmail(email.trim())) {
+        Toast.show("Invalid Email Address", { textColor: 'grey', duration: Toast.durations.SHORT });
+      } else if (password.length < 6) {
+        Toast.show("Must be atlest 6 characters", { textColor: 'grey', duration: Toast.durations.SHORT });
+      } else if (password != confrimpassword) {
+        Toast.show("Password does not match", { textColor: 'grey', duration: Toast.durations.SHORT });
+      } else {
+        dispatch(Actions.userRegister(email.trim(), password, name))
+        // navigation.navigate("UploadImage")
+
+      }
+    } else {
+      Toast.show("Please fill all fields!", { textColor: 'grey', duration: Toast.durations.SHORT });
+    }
   }
 
   StatusBar.setHidden(true)
@@ -170,7 +191,7 @@ const CreateAccountScreen = ({ navigation }) => {
           />
 
           <Text style={{ color: graycolor, fontFamily: simpletext, marginHorizontal: 15, }}>By proceeding, you agree to these
-                <Text style={{ color: bluetext, fontFamily: simpletext, }} onPress={() => toggleModal()} > Term and Conditions.</Text></Text>
+            <Text style={{ color: bluetext, fontFamily: simpletext, }} onPress={() => toggleModal()} > Term and Conditions.</Text></Text>
         </View>
         <View style={{ position: "absolute", alignSelf: "center", backgroundColor: BackgroundColor, bottom: 20, }}>
           <CustomButton text={"Create Password"} onPress={() => gotonextScreen()} />

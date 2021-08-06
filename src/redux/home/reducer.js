@@ -1,5 +1,5 @@
 
-import { GET_CAMPAIGN, GET_CAMPAIGN_SUCCESS, GET_NEWS, GET_NEWS_DETAILS, GET_NEWS_DETAILS_SUCCESS, GET_NEWS_SUCCESS, GET_USER_SUCCESS, } from './types';
+import { CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHECK_AVAILABILITY, CHECK_AVAILABILITY_SUCCESS, GET_CAMPAIGN, GET_CAMPAIGN_SUCCESS, GET_NEWS, GET_NEWS_DETAILS, GET_NEWS_DETAILS_SUCCESS, GET_NEWS_SUCCESS, GET_USER_LIST, GET_USER_LIST_SUCCESS, GET_USER_SUCCESS, } from './types';
 
 const INITIAL_STATE = {
   loading: false,
@@ -7,6 +7,8 @@ const INITIAL_STATE = {
   newsDetail: null,
   users: null,
   campaign: null,
+  userList: null,
+  availabilty: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -32,6 +34,21 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, loading: true };
     case GET_CAMPAIGN_SUCCESS:
       return { ...state, loading: false, campaign: payload };
+
+    case GET_USER_LIST:
+      return { ...state, loading: true };
+    case GET_USER_LIST_SUCCESS:
+      return { ...state, loading: false, userList: payload };
+
+    case CHANGE_PASSWORD:
+      return { ...state, loading: true };
+    case CHANGE_PASSWORD_SUCCESS:
+      return { ...state, loading: false, };
+
+    case CHECK_AVAILABILITY:
+      return { ...state, loading: true };
+    case CHECK_AVAILABILITY_SUCCESS:
+      return { ...state, loading: false, availabilty: payload };
 
     default:
       return state;

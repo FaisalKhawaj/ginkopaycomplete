@@ -7,7 +7,12 @@ import styles, { width } from './styles'
 import { bluetext, lightgray, LinearGradientColorOne, LinearGradientColorTwo } from '../../constants/colors'
 import { simpletext, boldtext } from '../../constants/fonts'
 import ToggleButton from '../../components/ToggleButton'
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
+import Toast from 'react-native-root-toast';
+
 const SliderScreenOne = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [emailerror, setEmailError] = useState("");
 
@@ -16,8 +21,26 @@ const SliderScreenOne = ({ navigation }) => {
   const [ispasswordVisible, setispasswordVisible] = useState(true);
   const [secureTextEntry, setsecureTextEntry] = useState(true)
   const [check, uncheck] = useState(false);
+
+  
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+  
   const gotonextScreen = () => {
-    navigation.navigate("DashBoardScreen")
+    if (email && password) {
+      if (!validateEmail(email.trim())) {
+        Toast.show("Invalid Email Address", { textColor: 'grey', duration: Toast.durations.SHORT },);
+      } else if (password.length < 6) {
+        Toast.show("Must be atlest 6 characters", { textColor: 'grey', duration: Toast.durations.SHORT });
+      } else {
+        dispatch(Actions.userLogin(email.trim(), password))
+
+      }
+    } else {
+      Toast.show("Please fill all fields!", { textColor: 'grey', duration: Toast.durations.SHORT });
+    }
   }
 
 

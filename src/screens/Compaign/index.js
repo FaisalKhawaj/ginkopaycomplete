@@ -14,10 +14,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 const CompaignMainPage = ({ navigation }) => {
+  const campaign = useSelector(state => state.home?.campaign);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(Actions.getCampaign())
   }, [])
+
 
     const [btnSelect, setBtnSelect] = useState('TopRated')
     const [TopCompaigns, setTopCompaigns] = useState([
@@ -184,7 +187,7 @@ const CompaignMainPage = ({ navigation }) => {
                 </View>
 
                 {btnSelect === 'TopRated' && showCompaign != true ?
-                    <FlatList data={TopRated}
+                    <FlatList data={campaign}
                         renderItem={({ item, index }) =>
                             <CryptoNews item={item} handler={TopRatedCompaignShowHandler} />
                         }

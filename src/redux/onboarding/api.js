@@ -10,31 +10,37 @@ const api = async (url, options) => {
     throw e;
   }
 };
-// Basic YnZibnZuYjpibW5ibm0=
+
 export const Api = {
 
   loginUser: async (data) => {
     var { email, password } = data
+    const formData = new FormData();
+
+
+    formData.append("username", email);
+    formData.append("password", password);
+    formData.append("grant_type", "password");
     const options = {
 
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        Authorization: 'Basic Y2xpZW50OnBhc3N3b3Jk'
       },
-      body: JSON.stringify({ email: email, password: password }),
+      body: formData,
     };
 
     try {
-      const response = await api(`/login/`, options);
+      const response = await fetch('https://ginkopay-crypto.herokuapp.com/oauth/token', options);
       switch (response.status) {
         case 200:
           return await response.json();
         case 400:
         case 401:
-          Toast.show('Invalid credentials', Toast.durations.SHORT);
+          Toast.show('Invalid credentials', { textColor: 'grey', duration: Toast.durations.SHORT });
           break;
         case 404:
-          Toast.show('User not found', Toast.durations.SHORT);
+          Toast.show('User not found', { textColor: 'grey', duration: Toast.durations.SHORT });
           break;
         default:
           var e = new Error("Something went wrong");
@@ -43,47 +49,29 @@ export const Api = {
     }
     catch (error) {
       console.log('errords', error.message.toString());
-      // Toast.show(error.message.toString(), Toast.durations.SHORT);
     }
   },
 
-  registerUser: async (email, password, name, address, district, phone, image) => {
-    const formData = new FormData();
-
-    formData.append(
-      "image",
-      {
-        uri: image.uri,
-        type: 'image/jpeg',
-        name: 'image'
-      }
-    );
-
-    formData.append("data", JSON.stringify({
-      email: email,
-      password: password,
-      address: address,
-      name: name,
-      district: district,
-      phone_number: phone,
-    }));
+  registerUser: async (email, password, name) => {
+    
     const options = {
       method: 'POST',
       headers: {
-        "Content-Type": "multipart/form-data",
+        'Content-Type': 'application/json',
       },
-      body: formData,
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        userName: name
+      }),
     };
-   
+
     try {
-      const response = await api('/register/user', options);
+      const response = await api('/user/signUp', options);
       switch (response.status) {
-        case 201:
-          Toast.show('User has been registered', Toast.durations.SHORT);
+        case 200:
+          Toast.show('User has been registered', { textColor: 'grey', duration: Toast.durations.SHORT });
           return await response;
-        case 409:
-          Toast.show('User with email is already registered', Toast.durations.SHORT);
-          break
         default:
           throw new Error('Some error occured');
       }
@@ -92,59 +80,6 @@ export const Api = {
       throw e;
     }
   },
-
-
-  registerBusiness: async (name, town, email, password, businessType, address, phone, image, description) => {
-    const formData = new FormData();
-
-    // Update the formData object 
-
-    formData.append(
-      "image",
-      {
-        uri: image.uri,
-        type: 'image/jpeg',
-        name: 'image'
-      }
-    );
-
-    formData.append("data", JSON.stringify({
-      name: name,
-      town: town,
-      email: email,
-      password: password,
-      address: address,
-      businessType: businessType,
-      phone_number: phone,
-      description: description,
-    }));
-    const options = {
-      method: 'POST',
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      body: formData,
-    };
-
-    try {
-      const response = await api('/register/business', options);
-      switch (response.status) {
-        case 201:
-          Toast.show('Business has been registered', Toast.durations.SHORT);
-          return await response;
-        case 409:
-          Toast.show('User with email is already registered', Toast.durations.SHORT);
-          break
-        default:
-          throw new Error('Some error occured');
-      }
-    } catch (e) {
-      console.log('e', e);
-      throw e;
-    }
-  },
-
-
 
 };
 

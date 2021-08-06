@@ -15,8 +15,12 @@ import CustomButton from '../../components/Button';
 import { mystyles } from '../../styles';
 import { simpletext } from '../../constants/fonts';
 const { width, height } = Dimensions.get('window');
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
+import Toast from 'react-native-root-toast';
 
 const Settings = ({ navigation }) => {
+    const dispatch = useDispatch();
 
     const EditProfileHandler = () => {
         setShowEditProfileModal(!showEditProfileModal)
@@ -54,7 +58,7 @@ const Settings = ({ navigation }) => {
         alert('SendFeedback')
     }
     const LogOutHandler = () => {
-        navigation.navigate("Login")
+        dispatch(Actions.logoutUser())
     }
     const UpdateHandler = () => {
         setShowEditProfileModal(!showEditProfileModal)
