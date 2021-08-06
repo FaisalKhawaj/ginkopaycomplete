@@ -119,7 +119,7 @@ const CompaignMainPage = ({ navigation }) => {
         setShowCompaign(!showCompaign)
     }
     const backBtn = () => {
-
+        navigation.goBack()
     }
     return (
         <SafeAreaView style={mystyles.container}>
