@@ -20,7 +20,10 @@ const SliderScreenOne = ({ navigation }) => {
       <Content contentContainerStyle={{ flex: 1, justifyContent: 'center', }}>
         {/* <View style={{ ...styles.container, paddingBottom: 60,
            paddingHorizontal: 30, }} > */}
-        <Image source={require("../../assets/slider1.png")} style={{ width: width / 1.3, height: width / 1.3, resizeMode: "cover" }} />
+        <Image source={require("../../assets/slider1.png")} style={{
+          width: width / 1.3, justifyContent: 'center',
+          height: width / 1.3, resizeMode: "cover"
+        }} />
         <CustomText
           text={"For the gamers \n and streamers"}
           locations={[0, .3, 4, 5, 100]} colors={["#A9CDFF", "#72F6D1", "#A0ED8D", "#FED365", "#FAA49E"]}
@@ -37,4 +40,3 @@ const SliderScreenOne = ({ navigation }) => {
 };
 export default SliderScreenOne;
 
-   

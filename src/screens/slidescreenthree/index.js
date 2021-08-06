@@ -17,7 +17,7 @@ const SliderScreenOne = ({ navigation }) => {
         {/* <ScrollView>
             <View style={{...styles.container,  paddingBottom:50,paddingHorizontal:30,}}> */}
         <Image source={require("../../assets/slider3.png")}
-          style={{ width: width / 1.3, height: width / 1.3, resizeMode: "cover" }} />
+          style={{ width: width / 1.3, height: width / 1.3, alignSelf: 'center', resizeMode: "cover" }} />
         <CustomText
           text={"Buy, sell \n & exchange"}
           locations={[0, .3, 4, 5, 100]} colors={["#A9CDFF", "#72F6D1", "#A0ED8D", "#FED365", "#FAA49E"]}

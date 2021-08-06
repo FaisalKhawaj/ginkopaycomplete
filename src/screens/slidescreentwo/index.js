@@ -14,7 +14,7 @@ const SliderScreenOne = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Content contentContainerStyle={{ flex: 1, justifyContent: 'center', }}>
         <Image source={require("../../assets/slider2.png")}
-          style={{ width: width / 1.3, height: width / 1.3, resizeMode: "cover" }} />
+          style={{ width: width / 1.3, height: width / 1.3, justifyContent: 'center', resizeMode: "cover" }} />
         <CustomText
           text={"Safe and \nConvenient"}
           locations={[0, .3, 4, 5, 100]} colors={["#A9CDFF", "#72F6D1", "#A0ED8D", "#FED365", "#FAA49E"]}
