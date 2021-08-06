@@ -15,10 +15,10 @@ const Welcome = ({ navigation }) => {
     const swiper = useRef(null)
 
     console.log("Active ID :", idActive)
-    // useEffect(() => {
-    //     SplashScreen.hide()
-    // }, [])
-    // StatusBar.setHidden(true)
+    useEffect(() => {
+        SplashScreen.hide()
+    }, [])
+    StatusBar.setHidden(true)
 
     const onPressNext = () => {
         if (idActive == 3) {
