@@ -10,7 +10,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { simpletext } from '../../constants/fonts';
 
 const UploadImageScreen = ({ navigation }) => {
-
+  const [profileImg, setProfileImg] = useState(null)
   const gotonextScreen = () => {
     navigation.navigate("KycNeed")
   }
