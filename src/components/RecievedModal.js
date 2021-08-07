@@ -47,7 +47,7 @@ const recievedModal = ({ visible, setVisible, setRequestPayment, setCopyLink }) 
                     <Text style={styles.otherassets}>Your address to Receive payment</Text>
                     <TouchableOpacity
                         onPress={() => OpenLinkModal()}
-                        style={{ flexDirection: "row", marginVertical: 20, justifyContent: "center", alignItems: "center", backgroundColor: "#2A2D3C", height: 40, minWidth: 100, paddingHorizontal: 20, borderRadius: 10 }}>
+                        style={{ flexDirection: "row", marginVertical: 10, justifyContent: "center", alignItems: "center", backgroundColor: "#2A2D3C", height: 40, minWidth: 100, paddingHorizontal: 20, borderRadius: 10 }}>
                         <Text style={styles.Receive}> 0x3Dc6...DfCE</Text>
                         <COPY />
                     </TouchableOpacity>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         margin: 0
     },
     mainview: {
-        height: height / 1.8,
+        height: height / 1.6,
         // flex: 1,
         width: width,
         bottom: 0,
