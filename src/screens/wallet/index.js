@@ -193,6 +193,9 @@ const Home = ({ navigation }) => {
   const setPurchaseModall = () => {
     setPurchaseModal(!pruchasemodal)
   }
+  const BuyModalBackHandler = () => {
+    setBuyModal(false)
+  }
 
   const setBuyModal11 = () => {
     setBuyModal(false)
@@ -202,6 +205,14 @@ const Home = ({ navigation }) => {
   const setBuyModal22 = () => {
     setBuyModal1(!buymodal1)
     setBuyModal2(!buymodal2)
+  }
+  const purchaseModalHandler = () => {
+    setPurchaseModal(!pruchasemodal)
+  }
+  const BuyCloseModalHandler = () => {
+    setPurchaseModal(false)
+    setBuyModal(!buymodal)
+    navigation.navigate('Home')
   }
 
   const setsendModalToken2 = () => {
@@ -324,8 +335,11 @@ const Home = ({ navigation }) => {
         <AssetsModal visible={assetsmodal} setVisible={setAssetsModal} />
         <SentModal visible={sentmodal} setVisible={setSentModal} setSendMessageModal={setSendMessageModal} setModalData={setModalData} tokenmodal={tokenmodal} setTokenModal={setTokenModal} setTokenModal2={setTokenModal2} />
         <RecievedModal visible={recievemodal} setVisible={setRecievedModal} setCopyLink={setCopyLink} setRequestPayment={setRequestPayment} />
-        <PurchaseMethod visible={pruchasemodal} setVisible={setPurchaseModall} setBuyModall={setBuyModall} />
-        <BuyModal visible={buymodal} setVisible={setBuyModal} setBuyModal11={setBuyModal11} />
+        <PurchaseMethod visible={pruchasemodal} setVisible={purchaseModalHandler} setBuyModall={setBuyModall} />
+        <BuyModal visible={buymodal} backHandler={BuyModalBackHandler}
+          closeHandler={BuyCloseModalHandler}
+        // setBuyModal11={setBuyModal11}
+        />
         <BuyModal1 visible={buymodal1} setVisible={setBuyModal1} setBuyModal22={setBuyModal22} />
         <BuyModal2 visible={buymodal2} setVisible={setBuyModal2} />
 

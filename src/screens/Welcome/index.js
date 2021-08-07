@@ -56,7 +56,7 @@ const Welcome = ({ navigation }) => {
 
                         <View style={{ flex: 1, justifyContent: 'center', }}>
                             <Image source={require("../../assets/slider3.png")}
-                                resizeMode="contain"
+                                resizeMode="cover"
                                 style={styles.imageStyle} />
                             <CustomText
                                 text={"Buy, sell \n & exchange"}
@@ -80,7 +80,7 @@ const Welcome = ({ navigation }) => {
                                 resizeMode="cover"
                                 style={styles.imageStyle} />
                             <CustomText
-                                text={"Safe and \nConvenient"}
+                                text={"Safe and \n Convenient"}
                                 locations={[0, .3, 4, 5, 100]} colors={["#A9CDFF", "#72F6D1", "#A0ED8D", "#FED365", "#FAA49E"]}
                                 style={{ fontSize: 40, textAlign: "center" }}
                             />
