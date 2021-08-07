@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
+
+import { useNavigation } from '@react-navigation/native';
 import DonateBtn from './DonateBtn';
 import CustomText from './Text';
 import AssetsModal from './AssetsModal';
@@ -35,7 +37,8 @@ var obj = [
       image:require("../assets/token2.png")
     },
   ]
-const Compaign = () => {
+const Compaign = ({setShowCompaign}) => {
+  const navigation = useNavigation()
     const [modaldata, setModalData] = useState({
         key:1,
         name: "Beexay",
@@ -44,56 +47,156 @@ const Compaign = () => {
       })
       const [data,setData] = useState(obj)
   const [historyTab,setHistoryTab] = useState(false)
-  const [assetsmodal, setAssetsModal] = useState(false);
   const [sentmodal, setSentModal] = useState(false);
   const [recievemodal, setRecievedModal] = useState(false);
   const [pruchasemodal, setPurchaseModal] = useState(false)
   const [buymodal, setBuyModal] = useState(false);
   const [buymodal1, setBuyModal1] = useState(false);
+  const [MyTab, setMyTab] = useState('Portfolio')
   const [buymodal2, setBuyModal2] = useState(false);
-  const [trnassubmitted , settranssubmitted] = useState(false)
+  const [trnassubmitted, settranssubmitted] = useState(false)
+  const [trnasconfirm, settranconfirm] = useState(false)
   const [sendmessagemodal, setSendMessageModal] = useState(false)
-  const [reqpaymodal, setReqPayModal] = useState(false);  
-  const [sendmodalconfirm, setSendModalConfirm] = useState(false) 
+  const [reqpaymodal, setReqPayModal] = useState(false);
+  const [sendmodalconfirm, setSendModalConfirm] = useState(false)
   const [copylink, setCopyLink] = useState(false)
   const [requestPayment, setRequestPayment] = useState(false)
-  const [tokenmodal,setTokenModal] = useState(false)
-  const [tokenmodal2,setTokenModal2] = useState(false)
+
+  const [tokenmodal, setTokenModal] = useState(false)
+  const [tokenmodal2, setTokenModal2] = useState(false)
     const setSendMessageModaltotrue = () => {
         setSendMessageModal(true);
     }
    
 
-      const setBuyModall = () => {
+    //   const setBuyModall = () => {
 
-        setBuyModal(true)
-      }
-      const setPurchaseModall = () => {
-        setPurchaseModal(!pruchasemodal)
-      }
+    //     setBuyModal(true)
+    //   }
+    //   const setPurchaseModall = () => {
+    //     setPurchaseModal(!pruchasemodal)
+    //   }
     
-      const setBuyModal11 = () => {
-        setBuyModal(false)
-        setBuyModal1(!buymodal1)
-      }
+    //   const setBuyModal11 = () => {
+    //     setBuyModal(false)
+    //     setBuyModal1(!buymodal1)
+    //   }
     
-      const setBuyModal22 = () => {
-        setBuyModal1(!buymodal1)
-        setBuyModal2(!buymodal2)
-      }
-      const setsendModalToken2 = () =>{
+    //   const setBuyModal22 = () => {
+    //     setBuyModal1(!buymodal1)
+    //     setBuyModal2(!buymodal2)
+    //   }
+    //   const setsendModalToken2 = () =>{
         
-        setTokenModal2(true)
-      }
-      const setSendMessageModalFun = () => {
-        setSentModal(true);
-        setTokenModal2(false)
-      }
-      const setsendModalConfirmfun = () => {
-        setSendModalConfirm(false);
-        setSentModal(false)
+    //     setTokenModal2(true)
+    //   }
+    //   const setSendMessageModalFun = () => {
+    //     setSentModal(true);
+    //     setTokenModal2(false)
+    //   }
+    //   const setsendModalConfirmfun = () => {
+    //     setSendModalConfirm(false);
+    //     setSentModal(false)
+    //     setSendMessageModal(false)
+    //   }
+
+  
+    const setSentModalLocal = () => {
+      setSentModal(false)
+    }
+    const setBuyModall = () => {
+      setPurchaseModal(false)
+      setBuyModal(true)
+    }
+  
+    const setPurchaseModall = () => {
+      setPurchaseModal(!pruchasemodal)
+    }
+  
+    const setBuyModal11 = () => {
+      setBuyModal(false)
+      setBuyModal1(!buymodal1)
+    }
+  
+    const setBuyModal22 = () => {
+      setBuyModal1(!buymodal1)
+      setBuyModal2(!buymodal2)
+    }
+  
+    const setsendModalToken2 = () => {
+      setTokenModal2(true)
+    }
+    const setSendMessageModalFun = (dd) => {
+      if(dd === "back"){
         setSendMessageModal(false)
+        setShowCompaign()
+      }else{
+        navigation.navigate("Wallet")
       }
+      //setSendMessageModal(false)     
+       //setSentModal(true)
+       //setTokenModal2(false)
+    }
+    const setsendModalConfirmfun = () => {
+      setSendModalConfirm(false);
+      setSentModal(false)
+      setSendMessageModal(false)
+    }
+  
+    const setTokenModalLocal = () => {
+      setTokenModal(true);
+      setSendMessageModal(false)
+    }
+  
+    const setTokenModalLocal2 = () => {
+      setTokenModal(false);
+      setSentModal(true)
+    }
+  
+    const crossbuttonFunction  = () => {
+      //alert("cross")
+      setSendMessageModal(false);
+      setSentModal(true)
+      //navigation.navigate("Wallet")
+    }
+  
+    const backbuttonFunctionpaymentModaluseMax = (data) => {
+     
+      if(data == "close"){
+        navigation.navigate("Wallet", {trans:false})
+        setReqPayModal(false)
+        setSentModal(false)
+      }else{
+        setReqPayModal(false)
+      setSentModal(false)
+      }
+   
+    }
+  
+    const BnbButtonPressed = () => {
+      setTokenModal(true)
+      setReqPayModal(false)
+    }
+  
+    const sentconfrimbackpress = () => {
+      setSendModalConfirm(false);
+    
+      setReqPayModal(true)
+    }
+  
+    const transitioncomplete = () => {
+     navigation.navigate("Wallet", {trans:true})
+    }
+  
+    const setRequestPaymentLocal = () => {
+      navigation.navigate("Wallet", {trans:true})
+    }
+
+    const setReqPayModalLocal = () => {
+      setReqPayModal(true);
+      setSendMessageModal(false)
+    }
+
     return (
         <View style={{ margin: 10, }}>
 
@@ -116,7 +219,7 @@ const Compaign = () => {
             <View style={{ alignSelf: 'center' }}>
                 <Text style={styles.newsText}>
                     Amet minim mollit non deserunt{'\n'}ullamco est sit aliqua dolor do amet{'\n'} sint. Velit officia consequat duis enim{'\n'}velit mollit. Exercitation veniam{'\n'}consequat sunt nostrud amet.
-    </Text>
+                </Text>
             </View>
 
             <View style={{ marginVertical: 10, marginLeft: 35, flexDirection: 'row', }}>
@@ -130,20 +233,20 @@ const Compaign = () => {
 
             <DonateBtn setVisible={setSendMessageModaltotrue}/>
 
-            <AssetsModal visible={assetsmodal} setVisible={setAssetsModal} />
-        <SentModal visible={sentmodal} setVisible={setSentModal} setSendMessageModal={setSendMessageModal} setModalData={setModalData} tokenmodal={tokenmodal} setTokenModal={setTokenModal} setTokenModal2={setTokenModal2} />
-        <RecievedModal visible={recievemodal} setVisible={setRecievedModal} setCopyLink={setCopyLink} setRequestPayment={setRequestPayment} />
-        <PurchaseMethod visible={pruchasemodal} setVisible={setPurchaseModall} setBuyModall={setBuyModall} />
-        <BuyModal visible={buymodal} setVisible={setBuyModal} setBuyModal11={setBuyModal11} />
-        <BuyModal1 visible={buymodal1} setVisible={setBuyModal1} setBuyModal22={setBuyModal22} />
-        <BuyModal2 visible={buymodal2} setVisible={setBuyModal2} />
-        <SentModalMessage visible={sendmessagemodal} setVisible={setSendMessageModalFun} data={modaldata} setReqPayModal={setReqPayModal} /> 
-        <RequestPaymentModalusemax  visible={reqpaymodal}  setVisible={setReqPayModal} setSendModalConfirm={setSendModalConfirm} setTokenModal={setsendModalToken2} /> 
-        <SentModalConfirm visible={sendmodalconfirm} setVisible={setsendModalConfirmfun} />
-        <TokenModal visible={tokenmodal} setVisible={setTokenModal} /> 
-        <TokenModal2 visible={tokenmodal2} setVisible={setTokenModal2} opensendmodal={setSendMessageModalFun} />
-        <CopyLinkModal visible={copylink}  setVisible={setCopyLink} />
-        <RequestPaymentModal visible={requestPayment}  setVisible={setRequestPayment}  setVisible2={setRecievedModal} />
+          <SentModal visible={sentmodal} setVisible={setSentModalLocal} setSendMessageModal={setSendMessageModal} setModalData={setModalData} tokenmodal={tokenmodal} setTokenModal={setTokenModal} setTokenModal2={setTokenModal2} />
+          <RecievedModal visible={recievemodal} setVisible={setRecievedModal} setCopyLink={setCopyLink} setRequestPayment={setRequestPayment} />
+          <PurchaseMethod visible={pruchasemodal} setVisible={setPurchaseModall} setBuyModall={setBuyModall} />
+          <BuyModal visible={buymodal} setVisible={setBuyModal} setBuyModal11={setBuyModal11} />
+          <BuyModal1 visible={buymodal1} setVisible={setBuyModal1} setBuyModal22={setBuyModal22} />
+          <BuyModal2 visible={buymodal2} setVisible={setBuyModal2} />
+
+          <SentModalMessage visible={sendmessagemodal} setVisible={setSendMessageModalFun} crossbuttonFunction={crossbuttonFunction} setTokenModal={setTokenModalLocal} data={modaldata} setReqPayModal={setReqPayModalLocal} />
+          <RequestPaymentModalusemax visible={reqpaymodal} backbuttonFunctionpaymentModaluseMax={backbuttonFunctionpaymentModaluseMax} BnbButtonPressed={BnbButtonPressed} setVisible={setReqPayModal} setSendModalConfirm={setSendModalConfirm} setTokenModal={setsendModalToken2} />
+          <SentModalConfirm visible={sendmodalconfirm} setVisible={setsendModalConfirmfun} sentconfrimbackpress={sentconfrimbackpress} transitioncomplete={transitioncomplete} />
+          <TokenModal visible={tokenmodal} setVisible={setTokenModalLocal2} />
+          <TokenModal2 visible={tokenmodal2} setVisible={setTokenModal2} opensendmodal={setSendMessageModalFun} />
+          <CopyLinkModal visible={copylink} setVisible={setCopyLink} />
+          <RequestPaymentModal visible={requestPayment} setVisible={setRequestPaymentLocal} setVisible2={setRecievedModal} />
         </View>
 
     )

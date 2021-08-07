@@ -30,12 +30,16 @@ var obj = [
     },
 ]
 
-const SentModal = ({ visible, setVisible, setSendMessageModal, setModalData, tokenmodal, setTokenModal }) => {
-    const openmodal = (item) => {
-        setVisible(false)
-        setSendMessageModal(true)
-        setModalData(item)
-    }
+
+const SentModal = ({visible, setVisible, setSendMessageModal, setModalData, tokenmodal, setTokenModal}) => {
+
+const openmodal = (item) => {
+    setVisible()
+    setSendMessageModal(true)
+    setModalData(item)
+}
+
+
     const renderItem = (item) => {
         return (
             <TouchableOpacity style={styles.renderItemmain} onPress={() => openmodal(item.item)} >
@@ -73,19 +77,19 @@ const SentModal = ({ visible, setVisible, setSendMessageModal, setModalData, tok
             backdropColor="#1D1F27"
             backdropOpacity={.85}
         >
-            <SafeAreaView style={[mystyles.container, { width: width }]}>
-                <Content contentContainerStyle={{ width: width, backgroundColor: "#17171A" }}>
-                    <View style={styles.mainview}>
-                        <Text style={styles.sentto}>Sent To</Text>
-                        <Text style={styles.from}>From</Text>
-                        <TouchableOpacity style={styles.fromselect} onPress={() => { setTokenModal(true), setVisible(false) }}>
-                            <View style={{ flexDirection: "row" }}>
-                                <Image
-                                    style={{ width: 40, height: 40, resizeMode: "cover", borderRadius: 60, }}
-                                    source={require("../assets/token2.png")} />
-                                <View style={{ marginLeft: 10 }}>
-                                    <Text style={{ color: "#fff", fontFamily: simpletext, fontSize: 15 }}>
-                                        Binance Coin
+
+            <View style={styles.mainview}>
+                <Text style={styles.sentto}>Sent To</Text>
+                <Text style={styles.from}>From</Text>
+                <TouchableOpacity style={styles.fromselect} onPress={() =>  { setTokenModal(true), setVisible()}}>
+                    <View style={{flexDirection:"row"}}>
+                    <Image 
+                        style={{width:40, height:40, resizeMode:"cover", borderRadius:60,}}
+                        source={require("../assets/token2.png")} />
+                    <View style={{marginLeft:10}}>
+                        <Text style={{color:"#fff" , fontFamily:simpletext, fontSize:15}}>
+                            Binance Coin
+
                         </Text>
                                     <Text style={{ color: graycolor, fontFamily: simpletext, fontSize: 12 }}>
                                         Balance: 19.2371 BNB

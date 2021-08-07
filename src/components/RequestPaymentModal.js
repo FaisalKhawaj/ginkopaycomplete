@@ -66,7 +66,7 @@ const RequestPaymentModal = ({visible, setVisible,}) => {
                     </View>
                     
                     <View style={{position:"absolute", bottom:20}}>
-                        <CustomButton text={"Next"} onPress={() =>setVisible() } />
+                        <CustomButton text={"Next"} onPress={() => setVisible() } />
                     </View>
                 </Content>
             </Container>
