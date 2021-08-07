@@ -31,6 +31,7 @@ import TokenModal from '../../components/SendModalToken'
 import TokenModal2 from '../../components/SendModalToken2'
 
 import { mystyles } from '../../styles';
+import PurchaseMethodBankModal from '../../components/BuyModal';
 const { width, height } = Dimensions.get("window");
 
 
@@ -335,11 +336,13 @@ const Home = ({ navigation }) => {
         <AssetsModal visible={assetsmodal} setVisible={setAssetsModal} />
         <SentModal visible={sentmodal} setVisible={setSentModal} setSendMessageModal={setSendMessageModal} setModalData={setModalData} tokenmodal={tokenmodal} setTokenModal={setTokenModal} setTokenModal2={setTokenModal2} />
         <RecievedModal visible={recievemodal} setVisible={setRecievedModal} setCopyLink={setCopyLink} setRequestPayment={setRequestPayment} />
-        <PurchaseMethod visible={pruchasemodal} setVisible={purchaseModalHandler} setBuyModall={setBuyModall} />
-        <BuyModal visible={buymodal} backHandler={BuyModalBackHandler}
+        <PurchaseMethod navigation={navigation} visible={pruchasemodal} setVisible={setPurchaseModall}
+        // setBuyModall={setBuyModall}
+        />
+        {/* <PurchaseMethodBankModal visible={buymodal} backHandler={BuyModalBackHandler}
           closeHandler={BuyCloseModalHandler}
         // setBuyModal11={setBuyModal11}
-        />
+        /> */}
         <BuyModal1 visible={buymodal1} setVisible={setBuyModal1} setBuyModal22={setBuyModal22} />
         <BuyModal2 visible={buymodal2} setVisible={setBuyModal2} />
 

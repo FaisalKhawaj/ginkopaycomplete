@@ -26,7 +26,7 @@ var obj = [
     },
 ]
 
-const AssetsModal = ({ visible, backHandler, closeHandler }) => {
+const PurchaseMethodBankModal = ({ visible, backHandler, closeHandler }) => {
     return (
         <Modal
             isVisible={visible}
@@ -75,7 +75,7 @@ const AssetsModal = ({ visible, backHandler, closeHandler }) => {
     )
 }
 
-export default AssetsModal;
+export default PurchaseMethodBankModal;
 
 const styles = StyleSheet.create({
     modal: {
