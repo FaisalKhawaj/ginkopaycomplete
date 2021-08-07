@@ -31,13 +31,13 @@ var obj = [
 ]
 
 
-const SentModal = ({visible, setVisible, setSendMessageModal, setModalData, tokenmodal, setTokenModal}) => {
+const SentModal = ({ visible, setVisible, setSendMessageModal, setModalData, tokenmodal, setTokenModal }) => {
 
-const openmodal = (item) => {
-    setVisible()
-    setSendMessageModal(true)
-    setModalData(item)
-}
+    const openmodal = (item) => {
+        setVisible()
+        setSendMessageModal(true)
+        setModalData(item)
+    }
 
 
     const renderItem = (item) => {
@@ -78,50 +78,50 @@ const openmodal = (item) => {
             backdropOpacity={.85}
         >
 
-            <View style={styles.mainview}>
-                <Text style={styles.sentto}>Sent To</Text>
-                <Text style={styles.from}>From</Text>
-                <TouchableOpacity style={styles.fromselect} onPress={() =>  { setTokenModal(true), setVisible()}}>
-                    <View style={{flexDirection:"row"}}>
-                    <Image 
-                        style={{width:40, height:40, resizeMode:"cover", borderRadius:60,}}
-                        source={require("../assets/token2.png")} />
-                    <View style={{marginLeft:10}}>
-                        <Text style={{color:"#fff" , fontFamily:simpletext, fontSize:15}}>
-                            Binance Coin
-
-                        </Text>
-                                    <Text style={{ color: graycolor, fontFamily: simpletext, fontSize: 12 }}>
-                                        Balance: 19.2371 BNB
-                        </Text>
-                                </View>
-                            </View>
-                            <TouchableOpacity>
-                                <MaterialIcons name="keyboard-arrow-right" size={20} color="#fff" />
-                            </TouchableOpacity>
-                        </TouchableOpacity>
-
-                        <Text style={styles.from}>To</Text>
-                        <View style={{ height: 60, width: width - 40, paddingHorizontal: 20, marginBottom: 30, justifyContent: "space-between", flexDirection: "row", alignItems: "center", borderRadius: 10, marginTop: 10, alignSelf: "center", borderWidth: 1, borderColor: graycolor }}>
-                            <Text style={{ color: graycolor, fontFamily: boldtext, fontSize: 13 }}>
-                                Search, public address (0x), or ENS
-                        </Text>
+            <SafeAreaView style={[mystyles.container, { width: width }]}>
+                <Content contentContainerStyle={{ flexGrow: 1, width: width, backgroundColor: "#17171A" }}>
+                    <Text style={styles.sentto}>Sent To</Text>
+                    <Text style={styles.from}>From</Text>
+                    <TouchableOpacity style={styles.fromselect} onPress={() => { setTokenModal(true), setVisible() }}>
+                        <View style={{ flexDirection: "row" }}>
                             <Image
-                                style={{ width: 20, tintColor: graycolor, height: 20, resizeMode: "cover", borderRadius: 26, }}
-                                source={require("../assets/scan.png")} />
+                                style={{ width: 40, height: 40, resizeMode: "cover", borderRadius: 60, }}
+                                source={require("../assets/token2.png")} />
+                            <View style={{ marginLeft: 10 }}>
+                                <Text style={{ color: "#fff", fontFamily: simpletext, fontSize: 15 }}>
+                                    Binance Coin
+
+                        </Text>
+                                <Text style={{ color: graycolor, fontFamily: simpletext, fontSize: 12 }}>
+                                    Balance: 19.2371 BNB
+                        </Text>
+                            </View>
                         </View>
-                        <Text style={styles.recent}>Recent</Text>
-                        <FlatList
-                            data={obj}
-                            renderItem={(item) => renderItem(item)}
-                            keyExtractor={(item, index) => index.toString()}
-                        />
+                        <TouchableOpacity>
+                            <MaterialIcons name="keyboard-arrow-right" size={20} color="#fff" />
+                        </TouchableOpacity>
+                    </TouchableOpacity>
+
+                    <Text style={styles.from}>To</Text>
+                    <View style={{ height: 60, width: width - 40, paddingHorizontal: 20, marginBottom: 30, justifyContent: "space-between", flexDirection: "row", alignItems: "center", borderRadius: 10, marginTop: 10, alignSelf: "center", borderWidth: 1, borderColor: graycolor }}>
+                        <Text style={{ color: graycolor, fontFamily: boldtext, fontSize: 13 }}>
+                            Search, public address (0x), or ENS
+                        </Text>
+                        <Image
+                            style={{ width: 20, tintColor: graycolor, height: 20, resizeMode: "cover", borderRadius: 26, }}
+                            source={require("../assets/scan.png")} />
                     </View>
+                    <Text style={styles.recent}>Recent</Text>
+                    <FlatList
+                        data={obj}
+                        renderItem={(item) => renderItem(item)}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
                 </Content>
             </SafeAreaView>
 
 
-        </Modal>
+        </Modal >
     )
 }
 
