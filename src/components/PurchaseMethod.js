@@ -6,6 +6,7 @@ import { graycolor, green } from '../constants/colors';
 const { width, height } = Dimensions.get("window");
 import LinearGradient from 'react-native-linear-gradient'
 import HeaderBackTextClose from './HeaderBackTextClose'
+import PurchaseMethodBankModal from './BuyModal';
 var obj = [
     {
         key: 1,
@@ -36,8 +37,19 @@ var obj = [
     },
 ]
 
-const SentModal = ({ visible, setVisible, setBuyModall }) => {
+const SentModal = ({ visible, navigation, setVisible }) => {
+    const [buymodal, setBuyModal] = useState(false);
+    console.log("Purchase MEthod Currency Select")
+    const BuyModallHandler = () => {
 
+        setBuyModal(!buymodal)
+    }
+    const BuyCloseModalHandler = () => {
+        setVisible
+        // setPurchaseModal(false)
+        setBuyModal(!buymodal)
+        navigation.navigate('Home')
+    }
     const renderItem = (item) => {
         return (
             <LinearGradient
@@ -47,7 +59,7 @@ const SentModal = ({ visible, setVisible, setBuyModall }) => {
                     padding: item.item.key === 1 ? 1 : 0, borderRadius: 10,
                     marginBottom: 10,
                 }}>
-                <TouchableOpacity style={styles.verticalListItem} onPress={() => setVisible, setBuyModall}>
+                <TouchableOpacity style={styles.verticalListItem} onPress={() => setVisible, BuyModallHandler}>
                     <Image style={styles.verticalListIconBackground} source={item.item.image} />
                     <View style={{ flexDirection: 'column', flex: 1 }}>
                         <Text style={{ color: '#fff', fontFamily: fontmedium, fontSize: 16 }}>
@@ -78,15 +90,19 @@ const SentModal = ({ visible, setVisible, setBuyModall }) => {
             backdropOpacity={.85}
         >
             <View style={styles.mainview}>
-                <HeaderBackTextClose text="Purchase Method" setShowBannerModal={setVisible} closeModal={setVisible} />
+                <HeaderBackTextClose text="Purchase Method" backhandler={setVisible} closeModal={setVisible} />
                 <FlatList
                     data={obj}
                     renderItem={renderItem}
                     keyExtractor={(item, index) => index.toString()}
                 />
             </View>
-
+            <PurchaseMethodBankModal visible={buymodal} backHandler={BuyModallHandler}
+                closeHandler={BuyCloseModalHandler}
+            // setBuyModal11={setBuyModal11}
+            />
         </Modal>
+
     )
 }
 

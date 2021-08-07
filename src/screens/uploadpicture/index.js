@@ -58,7 +58,7 @@ const UploadImageScreen = ({ navigation }) => {
           </TouchableOpacity>
         </ImageBackground>
       </Content>
-      <View style={{ alignSelf: "center", position: "absolute", bottom: 20 }}>
+      <View style={{ alignSelf: "center", position: "absolute", bottom: 30 }}>
         <CustomButton text={"skip"} onPress={() => gotonextScreen()} />
       </View>
     </Container>
