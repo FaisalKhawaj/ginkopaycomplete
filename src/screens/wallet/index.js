@@ -272,6 +272,11 @@ const Home = ({ navigation }) => {
       settranconfirm(false)
     }, 3000);
   }
+
+  const setReqPayModalLocall = () => {
+    setReqPayModal(true)
+    setSendMessageModal(false)
+  }
   return (
     <SafeAreaView style={[mystyles.container, { width: width }]}>
       <Content contentContainerStyle={{ width: width, backgroundColor: "#17171A" }}>
@@ -394,7 +399,7 @@ const Home = ({ navigation }) => {
         <BuyModal1 visible={buymodal1} setVisible={setBuyModal1} setBuyModal22={setBuyModal22} />
         <BuyModal2 visible={buymodal2} setVisible={setBuyModal2} />
 
-        <SentModalMessage visible={sendmessagemodal} setVisible={setSendMessageModalFun} crossbuttonFunction={crossbuttonFunction} setTokenModal={setTokenModalLocal} data={modaldata} setReqPayModal={setReqPayModal} />
+        <SentModalMessage visible={sendmessagemodal} setVisible={setSendMessageModalFun} crossbuttonFunction={crossbuttonFunction} setTokenModal={setTokenModalLocal} data={modaldata} setReqPayModal={setReqPayModalLocall} />
         <RequestPaymentModalusemax visible={reqpaymodal} backbuttonFunctionpaymentModaluseMax={backbuttonFunctionpaymentModaluseMax} BnbButtonPressed={BnbButtonPressed} setVisible={setReqPayModal} setSendModalConfirm={setSendModalConfirm} setTokenModal={setsendModalToken2} />
         <SentModalConfirm visible={sendmodalconfirm} setVisible={setsendModalConfirmfun} sentconfrimbackpress={sentconfrimbackpress} transitioncomplete={transitioncomplete} />
         <TokenModal visible={tokenmodal} setVisible={setTokenModal} />
