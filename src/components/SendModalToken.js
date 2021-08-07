@@ -6,6 +6,7 @@ import { graycolor, green } from '../constants/colors';
 const {width, height} = Dimensions.get("window");
 import SendModalMessage from '../components/SentModalMessage'
 import LinearGradient from 'react-native-linear-gradient'
+
 var obj = [
     {
       key:1,

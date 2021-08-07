@@ -7,15 +7,12 @@ import HeaderBackTextClose from './HeaderBackTextClose'
 const {width, height} = Dimensions.get("window");
 import CustomButton from './Button'
 import CustomText from './Text'
-import * as RootNavigation from '../Navigations/NavigationObject';
-const SentModal = ({visible, setVisible, data}) => {
+const SentModalConfirm = ({visible,sentconfrimbackpress, setVisible, transitioncomplete}) => {
     const BackBtnHandler = () => {
         setVisible();
     }
 
-    const navigatetowallet = () => {
-        setVisible();
-    }
+   
   return (
         <Modal 
             isVisible={visible}
@@ -33,7 +30,7 @@ const SentModal = ({visible, setVisible, data}) => {
             backdropOpacity = {.85}
         >
             <SafeAreaView style={{flex:1, height:height, backgroundColor:BackgroundColor}}>
-            <HeaderBackTextClose text="Confirm"setShowBannerModal={BackBtnHandler} closeModal={BackBtnHandler} />
+            <HeaderBackTextClose text="Confirm" setShowBannerModal={sentconfrimbackpress} closeModal={BackBtnHandler} />
                 
                 <ScrollView contentContainerStyle={{height:height ,alignSelf:"center", alignItems:"center", width:width}} style={{height:height}}>
                     <View style={styles.mainview}>
@@ -104,7 +101,7 @@ const SentModal = ({visible, setVisible, data}) => {
                         </View>
                     </View>
                     <View style={{position:"absolute", bottom:50, alignSelf:"center"}}>
-                        <CustomButton text={"Send"} onPress={() => navigatetowallet()}  />
+                        <CustomButton text={"Send"} onPress={() => transitioncomplete()}  />
                     </View>
                     
                 </View>  
@@ -115,7 +112,7 @@ const SentModal = ({visible, setVisible, data}) => {
     )
 }
 
-export default SentModal;
+export default SentModalConfirm;
 
 const styles = StyleSheet.create({
     modal:{

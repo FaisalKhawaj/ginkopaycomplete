@@ -7,7 +7,7 @@ import { boldtext, fontmedium, simpletext } from '../constants/fonts';
 import { graycolor, green } from '../constants/colors';
 import CustomText from './Text';
 const {width, height} = Dimensions.get("window");
-
+import { useNavigation } from '@react-navigation/native';
 var obj = [
     {
       key:1,
@@ -27,7 +27,7 @@ var obj = [
 ]
 
 const AssetsModal = ({visible, setVisible}) => {
-
+    const navigation = useNavigation();
     const renderItem = ({item}) => {
      
         return (
@@ -38,6 +38,11 @@ const AssetsModal = ({visible, setVisible}) => {
                 </View>
             </TouchableOpacity>
         )
+    }
+
+    const closemodal = () => {
+        setVisible();
+        navigation.navigate("Home")
     }
 
     return (
@@ -72,7 +77,7 @@ const AssetsModal = ({visible, setVisible}) => {
                     renderItem={renderItem}
                     keyExtractor={(item,index) => index.toString()}
                 />
-                <TouchableOpacity onPress={() => setVisible()}>
+                <TouchableOpacity onPress={() => closemodal()}>
                     <CustomText 
                         text={"Close"} 
                         locations={[0,1]} colors={["#70A2FF", "#F76E64",]} 

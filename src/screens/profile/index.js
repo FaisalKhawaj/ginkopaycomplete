@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, Image, Dimensions, SafeAreaView, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
+import { View, Text, TextInput, FlatList, Image, Dimensions, SafeAreaView,Share, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
 import { Container, Content, Thumbnail } from 'native-base';
 import Modal from 'react-native-modal';
 import Svg, { Rect, Defs, Use, image, Path, Pattern } from 'react-native-svg';
@@ -83,22 +83,49 @@ const Profile = ({ navigation }) => {
     }
     const CreateBannerHandler = () => {
         setShowBannerModal(!showBannerModal)
-        console.log('Banner')
+        //setShowBannerModal(false)
+       
     }
     const AddCompaignHandler = () => {
-        setShowCompaignModal(!showCompaignModal)
+        //setShowCompaignModal(!showCompaignModal)
+        setShowDonationDialog(!showDonationDialog)
         console.log('Compaign')
     }
     const CreateCompaignHandler = () => {
-        setShowDonationDialog(!showDonationDialog)
+        setShowCompaignModal(false)
+       // setShowDonationDialog(!showDonationDialog)
     }
     const DonationNextBtnHandler = () => {
-        setReferalModal(!ReferalModal)
+       setShowDonationDialog(false)
+       ShareMyPublicAddressHandler()
+    }
+    const ShareMyPublicAddressHandler = async () => {
+        try {
+            const result = await Share.share({
+              message:
+                'https://ginkopay.app.link/send/0xBBB6A12945aC14C84185a17C6BD2eAe96e',
+            });
+            if (result.action === Share.sharedAction) {
+              if (result.activityType) {
+                // shared with activity type of result.activityType
+              } else {
+                // shared
+              }
+            } else if (result.action === Share.dismissedAction) {
+              // dismissed
+            }
+          } catch (error) {
+            alert(error.message);
+          }
     }
     const BackBtnHandler = () => {
         navigation.goBack()
     }
-    console.log("Comp  " + showCompaignModal + " Banner  " + showBannerModal + " referal  " + ReferalModal)
+   const CreateBannerhandlerButtonNext = () => {
+    
+    setShowBannerModal(false);
+    setShowDonationDialog(true)
+   }
     return (
         <SafeAreaView style={[mystyles.container, { width: width }]}>
             <Content contentContainerStyle={{ width: width, backgroundColor: "#17171A" }}>
@@ -183,12 +210,12 @@ const Profile = ({ navigation }) => {
                 }
 
                 {btnSelect === 'Compaign' && showCompaign ?
-                    <Compaign />
+                    <Compaign  setShowCompaign={setShowCompaign}/>
                     : null
                 }
 
                 {btnSelect === 'Channels' && showCompaign ?
-                    <Compaign />
+                    <Compaign  setShowCompaign={setShowCompaign}/>
                     : null
                 }
 
@@ -331,9 +358,9 @@ const Profile = ({ navigation }) => {
                         />
 
 
-                        <View style={{ marginVertical: 10 }}>
-                            <CustomButton text={"Next"} onPress={CreateCompaignHandler} />
-                        </View>
+                        <TouchableOpacity style={{ marginVertical: 10, height:50, width:"100%" }} onPress={() =>{} } >
+                            <CustomButton text={"Next"} onPress={() => CreateBannerhandlerButtonNext()} />
+                        </TouchableOpacity>
 
                     </View>
                     {ReferalModal && showDonationDialog ?
@@ -408,7 +435,7 @@ const Profile = ({ navigation }) => {
 
 
                         <View style={{ flex: 1, marginBottom: 50, justifyContent: 'flex-end' }}>
-                            <CustomButton text={"Next"} onPress={DonationNextBtnHandler} />
+                            <CustomButton text={"Next"} onPress={() => DonationNextBtnHandler()} />
                         </View>
 
                     </View>

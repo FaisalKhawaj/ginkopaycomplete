@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Content } from 'native-base'
 import { View, Text, Image, StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons'
-import { BackgroundColor } from '../../constants/colors';
 import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay';
 import CryptoNews from '../../components/News';
-import CustomText from '../../components/Text';
-import DonateBtn from '../../components/DonateBtn';
 import Compaign from '../../components/compaign';
 import { mystyles } from '../../styles';
 
@@ -121,6 +117,11 @@ const CompaignMainPage = ({ navigation }) => {
     const backBtn = () => {
         navigation.goBack()
     }
+
+
+    const setShowCompaignLocal = () => {
+        setShowCompaign(false)
+    }
     return (
         <SafeAreaView style={mystyles.container}>
             <Content contentContainerStyle={{ backgroundColor: "#17171A" }}>
@@ -198,12 +199,12 @@ const CompaignMainPage = ({ navigation }) => {
                 {/* {
                     btnSelect === 'TopRatedCompaigns' ? */}
                 {btnSelect === 'TopRated' && showCompaign ?
-                    <Compaign />
+                    <Compaign setShowCompaign={setShowCompaignLocal} />
                     : null
                 }
 
                 {btnSelect === 'Recent' && showCompaign ?
-                    <Compaign />
+                    <Compaign setShowCompaign={setShowCompaignLocal} />
                     : null
                 }
 

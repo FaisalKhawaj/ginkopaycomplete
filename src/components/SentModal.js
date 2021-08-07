@@ -29,12 +29,14 @@ var obj = [
 ]
 
 const SentModal = ({visible, setVisible, setSendMessageModal, setModalData, tokenmodal, setTokenModal}) => {
+
 const openmodal = (item) => {
-    setVisible(false)
+    setVisible()
     setSendMessageModal(true)
     setModalData(item)
 }
-const renderItem = (item) => {
+
+    const renderItem = (item) => {
         return (
             <TouchableOpacity style={styles.renderItemmain} onPress={() => openmodal(item.item)} >
                 <View style={{flexDirection:"row"}}>
@@ -74,7 +76,7 @@ const renderItem = (item) => {
             <View style={styles.mainview}>
                 <Text style={styles.sentto}>Sent To</Text>
                 <Text style={styles.from}>From</Text>
-                <TouchableOpacity style={styles.fromselect} onPress={() => {setTokenModal(true), setVisible(false)}}>
+                <TouchableOpacity style={styles.fromselect} onPress={() =>  { setTokenModal(true), setVisible()}}>
                     <View style={{flexDirection:"row"}}>
                     <Image 
                         style={{width:40, height:40, resizeMode:"cover", borderRadius:60,}}

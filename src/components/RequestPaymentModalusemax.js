@@ -10,7 +10,7 @@ import CustomButton from './Button'
 import CustomText from './Text'
 const {width, height} = Dimensions.get("window");
 
-const RequestPaymentModal = ({visible, setVisible,setSendModalConfirm , setTokenModal}) => { 
+const RequestPaymentModal = ({visible, setVisible,backbuttonFunctionpaymentModaluseMax,BnbButtonPressed, setSendModalConfirm , setTokenModal}) => { 
   const [value, setValue] = React.useState("")
  
   const closeModal= () => {
@@ -34,16 +34,16 @@ const RequestPaymentModal = ({visible, setVisible,setSendModalConfirm , setToken
             backdropOpacity = {.85}
         >
         <Container style={styles.mainview}>  
-        <HeaderBackTextCloseBtn 
+            <HeaderBackTextCloseBtn 
                 text="Amount" 
-                setShowBannerModal={setVisible} 
-                closeModal={setVisible} 
-                />
+                setShowBannerModal={() => backbuttonFunctionpaymentModaluseMax("back")} 
+                closeModal={() => backbuttonFunctionpaymentModaluseMax("close")}  
+            />
             <Content 
                 contentContainerStyle={styles.contentContainerStyle} 
                 style={{flexGrow:1}}>
                 <View style={{flexDirection:"row", justifyContent:"space-between",width:width/2,marginLeft:width/4}}>
-                    <TouchableOpacity style={styles.button} onPress={() => {setVisible(false), setTokenModal()}}>
+                    <TouchableOpacity style={styles.button} onPress={() => {BnbButtonPressed()}}>
                         <Text style={{...styles.bnb}}>
                             BNB
                         </Text>

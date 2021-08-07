@@ -10,17 +10,18 @@ const {width, height} = Dimensions.get("window");
 
 import CustomButton from './Button'
 
-const SentModal = ({visible, setVisible, data,setReqPayModal}) => {
-
-    const [tokenmodal, setTokenModal] = useState(false)
-  
+const SentModalMessage = ({visible, setVisible, crossbuttonFunction ,setTokenModal, data,setReqPayModal}) => {
     const BackBtnHandler = () => {
-        setVisible();
+        setVisible("back");
     }
 
+    
     const openreqpaymentodal = () => {
-        setVisible(false)
-        setReqPayModal(true)
+        setReqPayModal()
+    }
+
+    const closeModal = ( ) => {
+        setVisible("close")
     }
   return (
         <Modal 
@@ -40,12 +41,12 @@ const SentModal = ({visible, setVisible, data,setReqPayModal}) => {
             backdropOpacity = {.85}
         >
             <SafeAreaView style={{ height:height, backgroundColor:BackgroundColor, alignSelf:"center"}}>
-            <HeaderBackTextClose text="Sent To"setShowBannerModal={BackBtnHandler} closeModal={BackBtnHandler} />
+            <HeaderBackTextClose text="Sent To" setShowBannerModal={BackBtnHandler} closeModal={closeModal} />
                 <ScrollView >
                     <View style={styles.mainview}>
                        
                         <Text style={styles.from}>From</Text>
-                        <TouchableOpacity style={styles.fromselect} onPress={() => setTokenModal(true)}>
+                        <TouchableOpacity style={styles.fromselect} onPress={() => setTokenModal()}>
                             <View style={{flexDirection:"row"}}>
                                 <Image 
                                     style={{width:40, height:40, resizeMode:"cover", borderRadius:60,}}
@@ -79,7 +80,7 @@ const SentModal = ({visible, setVisible, data,setReqPayModal}) => {
                             </Text>
                         </View>
                         </View>
-                        <TouchableOpacity onPress={() => setVisible()} >
+                        <TouchableOpacity onPress={() => crossbuttonFunction()} >
                                 <MaterialIcons  name="close" size={20} color="#fff"  />
                         </TouchableOpacity>
                     </TouchableOpacity>
@@ -101,13 +102,11 @@ const SentModal = ({visible, setVisible, data,setReqPayModal}) => {
                 </View>  
                 </ScrollView>
             </SafeAreaView>
-            <TokenModal visible={tokenmodal} setVisible={setTokenModal} /> 
-           
         </Modal>
     )
 }
 
-export default SentModal;
+export default SentModalMessage;
 
 const styles = StyleSheet.create({
     modal:{
