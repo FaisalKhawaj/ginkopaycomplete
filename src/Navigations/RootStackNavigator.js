@@ -21,6 +21,7 @@ import ChangePassword from '../screens/ChangePassword';
 // RootStack Navigator 
 
 import BottomTabNavigator from './BottomTabNavigator'
+import Welcome from '../screens/Welcome';
 
 const RootStack = createStackNavigator();
 enableScreens()
@@ -31,13 +32,19 @@ const RootStackScreen = ({ navigation }) => {
             screenOptions={{
                 headerShown: false
             }}
-            initialRouteName={"SliderScreenOne"}
-
+            initialRouteName={"Welcome"}
         >
+
             <RootStack.Screen
+                name="Welcome"
+                component={Welcome}
+            />
+            {/* <RootStack.Screen
                 name="SliderScreenOne"
                 component={SliderScreenOne}
             />
+
+
 
             <RootStack.Screen
                 name="SliderScreenTwo"
@@ -46,7 +53,7 @@ const RootStackScreen = ({ navigation }) => {
             <RootStack.Screen
                 name="SliderScreenThree"
                 component={SliderScreenThree}
-            />
+            /> */}
             <RootStack.Screen
                 name="CreateAccountIntro"
                 component={CreateAccountIntro}
