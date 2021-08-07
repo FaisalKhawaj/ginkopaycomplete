@@ -50,25 +50,25 @@ const PurchaseMethodBankModal = ({ visible, backHandler, closeHandler }) => {
                 <Text style={styles.BelowHeaderText}>Send your deposit to this bank account and we will credit the coins in your account</Text>
                 <TouchableOpacity
                     // onPress={() => {setBuyModal11()}}
-                    style={{ width: width - 60, marginTop: 20, paddingHorizontal: 30, alignSelf: "center" }}>
-                    <Text style={{ color: "#fff", fontFamily: boldtext }}>Account holder</Text>
-                    <Text style={{ color: graycolor, fontFamily: simpletext }}>Ginko service technology LLC </Text>
+                    style={styles.AccounTextValueView}>
+                    <Text style={styles.accountText}>Account holder</Text>
+                    <Text style={styles.AccountdetailsValues}>Ginko service technology LLC </Text>
                 </TouchableOpacity>
-                <View style={{ width: width - 60, marginTop: 20, paddingHorizontal: 30, alignSelf: "center" }}>
-                    <Text style={{ color: "#fff", fontFamily: boldtext }}>BIC</Text>
-                    <Text style={{ color: graycolor, fontFamily: simpletext }}>TRWIBEB1XXX</Text>
+                <View style={styles.AccounTextValueView}>
+                    <Text style={styles.accountText}>BIC</Text>
+                    <Text style={styles.AccountdetailsValues}>TRWIBEB1XXX</Text>
                 </View>
-                <View style={{ width: width - 60, marginTop: 20, paddingHorizontal: 30, alignSelf: "center" }}>
-                    <Text style={{ color: "#fff", fontFamily: boldtext }}>IBAN</Text>
-                    <Text style={{ color: graycolor, fontFamily: simpletext }}>BE93 9672 0280 8067</Text>
+                <View style={styles.AccounTextValueView}>
+                    <Text style={styles.accountText}>IBAN</Text>
+                    <Text style={styles.AccountdetailsValues}>BE93 9672 0280 8067</Text>
                 </View>
-                <View style={{ width: width - 60, marginTop: 20, paddingHorizontal: 30, alignSelf: "center" }}>
-                    <Text style={{ color: "#fff", fontFamily: boldtext }}>Address</Text>
-                    <Text style={{ color: graycolor, fontFamily: simpletext }}>Avenue Louise 54, Room S52{"\n"}Brussels, 1050, Belgium</Text>
+                <View style={styles.AccounTextValueView}>
+                    <Text style={styles.accountText}>Address</Text>
+                    <Text style={styles.AccountdetailsValues}>Avenue Louise 54, Room S52{"\n"}Brussels, 1050, Belgium</Text>
                 </View>
-                <View style={{ width: width - 60, marginTop: 20, paddingHorizontal: 30, alignSelf: "center" }}>
-                    <Text style={{ color: "#fff", fontFamily: boldtext }}>Causal</Text>
-                    <Text style={{ color: graycolor, fontFamily: simpletext }}>Initials crypotcurrency ID Account example {"\n"}BTC + MARIO92</Text>
+                <View style={styles.AccounTextValueView}>
+                    <Text style={styles.accountText}>Causal</Text>
+                    <Text style={styles.AccountdetailsValues}>Initials crypotcurrency ID Account example {"\n"}BTC + MARIO92</Text>
                 </View>
             </View>
         </Modal>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
 
     },
     mainview: {
-        height: height / 1.1,
+        height: height / 1.2,
         flex: 1,
         width: width,
         bottom: 0,
@@ -155,5 +155,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginHorizontal: 40,
         marginBottom: 30
+    },
+    AccounTextValueView: {
+        width: width - 60,
+        marginTop: 20,
+        paddingHorizontal: 30,
+        alignSelf: "center"
+    },
+    AccountdetailsValues: {
+        color: graycolor, fontFamily: simpletext
+    },
+    accountText: {
+        color: "#fff", fontFamily: boldtext
     }
 })
