@@ -9,14 +9,26 @@ import ARROWDOWN from '../assets/arrowdown.svg'
 import CustomButton from './Button'
 import CustomText from './Text'
 const {width, height} = Dimensions.get("window");
-
-const RequestPaymentModal = ({visible, setVisible,backbuttonFunctionpaymentModaluseMax,BnbButtonPressed, setSendModalConfirm , setTokenModal}) => { 
+import TokenModal2 from './SendModalToken2'
+import SentModalConfirm from './SentModalConfirm';
+const RequestPaymentModal = ({visible, setVisible,backbuttonFunctionpaymentModaluseMax}) => { 
   const [value, setValue] = React.useState("")
- 
-  const closeModal= () => {
-    setSendModalConfirm(true)
-   
- }
+  const [tokenmodal2, setTokenModal2] = useState(false)
+  const [sendmodalconfirm, setSendModalConfirm] = useState(false)
+  
+    const closeModal= () => {
+        setSendModalConfirm(true)
+    }
+
+    const BnbButtonPressed = () => {
+        setTokenModal2(true)
+    }
+
+    const closeTokenModal2andopensend = () => {
+        setTokenModal2(false)
+        setSendModalConfirm(true)
+    }
+
     return(
         <Modal 
             isVisible={visible}
@@ -81,10 +93,17 @@ const RequestPaymentModal = ({visible, setVisible,backbuttonFunctionpaymentModal
                    
                 </Content>
                      <View style={{position:"absolute", bottom:20, alignSelf:"center"}}>
-                        <CustomButton text={"Next"} onPress={() => closeModal()} />
+                        <CustomButton text={"Next"} onPress={() => setSendModalConfirm(true)} />
                     </View>
                
             </Container>
+            <TokenModal2 visible={tokenmodal2} setVisible={() => alert("set visible")} opensendmodal={() => closeTokenModal2andopensend()} />
+            <SentModalConfirm 
+                visible={sendmodalconfirm} 
+                setVisible={(data) => alert("setVisible"+ data)} 
+                sentconfrimbackpress={(data) => alert("sentconfrimbackpress"+ data)} 
+                transitioncomplete={(data) => { setSendModalConfirm(false), backbuttonFunctionpaymentModaluseMax("complete")}} 
+            />
         </Modal>
     )
 }
