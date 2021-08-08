@@ -15,7 +15,7 @@ const RequestPaymentModal = ({visible, setVisible,backbuttonFunctionpaymentModal
  
   const closeModal= () => {
     setSendModalConfirm(true)
-    setVisible(false)
+   
  }
     return(
         <Modal 
@@ -36,7 +36,7 @@ const RequestPaymentModal = ({visible, setVisible,backbuttonFunctionpaymentModal
         <Container style={styles.mainview}>  
             <HeaderBackTextCloseBtn 
                 text="Amount" 
-                setShowBannerModal={() => backbuttonFunctionpaymentModaluseMax("back")} 
+                backhandler={() => backbuttonFunctionpaymentModaluseMax("back")} 
                 closeModal={() => backbuttonFunctionpaymentModaluseMax("close")}  
             />
             <Content 

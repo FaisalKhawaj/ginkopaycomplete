@@ -31,6 +31,7 @@ import TokenModal from '../../components/SendModalToken'
 import TokenModal2 from '../../components/SendModalToken2'
 
 import { mystyles } from '../../styles';
+import PurchaseMethodBankModal from '../../components/BuyModal';
 const { width, height } = Dimensions.get("window");
 
 
@@ -183,8 +184,9 @@ const Home = ({ navigation }) => {
     }
   }
 
-  const setSentModalLocal = () => {
-    setSentModal(false)
+  const setSentModalLocal = (data) => {
+ 
+    setSentModal(data)
   }
   const setBuyModall = () => {
     setPurchaseModal(false)
@@ -193,6 +195,9 @@ const Home = ({ navigation }) => {
 
   const setPurchaseModall = () => {
     setPurchaseModal(!pruchasemodal)
+  }
+  const BuyModalBackHandler = () => {
+    setBuyModal(false)
   }
 
   const setBuyModal11 = () => {
@@ -203,6 +208,14 @@ const Home = ({ navigation }) => {
   const setBuyModal22 = () => {
     setBuyModal1(!buymodal1)
     setBuyModal2(!buymodal2)
+  }
+  const purchaseModalHandler = () => {
+    setPurchaseModal(!pruchasemodal)
+  }
+  const BuyCloseModalHandler = () => {
+    setPurchaseModal(false)
+    setBuyModal(!buymodal)
+    navigation.navigate('Home')
   }
 
   const setsendModalToken2 = () => {
@@ -394,8 +407,10 @@ const Home = ({ navigation }) => {
         <AssetsModal visible={assetsmodal} setVisible={setAssetsModal} />
         <SentModal visible={sentmodal} setVisible={setSentModalLocal} setSendMessageModal={setSendMessageModal} setModalData={setModalData} tokenmodal={tokenmodal} setTokenModal={setTokenModal} setTokenModal2={setTokenModal2} />
         <RecievedModal visible={recievemodal} setVisible={setRecievedModal} setCopyLink={setCopyLink} setRequestPayment={setRequestPayment} />
-        <PurchaseMethod visible={pruchasemodal} setVisible={setPurchaseModall} setBuyModall={setBuyModall} />
-        <BuyModal visible={buymodal} setVisible={setBuyModal} setBuyModal11={setBuyModal11} />
+        <PurchaseMethod navigation={navigation} visible={pruchasemodal} setVisible={setPurchaseModall}
+       
+        />
+       
         <BuyModal1 visible={buymodal1} setVisible={setBuyModal1} setBuyModal22={setBuyModal22} />
         <BuyModal2 visible={buymodal2} setVisible={setBuyModal2} />
 

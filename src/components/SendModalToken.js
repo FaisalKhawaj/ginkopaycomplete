@@ -31,7 +31,7 @@ var obj = [
     },
 ]
 
-const SentModal = ({visible, setVisible}) => {
+const SentModal = ({visible, setVisible , closesendmodal}) => {
     
     const renderItem = (item) => {
         return (
@@ -39,7 +39,7 @@ const SentModal = ({visible, setVisible}) => {
             start={{x: 0, y: 0}} end={{x: 1, y: 0}}
             colors={[ "#70A2FF","#F76E64"]} 
                 style={{padding:item.item.key === 1?1:0,borderRadius:10, marginBottom:10,}}>
-                <TouchableOpacity style={styles.verticalListItem} onPress={() => setVisible()}>
+                <TouchableOpacity style={styles.verticalListItem} onPress={() => setVisible , closesendmodal}>
                     <Image style={styles.verticalListIconBackground} source={item.item.image} />
                     <View style={{flexDirection:'column',flex:1}}>
                         <Text style={{color:'#fff',fontFamily:fontmedium, fontSize:16}}>

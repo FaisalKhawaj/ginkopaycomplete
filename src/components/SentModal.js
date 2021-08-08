@@ -6,7 +6,8 @@ import { Content } from 'native-base'
 import { boldtext, simpletext } from '../constants/fonts';
 import { graycolor, green } from '../constants/colors';
 import { mystyles } from '../styles';
-
+import TokenModal from './SendModalToken'
+import SentModalMessage from './SentModalMessage'
 const { width, height } = Dimensions.get("window");
 
 var obj = [
@@ -31,14 +32,31 @@ var obj = [
 ]
 
 
-const SentModal = ({ visible, setVisible, setSendMessageModal, setModalData, tokenmodal, setTokenModal }) => {
-
+const SentModal = ({ visible, setVisible }) => {
+    const [sendmessagemodal, setSendMessageModal] = useState(false)
+    const [tokenmodal, setTokenModal] = useState(false)
+    const [modaldata, setModalData] = useState({
+        key: 1,
+        name: "Beexay",
+        link: '0x3Dc6...DxE9',
+        image: require("../assets/token2.png")
+      })
     const openmodal = (item) => {
-        setVisible()
+        //setVisible()
         setSendMessageModal(true)
         setModalData(item)
     }
 
+    const CloseallModals = (data) => {
+      if(data === "back"){
+        setSendMessageModal(false);
+        setVisible(true)
+      }else{
+        setSendMessageModal(false);
+        setVisible(false)
+      }
+      
+    }
 
     const renderItem = (item) => {
         return (
@@ -82,7 +100,7 @@ const SentModal = ({ visible, setVisible, setSendMessageModal, setModalData, tok
                 <Content contentContainerStyle={{ flexGrow: 1, width: width, backgroundColor: "#17171A" }}>
                     <Text style={styles.sentto}>Sent To</Text>
                     <Text style={styles.from}>From</Text>
-                    <TouchableOpacity style={styles.fromselect} onPress={() => { setTokenModal(true), setVisible() }}>
+                    <TouchableOpacity style={styles.fromselect} onPress={() => { setTokenModal(true) }}>
                         <View style={{ flexDirection: "row" }}>
                             <Image
                                 style={{ width: 40, height: 40, resizeMode: "cover", borderRadius: 60, }}
@@ -119,8 +137,16 @@ const SentModal = ({ visible, setVisible, setSendMessageModal, setModalData, tok
                     />
                 </Content>
             </SafeAreaView>
-
-
+            <TokenModal visible={tokenmodal} setVisible={setTokenModal} closesendmodal={() => setVisible(false)} />
+            <SentModalMessage 
+                visible={sendmessagemodal} 
+                setVisible={(data) => CloseallModals(data)} 
+                crossbuttonFunction={() => setSendMessageModal(false)} 
+                setTokenModal={() => alert("setTokenModal")} 
+                data={modaldata} 
+                setReqPayModal={() => alert("setReqPayModal")} 
+            />
+        
         </Modal >
     )
 }

@@ -39,14 +39,12 @@ var obj = [
 
 const SentModal = ({ visible, navigation, setVisible }) => {
     const [buymodal, setBuyModal] = useState(false);
-    console.log("Purchase MEthod Currency Select")
     const BuyModallHandler = () => {
 
         setBuyModal(!buymodal)
     }
     const BuyCloseModalHandler = () => {
         setVisible
-        // setPurchaseModal(false)
         setBuyModal(!buymodal)
         navigation.navigate('Home')
     }
