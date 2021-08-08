@@ -30,8 +30,8 @@ const RequestPaymentModal = ({visible, setVisible,}) => {
         <Container style={styles.mainview}>  
             <HeaderBackTextCloseBtn 
                 text="Amount" 
-                setShowBannerModal={setVisible} 
-                closeModal={setVisible} 
+                backhandler={() => {}} 
+                closeModal={() => {}} 
                 />
             <Content 
                 contentContainerStyle={styles.contentContainerStyle} 

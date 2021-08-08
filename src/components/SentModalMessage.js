@@ -11,10 +11,11 @@ import CustomButton from './Button'
 import { mystyles } from '../styles';
 import RequestPaymentModalusemax from './RequestPaymentModalusemax';
 
-const SentModalMessage = ({ visible, setVisible, crossbuttonFunction,data }) => {
+const SentModalMessage = ({ visible, setVisible, crossbuttonFunction,data,transcitioncompletefunction }) => {
     const [tokenmodal, setTokenModal] = useState(false)
     const [reqpaymodal, setReqPayModal] = useState(false);
     const BackBtnHandler = () => {
+        setReqPayModal(false)
         setVisible("back");
     }
 
@@ -31,10 +32,11 @@ const SentModalMessage = ({ visible, setVisible, crossbuttonFunction,data }) => 
        if(data === "back"){
         setVisible(data)
         setReqPayModal(false)
+        }else if (data === "complete"){
+            transcitioncompletefunction()
+            setVisible("close")
         }else{
         setVisible("close")
-        
-        setReqPayModal(false)
        }
     }
     return (
@@ -120,7 +122,7 @@ const SentModalMessage = ({ visible, setVisible, crossbuttonFunction,data }) => 
                 backbuttonFunctionpaymentModaluseMax={(data) => handlebackandclose(data)} 
                 BnbButtonPressed={() => alert("BNB Button")} 
                 setVisible={() =>  alert("Nextt")} 
-                setSendModalConfirm={() => alert("Confirm Modal")} 
+                setSendModalConfirm={() => BackBtnHandler()} 
                 setTokenModal={() => alert("Set Token Modal 2")} 
             />
         </Modal>

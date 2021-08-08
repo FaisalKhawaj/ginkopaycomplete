@@ -30,7 +30,7 @@ const SentModalConfirm = ({visible,sentconfrimbackpress, setVisible, transitionc
             backdropOpacity = {.85}
         >
             <SafeAreaView style={{flex:1, height:height, backgroundColor:BackgroundColor}}>
-            <HeaderBackTextClose text="Confirm" setShowBannerModal={sentconfrimbackpress} closeModal={BackBtnHandler} />
+            <HeaderBackTextClose text="Confirm" backhandler={sentconfrimbackpress} closeModal={BackBtnHandler} />
                 
                 <ScrollView contentContainerStyle={{height:height ,alignSelf:"center", alignItems:"center", width:width}} style={{height:height}}>
                     <View style={styles.mainview}>

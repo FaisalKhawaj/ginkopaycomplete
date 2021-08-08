@@ -32,7 +32,7 @@ var obj = [
 ]
 
 
-const SentModal = ({ visible, setVisible }) => {
+const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
     const [sendmessagemodal, setSendMessageModal] = useState(false)
     const [tokenmodal, setTokenModal] = useState(false)
     const [modaldata, setModalData] = useState({
@@ -145,6 +145,7 @@ const SentModal = ({ visible, setVisible }) => {
                 setTokenModal={() => alert("setTokenModal")} 
                 data={modaldata} 
                 setReqPayModal={() => alert("setReqPayModal")} 
+                transcitioncompletefunction={transcitioncompletefunction}
             />
         
         </Modal >

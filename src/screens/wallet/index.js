@@ -290,6 +290,18 @@ const Home = ({ navigation }) => {
     setReqPayModal(true)
     setSendMessageModal(false)
   }
+  const transcitioncompletefunction = (data) => {
+    settranssubmitted(true)
+    setTimeout(() => {
+      settranssubmitted(false)  
+      settranconfirm(true)
+    }, 2000);
+
+    setTimeout(() => {
+      settranconfirm(false)
+    }, 3000);
+  }
+
   return (
     <SafeAreaView style={[mystyles.container, { width: width }]}>
       <Content contentContainerStyle={{ width: width, backgroundColor: "#17171A" }}>
@@ -405,8 +417,23 @@ const Home = ({ navigation }) => {
 
 
         <AssetsModal visible={assetsmodal} setVisible={setAssetsModal} />
-        <SentModal visible={sentmodal} setVisible={setSentModalLocal} setSendMessageModal={setSendMessageModal} setModalData={setModalData} tokenmodal={tokenmodal} setTokenModal={setTokenModal} setTokenModal2={setTokenModal2} />
-        <RecievedModal visible={recievemodal} setVisible={setRecievedModal} setCopyLink={setCopyLink} setRequestPayment={setRequestPayment} />
+        <SentModal 
+          visible={sentmodal} 
+          setVisible={setSentModalLocal} 
+          setSendMessageModal={setSendMessageModal} 
+          setModalData={setModalData} 
+          tokenmodal={tokenmodal} 
+          setTokenModal={setTokenModal} 
+          setTokenModal2={setTokenModal2} 
+          transcitioncompletefunction={transcitioncompletefunction}  
+        />
+        <RecievedModal 
+          visible={recievemodal} 
+          setVisible={setRecievedModal} 
+          setCopyLink={setCopyLink} 
+          setRequestPayment={setRequestPayment} 
+          transcitioncompletefunction={transcitioncompletefunction}  
+          />
         <PurchaseMethod navigation={navigation} visible={pruchasemodal} setVisible={setPurchaseModall}
        
         />

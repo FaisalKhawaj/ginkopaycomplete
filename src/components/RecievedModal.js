@@ -8,20 +8,26 @@ import COPY from '../assets/copy.svg'
 import { Container, Content, Text } from 'native-base'
 import CopyLinkModal from './LinkCopyModal'
 import RequestPaymentModal from "./RequestPaymentModal";
-import { mystyles } from '../styles';
 const { width, height } = Dimensions.get("window");
 
 
-const recievedModal = ({ visible, setVisible, setRequestPayment, setCopyLink }) => {
-
+const recievedModal = ({ visible, setVisible, transcitioncompletefunction   }) => {
+    const [copylink, setCopyLink] = useState(false)
+    const [requestPayment, setRequestPayment] = useState(false)
     const openRequestModal = () => {
         setRequestPayment(true)
-        setVisible()
-
     }
     const OpenLinkModal = () => {
         setCopyLink(true)
+    }
+    const navigatetoroot = () => {
+        setCopyLink(false)
         setVisible()
+    }
+    const closeallmodals = () => {
+        setRequestPayment(false)
+        setVisible();
+        transcitioncompletefunction()
     }
     return (
         <Modal
@@ -55,8 +61,11 @@ const recievedModal = ({ visible, setVisible, setRequestPayment, setCopyLink }) 
                         <CustomButton text={"Request Payment"} onPress={() => openRequestModal()} />
                     </View>
                 </Content>
-
             </Container>
+            <CopyLinkModal visible={copylink} setVisible={() => navigatetoroot()} />
+            <RequestPaymentModal 
+                visible={requestPayment} 
+                setVisible={() => closeallmodals()} setVisible2={() => alert("set visible 2")} />
         </Modal>
     )
 }
