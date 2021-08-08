@@ -3,27 +3,39 @@ import { View, TextInput, Dimensions, StyleSheet, SafeAreaView, ScrollView, Imag
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
 import { Content } from 'native-base'
-import { boldtext, simpletext } from '../constants/fonts';
-import { BackgroundColor, graycolor, } from '../constants/colors';
+import { boldtext,graycolor, simpletext } from '../constants/fonts';
 import TokenModal from './SendModalToken'
 import HeaderBackTextClose from './HeaderBackTextClose'
 const { width, height } = Dimensions.get("window");
-
 import CustomButton from './Button'
 import { mystyles } from '../styles';
+import RequestPaymentModalusemax from './RequestPaymentModalusemax';
 
-const SentModalMessage = ({ visible, setVisible, crossbuttonFunction, setTokenModal, data, setReqPayModal }) => {
+const SentModalMessage = ({ visible, setVisible, crossbuttonFunction,data }) => {
+    const [tokenmodal, setTokenModal] = useState(false)
+    const [reqpaymodal, setReqPayModal] = useState(false);
     const BackBtnHandler = () => {
         setVisible("back");
     }
 
 
     const openreqpaymentodal = () => {
-        setReqPayModal()
+        setReqPayModal(true)
     }
 
     const closeModal = () => {
         setVisible("close")
+    }
+
+    const  handlebackandclose = (data) => {
+       if(data === "back"){
+        setVisible(data)
+        setReqPayModal(false)
+        }else{
+        setVisible("close")
+        
+        setReqPayModal(false)
+       }
     }
     return (
         <Modal
@@ -44,12 +56,12 @@ const SentModalMessage = ({ visible, setVisible, crossbuttonFunction, setTokenMo
         >
             <SafeAreaView style={[mystyles.container, { width: width }]}>
                 <Content contentContainerStyle={{ flexGrow: 1, width: width, backgroundColor: "#17171A" }}>
-                    <HeaderBackTextClose text="Sent To" setShowBannerModal={BackBtnHandler} closeModal={closeModal} />
+                    <HeaderBackTextClose text="Sent To" backhandler={BackBtnHandler} closeModal={closeModal} />
 
                     <View style={styles.mainview}>
 
                         <Text style={styles.from}>From</Text>
-                        <TouchableOpacity style={styles.fromselect} onPress={() => setTokenModal()}>
+                        <TouchableOpacity style={styles.fromselect} onPress={() => setTokenModal(true)}>
                             <View style={{ flexDirection: "row" }}>
                                 <Image
                                     style={{ width: 40, height: 40, resizeMode: "cover", borderRadius: 60, }}
@@ -98,20 +110,19 @@ const SentModalMessage = ({ visible, setVisible, crossbuttonFunction, setTokenMo
                                 style={styles.textinput}
                             />
                         </View>
-                        {/* <View style={{
-                            flex: 1, justifyContent: 'flex-end',
-                            bottom: 30,
-                            // position: "absolute", bottom: 20,
-                            alignSelf: "center"
-                        }}>
-                            <CustomButton text={"Next"} onPress={() => openreqpaymentodal()} />
-                        </View> */}
-
                     </View>
                 </Content>
                 <CustomButton text={"Next"} onPress={() => openreqpaymentodal()} />
-
             </SafeAreaView>
+            <TokenModal visible={tokenmodal} setVisible={setTokenModal} closesendmodal={setVisible} />
+            <RequestPaymentModalusemax 
+                visible={reqpaymodal} 
+                backbuttonFunctionpaymentModaluseMax={(data) => handlebackandclose(data)} 
+                BnbButtonPressed={() => alert("BNB Button")} 
+                setVisible={() =>  alert("Nextt")} 
+                setSendModalConfirm={() => alert("Confirm Modal")} 
+                setTokenModal={() => alert("Set Token Modal 2")} 
+            />
         </Modal>
     )
 }
