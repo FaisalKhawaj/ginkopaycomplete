@@ -87,8 +87,8 @@ const Profile = ({ navigation }) => {
        
     }
     const AddCompaignHandler = () => {
-        //setShowCompaignModal(!showCompaignModal)
-        setShowDonationDialog(!showDonationDialog)
+        setShowCompaignModal(!showCompaignModal)
+       // setShowDonationDialog(!showDonationDialog)
         console.log('Compaign')
     }
     const CreateCompaignHandler = () => {
