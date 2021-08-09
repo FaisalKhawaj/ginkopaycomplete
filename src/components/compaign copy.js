@@ -101,100 +101,17 @@ const Compaign = ({setShowCompaign}) => {
     //   }
 
   
+  
     const setSentModalLocal = () => {
+      navigation.navigate("Wallet")
       setSentModal(false)
     }
-    const setBuyModall = () => {
-      setPurchaseModal(false)
-      setBuyModal(true)
-    }
   
-    const setPurchaseModall = () => {
-      setPurchaseModal(!pruchasemodal)
-    }
   
-    const setBuyModal11 = () => {
-      setBuyModal(false)
-      setBuyModal1(!buymodal1)
-    }
-  
-    const setBuyModal22 = () => {
-      setBuyModal1(!buymodal1)
-      setBuyModal2(!buymodal2)
-    }
-  
-    const setsendModalToken2 = () => {
-      setTokenModal2(true)
-    }
-    const setSendMessageModalFun = (dd) => {
-      if(dd === "back"){
-        setSendMessageModal(false)
-        setShowCompaign()
-      }else{
-        navigation.navigate("Wallet")
-      }
-      //setSendMessageModal(false)     
-       //setSentModal(true)
-       //setTokenModal2(false)
-    }
-    const setsendModalConfirmfun = () => {
-      setSendModalConfirm(false);
-      setSentModal(false)
-      setSendMessageModal(false)
-    }
-  
-    const setTokenModalLocal = () => {
-      setTokenModal(true);
-      setSendMessageModal(false)
-    }
-  
-    const setTokenModalLocal2 = () => {
-      setTokenModal(false);
-      setSentModal(true)
-    }
-  
-    const crossbuttonFunction  = () => {
-      //alert("cross")
-      setSendMessageModal(false);
-      setSentModal(true)
-      //navigation.navigate("Wallet")
-    }
-  
-    const backbuttonFunctionpaymentModaluseMax = (data) => {
-     
-      if(data == "close"){
-        navigation.navigate("Wallet", {trans:false})
-        setReqPayModal(false)
-        setSentModal(false)
-      }else{
-        setReqPayModal(false)
-      setSentModal(false)
-      }
-   
-    }
-  
-    const BnbButtonPressed = () => {
-      setTokenModal(true)
-      setReqPayModal(false)
-    }
-  
-    const sentconfrimbackpress = () => {
-      setSendModalConfirm(false);
     
-      setReqPayModal(true)
-    }
   
-    const transitioncomplete = () => {
-     navigation.navigate("Wallet", {trans:true})
-    }
-  
-    const setRequestPaymentLocal = () => {
-      navigation.navigate("Wallet", {trans:true})
-    }
-
-    const setReqPayModalLocal = () => {
-      setReqPayModal(true);
-      setSendMessageModal(false)
+    const transcitioncompletefunction = (data) => {
+     navigation.navigate("Wallet")
     }
 
     return (
@@ -233,16 +150,19 @@ const Compaign = ({setShowCompaign}) => {
 
             <DonateBtn setVisible={setSendMessageModaltotrue}/>
 
-
-
-          <SentModalMessage 
-            visible={sendmessagemodal} 
-            setVisible={setSendMessageModalFun} 
-            crossbuttonFunction={crossbuttonFunction} 
-            setTokenModal={setTokenModalLocal} 
-            data={modaldata} 
-            setReqPayModal={setReqPayModalLocal} />
-           </View>
+            <SentModal 
+              visible={sentmodal} 
+              setVisible={setSentModalLocal} 
+              setSendMessageModal={setSendMessageModal} 
+              setModalData={setModalData} 
+              tokenmodal={tokenmodal} 
+              setTokenModal={setTokenModal} 
+              setTokenModal2={setTokenModal2} 
+              transcitioncompletefunction={transcitioncompletefunction}  
+            />
+        
+        
+       </View>
 
     )
 }
