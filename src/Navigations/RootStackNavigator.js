@@ -19,9 +19,7 @@ enableScreens()
 const RootStackScreen = ({ navigation }) => {
     return (
         <RootStack.Navigator
-            screenOptions={{
-                headerShown: false
-            }}
+            headerMode='none'
             initialRouteName={"DashBoardScreen"}
 
         >

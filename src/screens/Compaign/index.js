@@ -187,7 +187,7 @@ const CompaignMainPage = ({ navigation }) => {
                 </View>
 
                 {btnSelect === 'TopRated' && showCompaign != true ?
-                    <FlatList data={campaign}
+                    <FlatList data={TopRated}
                         renderItem={({ item, index }) =>
                             <CryptoNews item={item} handler={TopRatedCompaignShowHandler} />
                         }

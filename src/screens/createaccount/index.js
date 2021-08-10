@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StatusBar, Text, Dimensions, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Container, Content, Item, Input, Label } from 'native-base'
 import { Checkbox } from 'react-native-paper';
@@ -18,6 +18,7 @@ import Toast from 'react-native-root-toast';
 const CreateAccountScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
+  const availabilty = useSelector(state => state.home?.availabilty);
   const [email, setEmail] = useState("");
   const [emailerror, setEmailError] = useState("");
 
@@ -42,6 +43,16 @@ const CreateAccountScreen = ({ navigation }) => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+  useEffect(() => {
+    if (name) {
+      dispatch(Actions.checkAvailabilty(name, email))
+      if (availabilty) {
+        setNameError('Username is available')
+      } else {
+        setNameError('Username not available')
+      }
+    }
+  }, [name, email, nameerror])
 
   function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -86,7 +97,7 @@ const CreateAccountScreen = ({ navigation }) => {
               onChangeText={text => setName(text)}
             />
           </Item>
-          <Text style={styles.text}>Username <Text style={{ color: bluetext }}>Available</Text></Text>
+          <Text style={styles.text}>{nameerror} <Text style={{ color: bluetext }}>Available</Text></Text>
         </View>
 
         <View style={styles.textinputmaincontainer}>

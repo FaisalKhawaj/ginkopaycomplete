@@ -43,7 +43,7 @@ export const Api = {
   },
 
   getNewsDetails: async (token, data) => {
-    const id  = data
+    const id = data
     const options = {
       method: 'GET',
       headers: {
@@ -130,7 +130,58 @@ export const Api = {
     };
 
     try {
-      const response = await api('/user', options);
+      const response = await api(`/user?size=${10}&page=${0}`, options);
+      switch (response.status) {
+        case 200:
+          return await response.json();
+        default:
+          throw new Error('Some error occured');
+      }
+    } catch (e) {
+      console.log('e', e);
+      throw e;
+    }
+  },
+
+  getBanner: async (token) => {
+
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token?.access_token}`,
+
+      },
+    };
+
+    try {
+      const response = await api('/banner', options);
+      switch (response.status) {
+        case 200:
+          return await response.json();
+        default:
+          throw new Error('Some error occured');
+      }
+    } catch (e) {
+      console.log('e', e);
+      throw e;
+    }
+  },
+
+  getBannerById: async (token, data) => {
+    console.log('dataa', data);
+    const id = data?.ownerId
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token?.access_token}`,
+
+      },
+    };
+
+    try {
+      const response = await api(`/banner${id}`, options);
       switch (response.status) {
         case 200:
           return await response.json();
@@ -161,6 +212,7 @@ export const Api = {
       const response = await api('/user/updatePassword', options);
       switch (response.status) {
         case 200:
+          Toast.show('Password has been changed', { textColor: 'grey', duration: Toast.durations.SHORT });
           return await response.json();
         default:
           throw new Error('Some error occured');
@@ -172,9 +224,59 @@ export const Api = {
   },
 
   availability: async (token, data) => {
-    const {name, email} = data
+    const { name, email } = data
     const options = {
-      method: 'PUT',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // Authorization: `Bearer ${token?.access_token}`,
+
+      },
+    };
+
+    try {
+      const response = await api(`/user/availability?userName=${name}&userEmail=${email}`, options);
+      switch (response.status) {
+        case 200:
+          return await response.json();
+        default:
+          throw new Error('Some error occured');
+      }
+    } catch (e) {
+      console.log('e', e);
+      throw e;
+    }
+  },
+
+  updateUser: async (token) => {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token?.access_token}`,
+
+      },
+    };
+
+    try {
+      const response = await api(`/user/${token?.userId}`, options);
+      switch (response.status) {
+        case 200:
+          Toast.show('User has been changed', { textColor: 'grey', duration: Toast.durations.SHORT });
+          return await response.json();
+        default:
+          throw new Error('Some error occured');
+      }
+    } catch (e) {
+      console.log('e', e);
+      throw e;
+    }
+  },
+
+  createBanner: async (token, data) => {
+    const { name, description, walletAddress, pictureUrl } = data
+    const options = {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token?.access_token}`,
@@ -182,14 +284,51 @@ export const Api = {
       },
       body: JSON.stringify({
         userName: name,
-        userEmail: email
+        description: description,
+        walletAdder: walletAddress,
+        pictureUrl: pictureUrl
       })
     };
 
+
     try {
-      const response = await api('/user/availability', options);
+      const response = await api(`/banner`, options);
       switch (response.status) {
         case 200:
+          Toast.show('Banner has been created', { textColor: 'grey', duration: Toast.durations.SHORT });
+          return await response.json();
+        default:
+          throw new Error('Some error occured');
+      }
+    } catch (e) {
+      console.log('e', e);
+      throw e;
+    }
+  },
+
+  createCompaign: async (token, data) => {
+    const { name, description, walletAddress, pictureUrl } = data
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token?.access_token}`,
+
+      },
+      body: JSON.stringify({
+        userName: name,
+        description: description,
+        walletAdder: walletAddress,
+        pictureUrl: pictureUrl
+      })
+    };
+
+
+    try {
+      const response = await api(`/campaign`, options);
+      switch (response.status) {
+        case 200:
+          Toast.show('Campaign has been created', { textColor: 'grey', duration: Toast.durations.SHORT });
           return await response.json();
         default:
           throw new Error('Some error occured');

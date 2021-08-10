@@ -115,7 +115,7 @@ const Compaign = () => {
 
             <View style={{ alignSelf: 'center' }}>
                 <Text style={styles.newsText}>
-                    Amet minim mollit non deserunt{'\n'}ullamco est sit aliqua dolor do amet{'\n'} sint. Velit officia consequat duis enim{'\n'}velit mollit. Exercitation veniam{'\n'}consequat sunt nostrud amet.
+                  Amet minim mollit non deserunt{'\n'}ullamco est sit aliqua dolor do amet{'\n'} sint. Velit officia consequat duis enim{'\n'}velit mollit. Exercitation veniam{'\n'}consequat sunt nostrud amet.
     </Text>
             </View>
 

@@ -10,14 +10,14 @@ const CompaignChannelViewBtn = ({ item, handler }) => {
             onPress={() => handler()}
             style={styles.CompaignChannelBtn}>
             <ImageBackground style={styles.ImageBackgroundStyle}
-                source={item.img}>
+                source={{uri: item.pictureUrl}}>
                 <View style={styles.TitleUrlView}>
                     <Text style={styles.TitleText}>
-                        {item.title}
+                        {item.userName}
                     </Text>
                     <Text style={styles.UrlText}>
-                        http://ginkopay.com/username
-     </Text>
+                        {item.walletAdder}
+                    </Text>
                 </View>
             </ImageBackground>
         </TouchableOpacity>

@@ -15,7 +15,11 @@ import CurrencyModal from '../components/CurrencyModal';
 import LanguageModal from '../components/LanguageModal'
 import LinearGradient from 'react-native-linear-gradient'
 const { width, height } = Dimensions.get('window') 
+import * as Actions from './../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
+
 const Preferences = ({ navigation }) => {
+    const dispatch = useDispatch();
 
     const [showGeneralModal, setShowGeneralModal] = useState(false)
     const [checkedCurrency, setCheckedCurrency] = React.useState('Native');
@@ -33,11 +37,13 @@ const Preferences = ({ navigation }) => {
 
 
     const closeModalHandler = () => {
+        dispatch(Actions.updateUser())
         setShowGeneralModal(!showGeneralModal)
     }
 
 
     const UpdateGeneralHandler = () => {
+        dispatch(Actions.updateUser())
         setShowPrivacyModal(!showPrivacyModal)
     }
 

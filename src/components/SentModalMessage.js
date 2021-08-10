@@ -72,10 +72,10 @@ const SentModal = ({visible, setVisible, data,setReqPayModal}) => {
                             source={{uri:"http://callerapp.net/finder/apis/v1/images/03119998999.jpg"}} />
                         <View style={{marginLeft:10}}>
                             <Text style={{color:"#fff" , fontFamily:simpletext, fontSize:15}}>
-                                {data.name}
+                                {data?.name}
                             </Text>
                             <Text style={{color:graycolor, fontFamily:simpletext,fontSize:12}}>
-                                {data.link}
+                                {data?.link}
                             </Text>
                         </View>
                         </View>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import RootStackNavigator from './src/Navigations/RootStackNavigator'
 import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './src/Navigations/NavigationObject';
@@ -85,37 +85,36 @@ function LoginStack() {
 }
 
 const App = () => {
-  
-  const [token, setToken] = useState(null);
 
+  const [token, setToken] = useState(false);
+  console.log('too', token);
   function handleState() {
 
     let value = store.getState().onboarding.userToken
-    console.log('isLogin', value?.access_token);
-    setToken(value?.access_token);
-    // if (value?.access_token) {
-    //   // var decoded = jwt_decode(value?.access_token);
-    //   const isLogin = isJwtExpired(value?.access_token)
-    //   console.log('tests', isLogin);
-      
-    //   setToken(isLogin);
-    // }
-    // else {
-    //   setToken(true)
-    // }
+    // console.log('isLogin fff', value?.access_token);
+    // setToken(value?.access_token);
+    if (value?.access_token) {
+      // var decoded = jwt_decode(value?.access_token);
+      const isLogin = isJwtExpired(value?.access_token)
+      console.log('tests', isLogin);
+
+      setToken(isLogin);
+    }
+    else {
+      setToken(true)
+    }
   }
 
   useEffect(() => {
     const unsubscribe = store.subscribe(handleState);
     return unsubscribe;
-  }, [token])
-console.log('token', token);
+  }, [])
   return (
-    
+
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer ref={navigationRef}>
-          {token != null ? <RootStackNavigator />: <LoginStack/>}
+          {!token ? <RootStackNavigator /> : <LoginStack />}
         </NavigationContainer>
       </PersistGate>
     </Provider>
