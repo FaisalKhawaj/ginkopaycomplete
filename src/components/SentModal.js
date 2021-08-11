@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, FlatList, Dimensions, StyleSheet, Image, Text, TouchableOpacity, SafeAreaView, } from 'react-native';
+import { View, FlatList, Dimensions, StyleSheet, Image, Text, TouchableOpacity, SafeAreaView, TextInput, } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
 import { Content } from 'native-base'
@@ -40,7 +40,7 @@ const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
         name: "Beexay",
         link: '0x3Dc6...DxE9',
         image: require("../assets/token2.png")
-      })
+    })
     const openmodal = (item) => {
         //setVisible()
         setSendMessageModal(true)
@@ -48,14 +48,14 @@ const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
     }
 
     const CloseallModals = (data) => {
-      if(data === "back"){
-        setSendMessageModal(false);
-        setVisible(true)
-      }else{
-        setSendMessageModal(false);
-        setVisible(false)
-      }
-      
+        if (data === "back") {
+            setSendMessageModal(false);
+            setVisible(true)
+        } else {
+            setSendMessageModal(false);
+            setVisible(false)
+        }
+
     }
 
     const renderItem = (item) => {
@@ -122,9 +122,12 @@ const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
 
                     <Text style={styles.from}>To</Text>
                     <View style={{ height: 60, width: width - 40, paddingHorizontal: 20, marginBottom: 30, justifyContent: "space-between", flexDirection: "row", alignItems: "center", borderRadius: 10, marginTop: 10, alignSelf: "center", borderWidth: 1, borderColor: graycolor }}>
-                        <Text style={{ color: graycolor, fontFamily: boldtext, fontSize: 13 }}>
-                            Search, public address (0x), or ENS
-                        </Text>
+                        <TextInput
+                            placeholder="Search, public address (0x), or ENS"
+                            placeholderTextColor={graycolor}
+                            style={{ color: graycolor, fontFamily: boldtext, fontSize: 13 }}
+
+                        />
                         <Image
                             style={{ width: 20, tintColor: graycolor, height: 20, resizeMode: "cover", borderRadius: 26, }}
                             source={require("../assets/scan.png")} />
@@ -138,16 +141,16 @@ const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
                 </Content>
             </SafeAreaView>
             <TokenModal visible={tokenmodal} setVisible={setTokenModal} closesendmodal={() => setVisible(false)} />
-            <SentModalMessage 
-                visible={sendmessagemodal} 
-                setVisible={(data) => CloseallModals(data)} 
-                crossbuttonFunction={() => setSendMessageModal(false)} 
-                setTokenModal={() => alert("setTokenModal")} 
-                data={modaldata} 
-                setReqPayModal={() => alert("setReqPayModal")} 
+            <SentModalMessage
+                visible={sendmessagemodal}
+                setVisible={(data) => CloseallModals(data)}
+                crossbuttonFunction={() => setSendMessageModal(false)}
+                setTokenModal={() => alert("setTokenModal")}
+                data={modaldata}
+                setReqPayModal={() => alert("setReqPayModal")}
                 transcitioncompletefunction={transcitioncompletefunction}
             />
-        
+
         </Modal >
     )
 }
