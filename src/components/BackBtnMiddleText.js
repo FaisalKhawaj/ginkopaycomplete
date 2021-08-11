@@ -4,7 +4,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { mystyles } from '../styles';
 
-const BackBtnWithMiddleText = ({ text, navigation, backBtn }) => {
+const BackBtnWithMiddleText = ({ text, backBtn }) => {
     return (
         <View style={styles.mainView}>
             <View style={{ flex: 1 }}>
