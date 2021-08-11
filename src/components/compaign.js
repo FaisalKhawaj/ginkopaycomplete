@@ -113,35 +113,22 @@ const Compaign = ({setShowCompaign}) => {
       setPurchaseModal(!pruchasemodal)
     }
   
-    const setBuyModal11 = () => {
-      setBuyModal(false)
-      setBuyModal1(!buymodal1)
-    }
   
-    const setBuyModal22 = () => {
-      setBuyModal1(!buymodal1)
-      setBuyModal2(!buymodal2)
-    }
   
-    const setsendModalToken2 = () => {
-      setTokenModal2(true)
-    }
+   
+  
+  
     const setSendMessageModalFun = (dd) => {
       if(dd === "back"){
         setSendMessageModal(false)
         setShowCompaign()
       }else{
         navigation.navigate("Wallet")
+        setSendMessageModal(false)
+        setShowCompaign()
       }
-      //setSendMessageModal(false)     
-       //setSentModal(true)
-       //setTokenModal2(false)
     }
-    const setsendModalConfirmfun = () => {
-      setSendModalConfirm(false);
-      setSentModal(false)
-      setSendMessageModal(false)
-    }
+   
   
     const setTokenModalLocal = () => {
       setTokenModal(true);
@@ -160,7 +147,7 @@ const Compaign = ({setShowCompaign}) => {
       //navigation.navigate("Wallet")
     }
   
-    const backbuttonFunctionpaymentModaluseMax = (data) => {
+    const transcitioncompletefunction = (data) => {
      
       if(data == "close"){
         navigation.navigate("Wallet", {trans:false})
@@ -172,26 +159,6 @@ const Compaign = ({setShowCompaign}) => {
       }
    
     }
-  
-    const BnbButtonPressed = () => {
-      setTokenModal(true)
-      setReqPayModal(false)
-    }
-  
-    const sentconfrimbackpress = () => {
-      setSendModalConfirm(false);
-    
-      setReqPayModal(true)
-    }
-  
-    const transitioncomplete = () => {
-     navigation.navigate("Wallet", {trans:true})
-    }
-  
-    const setRequestPaymentLocal = () => {
-      navigation.navigate("Wallet", {trans:true})
-    }
-
     const setReqPayModalLocal = () => {
       setReqPayModal(true);
       setSendMessageModal(false)
@@ -241,6 +208,7 @@ const Compaign = ({setShowCompaign}) => {
             crossbuttonFunction={crossbuttonFunction} 
             setTokenModal={setTokenModalLocal} 
             data={modaldata} 
+            transcitioncompletefunction={transcitioncompletefunction}  
             setReqPayModal={setReqPayModalLocal} />
            </View>
 
