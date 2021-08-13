@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Content, Linking, Item, Thumbnail, Input, Label } from 'native-base'
+import { Container, Content, Item, Thumbnail, Input, Label } from 'native-base'
 import { View, Text, Image, TouchableOpacity, Dimensions, Share, StyleSheet, TextInput, Platform } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Modal from 'react-native-modal';
