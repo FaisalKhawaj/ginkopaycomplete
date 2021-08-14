@@ -4,10 +4,13 @@ import Modal from 'react-native-modal';
 import { BackgroundColor, graycolor } from '../constants/colors';
 import { boldtext, simpletext } from '../constants/fonts';
 import CustomButton from './Button'
+import * as Actions from './../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
 
 const { width, height } = Dimensions.get("window");
 import { Container, Content, Item, Input, Label } from 'native-base'
 const ChnagePasswordModal = ({ isModalVisible, setModalVisible, toggleModal }) => {
+  const dispatch = useDispatch();
 
   const [password, setPassword] = useState("")
 
@@ -23,10 +26,10 @@ const ChnagePasswordModal = ({ isModalVisible, setModalVisible, toggleModal }) =
           <Text style={{ color: "#fff", fontSize: 16, marginVertical: 20, fontFamily: boldtext }}>Confirm your password</Text>
           <Text style={styles.graytext}>
             Do not save your password automaticly on your browser.
-            </Text>
+          </Text>
           <Text style={styles.graytext}>
             <Text style={{ color: "#EA3943" }}>DO NOT</Text> share this password with anyone! These words can be used to steal all your accounts
-            </Text>
+          </Text>
           <View style={styles.textinputmaincontainer}>
             <Item stackedLabel
               style={styles.textinputcontainer}>
@@ -42,7 +45,12 @@ const ChnagePasswordModal = ({ isModalVisible, setModalVisible, toggleModal }) =
             </Item>
 
           </View>
-          <CustomButton text={"I Got it"} onPress={() => setModalVisible()} />
+          <CustomButton text={"I Got it"} onPress={() => {
+            if (password) {
+              dispatch(Actions.changePassword(password))
+            }
+            setModalVisible()
+          }} />
         </View>
       </Content>
 

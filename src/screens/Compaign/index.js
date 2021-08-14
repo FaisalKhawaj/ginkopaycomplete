@@ -5,9 +5,17 @@ import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay'
 import CryptoNews from '../../components/News';
 import Compaign from '../../components/compaign';
 import { mystyles } from '../../styles';
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const CompaignMainPage = ({ navigation }) => {
+    const campaign = useSelector(state => state.home?.campaign);
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(Actions.getCampaign())
+    }, [])
     const [btnSelect, setBtnSelect] = useState('TopRated')
     const [TopCompaigns, setTopCompaigns] = useState([
         {

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StatusBar, Text, Dimensions, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Container, Content, Item, Input, Label } from 'native-base'
 import { Checkbox } from 'react-native-paper';
@@ -11,11 +11,16 @@ import Feather from 'react-native-vector-icons/Feather'
 import { boldtext, fontmedium, simpletext } from '../../constants/fonts';
 import ToggleButton from '../../components/ToggleButton'
 const { width, height } = Dimensions.get("window");
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
+import Toast from 'react-native-root-toast';
 
 const CreateAccountScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [emailerror, setEmailError] = useState("");
+  const availabilty = useSelector(state => state.home?.availabilty);
 
   const [name, setName] = useState("")
   const [nameerror, setNameError] = useState("")
@@ -39,9 +44,37 @@ const CreateAccountScreen = ({ navigation }) => {
     setModalVisible(!isModalVisible);
   };
 
+  useEffect(() => {
+    if (name) {
+      dispatch(Actions.checkAvailabilty(name, email))
+      if (availabilty) {
+        setNameError('Username is available')
+      } else {
+        setNameError('Username not available')
+      }
+    }
+  }, [name, email, nameerror])
 
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
   const gotonextScreen = () => {
-    navigation.navigate("UploadImage")
+    if (email && password && confrimpassword && name) {
+      if (!validateEmail(email.trim())) {
+        Toast.show("Invalid Email Address", { textColor: 'grey', duration: Toast.durations.SHORT });
+      } else if (password.length < 6) {
+        Toast.show("Must be atlest 6 characters", { textColor: 'grey', duration: Toast.durations.SHORT });
+      } else if (password != confrimpassword) {
+        Toast.show("Password does not match", { textColor: 'grey', duration: Toast.durations.SHORT });
+      } else {
+        dispatch(Actions.userRegister(email.trim(), password, name))
+        // navigation.navigate("UploadImage")
+
+      }
+    } else {
+      Toast.show("Please fill all fields!", { textColor: 'grey', duration: Toast.durations.SHORT });
+    }
   }
 
   StatusBar.setHidden(true)
@@ -65,7 +98,8 @@ const CreateAccountScreen = ({ navigation }) => {
               onChangeText={text => setName(text)}
             />
           </Item>
-          <Text style={styles.text}>Username <Text style={{ color: bluetext }}>Available</Text></Text>
+          <Text style={styles.text}>{nameerror} <Text style={{ color: bluetext }}>Available</Text></Text>
+
         </View>
 
         <View style={styles.textinputmaincontainer}>

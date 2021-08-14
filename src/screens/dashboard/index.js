@@ -9,6 +9,9 @@ import { boldtext, simpletext } from '../../constants/fonts';
 import { graycolor, green } from '../../constants/colors';
 import { mystyles } from '../../styles';
 const { width, height } = Dimensions.get("screen");
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
+
 
 let marketdata = [
   {
@@ -160,6 +163,9 @@ const Home = ({ navigation }) => {
   const [data, setData] = useState(obj)
   const [newsTab, setNewsTab] = useState(false)
   const [itemView, setItemView] = useState(false)
+  const news = useSelector(state => state.home?.news);
+  const newsDetail = useSelector(state => state.home?.newsDetail);
+  const dispatch = useDispatch();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -183,6 +189,9 @@ const Home = ({ navigation }) => {
       };
     }),
   );
+  useEffect(() => {
+    dispatch(Actions.getNews())
+  }, [])
 
   const renderTopMoversItem = (item) => {
     return (
@@ -200,10 +209,10 @@ const Home = ({ navigation }) => {
           <View style={{ flexDirection: 'column' }}>
             <Text style={{ color: '#fff', fontSize: 14, fontFamily: simpletext, }}>
               Dogecoin
-              </Text>
+            </Text>
             <Text style={{ color: graycolor, fontSize: 12, fontFamily: simpletext, }}>
               USD 0.13
-              </Text>
+            </Text>
           </View>
         </View>
       </View>
@@ -228,7 +237,7 @@ const Home = ({ navigation }) => {
             </Text>
             <Text style={{ color: item.percent >= 0 ? green : "red", fontFamily: simpletext, }}>
               {item.percent >= 0 ? "+" + item.percent : "" + item.percent}%
-                </Text>
+            </Text>
           </View>
         </View>
         <View style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
@@ -243,7 +252,10 @@ const Home = ({ navigation }) => {
   const renderNewsItem = ({ item }) => {
     return (
       <TouchableOpacity
-        onPress={() => openNewsItem(item)}
+        onPress={() => {
+          dispatch(Actions.getNewsDetails(item.webId))
+          openNewsItem(item)
+        }}
         style={styles.newsListItem}
       >
         <View style={{ margin: 20, flex: 1 }}>
@@ -277,18 +289,18 @@ const Home = ({ navigation }) => {
         <View style={{ flexDirection: 'column', flex: 1 }}>
           <Text style={{ color: '#fff', fontFamily: simpletext, fontSize: 16 }}>
             Bitcoin
-                  </Text>
+          </Text>
           <Text style={{ color: '#fff', fontFamily: simpletext, fontSize: 12 }}>
             BTC
-                  </Text>
+          </Text>
         </View>
         <View style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
           <Text style={{ color: '#fff', fontFamily: simpletext }}>
             USD $65465.56
-                </Text>
+          </Text>
           <Text style={{ color: green, }}>
             +11.70%
-                </Text>
+          </Text>
         </View>
       </View>
     )
@@ -325,7 +337,7 @@ const Home = ({ navigation }) => {
         </View>
         <Text style={{ color: '#fff', margin: 20, fontSize: 20, fontFamily: boldtext }}>
           Top Movers
-          </Text>
+        </Text>
         <View style={styles.horizantalListView}>
           <FlatList
             data={data}
@@ -344,7 +356,7 @@ const Home = ({ navigation }) => {
             }}>
             <Text style={{ color: !newsTab ? "#fff" : graycolor, fontFamily: simpletext, fontSize: 16 }}>
               Market
-              </Text>
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setNewsTab(true)}
@@ -354,7 +366,7 @@ const Home = ({ navigation }) => {
             }}>
             <Text style={{ color: newsTab ? "#fff" : graycolor, fontFamily: simpletext, fontSize: 16 }}>
               News
-              </Text>
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={{ flex: 1, width: '100%', borderTopWidth: newsTab && !itemView ? 1 : 0, borderTopColor: '#fff' }}>
@@ -369,7 +381,7 @@ const Home = ({ navigation }) => {
               {!itemView ? (
                 <View>
                   <FlatList
-                    data={newsdata}
+                    data={news}
                     renderItem={renderNewsItem}
                     keyExtractor={(item, index) => index.toString()}
                   />
@@ -386,12 +398,13 @@ const Home = ({ navigation }) => {
               ) :
                 <ScrollView>
                   <ImageBackground //remove backGroundColor and change image source
-                    source={require('../../assets/news1.png')}
+                    source={{ uri: newsDetail.pictureUrl }}
                     style={{ marginHorizontal: 20, marginTop: 10, height: 140, borderRadius: 10, overflow: "hidden", resizeMode: 'cover', backgroundColor: '#fff' }}
                   ></ImageBackground>
                   <View style={{ marginBottom: 20, marginHorizontal: 35, paddingVertical: 30, borderBottomWidth: 1, borderBottomColor: '#fff' }}>
                     <Text style={{ color: '#fff', fontSize: 14, fontFamily: simpletext, textAlign: 'justify' }}>
-                      Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                    {newsDetail.description}
+
                     </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
                       <View style={{ height: 13, width: 13, borderRadius: 8, backgroundColor: "#F7931A" }}>
@@ -411,7 +424,7 @@ const Home = ({ navigation }) => {
                   <TouchableOpacity style={styles.viewmore} onPress={() => setItemView(false)}>
                     <Text style={{ fontSize: 16, fontFamily: boldtext, color: graycolor }}>
                       All News
-                      </Text>
+                    </Text>
                     <MaterialIcons name="chevron-right" size={30} color="#fff" style={{ color: graycolor }} />
                   </TouchableOpacity>
                 </ScrollView>
