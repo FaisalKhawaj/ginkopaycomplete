@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Content } from 'native-base'
 import { View, Text, Image, StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
 import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, FlatList, BackHandler, Dimensions, SafeAreaView, StyleSheet, Image, Text, TouchableOpacity, Touchable, ImageBackground, ScrollView } from 'react-native';
 import CustomText from '../../components/Text'
 import { Content } from 'native-base'
@@ -260,7 +260,7 @@ const Home = ({ navigation }) => {
       >
         <View style={{ margin: 20, flex: 1 }}>
           <Text style={{ fontSize: 16, color: '#fff', fontFamily: simpletext, }}>
-            {item.news}
+            {item.description}
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
             <View style={{ height: 13, width: 13, borderRadius: 13, backgroundColor: "#F7931A" }} />
@@ -276,7 +276,7 @@ const Home = ({ navigation }) => {
           </View>
         </View>
         <View style={{ backgroundColor: 'transparent', marginRight: 20, }}>
-          <Image source={item.image} style={{ height: 60, width: 60, backgroundColor: "transparent", resizeMode: "cover" }} />
+          <Image source={{ uri: item.pictureUrl }} style={{ height: 60, width: 60, backgroundColor: "transparent", resizeMode: "cover" }} />
         </View>
       </TouchableOpacity>
     )
@@ -398,12 +398,12 @@ const Home = ({ navigation }) => {
               ) :
                 <ScrollView>
                   <ImageBackground //remove backGroundColor and change image source
-                    source={{ uri: newsDetail.pictureUrl }}
+                    source={{ uri: newsDetail?.pictureUrl }}
                     style={{ marginHorizontal: 20, marginTop: 10, height: 140, borderRadius: 10, overflow: "hidden", resizeMode: 'cover', backgroundColor: '#fff' }}
                   ></ImageBackground>
                   <View style={{ marginBottom: 20, marginHorizontal: 35, paddingVertical: 30, borderBottomWidth: 1, borderBottomColor: '#fff' }}>
                     <Text style={{ color: '#fff', fontSize: 14, fontFamily: simpletext, textAlign: 'justify' }}>
-                    {newsDetail.description}
+                    {newsDetail?.description}
 
                     </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>

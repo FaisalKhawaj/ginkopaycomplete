@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, Image, Dimensions, SafeAreaView, Share, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
 import { Container, Content, Thumbnail } from 'native-base';
 import Modal from 'react-native-modal';
@@ -20,9 +20,12 @@ import CustomButton from '../../components/Button';
 import SvgImg from '../../components/Svg';
 import DoneSvg from '../../components/DoneSvg';
 import BannerView from '../../components/AddBanner';
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
 
 const { width, height } = Dimensions.get("window");
 const Profile = ({ navigation }) => {
+    const dispatch = useDispatch();
 
     const [showCompaign, setShowCompaign] = useState(false)
     const [showCompaignModal, setShowCompaignModal] = useState(false);
@@ -103,9 +106,7 @@ const Profile = ({ navigation }) => {
 
     }
     const AddCompaignHandler = () => {
-        if (compaignTitle && compaignAddress && cloudImageUrl) {
-            dispatch(Actions.createBanner(compaignTitle, 'description', compaignAddress, cloudImageUrl))
-        }
+      
         setShowCompaignModal(!showCompaignModal)
         console.log('Compaign')
     }
@@ -143,7 +144,9 @@ const Profile = ({ navigation }) => {
         navigation.goBack()
     }
     const CreateBannerhandlerButtonNext = () => {
-
+        if (compaignTitle && compaignAddress && cloudImageUrl) {
+            dispatch(Actions.createBanner(compaignTitle, 'description', compaignAddress, cloudImageUrl))
+        }
         setShowBannerModal(false);
         setShowDonationDialog(true)
     }

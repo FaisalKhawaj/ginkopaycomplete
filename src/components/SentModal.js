@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, FlatList, Dimensions, StyleSheet, Image, Text, TouchableOpacity, SafeAreaView, TextInput, } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, Dimensions,ScrollView, StyleSheet, Image, Text, TouchableOpacity, SafeAreaView, TextInput, } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
 import { Content } from 'native-base'

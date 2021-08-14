@@ -63,13 +63,15 @@ const CreateAccountScreen = ({ navigation }) => {
     if (email && password && confrimpassword && name) {
       if (!validateEmail(email.trim())) {
         Toast.show("Invalid Email Address", { textColor: 'grey', duration: Toast.durations.SHORT });
+      } else if (!availabilty) {
+        Toast.show("Username is not available", { textColor: 'grey', duration: Toast.durations.SHORT });
       } else if (password.length < 6) {
         Toast.show("Must be atlest 6 characters", { textColor: 'grey', duration: Toast.durations.SHORT });
       } else if (password != confrimpassword) {
         Toast.show("Password does not match", { textColor: 'grey', duration: Toast.durations.SHORT });
       } else {
         dispatch(Actions.userRegister(email.trim(), password, name))
-        // navigation.navigate("UploadImage")
+        navigation.navigate("UploadImage")
 
       }
     } else {
@@ -204,10 +206,10 @@ const CreateAccountScreen = ({ navigation }) => {
           />
 
           <Text style={{ color: graycolor, fontFamily: simpletext, marginHorizontal: 15, }}>By proceeding, you agree to these
-                <Text style={{ color: bluetext, fontFamily: simpletext, }} onPress={() => toggleModal()} > Term and Conditions.</Text></Text>
+            <Text style={{ color: bluetext, fontFamily: simpletext, }} onPress={() => toggleModal()} > Term and Conditions.</Text></Text>
         </View>
         <View style={{ position: "absolute", alignSelf: "center", backgroundColor: BackgroundColor, bottom: 20, }}>
-          <CustomButton text={"Create Password"} onPress={() => gotonextScreen()} />
+          <CustomButton text={"Create Account"} onPress={() => gotonextScreen()} />
         </View>
       </ScrollView>
 
