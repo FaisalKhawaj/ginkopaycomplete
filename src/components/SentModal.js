@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, FlatList, Dimensions, StyleSheet, Image, Text, TouchableOpacity, SafeAreaView, TextInput, } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, Dimensions,ScrollView, StyleSheet, Image, Text, TouchableOpacity, SafeAreaView, TextInput, } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
 import { Content } from 'native-base'
@@ -9,6 +9,9 @@ import { mystyles } from '../styles';
 import TokenModal from './SendModalToken'
 import SentModalMessage from './SentModalMessage'
 const { width, height } = Dimensions.get("window");
+import * as Actions from './../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
+import Toast from 'react-native-root-toast';
 
 var obj = [
     {
@@ -33,6 +36,13 @@ var obj = [
 
 
 const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(Actions.getUserList())
+    }, [])
+    const userList = useSelector(state => state.home?.userList);
+
     const [sendmessagemodal, setSendMessageModal] = useState(false)
     const [tokenmodal, setTokenModal] = useState(false)
     const [modaldata, setModalData] = useState({
@@ -109,10 +119,10 @@ const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
                                 <Text style={{ color: "#fff", fontFamily: simpletext, fontSize: 15 }}>
                                     Binance Coin
 
-                        </Text>
+                                </Text>
                                 <Text style={{ color: graycolor, fontFamily: simpletext, fontSize: 12 }}>
                                     Balance: 19.2371 BNB
-                        </Text>
+                                </Text>
                             </View>
                         </View>
                         <TouchableOpacity>
@@ -133,11 +143,32 @@ const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
                             source={require("../assets/scan.png")} />
                     </View>
                     <Text style={styles.recent}>Recent</Text>
-                    <FlatList
+                    {/* <FlatList
                         data={obj}
                         renderItem={(item) => renderItem(item)}
                         keyExtractor={(item, index) => index.toString()}
-                    />
+                    /> */}
+                    <ScrollView>
+                        {userList?.content.map((item, index) => {
+                            return (
+                                <TouchableOpacity style={styles.renderItemmain} onPress={() => openmodal(item.item)} >
+                                    <View style={{ flexDirection: "row" }}>
+                                        <Image
+                                            style={{ width: 40, height: 40, resizeMode: "cover", borderRadius: 60, }}
+                                            source={require("../assets/token2.png")} />
+                                        <View style={{ marginLeft: 20 }}>
+                                            <Text style={{ color: "#fff", fontFamily: simpletext, fontSize: 15 }}>
+                                                {item?.firstName + " " + item?.lastName}
+                                            </Text>
+                                            <Text style={{ color: graycolor, fontFamily: simpletext, fontSize: 12 }}>
+                                                {item?.currencyConversion}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            )
+                        })}
+                    </ScrollView>
                 </Content>
             </SafeAreaView>
             <TokenModal visible={tokenmodal} setVisible={setTokenModal} closesendmodal={() => setVisible(false)} />

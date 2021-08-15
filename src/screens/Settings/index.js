@@ -15,9 +15,12 @@ import CustomButton from '../../components/Button';
 import { mystyles } from '../../styles';
 import { simpletext } from '../../constants/fonts';
 const { width, height } = Dimensions.get('window');
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
 
 const Settings = ({ navigation }) => {
-
+    
+    const dispatch = useDispatch();
     const EditProfileHandler = () => {
         setShowEditProfileModal(!showEditProfileModal)
 
@@ -55,7 +58,9 @@ const Settings = ({ navigation }) => {
         // Linking.openURL('https://apps.apple.com/pk/app/bolt-fast-affordable-rides/id675033630')
     }
     const LogOutHandler = () => {
-        navigation.navigate("Login")
+        dispatch(Actions.logoutUser())
+
+        // navigation.navigate("Login")
     }
     const UpdateHandler = () => {
         if (Platform.OS == 'ios')

@@ -11,7 +11,7 @@ import { boldtext, fontmedium } from '../../constants/fonts';
 const SliderScreenOne = ({ navigation }) => {
   StatusBar.setHidden(true)
   const gotonextScreen = () => {
-    navigation.navigate("DashBoardScreen")
+    navigation.navigate("Login")
   }
   return (
     <Container style={styles.container}>

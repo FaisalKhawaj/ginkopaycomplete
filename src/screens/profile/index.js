@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, Image, Dimensions, SafeAreaView,Share, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, FlatList, Image, Dimensions, SafeAreaView, Share, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
 import { Container, Content, Thumbnail } from 'native-base';
 import Modal from 'react-native-modal';
 import Svg, { Rect, Defs, Use, image, Path, Pattern } from 'react-native-svg';
@@ -13,19 +13,30 @@ import { mystyles } from '../../styles';
 import TextInputFloat from '../../components/TextInput'
 import AddCompaignAddBannerBtn from '../../components/AddCompaignBanner';
 import CompaignChannelViewBtn from '../../components/CompaignChannelViewBtn';
+import ImagePicker from 'react-native-image-crop-picker';
 import Compaign from '../../components/compaign';
 import CustomText from '../../components/Text';
 import CustomButton from '../../components/Button';
 import SvgImg from '../../components/Svg';
 import DoneSvg from '../../components/DoneSvg';
+import BannerView from '../../components/AddBanner';
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
+
 const { width, height } = Dimensions.get("window");
 const Profile = ({ navigation }) => {
+    const dispatch = useDispatch();
 
     const [showCompaign, setShowCompaign] = useState(false)
     const [showCompaignModal, setShowCompaignModal] = useState(false);
     const [showBannerModal, setShowBannerModal] = useState(false)
     const [btnSelect, setBtnSelect] = useState('Compaign')
+    const banner = useSelector(state => state.home?.banner);
+    const campaign = useSelector(state => state.home?.campaign);
 
+    useEffect(() => {
+        dispatch(Actions.getBanner())
+    }, [])
     const [CompaignList, setCompaignsList] = useState([
         {
             id: 1,
@@ -69,10 +80,18 @@ const Profile = ({ navigation }) => {
             url: 'http://ginkopay.com/username'
         },
     ])
-    const [compaignTitle, setCompaignTitle] = useState('');
+    const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/ginkopay/image/upload'
+
     const [compaignError, setCompaignError] = useState('');
+    const [compaignTitle, setCompaignTitle] = useState('');
+    const [compaignAddress, setCompaignAddress] = useState('');
+    const [compaignTitle1, setCompaignTitle1] = useState('');
+    const [compaignAddress1, setCompaignAddress1] = useState('');
     const [showDonationDialog, setShowDonationDialog] = useState(false)
     const [ReferalModal, setReferalModal] = useState(false)
+    const [profileImg, setProfileImg] = useState(null)
+    const [cloudImageUrl, setCloudImageUrl] = useState(null)
+
     const CompaignHandler = () => {
         console.log(showCompaign)
         setShowCompaign(!showCompaign)
@@ -84,48 +103,89 @@ const Profile = ({ navigation }) => {
     const CreateBannerHandler = () => {
         setShowBannerModal(!showBannerModal)
         //setShowBannerModal(false)
-       
+
     }
     const AddCompaignHandler = () => {
+      
         setShowCompaignModal(!showCompaignModal)
-       // setShowDonationDialog(!showDonationDialog)
         console.log('Compaign')
     }
     const CreateCompaignHandler = () => {
-        setShowCompaignModal(false)
-       // setShowDonationDialog(!showDonationDialog)
+        if (compaignTitle1 && compaignAddress1 && cloudImageUrl) {
+
+            dispatch(Actions.createCompaign(compaignTitle1, 'description', compaignAddress1, cloudImageUrl))
+        }
+        setShowDonationDialog(!showDonationDialog)
     }
     const DonationNextBtnHandler = () => {
-       setShowDonationDialog(false)
-       ShareMyPublicAddressHandler()
+        setShowDonationDialog(false)
+        ShareMyPublicAddressHandler()
     }
     const ShareMyPublicAddressHandler = async () => {
         try {
             const result = await Share.share({
-              message:
-                'https://ginkopay.app.link/send/0xBBB6A12945aC14C84185a17C6BD2eAe96e',
+                message:
+                    'https://ginkopay.app.link/send/0xBBB6A12945aC14C84185a17C6BD2eAe96e',
             });
             if (result.action === Share.sharedAction) {
-              if (result.activityType) {
-                // shared with activity type of result.activityType
-              } else {
-                // shared
-              }
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
             } else if (result.action === Share.dismissedAction) {
-              // dismissed
+                // dismissed
             }
-          } catch (error) {
+        } catch (error) {
             alert(error.message);
-          }
+        }
     }
     const BackBtnHandler = () => {
         navigation.goBack()
     }
-   const CreateBannerhandlerButtonNext = () => {
-    
-    setShowBannerModal(false);
-    setShowDonationDialog(true)
-   }
+    const CreateBannerhandlerButtonNext = () => {
+        if (compaignTitle && compaignAddress && cloudImageUrl) {
+            dispatch(Actions.createBanner(compaignTitle, 'description', compaignAddress, cloudImageUrl))
+        }
+        setShowBannerModal(false);
+        setShowDonationDialog(true)
+    }
+    const handleupload = (image) => {
+        const data = new FormData()
+        data.append('file', image),
+            data.append('upload_preset', 'ginkopay'),
+            data.append('cloud_name', 'Ginkopay')
+
+        fetch(CLOUDINARY_URL, {
+            method: 'POST',
+            body: data
+        }).then((res) => res.json()).then((data) => {
+            setCloudImageUrl(data?.secure_url)
+        }).catch((e) => {
+            console.log('e', e);
+        })
+    }
+
+    const openPicker = () => {
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
+        }).then(image => {
+            console.log('image', image);
+            let newFile = {
+                uri: image.path,
+                type: `test/${image.path.substr(image.path.length - 3)}`,
+                name: `test/${image.path.substr(image.path.length - 3)}`,
+            }
+            handleupload(newFile)
+            setProfileImg(image.path)
+        }).catch((error) => {
+            console.log(error)
+                .catch((e) => alert(e));
+
+        })
+    }
     return (
         <SafeAreaView style={[mystyles.container, { width: width }]}>
             <Content contentContainerStyle={{ width: width, backgroundColor: "#17171A" }}>
@@ -182,7 +242,7 @@ const Profile = ({ navigation }) => {
                 {btnSelect === 'Compaign' && showCompaign != true ?
                     <View>
                         <FlatList
-                            data={CompaignList}
+                            data={campaign}
                             renderItem={({ item, index }) =>
                                 <CompaignChannelViewBtn item={item}
                                     handler={CompaignHandler} />
@@ -198,9 +258,9 @@ const Profile = ({ navigation }) => {
                     ?
                     <View>
                         <FlatList
-                            data={Channels}
+                            data={banner}
                             renderItem={({ item, index }) =>
-                                <CompaignChannelViewBtn item={item} handler={ChannelHandler} />
+                                <BannerView item={item} handler={ChannelHandler} />
                             }
                         />
                         <AddCompaignAddBannerBtn text="Create Banner" Addhandler={CreateBannerHandler} />
@@ -210,12 +270,12 @@ const Profile = ({ navigation }) => {
                 }
 
                 {btnSelect === 'Compaign' && showCompaign ?
-                    <Compaign  setShowCompaign={setShowCompaign}/>
+                    <Compaign setShowCompaign={setShowCompaign} />
                     : null
                 }
 
                 {btnSelect === 'Channels' && showCompaign ?
-                    <Compaign  setShowCompaign={setShowCompaign}/>
+                    <Compaign setShowCompaign={setShowCompaign} />
                     : null
                 }
 
@@ -245,11 +305,11 @@ const Profile = ({ navigation }) => {
                         <View style={{ marginVertical: 8 }}>
                             <Text style={styles.createYourOwnDescription}>
                                 Create your own campaign to raise coins for{'\n'}your project. Please upload your banner{'\n'}and add a description
-                           </Text>
+                            </Text>
                         </View>
 
-                        <ImageBackground style={{ width: '100%', height: 190 }} source={require('../../assets/LargeKeyboardBg.png')}>
-                            <TouchableOpacity style={styles.plusUploadBtn}>
+                        <ImageBackground style={{ width: '100%', height: 190 }} source={{ uri: profileImg }}>
+                            <TouchableOpacity onPress={() => { openPicker() }} style={styles.plusUploadBtn}>
                                 <Image style={{ marginHorizontal: 5 }} source={require('../../assets/plusSquare.png')} />
                                 <Text style={styles.uploadText}>Upload</Text>
                             </TouchableOpacity>
@@ -265,6 +325,9 @@ const Profile = ({ navigation }) => {
                         <TextInput placeholder="Add a title"
                             placeholderTextColor="#888DAA"
                             style={mystyles.simpleTextInput}
+                            value={compaignTitle1}
+                            onChangeText={setCompaignTitle1}
+
                         />
 
                         <TextInput
@@ -273,6 +336,8 @@ const Profile = ({ navigation }) => {
                             numberOfLines={5}
                             placeholderTextColor="#888DAA"
                             placeholder="Add a description"
+                            value={compaignAddress1}
+                            onChangeText={setCompaignAddress1}
                             style={[mystyles.simpleTextInput, {
                                 backgroundColor: '#222531',
                                 borderColor: '#222531',
@@ -322,10 +387,11 @@ const Profile = ({ navigation }) => {
                                     source={require('../../assets/closecircle.png')} />
                             </TouchableOpacity>
                         </View>
+                        {profileImg ? <Image style={{ width: 50, alignSelf: 'center', borderRadius: 50, marginBottom: 20, height: 50 }}
+                            source={{ uri: profileImg }} /> :
+                            <SvgImg />}
 
-                        <SvgImg />
-
-                        <TouchableOpacity style={styles.LargeUploadBtn}>
+                        <TouchableOpacity onPress={() => { openPicker() }} style={styles.LargeUploadBtn}>
 
                             <CustomText text="Upload"
                                 locations={[0, 1,]} colors={["#72F6D1", "#FED365"]}
@@ -336,9 +402,6 @@ const Profile = ({ navigation }) => {
                         </View>
 
 
-
-
-
                         <View style={{ marginTop: 20, marginLeft: 15 }}>
                             <Text style={styles.compaignTitle}>Compaign Title</Text>
                         </View>
@@ -346,6 +409,8 @@ const Profile = ({ navigation }) => {
 
                         <TextInput placeholder="Add a title"
                             placeholderTextColor="#888DAA"
+                            value={compaignTitle}
+                            onChangeText={setCompaignTitle}
                             style={mystyles.simpleTextInput}
                         />
 
@@ -355,10 +420,12 @@ const Profile = ({ navigation }) => {
                         <TextInput placeholder="Public addres(0x),or ENS"
                             placeholderTextColor="#888DAA"
                             style={mystyles.simpleTextInput}
+                            value={compaignAddress}
+                            onChangeText={setCompaignAddress}
                         />
 
 
-                        <TouchableOpacity style={{ marginVertical: 10, height:50, width:"100%" }} onPress={() =>{} } >
+                        <TouchableOpacity style={{ marginVertical: 10, height: 50, width: "100%" }} onPress={() => { }} >
                             <CustomButton text={"Next"} onPress={() => CreateBannerhandlerButtonNext()} />
                         </TouchableOpacity>
 
@@ -483,7 +550,7 @@ const Profile = ({ navigation }) => {
                                 <Image resizeMode="contain" source={require('../../assets/AppleMacMini.png')} />
                                 <Text style={styles.shareText}>
                                     Apple Mac {'\n'}  mini
-      </Text>
+                                </Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity style={{ alignSelf: 'center' }}>
@@ -498,7 +565,7 @@ const Profile = ({ navigation }) => {
 
                                 <Text style={styles.shareText}>
                                     Arlene{'\n'}McCoy
-      </Text>
+                                </Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity style={{ alignSelf: 'center' }}>
@@ -522,10 +589,10 @@ const Profile = ({ navigation }) => {
 
                                     <Text style={styles.shareText}>
                                         Fellows
-      </Text>
+                                    </Text>
                                     <Text style={[styles.shareText, { color: '#ABABB0' }]}>
                                         2 People
-      </Text>
+                                    </Text>
                                 </View>
                             </TouchableOpacity>
 
@@ -541,7 +608,7 @@ const Profile = ({ navigation }) => {
 
                                 <Text style={styles.shareText}>
                                     First Last
-      </Text>
+                                </Text>
                             </TouchableOpacity>
                         </View>
 
@@ -552,7 +619,7 @@ const Profile = ({ navigation }) => {
                                 <Image resizeMode="contain" source={require('../../assets/instaPink.png')} />
                                 <Text style={styles.shareText}>
                                     Instagram
-      </Text>
+                                </Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity style={{ alignSelf: 'center' }}>
@@ -566,7 +633,7 @@ const Profile = ({ navigation }) => {
 
                                 <Text style={styles.shareText}>
                                     Messages
-      </Text>
+                                </Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity style={{ alignSelf: 'center' }}>
@@ -575,7 +642,7 @@ const Profile = ({ navigation }) => {
 
                                 <Text style={styles.shareText}>
                                     Whatsapp
-      </Text>
+                                </Text>
 
 
                             </TouchableOpacity>
@@ -587,7 +654,7 @@ const Profile = ({ navigation }) => {
 
                                 <Text style={styles.shareText}>
                                     Twitch
-                               </Text>
+                                </Text>
                             </TouchableOpacity>
                         </View>
 
