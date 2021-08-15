@@ -53,8 +53,7 @@ const CreateAccountScreen = ({ navigation }) => {
         setNameError('Username not available')
       }
     }
-  }, [name, email, nameerror])
-
+  }, [name, email, nameerror, availabilty])
   function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
@@ -71,7 +70,7 @@ const CreateAccountScreen = ({ navigation }) => {
         Toast.show("Password does not match", { textColor: 'grey', duration: Toast.durations.SHORT });
       } else {
         dispatch(Actions.userRegister(email.trim(), password, name))
-        navigation.navigate("UploadImage")
+        // navigation.navigate("UploadImage")
 
       }
     } else {

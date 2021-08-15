@@ -2,6 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 import { USER_LOGIN, USER_REGISTER } from './types'
 import * as Actions from './actions'
 import { Api } from './api'
+import * as RootNavigation from './../../Navigations/NavigationObject';
 
 function* loginUser(action) {
   try {
@@ -21,10 +22,8 @@ function* registerUser(action) {
     var { email, password, name } = action.payload;
 
     const data = yield call(Api.registerUser, email, password, name);
-    if (data.status === 200) {
       yield put(Actions.userRegisterSuccess(data))
-      // RootNavigation.navigate('loginscreen')
-    }
+      RootNavigation.navigate('UploadImage')
 
   } catch (error) {
     yield put(Actions.userRegisterSuccess())
