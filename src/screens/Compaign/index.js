@@ -7,6 +7,7 @@ import Compaign from '../../components/compaign';
 import { mystyles } from '../../styles';
 import * as Actions from './../../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
+import CryptoNews2 from '../../components/New2';
 
 
 const CompaignMainPage = ({ navigation }) => {
@@ -188,7 +189,7 @@ const CompaignMainPage = ({ navigation }) => {
                 {btnSelect === 'TopRated' && showCompaign != true ?
                     <FlatList data={TopRated}
                         renderItem={({ item, index }) =>
-                            <CryptoNews item={item} handler={TopRatedCompaignShowHandler} />
+                            <CryptoNews2 item={item} handler={TopRatedCompaignShowHandler} />
                         }
                     />
                     : null
@@ -196,7 +197,7 @@ const CompaignMainPage = ({ navigation }) => {
                 }
 
                 {btnSelect === 'Recent' && showCompaign != true ?
-                    <FlatList data={Recent}
+                    <FlatList data={campaign}
                         renderItem={({ item, index }) =>
                             <CryptoNews item={item} handler={RecentCompaignShowHandler} />
                         }

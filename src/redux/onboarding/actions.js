@@ -1,6 +1,6 @@
 import {
   LOGOUT_USER,
-  USER_LOGIN, USER_LOGIN_SUCCESS, USER_REGISTER, USER_REGISTER_SUCCESS,
+  USER_LOGIN, USER_LOGIN_SUCCESS, USER_LOGIN_TEST, USER_LOGIN_TEST_SUCCESS, USER_REGISTER, USER_REGISTER_SUCCESS,
 } from './types';
 
 
@@ -15,6 +15,21 @@ export const userLogin = (email, password) => {
 export const userLoginSuccess = (data) => {
   return {
     type: USER_LOGIN_SUCCESS,
+    payload: data
+  };
+};
+
+export const userLoginTest = (email, password) => {
+  return {
+    type: USER_LOGIN_TEST,
+    payload: {
+      email, password
+    }
+  };
+};
+export const userLoginTestSuccess = (data) => {
+  return {
+    type: USER_LOGIN_TEST_SUCCESS,
     payload: data
   };
 };

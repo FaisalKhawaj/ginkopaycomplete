@@ -8,11 +8,39 @@ const { width, height } = Dimensions.get("window");
 import { BackgroundColor, graycolor } from '../../constants/colors';
 import ImagePicker from 'react-native-image-crop-picker';
 import { simpletext } from '../../constants/fonts';
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
 
-const UploadImageScreen = ({ navigation }) => {
+const UploadImageScreen = ({ navigation, route }) => {
+  const user = useSelector(state => state.home?.users);
+
+  const dispatch = useDispatch();
+
   const [profileImg, setProfileImg] = useState(null)
-  const gotonextScreen = () => {
+  // const [profileImg, setProfileImg] = useState(null)
+  const [cloudImageUrl, setCloudImageUrl] = useState(null)
+ 
+  const gotonextScreen = async () => {
     navigation.navigate("KycNeed")
+    
+  }
+console.log('cloud', cloudImageUrl);
+
+  const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/ginkopay/image/upload'
+  const handleupload = (image) => {
+    const data = new FormData()
+    data.append('file', image),
+      data.append('upload_preset', 'ginkopay'),
+      data.append('cloud_name', 'Ginkopay')
+
+    fetch(CLOUDINARY_URL, {
+      method: 'POST',
+      body: data
+    }).then((res) => res.json()).then((data) => {
+      setCloudImageUrl(data?.secure_url)
+    }).catch((e) => {
+      console.log('e', e);
+    })
   }
 
   const openPicker = () => {
@@ -21,12 +49,22 @@ const UploadImageScreen = ({ navigation }) => {
       height: 400,
       cropping: true
     }).then(image => {
+      console.log('image', image);
+      let newFile = {
+        uri: image.path,
+        type: `test/${image.path.substr(image.path.length - 3)}`,
+        name: `test/${image.path.substr(image.path.length - 3)}`,
+      }
+      handleupload(newFile)
       setProfileImg(image.path)
-      navigation.navigate("UploadedImage", { image: image.path })
+      navigation.navigate("UploadedImage", { image: image.path, cloudImage: cloudImageUrl })
     }).catch((error) => {
       console.log(error)
+        .catch((e) => alert(e));
+
     })
   }
+
   StatusBar.setHidden(true)
 
   return (
@@ -40,7 +78,7 @@ const UploadImageScreen = ({ navigation }) => {
           locations={[0, 1, 2, 3, 4]}
           colors={["#A9CDFF", "#72F6D1", "#A0ED8D", "#FED365", "#FAA49E"]}
         />
-        <Text style={styles.paragraph}>“One of the marvelous things about community is that it enables us to welcome and help people in a way we couldn't as individuals.” – Jean Vanier</Text>
+        <Text style={styles.paragraph}>“One of th444e marvelous things about community is that it enables us to welcome and help people in a way we couldn't as individuals.” – Jean Vanier</Text>
         <ImageBackground
           source={require("../../assets/uploadbackground.png")}
           resizeMode="contain"

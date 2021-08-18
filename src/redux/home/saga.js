@@ -46,9 +46,9 @@ function* getUser() {
     const token = yield select(getToken);
 
     const data = yield call(Api.getUser, token);
-    if (data.status === 200) {
+  
       yield put(Actions.getUserSuccess(data))
-    }
+  
 
   } catch (error) {
     console.log('err', error);
@@ -119,12 +119,13 @@ function* availability(action) {
   }
 }
 
-function* updateUser() {
+function* updateUser(action) {
   try {
     const token = yield select(getToken);
 
-    const data = yield call(Api.updateUser, token);
+    const data = yield call(Api.updateUser, token, action.payload);
     yield put(Actions.updateUserSuccess(data))
+    yield put(Actions.getUser())
 
   } catch (error) {
     if (error == 'invalid_token') {

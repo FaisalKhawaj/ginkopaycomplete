@@ -21,7 +21,7 @@ import * as Actions from './../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
 
 const Preferences = ({ navigation }) => {
-    
+
     const dispatch = useDispatch();
     const [showGeneralModal, setShowGeneralModal] = useState(false)
     const [checkedCurrency, setCheckedCurrency] = React.useState('Native');
@@ -33,20 +33,21 @@ const Preferences = ({ navigation }) => {
     const [metametric, setMetaMetric] = useState(false)
     const [currencymodal, setCurrencyModal] = useState(false)
     const [languagemodal, setLanguageModal] = useState(false)
+    const user = useSelector(state => state.home?.users);
+
     const BackBtnHandler = () => {
         navigation.goBack()
     }
 
 
     const closeModalHandler = () => {
-        dispatch(Actions.updateUser())
-        
+        dispatch(Actions.getUser())
         setShowGeneralModal(!showGeneralModal)
     }
-    
-    
+
+
     const UpdateGeneralHandler = () => {
-        dispatch(Actions.updateUser())
+        dispatch(Actions.getUser())
         setShowPrivacyModal(!showPrivacyModal)
     }
 
@@ -130,7 +131,7 @@ const Preferences = ({ navigation }) => {
                             <Text style={styles.headingText}>Currency Conversion</Text>
                             <Text style={styles.descriptionText}>
                                 Display fiat values in using o specific currency throughout the application
-                         </Text>
+                            </Text>
                         </View>
 
                         <DropDownPicker
@@ -169,7 +170,7 @@ const Preferences = ({ navigation }) => {
                             <Text style={styles.headingText}>Privacy Currency</Text>
                             <Text style={styles.descriptionText}>
                                 Select Native to prioritize displaying values{'\n'}in the native currency of the chain (e.g. ETH).{'\n'} Select Fiat to prioritize displaying values in{'\n'}your selected fiat currency
-                             </Text>
+                            </Text>
                         </View>
 
                         <View style={{ marginLeft: 15, flexDirection: 'row' }}>
@@ -200,7 +201,7 @@ const Preferences = ({ navigation }) => {
                             <Text style={styles.headingText}>Current Language</Text>
                             <Text style={styles.descriptionText}>
                                 Translate the application to a different{'\n'}Supported language
-                             </Text>
+                            </Text>
                         </View>
 
                         <DropDownPicker
@@ -238,7 +239,7 @@ const Preferences = ({ navigation }) => {
                             <Text style={styles.headingText}>User can search my profile </Text>
                             <Text style={styles.descriptionText}>
                                 Other User can’t find your profile if you click{'\n'}no. Nobody will see your account.
-                             </Text>
+                            </Text>
                         </View>
 
                         <View style={{ marginLeft: 15, flexDirection: 'row' }}>
@@ -263,7 +264,41 @@ const Preferences = ({ navigation }) => {
                                 <Text style={{ alignSelf: 'center', color: '#FFFF' }}>No</Text>
                             </View>
                         </View>
-                        <CustomButton text={"Update"} onPress={closeModalHandler}
+                        <CustomButton text={"Update"} onPress={() => {
+                            setShowGeneralModal(!showGeneralModal)
+
+                            if (user) {
+
+                                dispatch(Actions.updateUser(
+                                    user?.webId,
+                                    user?.email,
+                                    user?.userNumber,
+                                    user?.firstName,
+                                    user?.lastName,
+                                    user?.surName,
+                                    user?.password,
+                                    user?.birthday,
+                                    user?.phoneNumber,
+                                    user?.phoneCarrier,
+                                    user?.gender,
+                                    user?.streetAddress,
+                                    user?.state,
+                                    user?.city,
+                                    user?.country,
+                                    user?.pictureUrl,
+                                    valueLanguage,
+                                    user?.visibility,
+                                    value,
+                                    checkedCurrency,
+                                    user?.privacyMode,
+                                    user?.partcpMetamatric,
+                                    user?.getTransactions,
+                                    user?.accountId,
+                                    user?.ethAddress,
+                                    user?.btcAddress
+                                ))
+                            }
+                        }}
                         />
 
                         {/* </View> */}
@@ -357,12 +392,57 @@ const Preferences = ({ navigation }) => {
                             <Text style={styles.headingText}>Get Incoming Transactions</Text>
                             <Text style={styles.descriptionText}>
                                 Third party APIs (Etherscan are used to show {"\n"} your incoming transactions in the history. {"\n"}
-                            Turn off if you don’t want us to pull data{"\n"} from those service
+                                Turn off if you don’t want us to pull data{"\n"} from those service
                             </Text>
                         </View>
 
                         {/* <View style={{ position: 'absolute', alignSelf: 'center', bottom: 10 }}> */}
-                        <CustomButton text={"Update"} onPress={UpdateGeneralHandler} />
+                        <CustomButton text={"Update"} onPress={() => {
+                            setShowPrivacyModal(!showPrivacyModal)
+                            var income = null
+                            var meta = null
+                            if (incomming) {
+                                income = 1
+                            } else {
+                                income = 0
+                            }
+                            if (metametric) {
+                                meta = 1
+                            } else {
+                                meta = 0
+                            }
+                            if (user) {
+
+                                dispatch(Actions.updateUser(
+                                    user?.webId,
+                                    user?.email,
+                                    user?.userNumber,
+                                    user?.firstName,
+                                    user?.lastName,
+                                    user?.surName,
+                                    user?.password,
+                                    user?.birthday,
+                                    user?.phoneNumber,
+                                    user?.phoneCarrier,
+                                    user?.gender,
+                                    user?.streetAddress,
+                                    user?.state,
+                                    user?.city,
+                                    user?.country,
+                                    user?.pictureUrl,
+                                    user?.currentLang,
+                                    user?.visibility,
+                                    user?.currencyConversion,
+                                    user?.privacyCurrency,
+                                    user?.privacyMode,
+                                    meta,
+                                    income,
+                                    user?.accountId,
+                                    user?.ethAddress,
+                                    user?.btcAddress
+                                ))
+                            }
+                        }} />
                         {/* </View> */}
                     </View>
                 </ScrollView>

@@ -51,6 +51,44 @@ export const Api = {
       console.log('errords', error.message.toString());
     }
   },
+  loginUserTest: async (data) => {
+    var { email, password } = data
+    const formData = new FormData();
+
+
+    formData.append("username", email);
+    formData.append("password", password);
+    formData.append("grant_type", "password");
+    const options = {
+
+      method: 'POST',
+      headers: {
+        Authorization: 'Basic Y2xpZW50OnBhc3N3b3Jk'
+      },
+      body: formData,
+    };
+
+    try {
+      const response = await fetch('https://ginkopay-crypto.herokuapp.com/oauth/token', options);
+      switch (response.status) {
+        case 200:
+          return await response.json();
+        case 400:
+        case 401:
+          Toast.show('Invalid credentials', { textColor: 'grey', duration: Toast.durations.SHORT });
+          break;
+        case 404:
+          Toast.show('User not found', { textColor: 'grey', duration: Toast.durations.SHORT });
+          break;
+        default:
+          var e = new Error("Something went wrong");
+          throw e;
+      }
+    }
+    catch (error) {
+      console.log('errords', error.message.toString());
+    }
+  },
 
   registerUser: async (email, password, name) => {
     

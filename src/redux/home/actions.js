@@ -1,4 +1,5 @@
-import { CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHECK_AVAILABILITY, CHECK_AVAILABILITY_SUCCESS, CREATE_BANNER, CREATE_BANNER_SUCCESS, CREATE_COMPAIGN, CREATE_COMPAIGN_SUCCESS, GET_BANNER, GET_BANNER_BY_ID, GET_BANNER_BY_ID_SUCCESS, GET_BANNER_SUCCESS, GET_CAMPAIGN, GET_CAMPAIGN_SUCCESS, GET_NEWS, GET_NEWS_DETAILS, GET_NEWS_DETAILS_SUCCESS, GET_NEWS_SUCCESS, GET_USER, GET_USER_LIST, GET_USER_LIST_SUCCESS, GET_USER_SUCCESS, UPDATE_USER, UPDATE_USER_SUCCESS,
+import {
+  CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHECK_AVAILABILITY, CHECK_AVAILABILITY_SUCCESS, CREATE_BANNER, CREATE_BANNER_SUCCESS, CREATE_COMPAIGN, CREATE_COMPAIGN_SUCCESS, GET_BANNER, GET_BANNER_BY_ID, GET_BANNER_BY_ID_SUCCESS, GET_BANNER_SUCCESS, GET_CAMPAIGN, GET_CAMPAIGN_SUCCESS, GET_NEWS, GET_NEWS_DETAILS, GET_NEWS_DETAILS_SUCCESS, GET_NEWS_SUCCESS, GET_USER, GET_USER_LIST, GET_USER_LIST_SUCCESS, GET_USER_SUCCESS, UPDATE_USER, UPDATE_USER_SUCCESS,
 } from './types';
 
 
@@ -92,9 +93,64 @@ export const checkAvailabiltySuccess = (data) => {
   };
 };
 
-export const updateUser = () => {
+export const updateUser = (
+  webId,
+  email,
+  userNumber,
+  firstName,
+  lastName,
+  surName,
+  password,
+  birthday,
+  phoneNumber,
+  phoneCarrier,
+  gender,
+  streetAddress,
+  state,
+  city,
+  country,
+  pictureUrl,
+  currentLang,
+  visibility,
+  currencyConversion,
+  privacyCurrency,
+  privacyMode,
+  partcpMetamatric,
+  getTransactions,
+  accountId,
+  ethAddress,
+  btcAddress
+) => {
   return {
     type: UPDATE_USER,
+    payload: {
+      webId,
+      email,
+      userNumber,
+      firstName,
+      lastName,
+      surName,
+      password,
+      birthday,
+      phoneNumber,
+      phoneCarrier,
+      gender,
+      streetAddress,
+      state,
+      city,
+      country,
+      pictureUrl,
+      currentLang,
+      visibility,
+      currencyConversion,
+      privacyCurrency,
+      privacyMode,
+      partcpMetamatric,
+      getTransactions,
+      accountId,
+      ethAddress,
+      btcAddress
+    }
   };
 };
 export const updateUserSuccess = (data) => {
@@ -104,7 +160,7 @@ export const updateUserSuccess = (data) => {
   };
 };
 
-export const createBanner = ( name, description, walletAddress, pictureUrl) => {
+export const createBanner = (name, description, walletAddress, pictureUrl) => {
   return {
     type: CREATE_BANNER,
     payload: {
@@ -119,7 +175,7 @@ export const createBannerSuccess = (data) => {
   };
 };
 
-export const createCompaign = ( name, description, walletAddress, pictureUrl) => {
+export const createCompaign = (name, description, walletAddress, pictureUrl) => {
   return {
     type: CREATE_COMPAIGN,
     payload: {

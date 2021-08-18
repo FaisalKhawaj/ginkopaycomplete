@@ -33,12 +33,14 @@ import SliderScreenOne from './src/screens/slidescreenone'
 import SliderScreenTwo from './src/screens/slidescreentwo'
 import SliderScreenThree from './src/screens/slidescreenthree'
 import CreateAccountIntro from './src/screens/createaccountintro'
+import * as Actions from './src/redux/home/actions'
 import Login from './src/screens/login'
 import CreataAccount from './src/screens/createaccount'
 import UploadImage from './src/screens/uploadpicture'
 import UploadedImage from './src/screens/uploaddedpicture'
 import KycNeed from './src/screens/kycneed'
 import Welcome from './src/screens/Welcome'
+
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -118,6 +120,7 @@ const App = () => {
       // var decoded = jwt_decode(value?.access_token);
       const isLogin = isJwtExpired(value?.access_token)
       console.log('tests', isLogin);
+      // store.dispatch(Actions.getUser())
 
       setToken(isLogin);
     }
@@ -135,7 +138,7 @@ const App = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer ref={navigationRef}>
-          {!token ? <RootStackNavigator /> : <LoginStack />}
+          {token ? <LoginStack /> :  <RootStackNavigator />}
         </NavigationContainer>
       </PersistGate>
     </Provider>

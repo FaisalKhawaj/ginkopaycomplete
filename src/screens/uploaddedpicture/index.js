@@ -8,10 +8,79 @@ import { BackgroundColor, graycolor } from '../../constants/colors';
 import ImagePicker from 'react-native-image-crop-picker';
 import { simpletext } from '../../constants/fonts';
 import { mystyles } from '../../styles';
+import { useSelector, useDispatch } from 'react-redux';
+import jwt_decode from "jwt-decode";
 
 const UploadImageScreen = ({ navigation, route }) => {
-  const gotonextScreen = () => {
+  const userTokenTest = useSelector(state => state.onboarding?.userTokenTest);
+
+  var decoded = jwt_decode(userTokenTest?.access_token);
+  var email = decoded?.user_name
+
+  console.log('imageeee', route.params?.cloudImage);
+  const gotonextScreen = async (email) => {
     navigation.navigate("KycNeed")
+    if (userTokenTest && route.params?.cloudImage) {
+
+
+      const options = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userTokenTest?.access_token}`,
+        },
+        body: JSON.stringify({
+          webId: userTokenTest?.userId,
+          email: email,
+          userNumber: null,
+          firstName: userTokenTest?.name,
+          lastName: '',
+          surName: null,
+          password: null,
+          birthday: null,
+          phoneNumber: null,
+          phoneCarrier: '0',
+          gender: null,
+          streetAddress: null,
+          state: null,
+          city: null,
+          country: null,
+          pictureUrl: route.params?.cloudImage,
+          currentLang: null,
+          visibility: 1,
+          currencyConversion: null,
+          privacyCurrency: null,
+          privacyMode: null,
+          partcpMetamatric: null,
+          getTransactions: null,
+          accountId: null,
+          ethAddress: null,
+          btcAddress: null
+        })
+      };
+
+      try {
+        const response = await fetch(`https://ginkopay-crypto.herokuapp.com/api/user/${userTokenTest?.userId}`, options);
+        switch (response.status) {
+          case 200:
+            Toast.show('User has been Updated', { textColor: 'grey', duration: Toast.durations.SHORT });
+            const response = await response.json();
+            if (response) {
+              dispatch(Actions.updateUser(response))
+            }
+            return;
+          default:
+            throw new Error('Some error occured');
+        }
+      } catch (e) {
+        console.log('e', e);
+        throw e;
+      }
+
+
+    }else{
+      Toast.show('Please select image', { textColor: 'grey', duration: Toast.durations.SHORT });
+    }
   }
 
   const openPicker = () => {
@@ -61,7 +130,7 @@ const UploadImageScreen = ({ navigation, route }) => {
           </TouchableOpacity>
         </ImageBackground>
         <View style={{ position: "absolute", bottom: 20, }}>
-          <CustomButton text={"Next"} onPress={() => gotonextScreen()} />
+          <CustomButton text={"Next"} onPress={() => gotonextScreen(email)} />
         </View>
       </Content>
     </SafeAreaView>

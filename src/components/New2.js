@@ -1,33 +1,34 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 
-const CryptoNews = ({ item, handler }) => {
+const CryptoNews2 = ({ item, handler }) => {
     return (
         <TouchableOpacity onPress={() => handler()} style={styles.newsMainView}>
             <View style={{ flexDirection: 'row', }}>
 
                 <View style={styles.newsTextView}>
                     <Text style={styles.newsText}>
-                        {item.userName}
+                        {item.description}
                     </Text>
                 </View>
 
-                <Image resizeMode="contain" style={{width: 50, height: 50}} source={{uri: item.pictureUrl}} />
+                <Image resizeMode="contain" source={item.img} />
             </View>
+
             <View style={{ flexDirection: 'row', }}>
                 <Image
                     //  style={{ alignSelf: 'center' }} 
                     source={require('../assets/yellowDot.png')} />
-                <Text style={styles.BTCHoursAgoSource}>BTC</Text>
-                <Text style={styles.BTCHoursAgoSource}>16h ago</Text>
-                <Text style={styles.BTCHoursAgoSource}>News Source</Text>
+                <Text style={styles.BTCHoursAgoSource}>{item.coin}</Text>
+                <Text style={styles.BTCHoursAgoSource}>{item.hoursAgo}</Text>
+                <Text style={styles.BTCHoursAgoSource}>{item.newsSource}</Text>
             </View>
 
 
         </TouchableOpacity>
     )
 }
-export default CryptoNews;
+export default CryptoNews2;
 
 const styles = StyleSheet.create(
     {

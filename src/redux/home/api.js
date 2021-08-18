@@ -15,7 +15,7 @@ export const Api = {
 
 
   getNews: async (token) => {
-
+    console.log('token', token);
     const options = {
       method: 'GET',
       headers: {
@@ -69,7 +69,6 @@ export const Api = {
 
 
   getUser: async (token) => {
-
     const options = {
       method: 'GET',
       headers: {
@@ -80,7 +79,7 @@ export const Api = {
     };
 
     try {
-      const response = await api('/user/{id}', options);
+      const response = await api(`/user/${token?.userId}`, options);
       switch (response.status) {
         case 200:
           return await response.json();
@@ -248,21 +247,75 @@ export const Api = {
     }
   },
 
-  updateUser: async (token) => {
+  updateUser: async (token, data) => {
+    const { webId,
+      email,
+      userNumber,
+      firstName,
+      lastName,
+      surName,
+      password,
+      birthday,
+      phoneNumber,
+      phoneCarrier,
+      gender,
+      streetAddress,
+      state,
+      city,
+      country,
+      pictureUrl,
+      currentLang,
+      visibility,
+      currencyConversion,
+      privacyCurrency,
+      privacyMode,
+      partcpMetamatric,
+      getTransactions,
+      accountId,
+      ethAddress,
+      btcAddress } = data
+
     const options = {
-      method: 'GET',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token?.access_token}`,
-
       },
+      body: JSON.stringify({
+        webId: webId,
+        email: email,
+        userNumber: userNumber,
+        firstName: firstName,
+        lastName: lastName,
+        surName: surName,
+        password: password,
+        birthday: birthday,
+        phoneNumber: phoneNumber,
+        phoneCarrier: '0',
+        gender: gender,
+        streetAddress: streetAddress,
+        state: state,
+        city: city,
+        country: country,
+        pictureUrl: pictureUrl,
+        currentLang: currentLang,
+        visibility: visibility,
+        currencyConversion: currencyConversion,
+        privacyCurrency: privacyCurrency,
+        privacyMode: privacyMode,
+        partcpMetamatric: partcpMetamatric,
+        getTransactions: getTransactions,
+        accountId: accountId,
+        ethAddress: ethAddress,
+        btcAddress: btcAddress
+      })
     };
 
     try {
       const response = await api(`/user/${token?.userId}`, options);
       switch (response.status) {
         case 200:
-          Toast.show('User has been changed', { textColor: 'grey', duration: Toast.durations.SHORT });
+          Toast.show('User has been Updated', { textColor: 'grey', duration: Toast.durations.SHORT });
           return await response.json();
         default:
           throw new Error('Some error occured');

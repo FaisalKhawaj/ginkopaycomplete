@@ -33,9 +33,11 @@ const Profile = ({ navigation }) => {
     const [btnSelect, setBtnSelect] = useState('Compaign')
     const banner = useSelector(state => state.home?.banner);
     const campaign = useSelector(state => state.home?.campaign);
-
+    const user = useSelector(state => state.home?.users);
+    console.log('userrr',user);
     useEffect(() => {
         dispatch(Actions.getBanner())
+        dispatch(Actions.getUser())
     }, [])
     const [CompaignList, setCompaignsList] = useState([
         {
@@ -193,11 +195,11 @@ const Profile = ({ navigation }) => {
 
                 <View style={styles.MainUserSettingsView}>
 
-                    <Image style={{ alignSelf: 'center' }} resizeMode="contain" source={require('../../assets/personprofile.png')} />
+                   {user?.pictureUrl != null? <Image style={{ alignSelf: 'center', width: 30, height: 30, borderRadius: 30 }}  source={{uri: user?.pictureUrl}} />:null}
 
                     <View style={styles.UserUsernameView}>
                         <Text style={styles.UsernameText}>Username</Text>
-                        <Text style={styles.Username}>Team Italia</Text>
+                        <Text style={styles.Username}>{user?.firstName + user?.lastName}</Text>
                     </View>
 
                     <TouchableOpacity

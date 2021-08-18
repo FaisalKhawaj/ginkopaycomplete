@@ -19,11 +19,52 @@ import * as Actions from './../../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
 
 const Settings = ({ navigation }) => {
-    
+    const user = useSelector(state => state.home?.users);
+    const [profileImg, setProfileImg] = useState(null)
+    const [cloudImageUrl, setCloudImageUrl] = useState(null)
+    console.log('user', user);
     const dispatch = useDispatch();
     const EditProfileHandler = () => {
+        dispatch(Actions.getUser())
         setShowEditProfileModal(!showEditProfileModal)
 
+    }
+    const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/ginkopay/image/upload'
+    const handleupload = (image) => {
+        const data = new FormData()
+        data.append('file', image),
+            data.append('upload_preset', 'ginkopay'),
+            data.append('cloud_name', 'Ginkopay')
+
+        fetch(CLOUDINARY_URL, {
+            method: 'POST',
+            body: data
+        }).then((res) => res.json()).then((data) => {
+            setCloudImageUrl(data?.secure_url)
+        }).catch((e) => {
+            console.log('e', e);
+        })
+    }
+    
+    const openPicker = () => {
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
+        }).then(image => {
+            console.log('image', image);
+            let newFile = {
+                uri: image.path,
+                type: `test/${image.path.substr(image.path.length - 3)}`,
+                name: `test/${image.path.substr(image.path.length - 3)}`,
+            }
+            handleupload(newFile)
+            setProfileImg(image.path)
+        }).catch((error) => {
+            console.log(error)
+                .catch((e) => alert(e));
+
+        })
     }
     const ShareMyPublicAddressHandler = async () => {
         try {
@@ -63,6 +104,38 @@ const Settings = ({ navigation }) => {
         // navigation.navigate("Login")
     }
     const UpdateHandler = () => {
+        if (user) {
+
+            dispatch(Actions.updateUser(
+                user?.webId,
+                user?.email,
+                user?.userNumber,
+                name,
+                user?.lastName,
+                user?.surName,
+                user?.password,
+                user?.birthday,
+                user?.phoneNumber,
+                user?.phoneCarrier,
+                user?.gender,
+                user?.streetAddress,
+                user?.state,
+                user?.city,
+                user?.country,
+                cloudImageUrl,
+                user?.currentLang,
+                user?.visibility,
+                user?.currencyConversion,
+                user?.privacyCurrency,
+                user?.privacyMode,
+                user?.partcpMetamatric,
+                user?.getTransactions,
+                user?.accountId,
+                user?.ethAddress,
+                user?.btcAddress
+            ))
+        }
+
         if (Platform.OS == 'ios')
             setShowEditProfileModal(!showEditProfileModal)
         else
@@ -74,21 +147,9 @@ const Settings = ({ navigation }) => {
     }
 
     const [showEditProfileModal, setShowEditProfileModal] = useState(false)
-    const [ProfileImg, setProfileImg] = useState(require("../../assets/profilePic.png"))
+    // const [ProfileImg, setProfileImg] = useState(require("../../assets/profilePic.png"))
     const [name, setName] = useState("")
 
-    const openPicker = () => {
-        ImagePicker.openPicker({
-            width: 300,
-            height: 400,
-            cropping: true
-        }).then(image => {
-            setProfileImg(image.path)
-
-        }).catch((error) => {
-            console.log(error)
-        })
-    }
 
     return (
         <Container style={{ backgroundColor: BackgroundColor }}>
@@ -96,7 +157,7 @@ const Settings = ({ navigation }) => {
 
                 <TouchableOpacity style={{ marginVertical: 20, alignSelf: 'center' }}>
                     <Thumbnail large
-                        source={require('../../assets/profilePic.png')} />
+                        source={{uri: user?.pictureUrl}} />
                     <View style={mystylesComp.arrowCircleGradientView}>
                         <LinearGradient
                             start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
@@ -154,9 +215,9 @@ const Settings = ({ navigation }) => {
                         <View style={{ alignSelf: 'center' }}>
 
                             <View style={mystylesComp.circleImageView}>
-                                {ProfileImg != null ?
+                                {profileImg != null ?
                                     <Image style={{ width: 30, height: 20, borderRadius: 25, }} resizeMode='center'
-                                        source={ProfileImg} /> : null
+                                        source={{uri: profileImg}} /> : null
 
                                 }
                             </View>

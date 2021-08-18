@@ -191,6 +191,7 @@ const Home = ({ navigation }) => {
   );
   useEffect(() => {
     dispatch(Actions.getNews())
+    dispatch(Actions.getUser())
   }, [])
 
   const renderTopMoversItem = (item) => {
