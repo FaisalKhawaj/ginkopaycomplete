@@ -22,6 +22,8 @@ import DoneSvg from '../../components/DoneSvg';
 import BannerView from '../../components/AddBanner';
 import * as Actions from './../../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
+import Banner from '../../components/Campaign1';
+import Campaign1 from '../../components/Campaign1';
 
 const { width, height } = Dimensions.get("window");
 const Profile = ({ navigation }) => {
@@ -99,7 +101,6 @@ const Profile = ({ navigation }) => {
         setShowCompaign(!showCompaign)
     }
     const ChannelHandler = () => {
-        console.log(showCompaign)
         setShowCompaign(!showCompaign)
     }
     const CreateBannerHandler = () => {
@@ -272,7 +273,7 @@ const Profile = ({ navigation }) => {
                 }
 
                 {btnSelect === 'Compaign' && showCompaign ?
-                    <Compaign setShowCompaign={setShowCompaign} />
+                    <Campaign1 setShowCompaign={setShowCompaign} />
                     : null
                 }
 

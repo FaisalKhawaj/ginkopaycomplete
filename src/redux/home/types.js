@@ -33,3 +33,6 @@ export const GET_BANNER_SUCCESS = "GET_BANNER_SUCCESS";
 
 export const GET_BANNER_BY_ID = "GET_BANNER_BY_ID";                //           
 export const GET_BANNER_BY_ID_SUCCESS = "GET_BANNER_BY_ID_SUCCESS";
+
+export const GET_BANNER_BY_ID_1 = "GET_BANNER_BY_ID_1";                //           
+export const GET_CAMPAIGN_BY_ID_1 = "GET_CAMPAIGN_BY_ID_1";                //           

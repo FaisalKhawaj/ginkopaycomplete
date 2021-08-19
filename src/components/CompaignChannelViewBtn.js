@@ -3,14 +3,20 @@ import {
     View, Text, TouchableOpacity, StyleSheet,
     Image, ImageBackground
 } from 'react-native'
+import * as Actions from './../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
 
 const CompaignChannelViewBtn = ({ item, handler }) => {
+    const dispatch = useDispatch();
     return (
         <TouchableOpacity
-            onPress={() => handler()}
+            onPress={() => {
+                dispatch(Actions.getCampaignByID1(item))
+                handler()
+            }}
             style={styles.CompaignChannelBtn}>
             <ImageBackground style={styles.ImageBackgroundStyle}
-                source={{uri: item.pictureUrl}}>
+                source={{ uri: item.pictureUrl }}>
                 <View style={styles.TitleUrlView}>
                     <Text style={styles.TitleText}>
                         {item.userName}

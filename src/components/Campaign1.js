@@ -39,11 +39,11 @@ var obj = [
       image:require("../assets/token2.png")
     },
   ]
-const Compaign = ({setShowCompaign}) => {
+const Campaign1 = ({setShowCompaign}) => {
 
   const navigation = useNavigation()
-  const bannerId = useSelector(state => state.home?.bannerId);
-  console.log('banner', bannerId);
+  const campaignId = useSelector(state => state.home?.campaignId);
+  console.log('banner', campaignId);
     const [modaldata, setModalData] = useState({
         key:1,
         name: "Beexay",
@@ -177,7 +177,7 @@ const Compaign = ({setShowCompaign}) => {
                     <Icon name="chevron-back-outline" size={20} color="#FFFF" />
                 </TouchableOpacity>
 
-                <CustomText text={bannerId?.userName} locations={[0, 1]} colors={["#72F6D1", "#FFD505"]}
+                <CustomText text={campaignId?.userName} locations={[0, 1]} colors={["#72F6D1", "#FFD505"]}
                     style={{ fontSize: 20, fontWeight: "bold", textAlign: "center" }} />
                 <TouchableOpacity style={{ alignSelf: 'center' }}>
                     < Icon name="chevron-forward-outline" size={20} color="#FFFF" />
@@ -185,12 +185,12 @@ const Compaign = ({setShowCompaign}) => {
             </View>
 
             <View style={styles.compaignLargeImg}>
-                <Image style={{width: 300, height: 200}} source={{uri: bannerId?.pictureUrl}} />
+                <Image style={{width: 300, height: 200}} source={{uri: campaignId?.pictureUrl}} />
             </View>
 
             <View style={{ alignSelf: 'center' }}>
                 <Text style={styles.newsText}>
-                    {bannerId?.description}
+                    {campaignId?.description}
                 </Text>
             </View>
 
@@ -219,7 +219,7 @@ const Compaign = ({setShowCompaign}) => {
 
     )
 }
-export default Compaign;
+export default Campaign1;
 
 const styles = StyleSheet.create({
     compaignLargeImg:

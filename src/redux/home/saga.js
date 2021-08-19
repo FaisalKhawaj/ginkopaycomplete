@@ -186,12 +186,11 @@ function* getBanner() {
   }
 }
 
-function* getBannerById() {
+function* getBannerById(action) {
   try {
     const token = yield select(getToken);
-    const getBanner = yield select(banner);
 
-    const data = yield call(Api.getBannerById, token, getBanner);
+    const data = yield call(Api.getBannerById, token, action.payload);
     yield put(Actions.getBannerByIDSuccess(data))
 
   } catch (error) {

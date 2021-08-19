@@ -169,7 +169,7 @@ export const Api = {
 
   getBannerById: async (token, data) => {
     console.log('dataa', data);
-    const id = data?.ownerId
+    const id = data
     const options = {
       method: 'GET',
       headers: {
@@ -180,7 +180,7 @@ export const Api = {
     };
 
     try {
-      const response = await api(`/banner${id}`, options);
+      const response = await api(`/banner/ownerId`, options);
       switch (response.status) {
         case 200:
           return await response.json();
