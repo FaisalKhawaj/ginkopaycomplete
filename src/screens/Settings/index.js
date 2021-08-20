@@ -136,10 +136,13 @@ const Settings = ({ navigation }) => {
             ))
         }
 
-        if (Platform.OS == 'ios')
-            setShowEditProfileModal(!showEditProfileModal)
-        else
-            Linking.openURL('https://play.google.com/store/apps/details?id=com.ubercab')
+        setShowEditProfileModal(!showEditProfileModal)
+        if (Platform.OS == 'ios'){
+
+        }
+        else{
+            // Linking.openURL('https://play.google.com/store/apps/details?id=com.ubercab')
+        }
     }
 
     const BackBtnHandler = () => {
@@ -211,7 +214,7 @@ const Settings = ({ navigation }) => {
                     <View style={[mystyles.referCodeModalMainView, { height: height / 1.7, width: width }]}>
                         <View style={mystyles.modalUpperSmallLine} />
 
-                        <BackBtnWithMiddleText text="Choose New Account" backBtn={BackBtnHandler} navigation={navigation} />
+                        <BackBtnWithMiddleText text="Choose New Account" EditProfileHandler={EditProfileHandler} backBtn={BackBtnHandler} navigation={navigation} />
                         <View style={{ alignSelf: 'center' }}>
 
                             <View style={mystylesComp.circleImageView}>

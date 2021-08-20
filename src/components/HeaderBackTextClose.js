@@ -9,7 +9,7 @@ const HeaderBackTextCloseBtn = ({ text, backhandler, closeModal }) => {
         <View style={{ marginVertical: 5, marginLeft: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
 
             <TouchableOpacity style={{ alignSelf: 'center' }}
-                onPress={() => backhandler()}>
+                onPress={() =>closeModal() }>
                 <Icon name="chevron-back-outline" size={20} color="#FFFF" />
             </TouchableOpacity>
 

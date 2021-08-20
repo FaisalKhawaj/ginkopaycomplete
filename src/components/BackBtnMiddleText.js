@@ -4,11 +4,11 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { mystyles } from '../styles';
 
-const BackBtnWithMiddleText = ({ text, backBtn }) => {
+const BackBtnWithMiddleText = ({ text, backBtn, EditProfileHandler }) => {
     return (
         <View style={styles.mainView}>
             <View style={{ flex: 1 }}>
-                <TouchableOpacity style={{ width: 40 }} onPress={() => backBtn()}>
+                <TouchableOpacity style={{ width: 40 }} onPress={() => EditProfileHandler()}>
                     <Icon name="chevron-back-outline" size={20} color="#FFFF" />
                 </TouchableOpacity>
             </View>
