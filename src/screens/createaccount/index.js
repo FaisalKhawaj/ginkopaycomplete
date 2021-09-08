@@ -133,7 +133,7 @@ const CreateAccountScreen = ({ navigation }) => {
             />
             <TouchableOpacity style={styles.ispasswordIcon}
               onPress={() => setispasswordVisible(!ispasswordVisible)}>
-              {isconfirmpasswordvisible ?
+              {ispasswordVisible ?
                 <Feather name="eye" size={28} color="#fff" /> :
                 <Feather name="eye-off" size={28} color="#fff" />}
 
@@ -156,7 +156,7 @@ const CreateAccountScreen = ({ navigation }) => {
             />
             <TouchableOpacity style={styles.ispasswordIcon}
               onPress={() => setisconfirmpasswordvisible(!isconfirmpasswordvisible)}>
-              {ispasswordVisible ?
+              {isconfirmpasswordvisible ?
                 <Feather name="eye" size={28} color="#fff" /> :
                 <Feather name="eye-off" size={28} color="#fff" />}
 
@@ -208,7 +208,7 @@ const CreateAccountScreen = ({ navigation }) => {
             <Text style={{ color: bluetext, fontFamily: simpletext, }} onPress={() => toggleModal()} > Term and Conditions.</Text></Text>
         </View>
         <View style={{ position: "absolute", alignSelf: "center", backgroundColor: BackgroundColor, bottom: 20, }}>
-          <CustomButton text={"Create Account"} onPress={() => gotonextScreen()} />
+          <CustomButton text={"Submit"} onPress={() => gotonextScreen()} />
         </View>
       </ScrollView>
 

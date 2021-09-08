@@ -55,7 +55,7 @@ const Welcome = ({ navigation }) => {
                     <View style={{ flex: 1, backgroundColor: BackgroundColor }} key={"1"}>
 
                         <View style={{ flex: 1, justifyContent: 'center', }}>
-                            <Image source={require("../../assets/slider3.png")}
+                            <Image source={require("../../assets/slider1.png")}
                                 resizeMode="cover"
                                 style={styles.imageStyle} />
                             <CustomText
@@ -65,7 +65,7 @@ const Welcome = ({ navigation }) => {
                             />
                         </View>
                         {/* <ThreeDots color={"three"} /> */}
-                        <View style={{ position: 'absolute', bottom: 10 }}>
+                        <View style={{ position: 'absolute', alignSelf: 'center', bottom: 10 }}>
                             <CustomButton text={"Next"} onPress={gotonextScreen} />
                         </View>
 
@@ -86,7 +86,7 @@ const Welcome = ({ navigation }) => {
                             />
                         </View>
 
-                        <View style={{ position: 'absolute', bottom: 10 }}>
+                        <View style={{ position: 'absolute', alignSelf: 'center', bottom: 10 }}>
                             <CustomButton text={"Next"} onPress={gotonextScreen} />
                         </View>
 
@@ -103,7 +103,7 @@ const Welcome = ({ navigation }) => {
                                 style={{ fontSize: 40, textAlign: "center" }}
                             />
                         </View>
-                        <View style={{ position: 'absolute', bottom: 10 }}>
+                        <View style={{ position: 'absolute', alignSelf: 'center', bottom: 10 }}>
                             <CustomButton text={"Next"} onPress={gotonextScreen} />
                         </View>
                     </View>

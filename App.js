@@ -39,6 +39,9 @@ import UploadImage from './src/screens/uploadpicture'
 import UploadedImage from './src/screens/uploaddedpicture'
 import KycNeed from './src/screens/kycneed'
 import Welcome from './src/screens/Welcome'
+import ForgotPassword from './src/screens/ForgotPasswordEnterEmail';
+import ConfirmationEmail from './src/screens/ConfirmationEmail';
+import ResetPassword from './src/screens/ResetPassword';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -60,23 +63,13 @@ const RootStack = createStackNavigator();
 function LoginStack() {
   return (
     <RootStack.Navigator headerMode={'none'} initialRouteName={'Welcome'}>
-      {/* <RootStack.Screen
-        name="SliderScreenOne"
-        component={SliderScreenOne}
-      /> */}
+
 
       <RootStack.Screen
         name="Welcome"
         component={Welcome}
       />
-      {/* <RootStack.Screen
-        name="SliderScreenTwo"
-        component={SliderScreenTwo}
-      />
-      <RootStack.Screen
-        name="SliderScreenThree"
-        component={SliderScreenThree}
-      /> */}
+
       <RootStack.Screen
         name="CreateAccountIntro"
         component={CreateAccountIntro}
@@ -84,6 +77,21 @@ function LoginStack() {
       <RootStack.Screen
         name="Login"
         component={Login}
+      />
+
+      <RootStack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
+      />
+
+      <RootStack.Screen
+        name="ConfirmationEmail"
+        component={ConfirmationEmail}
+      />
+
+      <RootStack.Screen
+        name="ResetPassword"
+        component={ResetPassword}
       />
       <RootStack.Screen
         name="CreataAccount"
@@ -101,6 +109,10 @@ function LoginStack() {
         name="KycNeed"
         component={KycNeed}
       />
+      {/* <RootStack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
+      /> */}
     </RootStack.Navigator>
   )
 }

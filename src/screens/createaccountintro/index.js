@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StatusBar, Image, Text, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { View, StatusBar, Image, Text, TouchableOpacity, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import CustomText from '../../components/Text'
 import { Content } from 'native-base'
 import CustomButton from '../../components/Button'
@@ -14,18 +14,18 @@ const SliderScreenOne = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Content contentContainerStyle={{ flex: 1, justifyContent: 'center', }}>
-        <Image source={require("../../assets/slider4.png")} style={{ width: width / 1.3, height: width / 1.3, alignSelf: 'center', resizeMode: "cover" }} />
+        <Image resizeMode="contain" source={require("../../assets/slider4.png")} style={{ width: width / 1.6, height: width / 1.6, alignSelf: 'center', }} />
         <CustomText
           text={"Your own\nCrypto Wallet"}
           locations={[0, .3, .4, .5, 1]} colors={["#A9CDFF", "#72F6D1", "#A0ED8D", "#FED365", "#FAA49E"]}
-          style={{ fontSize: 40, textAlign: "center" }}
+          style={{ fontSize: 40, marginTop: 15, textAlign: "center" }}
         />
         <View style={{ height: 50 }} />
         <CustomButton text={"Create a new Wallet"} onPress={gotonextScreen} />
         <View style={{ height: 20 }} />
         <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => navigation.navigate("Login")}>
           <Text style={{ color: graycolor, fontFamily: simpletext }}>You have an account?
-                        <Text style={{ color: bluetext, fontFamily: simpletext, }}> Sign in</Text>
+                        <Text style={createAcc.signInText}> Sign in</Text>
           </Text>
         </TouchableOpacity>
       </Content>
@@ -34,3 +34,9 @@ const SliderScreenOne = ({ navigation }) => {
 
 };
 export default SliderScreenOne;
+
+const createAcc = StyleSheet.create({
+  signInText: {
+    color: bluetext, textDecorationLine: 'underline', fontFamily: simpletext,
+  }
+})

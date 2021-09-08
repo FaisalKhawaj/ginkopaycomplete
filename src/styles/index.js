@@ -66,6 +66,10 @@ export const mystyles = StyleSheet.create(
             justifyContent: "flex-end",
             backgroundColor: BackgroundColor
 
+        },
+        ginkoPayImg: {
+            width: width / 1.3, alignSelf: 'center', height: width / 2.3,
+            resizeMode: "contain"
         }
     }
 )
