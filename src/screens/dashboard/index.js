@@ -6,61 +6,63 @@ import { useFocusEffect } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay';
 import { boldtext, simpletext } from '../../constants/fonts';
-import { graycolor, green } from '../../constants/colors';
+import { graycolor, green, lightWhite, LinearGradientColorOne, LinearGradientColorTwo } from '../../constants/colors';
 import { mystyles } from '../../styles';
 const { width, height } = Dimensions.get("screen");
 import * as Actions from './../../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 let marketdata = [
   {
     key: 1,
-    image: require("../../assets/btc.png"),
-    name: "Binance Coin",
+    image: require("../../assets/apex.png"),
+    name: "APEX Coin",
     dollar: "$226.69",
     percent: +2,
-    title: "19.2371 BNB",
+    title: "19.2371 CPXT/GDC",
   },
   {
     key: 2,
-    image: require("../../assets/coin2.png"),
-    name: "USD Coin",
+    image: require("../../assets/cp.png"),
+    name: "COD Point",
     dollar: "$1.00",
     percent: 4.3,
-    title: "92,3 USDC",
+    title: "92,3 CPT/GDC",
   },
   {
     key: 3,
-    image: require("../../assets/coin3.png"),
-    name: "Cardano",
+    image: require("../../assets/V.png"),
+    name: "V-BUCKS",
     dollar: "$20.83",
     percent: -1.3,
-    title: "12.74 ADA",
+    title: "12.74 VBT/GDC",
   },
   {
     key: 4,
-    image: require("../../assets/coin3.png"),
-    name: "Cardano",
+    image: require("../../assets/fifaa.png"),
+    name: "FIFA Coin",
     dollar: "$20.83",
     percent: -1.3,
-    title: "12.74 ADA",
+    title: "12.74 FCT/GDC",
   },
   {
     key: 5,
-    image: require("../../assets/coin3.png"),
-    name: "Cardano",
+    image: require("../../assets/Valorant.png"),
+    name: "VALORANT RIOT",
     dollar: "$20.83",
     percent: -1.3,
-    title: "12.74 ADA",
+    title: "12.74 VRT/GDC",
   },
   {
     key: 6,
-    image: require("../../assets/coin3.png"),
-    name: "Cardano",
+    image: require("../../assets/RP.png"),
+    name: "LOL RIOT",
     dollar: "$20.83",
     percent: -1.3,
-    title: "12.74 ADA",
+    title: "12.74 LRT/GDC",
   },
 
 ]
@@ -133,30 +135,39 @@ let newsdata = [
   },
 ]
 
-let watchlistdata = [{
-  key: 1,
-  image: require("../../assets/btc.png"),
-  name: "Bitcoin",
-  Heading: "BTC",
-  amount: "USD 43,906,95",
-  percent: "11.71%"
-},
-{
-  key: 2,
-  image: require("../../assets/btc.png"),
-  name: "Bitcoin",
-  Heading: "BTC",
-  amount: "USD 43,906,95",
-  percent: "11.71%"
-},
-{
-  key: 3,
-  image: require("../../assets/btc.png"),
-  name: "Bitcoin",
-  Heading: "BTC",
-  amount: "USD 43,906,95",
-  percent: "11.71%"
-},
+let watchlistdata = [
+  {
+    key: 1,
+    image: require("../../assets/btc.png"),
+    name: "Gamer Digital Currency",
+    Heading: "GDC",
+    amount: "GDC 43,906,95",
+    percent: "+11.71%"
+  },
+  {
+    key: 2,
+    image: require("../../assets/btc.png"),
+    name: "Bitcoin",
+    Heading: "BTC",
+    amount: "USD 43,906,95",
+    percent: "+11.71%"
+  },
+  {
+    key: 3,
+    image: require("../../assets/btc.png"),
+    name: "Bitcoin",
+    Heading: "BTC",
+    amount: "USD 43,906,95",
+    percent: "+11.71%"
+  },
+  {
+    key: 4,
+    image: require("../../assets/btc.png"),
+    name: "Bitcoin",
+    Heading: "BTC",
+    amount: "USD 43,906,95",
+    percent: "+11.71%"
+  },
 ]
 const Home = ({ navigation }) => {
 
@@ -193,6 +204,32 @@ const Home = ({ navigation }) => {
     dispatch(Actions.getNews())
   }, [])
 
+
+  const watchListrenderItem = ({ item }) => {
+    return (
+      <View style={styles.mainView}>
+        <Image style={styles.iconBackground} source={require('../../assets/btc.png')} />
+        <View style={{ flexDirection: 'column', flex: 1 }}>
+          <Text style={{ color: '#fff', fontFamily: simpletext, fontSize: 16 }}>
+            {item.name}
+          </Text>
+          <Text style={{ color: '#fff', fontFamily: simpletext, fontSize: 12 }}>
+            {item.Heading}
+          </Text>
+        </View>
+        <View style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
+          <Text style={{ color: '#fff', fontFamily: simpletext }}>
+            {item.amount}
+          </Text>
+          <Text style={{ color: green, }}>
+            {item.percent}
+          </Text>
+        </View>
+      </View>
+    )
+  }
+
+
   const renderTopMoversItem = (item) => {
     return (
       <View style={styles.horizantalListItem}>
@@ -228,11 +265,11 @@ const Home = ({ navigation }) => {
       >
         <Image style={styles.verticalListIconBackground} source={item.image} />
         <View style={{ flexDirection: 'column', flex: 1 }}>
-          <Text style={{ color: '#fff', fontFamily: simpletext, fontSize: 16 }}>
+          <Text style={{ color: '#fff', fontFamily: 'Poppins-SemiBold', fontSize: 16 }}>
             {item.name}
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={{ color: '#fff', fontFamily: simpletext, fontSize: 12, marginRight: 20 }}>
+            <Text style={{ color: lightWhite, fontFamily: simpletext, fontSize: 12, marginRight: 20 }}>
               {item.dollar}
             </Text>
             <Text style={{ color: item.percent >= 0 ? green : "red", fontFamily: simpletext, }}>
@@ -240,10 +277,36 @@ const Home = ({ navigation }) => {
             </Text>
           </View>
         </View>
-        <View style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
-          <Text style={{ color: '#fff', fontFamily: simpletext, fontFamily: simpletext }}>
+        <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+          <Text style={{ color: '#fff', fontFamily: 'Poppins-SemiBold', }}>
             {item.title}
           </Text>
+          <View style={{ flexDirection: 'row', }}>
+
+            <TouchableOpacity style={{ backgroundColor: '#2A2D3C', width: wp('15%'), borderRadius: 5 }}>
+              <CustomText
+                text={"BUY"}
+                locations={[0, 1,]} colors={["#70A2FF", '#F76E64']}
+                style={{ fontSize: 13, textAlign: "center", fontFamily: 'Poppins-SemiBold', paddingVertical: 3, paddingHorizontal: 10 }}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.buySellBtn}>
+              <CustomText
+                text={"SELL"}
+                locations={[0, 1,]} colors={["#70A2FF", '#F76E64']}
+                style={{ fontSize: 13, textAlign: "center", paddingVertical: 3, paddingHorizontal: 10 }}
+              />
+            </TouchableOpacity>
+
+
+
+
+
+          </View>
+
+
+
         </View>
       </TouchableOpacity>
     )
@@ -282,29 +345,7 @@ const Home = ({ navigation }) => {
     )
   }
 
-  const watchListrenderItem = ({ item }) => {
-    return (
-      <View style={styles.mainView}>
-        <Image style={styles.iconBackground} source={require('../../assets/btc.png')} />
-        <View style={{ flexDirection: 'column', flex: 1 }}>
-          <Text style={{ color: '#fff', fontFamily: simpletext, fontSize: 16 }}>
-            Bitcoin
-          </Text>
-          <Text style={{ color: '#fff', fontFamily: simpletext, fontSize: 12 }}>
-            BTC
-          </Text>
-        </View>
-        <View style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
-          <Text style={{ color: '#fff', fontFamily: simpletext }}>
-            USD $65465.56
-          </Text>
-          <Text style={{ color: green, }}>
-            +11.70%
-          </Text>
-        </View>
-      </View>
-    )
-  }
+
   const openNewsItem = (item) => {
     setItemView(true)
   }
@@ -335,7 +376,7 @@ const Home = ({ navigation }) => {
             keyExtractor={(item, index) => index.toString()}
           />
         </View>
-        <Text style={{ color: '#fff', margin: 20, fontSize: 20, fontFamily: boldtext }}>
+        {/* <Text style={{ color: '#fff', margin: 20, fontSize: 20, fontFamily: boldtext }}>
           Top Movers
         </Text>
         <View style={styles.horizantalListView}>
@@ -346,7 +387,7 @@ const Home = ({ navigation }) => {
             renderItem={renderTopMoversItem}
             keyExtractor={(item, index) => index.toString()}
           />
-        </View>
+        </View> */}
         <View style={styles.tabView}>
           <TouchableOpacity
             onPress={() => marketPress()}
@@ -403,7 +444,7 @@ const Home = ({ navigation }) => {
                   ></ImageBackground>
                   <View style={{ marginBottom: 20, marginHorizontal: 35, paddingVertical: 30, borderBottomWidth: 1, borderBottomColor: '#fff' }}>
                     <Text style={{ color: '#fff', fontSize: 14, fontFamily: simpletext, textAlign: 'justify' }}>
-                    {newsDetail?.description}
+                      {newsDetail?.description}
 
                     </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
@@ -516,5 +557,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
+  },
+  buySellBtn: {
+    backgroundColor: '#2A2D3C',
+    marginHorizontal: 10,
+    width: wp('15%'),
+    borderRadius: 5
   }
 })
