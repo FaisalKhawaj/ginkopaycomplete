@@ -65,7 +65,7 @@ const CreateAccountScreen = ({ navigation }) => {
       } else if (!availabilty) {
         Toast.show("Username is not available", { textColor: 'grey', duration: Toast.durations.SHORT });
       } else if (password.length < 6) {
-        Toast.show("Must be atlest 6 characters", { textColor: 'grey', duration: Toast.durations.SHORT });
+        Toast.show("Must be atleast 6 characters", { textColor: 'grey', duration: Toast.durations.SHORT });
       } else if (password != confrimpassword) {
         Toast.show("Password does not match", { textColor: 'grey', duration: Toast.durations.SHORT });
       } else {
