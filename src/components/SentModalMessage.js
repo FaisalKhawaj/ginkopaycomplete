@@ -3,15 +3,16 @@ import { View, TextInput, Dimensions, StyleSheet, SafeAreaView, ScrollView, Imag
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
 import { Content } from 'native-base'
-import { boldtext,graycolor, simpletext } from '../constants/fonts';
+import { boldtext, graycolor, simpletext } from '../constants/fonts';
 import TokenModal from './SendModalToken'
 import HeaderBackTextClose from './HeaderBackTextClose'
 const { width, height } = Dimensions.get("window");
 import CustomButton from './Button'
 import { mystyles } from '../styles';
 import RequestPaymentModalusemax from './RequestPaymentModalusemax';
+import { lightWhite } from '../constants/colors';
 
-const SentModalMessage = ({ visible, setVisible, crossbuttonFunction,data,transcitioncompletefunction }) => {
+const SentModalMessage = ({ visible, setVisible, crossbuttonFunction, data, transcitioncompletefunction }) => {
     const [tokenmodal, setTokenModal] = useState(false)
     const [reqpaymodal, setReqPayModal] = useState(false);
     const BackBtnHandler = () => {
@@ -28,16 +29,16 @@ const SentModalMessage = ({ visible, setVisible, crossbuttonFunction,data,transc
         setVisible("close")
     }
 
-    const  handlebackandclose = (data) => {
-       if(data === "back"){
-        setVisible(data)
-        setReqPayModal(false)
-        }else if (data === "complete"){
+    const handlebackandclose = (data) => {
+        if (data === "back") {
+            setVisible(data)
+            setReqPayModal(false)
+        } else if (data === "complete") {
             transcitioncompletefunction()
             setVisible("close")
-        }else{
-        setVisible("close")
-       }
+        } else {
+            setVisible("close")
+        }
     }
     return (
         <Modal
@@ -72,8 +73,8 @@ const SentModalMessage = ({ visible, setVisible, crossbuttonFunction,data,transc
                                     <Text style={{ color: "#fff", fontFamily: simpletext, fontSize: 15 }}>
                                         Binance Coin
                                     </Text>
-                                    <Text style={{ color: graycolor, fontFamily: simpletext, fontSize: 12 }}>
-                                        Binance Coin
+                                    <Text style={{ color: lightWhite, fontFamily: simpletext, fontSize: 12 }}>
+                                        Balance: 18.2371 GDC
                                     </Text>
                                 </View>
                             </View>
@@ -106,7 +107,7 @@ const SentModalMessage = ({ visible, setVisible, crossbuttonFunction,data,transc
                             <Text style={styles.from}>Add a message</Text>
                             <TextInput
                                 placeholder={"Add Message"}
-                                placeholderTextColor={graycolor}
+                                placeholderTextColor={lightWhite}
                                 multiline={true}
                                 numberOfLines={8}
                                 style={styles.textinput}
@@ -117,13 +118,13 @@ const SentModalMessage = ({ visible, setVisible, crossbuttonFunction,data,transc
                 <CustomButton text={"Next"} onPress={() => openreqpaymentodal()} />
             </SafeAreaView>
             <TokenModal visible={tokenmodal} setVisible={setTokenModal} closesendmodal={setVisible} />
-            <RequestPaymentModalusemax 
-                visible={reqpaymodal} 
-                backbuttonFunctionpaymentModaluseMax={(data) => handlebackandclose(data)} 
-                BnbButtonPressed={() => alert("BNB Button")} 
-                setVisible={() =>  alert("Nextt")} 
-                setSendModalConfirm={() => BackBtnHandler()} 
-                setTokenModal={() => alert("Set Token Modal 2")} 
+            <RequestPaymentModalusemax
+                visible={reqpaymodal}
+                backbuttonFunctionpaymentModaluseMax={(data) => handlebackandclose(data)}
+                BnbButtonPressed={() => alert("BNB Button")}
+                setVisible={() => alert("Nextt")}
+                setSendModalConfirm={() => BackBtnHandler()}
+                setTokenModal={() => alert("Set Token Modal 2")}
             />
         </Modal>
     )
@@ -231,16 +232,15 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     textinput: {
-        borderColor: graycolor,
+        borderColor: '#222531',
         borderRadius: 15,
         borderWidth: 2,
-        color: "#fff",
+        color: lightWhite,
         fontFamily: simpletext,
-        borderColor: "gray",
         paddingLeft: 10,
         textAlign: "left",
         opacity: 1,
-        backgroundColor: "rgba(255,255,255,.1)",
+        backgroundColor: '#222531',
         textAlignVertical: "top",
         height: 180,
         width: width - 40

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Dimensions,ScrollView, StyleSheet, Image, Text, TouchableOpacity, SafeAreaView, TextInput, } from 'react-native';
+import { View, FlatList, Dimensions, ScrollView, StyleSheet, Image, Text, TouchableOpacity, SafeAreaView, TextInput, } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
 import { Content } from 'native-base'
@@ -135,7 +135,7 @@ const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
                         <TextInput
                             placeholder="Search, public address (0x), or ENS"
                             placeholderTextColor={graycolor}
-                            style={{ color: graycolor, fontFamily: boldtext, fontSize: 13 }}
+                            style={{ color: graycolor, flex: 1, fontFamily: boldtext, fontSize: 13 }}
 
                         />
                         <Image
@@ -143,12 +143,12 @@ const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
                             source={require("../assets/scan.png")} />
                     </View>
                     <Text style={styles.recent}>Recent</Text>
-                    {/* <FlatList
+                    <FlatList
                         data={obj}
                         renderItem={(item) => renderItem(item)}
                         keyExtractor={(item, index) => index.toString()}
-                    /> */}
-                    <ScrollView>
+                    />
+                    {/* <ScrollView>
                         {userList?.content.map((item, index) => {
                             return (
                                 <TouchableOpacity style={styles.renderItemmain} onPress={() => openmodal(item.item)} >
@@ -168,7 +168,7 @@ const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
                                 </TouchableOpacity>
                             )
                         })}
-                    </ScrollView>
+                    </ScrollView> */}
                 </Content>
             </SafeAreaView>
             <TokenModal visible={tokenmodal} setVisible={setTokenModal} closesendmodal={() => setVisible(false)} />
@@ -210,14 +210,14 @@ const styles = StyleSheet.create({
         fontFamily: boldtext
     },
     from: {
-        color: "#fff",
+        color: "#fff", marginLeft: 20,
 
         fontSize: 16,
         fontFamily: boldtext
     },
     recent: {
         color: graycolor,
-        fontSize: 16,
+        fontSize: 16, marginLeft: 20,
         fontFamily: boldtext
     },
     ethereumview: {
