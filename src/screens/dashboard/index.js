@@ -13,6 +13,7 @@ import * as Actions from './../../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import MarketModal from '../../components/MarketModal';
 
 
 let marketdata = [
@@ -23,6 +24,10 @@ let marketdata = [
     dollar: "$226.69",
     percent: +2,
     title: "19.2371 CPXT/GDC",
+    DetailImg: require('../../assets/LetGo.gif'),
+    DetailName: 'APEX LEGEND',
+    DetailDescription: 'Apex Legends is a free-to-play battle royale developed by Respawn Entertainment and published by Electronic Arts. Set in the same universe as Titanfall, the game was released for Microsoft Windows, PlayStation 4 and Xbox One on February 4th 2019. On March 10th  2021, the game has also landed on Nintendo Switch.\n Apex coin is the official currency of the Apex universe, with which you can buy bundles and skins for customize your LEGEND.'
+
   },
   {
     key: 2,
@@ -31,6 +36,9 @@ let marketdata = [
     dollar: "$1.00",
     percent: 4.3,
     title: "92,3 CPT/GDC",
+    DetailImg: require('../../assets/CODGun.png'),
+    DetailName: 'CALL OF DUTY',
+    DetailDescription: 'Call of Duty: Warzone is a first-person shooter video game  free-to-play Battle Royale developed by Infinity  Ward, Treyarch and Raven Software. Posted on 10 March  2020 from Activision on PlayStation 4, Xbox  One and Microsoft Windows as a free stand-alone DLC of Call of Duty: Modern Warfare, is also available on PlayStation 5 in backward compatible format and on Xbox Series  X/S in next-gen version.\nThe official currency of the game is the CP with which gamers can buy skins, bundles in the store and battle pass to customize their Avatar.'
   },
   {
     key: 3,
@@ -39,6 +47,10 @@ let marketdata = [
     dollar: "$20.83",
     percent: -1.3,
     title: "12.74 VBT/GDC",
+    DetailImg: require('../../assets/cartoon.png'),
+    DetailName: 'FORTNITE',
+    DetailDescription: 'Fortnite is an online video game developed by Epic Games and released in 2017. It is available in three distinct game mode versions that otherwise share the same general gameplay and game engine: Save the World, Battle Royale and Creative.\n V-Bucks are a premium Currency in Fortnite. Their primary use is for the purchase of Cosmetic Items or the Battle Pass. '
+
   },
   {
     key: 4,
@@ -47,6 +59,9 @@ let marketdata = [
     dollar: "$20.83",
     percent: -1.3,
     title: "12.74 FCT/GDC",
+    DetailImg: require('../../assets/FootballPlay.png'),
+    DetailName: 'FIFA FUT',
+    DetailDescription: "FIFA Ultimate Team is a game mode version  launched starting from Fifa  09 whose goal is  to build a team, using players  of any club and nationality, with which to compete in offline and online tournaments.\n Teams are composed using cards FUT: Each user at the first start of the game receives in  gift some packages to build your team.\nThrough Fifa Coins and Fifa PointsIt will then be possible to purchase additional packs or players to improve your team. Each game played will earn you credits which will be the greater the better the  result.",
   },
   {
     key: 5,
@@ -55,6 +70,10 @@ let marketdata = [
     dollar: "$20.83",
     percent: -1.3,
     title: "12.74 VRT/GDC",
+    DetailImg: require('../../assets/ApexSad.png'),
+    DetailName: 'VALORANT',
+    DetailDescription: 'Valorant is a free-to-play first-person shooter developed and published by Riot Games, for Microsoft Windows.\nWith the Valorant official currency players will be able to unlock new weapon models on the official shop. '
+
   },
   {
     key: 6,
@@ -63,6 +82,9 @@ let marketdata = [
     dollar: "$20.83",
     percent: -1.3,
     title: "12.74 LRT/GDC",
+    DetailImg: require('../../assets/Girl.gif'),
+    DetailName: 'LOL',
+    DetailDescription: 'League of Legends is an online video game of the MOBA genre developed and published by Riot Games for Microsoft Windows and macOS.It is a strategy game where two    teams of five powerful champions battle it out for  destroy the base of the opponents.\nLeague of Legends is one of the most video games  popular in the world, with over 100 million players active every month.\n The official currency is the RIOT POINT with which it is possible to buy different types of boosts, aspects for champions and wards, additional rune pages, summoning icons and above all the champions themselves.'
   },
 
 ]
@@ -173,11 +195,12 @@ const Home = ({ navigation }) => {
 
   const [data, setData] = useState(obj)
   const [newsTab, setNewsTab] = useState(false)
+  const [showMarketModal, setShowMarketModal] = useState(false)
   const [itemView, setItemView] = useState(false)
   const news = useSelector(state => state.home?.news);
   const newsDetail = useSelector(state => state.home?.newsDetail);
   const dispatch = useDispatch();
-
+  console.log("showMarketModal", showMarketModal)
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
@@ -255,12 +278,21 @@ const Home = ({ navigation }) => {
       </View>
     )
   }
+  const closeMarketModal = () => {
+    setShowMarketModal(false)
+  }
+  const [market, setMarket] = useState([])
+  const marketModalHandler = (item) => {
+    setShowMarketModal(true);
+    setMarket(item);
 
+
+  }
   const renderMarketItem = ({ item }) => {
 
     return (
       <TouchableOpacity
-        onPress={() => alert("Market Item Pressd")}
+        onPress={() => marketModalHandler(item)}
         style={styles.verticalListItem}
       >
         <Image style={styles.verticalListIconBackground} source={item.image} />
@@ -360,11 +392,12 @@ const Home = ({ navigation }) => {
   }
   return (
     <SafeAreaView style={mystyles.container}>
-      <Content contentContainerStyle={{ flex: 1, justifyContent: 'center', }}>
+      <Content contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', }}>
         <HeaderBackBtnWithLogo backBtn={backBtn} />
         <Text style={{ color: '#fff', fontSize: 22, marginHorizontal: 20, fontFamily: boldtext }}>
           Watchlist
         </Text>
+
         <View>
           <FlatList
             data={watchlistdata}
@@ -410,7 +443,10 @@ const Home = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{ flex: 1, width: '100%', borderTopWidth: newsTab && !itemView ? 1 : 0, borderTopColor: '#fff' }}>
+        <View style={{
+          flex: 1,
+          width: '100%', borderTopWidth: newsTab && !itemView ? 1 : 0, borderTopColor: '#fff'
+        }}>
           {!newsTab ? (
             <FlatList
               data={marketdata}
@@ -472,6 +508,7 @@ const Home = ({ navigation }) => {
               }
             </>
           }
+          <MarketModal item={market} showMarketModal={showMarketModal} setShowMarketModal={setShowMarketModal} />
 
         </View>
       </Content>
