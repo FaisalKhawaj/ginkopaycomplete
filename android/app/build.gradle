@@ -191,13 +191,7 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
-compile 'com.facebook.fresco:animated-base-support:1.3.0'
 
-compile 'com.facebook.fresco:animated-gif:1.3.0'
-
-compile 'com.facebook.fresco:animated-webp:1.3.0'
-
-compile 'com.facebook.fresco:webpsupport:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'

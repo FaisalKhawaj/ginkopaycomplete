@@ -14,7 +14,7 @@ const CompaignMainPage = ({ navigation }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-      dispatch(Actions.getCampaign())
+        dispatch(Actions.getCampaign())
     }, [])
     const [btnSelect, setBtnSelect] = useState('TopRated')
     const [TopCompaigns, setTopCompaigns] = useState([
@@ -43,19 +43,21 @@ const CompaignMainPage = ({ navigation }) => {
     const [TopRated, setTopRated] = useState([
         {
             id: 1,
-            coin: "BTC",
+            coin: "GDC",
             description: "Fusce enim in se iaculis facilisi\npellentesque",
             img: require('../../assets/GamingPc.png'),
             hoursAgo: "16h ago",
-            newsSource: "News Source"
+            newsSource: "News Source",
+            numoflikes: 1500
         },
         {
             id: 2,
-            coin: "BTC",
+            coin: "GDC",
             description: "Fusce enim in se iaculis facilisi\npellentesque",
             img: require('../../assets/Table.png'),
             hoursAgo: "16h ago",
-            newsSource: "News Source"
+            newsSource: "News Source",
+            numoflikes: 1500
         },
         {
             id: 3,
@@ -63,15 +65,17 @@ const CompaignMainPage = ({ navigation }) => {
             description: "Platea adipiscing nam tempor\nullamcorper velit bibendum\namet nibh scelerisque.",
             img: require('../../assets/screen.png'),
             hoursAgo: "16h ago",
-            newsSource: "News Source"
+            newsSource: "News Source",
+            numoflikes: 1500
         },
         {
             id: 4,
-            coin: "BTC",
+            coin: "GDC",
             description: "Diam quis elementum viverra\nnulla gravida euismod."
             , img: require('../../assets/mobilecrypto.png'),
             hoursAgo: "16h ago",
-            newsSource: "News Source"
+            newsSource: "News Source",
+            numoflikes: 1500
         }
 
     ])
@@ -83,7 +87,8 @@ const CompaignMainPage = ({ navigation }) => {
             description: "Fusce enim in se iaculis facilisi\npellentesque",
             img: require('../../assets/keyboard.png'),
             hoursAgo: "16h ago",
-            newsSource: "News Source"
+            newsSource: "News Source",
+            numoflikes: 1500
         },
         {
             id: 2,
@@ -91,7 +96,8 @@ const CompaignMainPage = ({ navigation }) => {
             description: "Fusce enim in se iaculis facilisi\npellentesque",
             img: require('../../assets/multimedia.png'),
             hoursAgo: "16h ago",
-            newsSource: "News Source"
+            newsSource: "News Source",
+            numoflikes: 1500
         },
         {
             id: 3,
@@ -99,7 +105,8 @@ const CompaignMainPage = ({ navigation }) => {
             description: "Platea adipiscing nam tempor\nullamcorper velit bibendum\namet nibh scelerisque.",
             img: require('../../assets/peoplegaming.png'),
             hoursAgo: "16h ago",
-            newsSource: "News Source"
+            newsSource: "News Source",
+            numoflikes: 1500
         },
         {
             id: 4,
@@ -107,7 +114,8 @@ const CompaignMainPage = ({ navigation }) => {
             description: "Diam quis elementum viverra\nnulla gravida euismod."
             , img: require('../../assets/newkeyboard.png'),
             hoursAgo: "16h ago",
-            newsSource: "News Source"
+            newsSource: "News Source",
+            numoflikes: 1500
         }
 
     ])

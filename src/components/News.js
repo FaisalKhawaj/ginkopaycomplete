@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { width } from '../styles';
 
 const CryptoNews = ({ item, handler }) => {
     return (
@@ -21,7 +22,11 @@ const CryptoNews = ({ item, handler }) => {
                     source={require('../assets/yellowDot.png')} />
                 <Text style={styles.BTCHoursAgoSource}>{item.coin}</Text>
                 <Text style={styles.BTCHoursAgoSource}>{item.hoursAgo}</Text>
-                <Text style={styles.BTCHoursAgoSource}>{item.newsSource}</Text>
+                <Text style={[styles.BTCHoursAgoSource, { flex: 1 }]}>{item.newsSource}</Text>
+                <TouchableOpacity onPress={() => alert('Liked')} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <Image style={{ width: 15, height: 15 }} resizeMode="contain" source={require('../assets/gradientLike.png')} />
+                    <Text style={[styles.BTCHoursAgoSource, {}]}>{item.numoflikes} Likes</Text>
+                </TouchableOpacity>
             </View>
 
 

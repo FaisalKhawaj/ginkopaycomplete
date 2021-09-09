@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Text, Image, Dimensions, SafeAreaView, StyleSheet, View, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
+import GifImage from '@lowkey/react-native-gif';
+
 import { Content, Container } from 'native-base'
 import { BackgroundColor, graycolor, lightWhite } from '../constants/colors';
 import { mystyles } from '../styles';
@@ -41,7 +43,17 @@ const MarketModal = ({ item, showMarketModal, setShowMarketModal }) => {
 
                         <View style={styles.line} />
 
-                        <Image style={{ width: width, height: hp('35%') }} resizeMode="cover" source={item.DetailImg} />
+                        <GifImage
+                            source={item.DetailImg}
+                            style={{
+                                width: width,
+                                height: hp('35%'),
+                            }}
+                            resizeMode={'cover'}
+                        />
+
+
+                        {/* <Image style={{ width: width, height: hp('35%') }} resizeMode="cover" source={item.DetailImg} /> */}
                         <CustomText
                             text={item.DetailName}
                             style={{ fontSize: 20, marginVertical: hp(1), marginHorizontal: wp(2), fontWeight: 'bold', }}

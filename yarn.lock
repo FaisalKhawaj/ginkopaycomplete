@@ -1010,6 +1010,11 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@lowkey/react-native-gif@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@lowkey/react-native-gif/-/react-native-gif-3.0.3.tgz#1ddd1dec4b49d2ed0cdd2e6114e1cc1a2594ffd1"
+  integrity sha512-qg7iYxTgWiyA9TfL7BltUrTfel9lB5djcaGgUvdEwU98aKRWDZFDYGErj4obNQkN4GlpJ3atQ0wbMEROkNsnLg==
+
 "@react-native-async-storage/async-storage@^1.15.5":
   version "1.15.7"
   resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.15.7.tgz#736ac5cfe211b081e70389e80c237398d1451f08"
