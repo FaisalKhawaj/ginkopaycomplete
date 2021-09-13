@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Dimensions, StyleSheet, Text, TextInput, Image, TouchableOpacity, View } from "react-native";
 import { Container, Content, Item, Input, Label } from 'native-base'
 import Modal from 'react-native-modal';
@@ -6,37 +6,18 @@ import { boldtext, simpletext } from '../constants/fonts';
 import { BackgroundColor, graycolor } from '../constants/colors';
 import HeaderBackTextCloseBtn from './HeaderBackTextClose'
 import ARROWDOWN from '../assets/arrowdown.svg'
-import CURRECO from '../assets/CurrencyEthereum.svg'
-
 import CustomButton from './Button'
-import CustomText from './Text'
+import CustomText from './Text';
 const { width, height } = Dimensions.get("window");
-import TokenModal2 from './SendModalToken2'
-import SentModalConfirm from './SentModalConfirm';
-const RequestPaymentModal = ({ visible, setVisible, backbuttonFunctionpaymentModaluseMax }) => {
+
+const DashboardBuy = ({ visible, setVisible, setVisible2 }) => {
     const [value, setValue] = React.useState("")
-    const [tokenmodal2, setTokenModal2] = useState(false)
-    const [sendmodalconfirm, setSendModalConfirm] = useState(false)
-
-    const closeModal = () => {
-        setSendModalConfirm(true)
-    }
-
-    const BnbButtonPressed = () => {
-        setTokenModal2(true)
-    }
-
-    const closeTokenModal2andopensend = () => {
-        setTokenModal2(false)
-        setSendModalConfirm(true)
-    }
-
     return (
         <Modal
             isVisible={visible}
             animationIn="fadeInRight"
-            deviceHeight={Dimensions.get("window").height}
-
+            deviceHeight={Dimensions.get("screen").height * 2}
+            transparent={true}
             style={styles.modal}
             coverScreen={true}
             animationOut="slideOutDown"
@@ -50,21 +31,25 @@ const RequestPaymentModal = ({ visible, setVisible, backbuttonFunctionpaymentMod
             <Container style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="Amount"
-                    backhandler={() => backbuttonFunctionpaymentModaluseMax("back")}
-                    closeModal={() => backbuttonFunctionpaymentModaluseMax("close")}
+                    backhandler={() => { setVisible() }}
+                    closeModal={() => { setVisible() }}
                 />
                 <Content
                     contentContainerStyle={styles.contentContainerStyle}
                     style={{ flexGrow: 1 }}>
-                    <View style={{ flexDirection: "row", justifyContent: "space-between", width: width / 2, marginLeft: width / 4 }}>
-                        {/* <Text style={{...styles.bnb}}>
-                            BNB
-                        </Text> */}
-                        {/* <ARROWDOWN /> */}
-                        <CURRECO />
 
+                    <Image resizeMode="cover"
+                        style={{ width: 60, alignSelf: 'center', height: 60 }}
+                        source={require('../assets/Apex_Large.png')} />
 
+                    <View style={{ marginVertical: '3%' }}>
+                        <CustomText
+                            text="BUY CPXT"
+                            locations={[0, 1]}
+                            colors={["#A9CDFF", "#FAA49E"]}
+                            style={{ fontFamily: 'Poppins-Bold', fontSize: 15, }} />
                     </View>
+
 
                     <View style={{ paddingVertical: 20, alignItems: 'center', flexDirection: 'row' }} >
                         <Item stackedLabel style={[styles.textinputcontainer, { width: width - 200 }]}>
@@ -94,34 +79,32 @@ const RequestPaymentModal = ({ visible, setVisible, backbuttonFunctionpaymentMod
                         <Text style={styles.buttontext}>$455.555</Text>
                         <Image source={require("../assets/updown.png")} style={{ width: 15, height: 15 }} />
                     </View>
-                    <Text style={{ color: "#ffffff", fontFamily: simpletext, marginVertical: 10 }}>BALANCE 12.343 GDC</Text>
 
 
+                    <Text style={styles.buttontext}>Balance : 19.2377</Text>
+
+
+
+                    <View style={{ position: "absolute", bottom: 20 }}>
+                        <CustomButton text={"Next"} onPress={() => setVisible2()} />
+                    </View>
                 </Content>
-                <View style={{ position: "absolute", bottom: 20, alignSelf: "center" }}>
-                    <CustomButton text={"Next"} onPress={() => setSendModalConfirm(true)} />
-                </View>
-
             </Container>
-            <TokenModal2 visible={tokenmodal2} setVisible={() => alert("set visible")} opensendmodal={() => closeTokenModal2andopensend()} />
-            <SentModalConfirm
-                visible={sendmodalconfirm}
-                setVisible={(data) => alert("setVisible" + data)}
-                sentconfrimbackpress={(data) => alert("sentconfrimbackpress" + data)}
-                transitioncomplete={(data) => { setSendModalConfirm(false), backbuttonFunctionpaymentModaluseMax("complete") }}
-            />
         </Modal>
     )
 }
 
-export default RequestPaymentModal;
+export default DashboardBuy;
 
 const styles = StyleSheet.create({
     modal: {
-        margin: 0,
+        margin: 0
     },
     mainview: {
-        height: height,
+        height: height / 1,
+        flex: 1,
+        width: width,
+        bottom: 0,
         alignSelf: 'center',
         backgroundColor: BackgroundColor,
         width: width,
@@ -182,13 +165,12 @@ const styles = StyleSheet.create({
         textAlignVertical: "center",
         color: '#A9CDFF',
         height: 70,
-        width: width - 200,
+        width: width - 80,
     },
     amountupdown: {
         flexDirection: "row",
         paddingHorizontal: 20,
         borderRadius: 30,
-        height: 35,
         marginVertical: 30,
         paddingVertical: 5,
         justifyContent: "center",

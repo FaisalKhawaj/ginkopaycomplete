@@ -14,6 +14,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import MarketModal from '../../components/MarketModal';
+import RequestPaymentModal from '../../components/RequestPaymentModal';
+import DashboardBuy from '../../components/DashboardBuyModal';
+import MarketBuySellConfirmAmountModal from '../../components/BuySellConfirmAmoutModal';
 
 
 let marketdata = [
@@ -197,8 +200,21 @@ const Home = ({ navigation }) => {
   const [newsTab, setNewsTab] = useState(false)
   const [showMarketModal, setShowMarketModal] = useState(false)
   const [itemView, setItemView] = useState(false)
+  const [dashboardBuyModal, setDashboardBuyModal] = useState(false)
+  const [showBuySellConfirmAmountModal, setShowBuySellConfirmAmountModal] = useState(false)
   const news = useSelector(state => state.home?.news);
   const newsDetail = useSelector(state => state.home?.newsDetail);
+
+  const closeallmodals = () => {
+    setDashboardBuyModal(false)
+  }
+  const DashboardBuyBtnHandler = () => {
+    setDashboardBuyModal(false)
+    setShowBuySellConfirmAmountModal(true)
+  }
+  const MarketBuySellConfirmAmountModalHandler = () => {
+    setShowBuySellConfirmAmountModal(false)
+  }
   const dispatch = useDispatch();
   console.log("showMarketModal", showMarketModal)
   useFocusEffect(
@@ -286,7 +302,6 @@ const Home = ({ navigation }) => {
     setShowMarketModal(true);
     setMarket(item);
 
-
   }
   const renderMarketItem = ({ item }) => {
 
@@ -315,7 +330,7 @@ const Home = ({ navigation }) => {
           </Text>
           <View style={{ flexDirection: 'row', }}>
 
-            <TouchableOpacity style={{ backgroundColor: '#2A2D3C', width: wp('15%'), borderRadius: 5 }}>
+            <TouchableOpacity onPress={() => setDashboardBuyModal(true)} style={{ backgroundColor: '#2A2D3C', width: wp('15%'), borderRadius: 5 }}>
               <CustomText
                 text={"BUY"}
                 locations={[0, 1,]} colors={["#70A2FF", '#F76E64']}
@@ -509,7 +524,16 @@ const Home = ({ navigation }) => {
             </>
           }
           <MarketModal item={market} showMarketModal={showMarketModal} setShowMarketModal={setShowMarketModal} />
+          <DashboardBuy
+            visible={dashboardBuyModal}
+            setVisible={closeallmodals}
+            setVisible2={DashboardBuyBtnHandler} />
 
+          <MarketBuySellConfirmAmountModal
+            visible={showBuySellConfirmAmountModal}
+            closeModal={MarketBuySellConfirmAmountModalHandler}
+
+          />
         </View>
       </Content>
     </SafeAreaView>

@@ -43,7 +43,7 @@ const MarketModal = ({ item, showMarketModal, setShowMarketModal }) => {
 
                         <View style={styles.line} />
 
-                        <GifImage
+                        <Image
                             source={item.DetailImg}
                             style={{
                                 width: width,
