@@ -10,7 +10,7 @@ import CustomButton from './Button'
 import CustomText from './Text';
 const { width, height } = Dimensions.get("window");
 
-const DashboardBuy = ({ visible, setVisible, setVisible2 }) => {
+const DashboardBuy = ({ visible, text, setVisible, setVisible2 }) => {
     const [value, setValue] = React.useState("")
     return (
         <Modal
@@ -44,7 +44,7 @@ const DashboardBuy = ({ visible, setVisible, setVisible2 }) => {
 
                     <View style={{ marginVertical: '3%' }}>
                         <CustomText
-                            text="BUY CPXT"
+                            text={text}
                             locations={[0, 1]}
                             colors={["#A9CDFF", "#FAA49E"]}
                             style={{ fontFamily: 'Poppins-Bold', fontSize: 15, }} />

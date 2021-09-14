@@ -201,19 +201,32 @@ const Home = ({ navigation }) => {
   const [showMarketModal, setShowMarketModal] = useState(false)
   const [itemView, setItemView] = useState(false)
   const [dashboardBuyModal, setDashboardBuyModal] = useState(false)
-  const [showBuySellConfirmAmountModal, setShowBuySellConfirmAmountModal] = useState(false)
+  const [dashboardSellModal, setDashboardSellModal] = useState(false)
+  const [showBuyConfirmAmountModal, setShowBuyConfirmAmountModal] = useState(false)
+  const [showSellConfirmAmountModal, setShowSellConfirmAmountModal] = useState(false)
   const news = useSelector(state => state.home?.news);
   const newsDetail = useSelector(state => state.home?.newsDetail);
 
-  const closeallmodals = () => {
+  const closeBuyModals = () => {
     setDashboardBuyModal(false)
+  }
+  const closeSellModals = () => {
+    setDashboardSellModal(false)
   }
   const DashboardBuyBtnHandler = () => {
     setDashboardBuyModal(false)
-    setShowBuySellConfirmAmountModal(true)
+    setShowBuyConfirmAmountModal(true)
   }
-  const MarketBuySellConfirmAmountModalHandler = () => {
-    setShowBuySellConfirmAmountModal(false)
+  const DashboardSellBtnHandler = () => {
+    setDashboardSellModal(false)
+    setShowSellConfirmAmountModal(true)
+
+  }
+  const MarketSellConfirmAmountModalHandler = () => {
+    setShowSellConfirmAmountModal(false)
+  }
+  const MarketBuyConfirmAmountModalHandler = () => {
+    setShowBuyConfirmAmountModal(false)
   }
   const dispatch = useDispatch();
   console.log("showMarketModal", showMarketModal)
@@ -338,7 +351,7 @@ const Home = ({ navigation }) => {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.buySellBtn}>
+            <TouchableOpacity onPress={() => setDashboardSellModal(true)} style={styles.buySellBtn}>
               <CustomText
                 text={"SELL"}
                 locations={[0, 1,]} colors={["#70A2FF", '#F76E64']}
@@ -526,12 +539,27 @@ const Home = ({ navigation }) => {
           <MarketModal item={market} showMarketModal={showMarketModal} setShowMarketModal={setShowMarketModal} />
           <DashboardBuy
             visible={dashboardBuyModal}
-            setVisible={closeallmodals}
+            text="BUY CPXT"
+            setVisible={closeBuyModals}
             setVisible2={DashboardBuyBtnHandler} />
 
+          <DashboardBuy
+            visible={dashboardSellModal}
+            text="SELL CPXT"
+            setVisible={closeSellModals}
+            setVisible2={DashboardSellBtnHandler} />
+
           <MarketBuySellConfirmAmountModal
-            visible={showBuySellConfirmAmountModal}
-            closeModal={MarketBuySellConfirmAmountModalHandler}
+            visible={showSellConfirmAmountModal}
+            btnText="SELL"
+            closeModal={MarketSellConfirmAmountModalHandler}
+
+          />
+
+          <MarketBuySellConfirmAmountModal
+            visible={showBuyConfirmAmountModal}
+            btnText="BUY"
+            closeModal={MarketBuyConfirmAmountModalHandler}
 
           />
         </View>

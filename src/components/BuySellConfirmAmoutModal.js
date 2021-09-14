@@ -7,7 +7,7 @@ import HeaderBackTextClose from './HeaderBackTextClose'
 const { width, height } = Dimensions.get("window");
 import CustomButton from './Button'
 import CustomText from './Text'
-const MarketBuySellConfirmAmountModal = ({ visible, closeModal }) => {
+const MarketBuySellConfirmAmountModal = ({ visible, btnText, closeModal }) => {
 
 
 
@@ -80,7 +80,7 @@ const MarketBuySellConfirmAmountModal = ({ visible, closeModal }) => {
                             </View>
                         </View>
                         {/* <View style={{position:"absolute", bottom:50, alignSelf:"center"}}> */}
-                        <CustomButton text={"BUY"}
+                        <CustomButton text={btnText}
                             onPress={() => closeModal()}
                         />
                         {/* </View> */}
