@@ -7,6 +7,7 @@ const { width, height } = Dimensions.get("window");
 import LinearGradient from 'react-native-linear-gradient'
 import HeaderBackTextClose from './HeaderBackTextClose'
 import PurchaseMethodBankModal from './BuyModal';
+import CustomText from './Text';
 var obj = [
     {
         key: 1,
@@ -89,6 +90,12 @@ const SentModal = ({ visible, navigation, setVisible }) => {
         >
             <View style={styles.mainview}>
                 <HeaderBackTextClose text="Purchase Method" backhandler={setVisible} closeModal={setVisible} />
+                <CustomText
+                    text={"Wire Transfer"}
+                    locations={[0, 1]}
+                    colors={["#A9CDFF", "#A9CDFF"]}
+                    style={{ fontSize: 18, fontFamily: boldtext, }}
+                />
                 <FlatList
                     data={obj}
                     renderItem={renderItem}

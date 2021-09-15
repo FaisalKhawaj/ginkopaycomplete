@@ -88,7 +88,7 @@ const Home = ({ navigation }) => {
   const [sentmodal, setSentModal] = useState(false);
   const [recievemodal, setRecievedModal] = useState(false);
   const [pruchasemodal, setPurchaseModal] = useState(false)
-  const [MyTab, setMyTab] = useState('Portfolio')
+  const [MyTab, setMyTab] = useState('History')
   const [trnassubmitted, settranssubmitted] = useState(false)
   const [trnasconfirm, settranconfirm] = useState(false)
   const [sendmessagemodal, setSendMessageModal] = useState(false)
@@ -238,7 +238,10 @@ const Home = ({ navigation }) => {
                     </Text>
             </View>
           </View>
-          <CURRECO />
+          <TouchableOpacity onPress={() => navigation.navigate("ProtflioItemExpand")}>
+            <CURRECO />
+          </TouchableOpacity>
+
         </View>
 
         <View style={styles.horizantalListView}>
@@ -267,7 +270,7 @@ const Home = ({ navigation }) => {
         </View>
 
         <View style={styles.tabView}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => setMyTab('Portfolio')}
             style={{
               borderBottomWidth: MyTab == 'Portfolio' ? 2 : 0, margin: 10, paddingHorizontal: 15,
@@ -276,7 +279,7 @@ const Home = ({ navigation }) => {
             <Text style={{ color: MyTab == 'Portfolio' ? "#fff" : graycolor, fontFamily: fontmedium, fontSize: 14 }}>
               Portfolio
                 </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             onPress={() => setMyTab('History')}
             style={{

@@ -11,6 +11,7 @@ import { graycolor, green } from '../../constants/colors';
 import { simpletext } from '../../constants/fonts';
 import CustomText from '../../components/Text';
 import { Content } from 'native-base'
+import WITHDRAW from '../../assets/withdraw.svg'
 
 import SentModal from '../../components/SentModal'
 import RecievedModal from '../../components/RecievedModal'
@@ -209,10 +210,12 @@ const ProtfilioItemExpanded = ({ navigation }) => {
             <Image style={styles.mainIcon} source={require('../../assets/coin1.png')} />
           </View>
         </View>
+
         <View style={styles.horizantalListView}>
           <TouchableOpacity style={styles.button}
             onPress={() => setSentModal(true)}
           >
+
             <SENT />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}
@@ -226,6 +229,11 @@ const ProtfilioItemExpanded = ({ navigation }) => {
             <BUY />
           </TouchableOpacity>
 
+          <TouchableOpacity style={styles.button}
+            onPress={() => showModal("withdraw")}
+          >
+            <WITHDRAW />
+          </TouchableOpacity>
         </View>
         <View style={{ flex: 1, marginHorizontal: 20 }}>
           <FlatList
