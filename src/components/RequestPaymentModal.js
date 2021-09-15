@@ -6,7 +6,9 @@ import { boldtext, simpletext } from '../constants/fonts';
 import { BackgroundColor, graycolor } from '../constants/colors';
 import HeaderBackTextCloseBtn from './HeaderBackTextClose'
 import ARROWDOWN from '../assets/arrowdown.svg'
+import CURRECO from '../assets/CurrencyEthereum.svg'
 import CustomButton from './Button'
+import CustomText from './Text';
 const { width, height } = Dimensions.get("window");
 
 const RequestPaymentModal = ({ visible, setVisible, }) => {
@@ -37,12 +39,7 @@ const RequestPaymentModal = ({ visible, setVisible, }) => {
                     contentContainerStyle={styles.contentContainerStyle}
                     style={{ flexGrow: 1 }}>
 
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={{ ...styles.bnb }}>
-                            BNB
-                    </Text>
-                        <ARROWDOWN />
-                    </TouchableOpacity>
+                    <CURRECO />
 
                     <View style={{ paddingVertical: 20, alignItems: 'center', flexDirection: 'row' }} >
                         <Item stackedLabel style={[styles.textinputcontainer, { width: width - 200 }]}>

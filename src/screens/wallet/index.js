@@ -10,6 +10,7 @@ import CustomText from '../../components/Text';
 import SENT from '../../assets/sent.svg'
 import RECIEVED from '../../assets/recieved.svg'
 import BUY from '../../assets/buy.svg'
+import WITHDRAW from '../../assets/withdraw.svg'
 import CURRECO from '../../assets/CurrencyEthereum.svg'
 
 // Modals 
@@ -179,21 +180,21 @@ const Home = ({ navigation }) => {
   }
 
   const setSentModalLocal = (data) => {
- 
+
     setSentModal(data)
   }
- 
+
 
   const setPurchaseModall = () => {
     setPurchaseModal(!pruchasemodal)
   }
 
 
- 
+
   const transcitioncompletefunction = (data) => {
     settranssubmitted(true)
     setTimeout(() => {
-      settranssubmitted(false)  
+      settranssubmitted(false)
       settranconfirm(true)
     }, 2000);
 
@@ -244,6 +245,7 @@ const Home = ({ navigation }) => {
           <TouchableOpacity style={styles.button}
             onPress={() => showModal("sent")}
           >
+
             <SENT />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}
@@ -255,6 +257,12 @@ const Home = ({ navigation }) => {
             onPress={() => showModal("buy")}
           >
             <BUY />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button}
+            onPress={() => showModal("withdraw")}
+          >
+            <WITHDRAW />
           </TouchableOpacity>
         </View>
 
@@ -302,43 +310,43 @@ const Home = ({ navigation }) => {
           }
         </View>
         <View style={{ margin: 20, }}>
-          
+
           {trnassubmitted ?
             <TransictionSubmited transnumber={0} />
-            :null
+            : null
           }
-          
+
           {trnasconfirm ?
             <TransictionCompleted transnumber={0} />
-            :null
+            : null
           }
 
         </View>
 
 
         <AssetsModal visible={assetsmodal} setVisible={setAssetsModal} />
-        <SentModal 
-          visible={sentmodal} 
-          setVisible={setSentModalLocal} 
-          setSendMessageModal={setSendMessageModal} 
-          setModalData={setModalData} 
-          tokenmodal={tokenmodal} 
-          setTokenModal={setTokenModal} 
-          setTokenModal2={setTokenModal2} 
-          transcitioncompletefunction={transcitioncompletefunction}  
+        <SentModal
+          visible={sentmodal}
+          setVisible={setSentModalLocal}
+          setSendMessageModal={setSendMessageModal}
+          setModalData={setModalData}
+          tokenmodal={tokenmodal}
+          setTokenModal={setTokenModal}
+          setTokenModal2={setTokenModal2}
+          transcitioncompletefunction={transcitioncompletefunction}
         />
-        <RecievedModal 
-          visible={recievemodal} 
-          setVisible={setRecievedModal} 
-          setCopyLink={setCopyLink} 
-          setRequestPayment={setRequestPayment} 
-          transcitioncompletefunction={transcitioncompletefunction}  
-          />
+        <RecievedModal
+          visible={recievemodal}
+          setVisible={setRecievedModal}
+          setCopyLink={setCopyLink}
+          setRequestPayment={setRequestPayment}
+          transcitioncompletefunction={transcitioncompletefunction}
+        />
         <PurchaseMethod navigation={navigation} visible={pruchasemodal} setVisible={setPurchaseModall}
-       
+
         />
-       
-        
+
+
       </Content>
     </SafeAreaView>
 

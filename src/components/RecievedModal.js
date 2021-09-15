@@ -4,6 +4,8 @@ import Modal from 'react-native-modal';
 import { boldtext, fontmedium, simpletext } from '../constants/fonts';
 import { graycolor, green } from '../constants/colors';
 import CustomButton from './Button';
+import CustomText from '../components/Text';
+
 import COPY from '../assets/copy.svg'
 import { Container, Content, Text } from 'native-base'
 import CopyLinkModal from './LinkCopyModal'
@@ -11,7 +13,7 @@ import RequestPaymentModal from "./RequestPaymentModal";
 const { width, height } = Dimensions.get("window");
 
 
-const recievedModal = ({ visible, setVisible, transcitioncompletefunction   }) => {
+const recievedModal = ({ visible, setVisible, transcitioncompletefunction }) => {
     const [copylink, setCopyLink] = useState(false)
     const [requestPayment, setRequestPayment] = useState(false)
     const openRequestModal = () => {
@@ -63,8 +65,8 @@ const recievedModal = ({ visible, setVisible, transcitioncompletefunction   }) =
                 </Content>
             </Container>
             <CopyLinkModal visible={copylink} setVisible={() => navigatetoroot()} />
-            <RequestPaymentModal 
-                visible={requestPayment} 
+            <RequestPaymentModal
+                visible={requestPayment}
                 setVisible={() => closeallmodals()} setVisible2={() => alert("set visible 2")} />
         </Modal>
     )
