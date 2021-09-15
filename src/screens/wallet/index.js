@@ -68,14 +68,14 @@ var obj = [
   {
     key: 1,
     name: "Fabio Ahempip",
-    amount: '0.09 ETH',
+    amount: '0.09 GDC',
     dollars: "$164.41",
     image: require("../../assets/collectibles.png")
   },
   {
     key: 1,
     name: "Master Lubzap",
-    amount: '6 ETH',
+    amount: '6 GDC',
     dollars: "$10,937.22",
     image: require("../../assets/token2.png")
   },
@@ -225,7 +225,7 @@ const Home = ({ navigation }) => {
         <View style={styles.mainView}>
           <View style={{ flex: 1 }}>
             <CustomText
-              text="12.4345 ETH"
+              text="12.4345 GDC"
               locations={[0, 0.1, 0.6, .8, 1]}
               colors={["#A9CDFF", "#72F6D1", "#A0ED8D", "#FED365", "#FAA49E"]}
               style={{ fontFamily: simpletext, fontSize: 30, }} />

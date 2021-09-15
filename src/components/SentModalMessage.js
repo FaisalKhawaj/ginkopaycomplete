@@ -93,7 +93,7 @@ const SentModalMessage = ({ visible, setVisible, crossbuttonFunction, data, tran
                                     <Text style={{ color: "#fff", fontFamily: simpletext, fontSize: 15 }}>
                                         {data?.name}
                                     </Text>
-                                    <Text style={{ color: graycolor, fontFamily: simpletext, fontSize: 12 }}>
+                                    <Text style={{ color: '#FFFF', fontFamily: simpletext, fontSize: 12 }}>
                                         {data?.link}
                                     </Text>
                                 </View>

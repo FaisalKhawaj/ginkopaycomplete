@@ -38,7 +38,7 @@ const SentModalConfirm = ({ visible, sentconfrimbackpress, setVisible, transitio
                         <View style={{ alignSelf: "center", justifyContent: "center", alignItems: "center", paddingVertical: 0 }}>
                             <Text style={styles.text}>Amount</Text>
                             <CustomText
-                                text="12.4345 ETH"
+                                text="12.4345 GDC"
                                 locations={[0, 0.1, 0.6, .8, 1]}
                                 colors={["#A9CDFF", "#72F6D1", "#A0ED8D", "#FED365", "#FAA49E"]}
                                 style={{ fontFamily: simpletext, paddingVertical: 20, fontSize: 30, }} />

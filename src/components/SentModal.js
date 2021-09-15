@@ -121,7 +121,7 @@ const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
 
                                 </Text>
                                 <Text style={{ color: graycolor, fontFamily: simpletext, fontSize: 12 }}>
-                                    Balance: 19.2371 BNB
+                                    Balance: 19.2371 GDC
                                 </Text>
                             </View>
                         </View>
