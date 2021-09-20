@@ -14,7 +14,7 @@ import WithdrawAmount from './withdrawAmount';
 const { width, height } = Dimensions.get("window");
 
 
-const recievedModal = ({ title, description, address, btnName, visible, setVisible, transcitioncompletefunction }) => {
+const MyWithdrawModal = ({ title, description, address, btnName, visible, setVisible, transcitioncompletefunction }) => {
     const [copylink, setCopyLink] = useState(false)
     const [requestPayment, setRequestPayment] = useState(false)
     const [withdrawAmount, setWithdrawAmount] = useState(false)
@@ -59,16 +59,16 @@ const recievedModal = ({ title, description, address, btnName, visible, setVisib
                     <Text style={styles.Receive}> {title}</Text>
                     <Image source={require("../assets/wallet.png")} style={{ width: 150, height: 150 }} />
                     <Text style={[styles.otherassets, { textAlign: 'center' }]}>{description}</Text>
-
-                    <TouchableOpacity
-                        onPress={() => OpenLinkModal()}
-                        style={{ flexDirection: "row", marginVertical: 10, justifyContent: "center", alignItems: "center", backgroundColor: "#2A2D3C", height: 40, minWidth: 100, paddingHorizontal: 20, borderRadius: 10 }}>
-                        <Text style={styles.Receive}> {address}</Text>
-                        <COPY />
-                    </TouchableOpacity>
-
+                    {address ?
+                        <TouchableOpacity
+                            onPress={() => OpenLinkModal()}
+                            style={{ flexDirection: "row", marginVertical: 10, justifyContent: "center", alignItems: "center", backgroundColor: "#2A2D3C", height: 40, minWidth: 100, paddingHorizontal: 20, borderRadius: 10 }}>
+                            <Text style={styles.Receive}> {address}</Text>
+                            <COPY />
+                        </TouchableOpacity> : null
+                    }
                     <View style={{ position: "absolute", bottom: 20 }}>
-                        <CustomButton text={btnName} onPress={() => openRequestModal()} />
+                        <CustomButton text={btnName} onPress={() => setVisible()} />
                     </View>
                 </Content>
             </Container>
@@ -76,15 +76,13 @@ const recievedModal = ({ title, description, address, btnName, visible, setVisib
             <RequestPaymentModal
                 visible={requestPayment}
                 setVisible={() => closeallmodals()} setVisible2={() => alert("set visible 2")} />
-            <WithdrawAmount visible={withdrawAmount}
-                setVisible={() => withdrawAmountHandler()}
-            />
+
 
         </Modal>
     )
 }
 
-export default recievedModal;
+export default MyWithdrawModal;
 
 const styles = StyleSheet.create({
     modal: {

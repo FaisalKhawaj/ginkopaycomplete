@@ -12,7 +12,7 @@ import RECIEVED from '../../assets/recieved.svg'
 import BUY from '../../assets/buy.svg'
 import WITHDRAW from '../../assets/withdraw.svg'
 import CURRECO from '../../assets/CurrencyEthereum.svg'
-
+import MyWithdrawModal from '../../components/withdrawModal'
 // Modals 
 import AssetsModal from '../../components/AssetsModal';
 import SentModal from '../../components/SentModal'
@@ -33,6 +33,7 @@ import TokenModal2 from '../../components/SendModalToken2'
 
 import { mystyles } from '../../styles';
 import PurchaseMethodBankModal from '../../components/BuyModal';
+import WithdrawAmount from '../../components/withdrawAmount';
 const { width, height } = Dimensions.get("window");
 
 
@@ -87,6 +88,7 @@ const Home = ({ navigation }) => {
   const [assetsmodal, setAssetsModal] = useState(false);
   const [sentmodal, setSentModal] = useState(false);
   const [recievemodal, setRecievedModal] = useState(false);
+  const [WithdrawModal, setWithdrawModal] = useState(false)
   const [pruchasemodal, setPurchaseModal] = useState(false)
   const [MyTab, setMyTab] = useState('History')
   const [trnassubmitted, settranssubmitted] = useState(false)
@@ -94,7 +96,7 @@ const Home = ({ navigation }) => {
   const [sendmessagemodal, setSendMessageModal] = useState(false)
   const [copylink, setCopyLink] = useState(false)
   const [requestPayment, setRequestPayment] = useState(false)
-
+  const [withdrawAmount, setWithdrawAmount] = useState(false)
   const [tokenmodal, setTokenModal] = useState(false)
   const [tokenmodal2, setTokenModal2] = useState(false)
 
@@ -168,6 +170,9 @@ const Home = ({ navigation }) => {
       case "received":
         setRecievedModal(true)
         break;
+      case "withdraw":
+        setWithdrawModal(true)
+        break;
       case "buy":
         setPurchaseModal(true)
         break;
@@ -182,6 +187,10 @@ const Home = ({ navigation }) => {
   const setSentModalLocal = (data) => {
 
     setSentModal(data)
+  }
+  const closeWithDrawModal = () => {
+    setWithdrawModal(false)
+    setWithdrawAmount(true)
   }
 
 
@@ -339,14 +348,33 @@ const Home = ({ navigation }) => {
           transcitioncompletefunction={transcitioncompletefunction}
         />
         <RecievedModal
+          title="Receive"
+          description="Your address to Receive payment"
+          btnName="Request Payment"
+          address="0x3Dc6...DfCE"
           visible={recievemodal}
           setVisible={setRecievedModal}
           setCopyLink={setCopyLink}
           setRequestPayment={setRequestPayment}
           transcitioncompletefunction={transcitioncompletefunction}
         />
+        <MyWithdrawModal
+          title="Withdraw"
+          description={"You can withdraw your coins on your\nlast Deposit method"}
+          btnName="Withdraw"
+          visible={WithdrawModal}
+          setVisible={closeWithDrawModal}
+          setCopyLink={setCopyLink}
+          // setWithdrawAmount={setWithdrawAmount}
+          // setRequestPayment={setRequestPayment}
+          transcitioncompletefunction={transcitioncompletefunction}
+        />
+        {/* <WithdrawModal /> */}
         <PurchaseMethod navigation={navigation} visible={pruchasemodal} setVisible={setPurchaseModall}
 
+        />
+        <WithdrawAmount visible={withdrawAmount}
+          setVisible={() => setWithdrawAmount(false)}
         />
 
 

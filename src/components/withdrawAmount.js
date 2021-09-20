@@ -11,8 +11,9 @@ import CustomButton from './Button'
 import CustomText from './Text';
 import CopyLinkModal from './LinkCopyModal';
 const { width, height } = Dimensions.get("window");
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const RequestPaymentModal = ({ visible, setVisible, }) => {
+const WithdrawAmount = ({ visible, setVisible, }) => {
     const [value, setValue] = React.useState("")
     return (
         <Modal
@@ -71,6 +72,23 @@ const RequestPaymentModal = ({ visible, setVisible, }) => {
                         <Image source={require("../assets/updown.png")} style={{ width: 15, height: 15 }} />
                     </View>
 
+                    <View style={{ alignSelf: 'flex-start', marginLeft: wp(5) }}>
+                        <Text style={{ fontFamily: 'Poppins-SemiBold', color: '#FFFF' }}>Withdraw to </Text>
+                        <View style={{ flexDirection: 'row', marginVertical: 5 }}>
+                            <Image resizeMode="contain"
+                                style={{ alignSelf: 'center', width: 15, height: 15, }}
+                                source={require('../assets/addGradient.png')} />
+                            <TouchableOpacity>
+                                <CustomText
+                                    text="Add Bank Account"
+                                    locations={[0, 1]}
+                                    colors={["#72F6D1", "#FAA49E"]}
+                                    style={{ fontFamily: simpletext, fontSize: 15, }} />
+                            </TouchableOpacity>
+                        </View>
+
+                    </View>
+
                     <View style={{ position: "absolute", bottom: 20 }}>
                         <CustomButton text={"Next"} onPress={() => setVisible()} />
                     </View>
@@ -81,7 +99,7 @@ const RequestPaymentModal = ({ visible, setVisible, }) => {
     )
 }
 
-export default RequestPaymentModal;
+export default WithdrawAmount;
 
 const styles = StyleSheet.create({
     modal: {

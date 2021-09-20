@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, FlatList, Dimensions, StyleSheet, Image, Text, TouchableOpacity, Touchable, StatusBar } from 'react-native';
+import { View, FlatList, Dimensions, StyleSheet, Image, Text, TouchableOpacity, Touchable, StatusBar, TextInput } from 'react-native';
 import Modal from 'react-native-modal';
 import { boldtext, fontmedium, simpletext } from '../constants/fonts';
 import { graycolor, green } from '../constants/colors';
@@ -8,6 +8,8 @@ import LinearGradient from 'react-native-linear-gradient'
 import HeaderBackTextClose from './HeaderBackTextClose'
 import PurchaseMethodBankModal from './BuyModal';
 import CustomText from './Text';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import CustomButton from './Button';
 var obj = [
     {
         key: 1,
@@ -60,7 +62,7 @@ const SentModal = ({ visible, navigation, setVisible }) => {
                 }}>
                 <TouchableOpacity style={styles.verticalListItem} onPress={() => setVisible, BuyModallHandler}>
                     <Image style={styles.verticalListIconBackground} source={item.item.image} />
-                    <View style={{ flexDirection: 'column', flex: 1 }}>
+                    <View style={{ flexDirection: 'column', }}>
                         <Text style={{ color: '#fff', fontFamily: fontmedium, fontSize: 16 }}>
                             {item.item.name}
 
@@ -101,11 +103,47 @@ const SentModal = ({ visible, navigation, setVisible }) => {
                     renderItem={renderItem}
                     keyExtractor={(item, index) => index.toString()}
                 />
+
+                <View style={{
+
+                }}>
+                    <Text style={{ textAlign: 'center', fontFamily: 'Poppins-Bold', color: '#FFFF' }}>or</Text>
+                </View>
+
+                <CustomText
+                    text={"Add your card number"}
+                    locations={[0, 1]}
+                    colors={["#70A2FF", "#F76E64"]}
+                    style={{ fontSize: 15, fontFamily: boldtext, }}
+                />
+
+                <View style={styles.roundedCardNumView}>
+                    <TextInput placeholder="Card Number" placeholderTextColor={graycolor} style={{ flex: 1, fontFamily: 'Poppins-Regular', color: graycolor }} />
+                    <View style={{ flexDirection: 'row' }}>
+                        <TextInput placeholderTextColor={graycolor} placeholder="MM"
+                            style={{ fontFamily: 'Poppins-Regular', color: graycolor }}
+                        />
+                        <Text style={{ alignSelf: 'center', color: graycolor }}>/</Text>
+                        <TextInput placeholderTextColor={graycolor} placeholder="AA"
+                            style={{ fontFamily: 'Poppins-Regular', color: graycolor }}
+                        />
+
+                        <TextInput placeholderTextColor={graycolor} placeholder="CVC"
+                            style={{ fontFamily: 'Poppins-Regular', color: graycolor }}
+                        />
+                    </View>
+
+                </View>
+
+                <View style={{ marginVertical: hp(3) }}>
+                    <CustomButton text={"Buy"} onPress={() => setVisible()} />
+                </View>
+                <PurchaseMethodBankModal visible={buymodal} backHandler={BuyModallHandler}
+                    closeHandler={BuyCloseModalHandler}
+                // setBuyModal11={setBuyModal11}
+                />
             </View>
-            <PurchaseMethodBankModal visible={buymodal} backHandler={BuyModallHandler}
-                closeHandler={BuyCloseModalHandler}
-            // setBuyModal11={setBuyModal11}
-            />
+
         </Modal>
 
     )
@@ -119,9 +157,10 @@ const styles = StyleSheet.create({
         width: width,
     },
     mainview: {
-        marginTop: height / 2.4,
+        // marginTop: height / 2.4,
         // height: height / 3.3,
-        flex: 1,
+        // flex: 1,
+        height: height / 1.1,
         width: width,
         bottom: 0,
         padding: 20,
@@ -130,7 +169,6 @@ const styles = StyleSheet.create({
         // alignSelf: 'center',
         // alignItems: 'center',
         backgroundColor: '#17171A',
-
         borderTopRightRadius: 10,
         borderTopLeftRadius: 10
     },
@@ -200,11 +238,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         height: 60,
         justifyContent: "space-between"
-    }, verticalListItem: {
+    },
+    verticalListItem:
+    {
         flexDirection: 'row',
         backgroundColor: '#171921',
-
-
         padding: 12,
         borderRadius: 10,
     },
@@ -215,5 +253,10 @@ const styles = StyleSheet.create({
         borderRadius: 35,
         marginRight: 20
     },
+    roundedCardNumView: {
+        borderWidth: 1, borderColor: '#FFFF', flexDirection: 'row',
+        justifyContent: 'center',
+        paddingHorizontal: 10, width: width - 80, borderRadius: 25,
+    }
 
 })
