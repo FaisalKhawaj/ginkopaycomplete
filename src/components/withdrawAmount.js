@@ -61,7 +61,7 @@ const WithdrawAmount = ({ visible, setVisible, }) => {
                         <CustomText
                             text="Use Max"
                             locations={[0, 1]}
-                            colors={["#70A2FF", "#F76E64"]}
+                            colors={["#F76E64", "#70A2FF",]}
                             style={{ fontFamily: boldtext, fontSize: 13, textAlign: "center", textAlignVertical: "center" }} />
 
                     </View>
@@ -78,11 +78,11 @@ const WithdrawAmount = ({ visible, setVisible, }) => {
                             <Image resizeMode="contain"
                                 style={{ alignSelf: 'center', width: 15, height: 15, }}
                                 source={require('../assets/addGradient.png')} />
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => setVisible()} >
                                 <CustomText
                                     text="Add Bank Account"
                                     locations={[0, 1]}
-                                    colors={["#72F6D1", "#FAA49E"]}
+                                    colors={["#F76E64", "#70A2FF",]}
                                     style={{ fontFamily: simpletext, fontSize: 15, }} />
                             </TouchableOpacity>
                         </View>

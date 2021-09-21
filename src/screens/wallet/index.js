@@ -1,12 +1,12 @@
 
 import React, { useState } from 'react';
 import { View, FlatList, StatusBar, Dimensions, StyleSheet, Image, Text, TouchableOpacity, Touchable, SafeAreaView } from 'react-native';
-import { Container, Content } from 'native-base'
+import { Container, Content, Item, Input, Label } from 'native-base'
 import Feather from 'react-native-vector-icons/Feather';
 import { boldtext, fontmedium, simpletext } from '../../constants/fonts';
-import { graycolor, green } from '../../constants/colors';
+import { BackgroundColor, graycolor, green, lightWhite } from '../../constants/colors';
 import CustomText from '../../components/Text';
-
+import Modal from 'react-native-modal'
 import SENT from '../../assets/sent.svg'
 import RECIEVED from '../../assets/recieved.svg'
 import BUY from '../../assets/buy.svg'
@@ -30,11 +30,13 @@ import CopyLinkModal from '../../components/LinkCopyModal'
 import PurchaseMethod from '../../components/PurchaseMethod'
 import TokenModal from '../../components/SendModalToken'
 import TokenModal2 from '../../components/SendModalToken2'
-
+import MyBankAccountModal from '../../components/BankAccountModal'
 import { mystyles } from '../../styles';
 import PurchaseMethodBankModal from '../../components/BuyModal';
 import WithdrawAmount from '../../components/withdrawAmount';
+import HeaderBackTextCloseBtn from '../../components/HeaderBackTextClose';
 const { width, height } = Dimensions.get("window");
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 let protfiliodata = [
@@ -99,7 +101,8 @@ const Home = ({ navigation }) => {
   const [withdrawAmount, setWithdrawAmount] = useState(false)
   const [tokenmodal, setTokenModal] = useState(false)
   const [tokenmodal2, setTokenModal2] = useState(false)
-
+  const [BankAccountModal, setBankAccountModal] = useState(false)
+  const [InsertBankAccountDetails, setInsertBankAccountDetails] = useState(false)
   const [modaldata, setModalData] = useState({
     key: 1,
     name: "Beexay",
@@ -198,8 +201,14 @@ const Home = ({ navigation }) => {
     setPurchaseModal(!pruchasemodal)
   }
 
-
-
+  const WithdrawAmountHandler = () => {
+    setWithdrawAmount(false)
+    setBankAccountModal(true)
+  }
+  const AddBankAccountHandler = () => {
+    setBankAccountModal(false)
+    setInsertBankAccountDetails(true)
+  }
   const transcitioncompletefunction = (data) => {
     settranssubmitted(true)
     setTimeout(() => {
@@ -374,8 +383,145 @@ const Home = ({ navigation }) => {
 
         />
         <WithdrawAmount visible={withdrawAmount}
-          setVisible={() => setWithdrawAmount(false)}
+          setVisible={WithdrawAmountHandler}
         />
+
+        <MyBankAccountModal visible={BankAccountModal} setVisible={AddBankAccountHandler} />
+
+
+        <Modal
+          isVisible={InsertBankAccountDetails}
+          animationIn="fadeInRight"
+          deviceHeight={Dimensions.get("screen").height * 2}
+          transparent={true}
+          style={styles.modal}
+          coverScreen={true}
+          animationOut="slideOutDown"
+          onBackdropPress={() => setInsertBankAccountDetails(false)}
+          onBackButtonPress={() => setInsertBankAccountDetails(false)}
+          useNativeDriver={true}
+          hasBackdrop={true}
+          backdropColor="#1D1F27"
+          backdropOpacity={.85}
+        >
+          <Container style={styles.mainview}>
+            <HeaderBackTextCloseBtn
+              text="BANK ACCOUNT"
+              backhandler={() => { setInsertBankAccountDetails(false) }}
+              closeModal={() => { setInsertBankAccountDetails(false) }}
+            />
+            <Content
+              contentContainerStyle={styles.contentContainerStyle}
+              style={{ flexGrow: 1 }}>
+
+
+              <View style={styles.textinputmaincontainer}>
+                <Item stackedLabel
+                  style={styles.textinputcontainer}>
+                  <Label style={{ color: graycolor, fontFamily: simpletext, fontSize: 14, }}>Account holder</Label>
+                  <Input
+                    placeholder="Enter your bank account name"
+                    placeholderTextColor="#fff"
+                    style={styles.textinput}
+                    textColor="#fff"
+                  // value={name}
+                  // onChangeText={text => setName(text)}
+                  />
+                </Item>
+
+              </View>
+
+              <View style={styles.textinputmaincontainer}>
+                <Item stackedLabel
+                  style={styles.textinputcontainer}>
+                  <Label style={{ color: graycolor, fontFamily: simpletext, fontSize: 14, }}>BIC </Label>
+                  <Input
+                    placeholder="Enter your bank identifier code"
+                    placeholderTextColor="#fff"
+                    style={styles.textinput}
+                    textColor="#fff"
+                  // value={name}
+                  // onChangeText={text => setName(text)}
+                  />
+                </Item>
+
+              </View>
+
+              <View style={styles.textinputmaincontainer}>
+                <Item stackedLabel
+                  style={styles.textinputcontainer}>
+                  <Label style={{ color: graycolor, fontFamily: simpletext, fontSize: 14, }}>IBAN </Label>
+                  <Input
+                    placeholder="Enter your IBAN"
+                    placeholderTextColor="#fff"
+                    style={styles.textinput}
+                    textColor="#fff"
+                  // value={name}
+                  // onChangeText={text => setName(text)}
+                  />
+                </Item>
+
+              </View>
+
+              <View style={styles.textinputmaincontainer}>
+                <Item stackedLabel
+                  style={styles.textinputcontainer}>
+                  <Label style={{ color: graycolor, fontFamily: simpletext, fontSize: 14, }}>Address </Label>
+                  <Input
+                    placeholder="Enter your full Address"
+                    placeholderTextColor="#fff"
+                    style={styles.textinput}
+                    textColor="#fff"
+                  // value={name}
+                  // onChangeText={text => setName(text)}
+                  />
+                </Item>
+
+              </View>
+
+
+              <TouchableOpacity style={styles.saveBtn}>
+                <CustomText
+                  text={"Save"}
+                  locations={[0, 1]}
+                  colors={["#70A2FF", "#F76E64"]}
+                  style={{ fontSize: 12, fontFamily: boldtext, }}
+                />
+              </TouchableOpacity>
+
+
+
+
+
+
+              <View style={{ alignSelf: 'center', position: 'absolute', bottom: 20, flexDirection: 'row', width: width - 80, }}>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: lightWhite }}>
+                  In order to change the value of your bank{'\n'}
+   account you need to contact us at our{'\n'}
+   support   <CustomText
+                    text={"example@example.com"}
+                    locations={[0, 1]}
+                    colors={["#A9CDFF", "#A9CDFF"]}
+                    style={{ fontSize: 12, fontFamily: boldtext, }}
+                  />
+                  <Text style={{ color: lightWhite }}> or at our number</Text>
+                  <CustomText
+                    text={"+391234567890"}
+                    locations={[0, 1]}
+                    colors={["#A9CDFF", "#A9CDFF"]}
+                    style={{ fontSize: 12, fontFamily: boldtext, }}
+                  />
+                </Text>
+              </View>
+
+
+
+
+
+
+            </Content>
+          </Container>
+        </Modal>
 
 
       </Content>
@@ -386,8 +532,36 @@ const Home = ({ navigation }) => {
 export default Home;
 
 const styles = StyleSheet.create({
+  saveBtn: {
+    alignSelf: 'center',
+    width: wp('25%'),
+    padding: 5,
+    marginVertical: hp(3),
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#000',
+    borderRadius: 10
+  },
   container: {
     backgroundColor: "#17171A"
+  },
+  modal: {
+    margin: 0
+  },
+  contentContainerStyle: {
+    alignItems: "center",
+    flexGrow: 1
+  },
+  mainview: {
+    height: height / 1,
+    flex: 1,
+    width: width,
+    bottom: 0,
+    alignSelf: 'center',
+    backgroundColor: BackgroundColor,
+    width: width,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10
   },
   header: {
     marginHorizontal: 20,
@@ -445,6 +619,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  textinputmaincontainer: {
+    width: width - 30,
+    alignSelf: "center",
+    marginVertical: 10,
+  },
+  textinputcontainer: {
+    borderColor: graycolor,
+    borderTopWidth: .5,
+    borderLeftWidth: .5,
+    borderRightWidth: .5,
+    borderBottomWidth: .5,
+    width: width - 30,
+    alignSelf: "center",
+    borderTopLeftRadius: 10,
+    paddingHorizontal: 15,
+    borderTopRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    backgroundColor: 'transparent'
+  },
+  textinput: {
+    fontFamily: simpletext,
+    fontSize: 14,
+    color: '#FFF',
+    height: 40,
+  },
 })
 
 const protfilioitemstyles = StyleSheet.create({
@@ -461,7 +661,6 @@ const protfilioitemstyles = StyleSheet.create({
     width: 35,
     alignItems: 'center',
     justifyContent: 'center',
-
     borderRadius: 18,
     marginRight: 20
   },
@@ -481,8 +680,8 @@ const historyitemstyles = StyleSheet.create({
     width: 35,
     alignItems: 'center',
     justifyContent: 'center',
-
     borderRadius: 18,
     marginRight: 20
   },
+
 })
