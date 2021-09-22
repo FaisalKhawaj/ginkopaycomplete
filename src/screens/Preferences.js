@@ -19,9 +19,10 @@ import { mystyles } from '../styles';
 const { width, height } = Dimensions.get('window')
 import * as Actions from './../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
+import TwoFAModal from '../components/2FAModal';
 
 const Preferences = ({ navigation }) => {
-    
+
     const dispatch = useDispatch();
     const [showGeneralModal, setShowGeneralModal] = useState(false)
     const [checkedCurrency, setCheckedCurrency] = React.useState('Native');
@@ -29,7 +30,11 @@ const Preferences = ({ navigation }) => {
     const [showPrivacyModal, setShowPrivacyModal] = useState(false)
     const [showverificationModal, setShowVerificatonModal] = useState(false)
     const [privaytoggle, setPrivacyToggle] = useState(false)
+    const [privacyModeToggle, setPrivacyModeToggle] = useState(false)
+    const [Enable2FA, setEnable2FA] = useState(false)
+    const [EnableTouchID, setEnableTouchID] = useState(false)
     const [incomming, setIncomming] = useState(false)
+    const [Modal2FA, setModal2FA] = useState(false)
     const [metametric, setMetaMetric] = useState(false)
     const [currencymodal, setCurrencyModal] = useState(false)
     const [languagemodal, setLanguageModal] = useState(false)
@@ -40,14 +45,17 @@ const Preferences = ({ navigation }) => {
 
     const closeModalHandler = () => {
         dispatch(Actions.updateUser())
-        
+
         setShowGeneralModal(!showGeneralModal)
     }
-    
-    
+
+
     const UpdateGeneralHandler = () => {
         dispatch(Actions.updateUser())
         setShowPrivacyModal(!showPrivacyModal)
+    }
+    const Enable2FAHandler = () => {
+        setEnable2FA(!Enable2FA)
     }
 
     const functionshowverificationmodal = () => {
@@ -283,16 +291,46 @@ const Preferences = ({ navigation }) => {
                 scrollHorizontal={true}
                 visible={showPrivacyModal}
             >
-                <ScrollView >
-                    <View style={{ height: height, backgroundColor: '#17171A' }}>
-                        <HeaderBackTextCloseBtn text="Security & Privacy" backhandler={BackBtnHandler} closeModal={UpdateGeneralHandler} />
+                <Container style={styles.mainview}>
+                    <HeaderBackTextCloseBtn
+                        text="Security & Privacy"
+                        backhandler={BackBtnHandler}
+                        closeModal={UpdateGeneralHandler} />
+
+                    <Content
+                        contentContainerStyle={[styles.contentContainerStyle, { alignItems: 'flex-start' }]}
+                        style={{ flexGrow: 1, }}>
+
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <Text style={styles.headingText}>Privacy</Text>
                         </View>
 
+                        <View style={[styles.CurrencyPRivacyCurrentLanUserSearchView, {
+                            flexDirection: 'row', flex: 1, marginHorizontal: 18,
+                            justifyContent: 'space-between'
+                        }]}>
 
-                        <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
+
+                            <Text style={[styles.headingText, { flex: 1 }]}>Clear Privacy Data</Text>
+
+                            <LinearGradient
+                                onPress={() => setPrivacyToggle(!privaytoggle)}
+                                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                                colors={["#70A2FF", "#F76E64"]}
+                                style={{ ...styles.LinearGradient, alignItems: privaytoggle ? "flex-end" : "flex-start" }}
+                            >
+                                <TouchableOpacity onPress={() => setPrivacyToggle(!privaytoggle)} style={{ height: 20, width: 20, borderRadius: 4, backgroundColor: "#fff" }} />
+                            </LinearGradient>
+
+                        </View>
+
+                        <Text style={[styles.descriptionText, { marginHorizontal: 18 }]}>
+                            Clear Priacy data so all websites must{'\n'}request access to view account information {'\n'}again
+                            </Text>
+
+
+                        {/* <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <View style={{ position: "absolute", zIndex: 20, alignSelf: "flex-end" }}>
 
                                 <LinearGradient
@@ -309,22 +347,41 @@ const Preferences = ({ navigation }) => {
                             <Text style={styles.descriptionText}>
                                 Clear Priacy data so all websites must{'\n'}request access to view account information {'\n'}again
                             </Text>
-                        </View>
+                        </View> */}
 
                         <TouchableOpacity style={{
                             height: 45,
                             marginVertical: 10,
                             marginHorizontal: 20, width: width - 40, borderRadius: 5, backgroundColor: "#222531", justifyContent: "center", alignItems: "center"
                         }}>
+
                             <Text style={{ color: "#4C516B" }}>Clear Privacy Data</Text>
                         </TouchableOpacity>
 
-                        <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
-                            <Text style={styles.headingText}>Privacy Mode</Text>
-                            <Text style={styles.descriptionText}>
-                                Website must request access to view your account information
-                            </Text>
+                        <View style={[styles.CurrencyPRivacyCurrentLanUserSearchView, {
+                            flexDirection: 'row', flex: 1, marginHorizontal: 18,
+                            justifyContent: 'space-between'
+                        }]}>
+
+
+                            <Text style={[styles.headingText, { flex: 1 }]}> Privacy Mode</Text>
+
+                            <LinearGradient
+                                onPress={() => setPrivacyModeToggle(!privacyModeToggle)}
+                                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                                colors={["#70A2FF", "#F76E64"]}
+                                style={{ ...styles.LinearGradient, alignItems: privacyModeToggle ? "flex-end" : "flex-start" }}
+                            >
+                                <TouchableOpacity onPress={() => setPrivacyModeToggle(!privacyModeToggle)} style={{ height: 20, width: 20, borderRadius: 4, backgroundColor: "#fff" }} />
+                            </LinearGradient>
+
                         </View>
+
+                        <Text style={[styles.descriptionText, { marginHorizontal: 18 }]}>
+                            Website must request access to view your account information
+                            </Text>
+
+
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <View style={{ position: "absolute", zIndex: 20, alignSelf: "flex-end" }}>
@@ -342,31 +399,80 @@ const Preferences = ({ navigation }) => {
                             </Text>
                         </View>
 
-                        <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
-                            <View style={{ position: "absolute", zIndex: 20, alignSelf: "flex-end" }}>
 
-                                <LinearGradient
-                                    start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
-                                    colors={["#70A2FF", "#F76E64"]}
-                                    style={{ ...styles.LinearGradient, alignItems: incomming ? "flex-end" : "flex-start" }}
-                                >
-                                    <TouchableOpacity onPress={() => setIncomming(!incomming)} style={{ height: 20, width: 20, borderRadius: 4, backgroundColor: "#fff" }} />
-                                </LinearGradient>
+                        <View style={[styles.CurrencyPRivacyCurrentLanUserSearchView, {
+                            flexDirection: 'row', flex: 1, marginHorizontal: 18,
+                            justifyContent: 'space-between'
+                        }]}>
 
-                            </View>
-                            <Text style={styles.headingText}>Get Incoming Transactions</Text>
-                            <Text style={styles.descriptionText}>
-                                Third party APIs (Etherscan are used to show {"\n"} your incoming transactions in the history. {"\n"}
-                            Turn off if you don’t want us to pull data{"\n"} from those service
-                            </Text>
+
+                            <Text style={[styles.headingText, { flex: 1 }]}> Enable 2FA</Text>
+
+                            <LinearGradient
+                                onPress={() => setEnable2FA(!Enable2FA)}
+                                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                                colors={["#70A2FF", "#F76E64"]}
+                                style={{ ...styles.LinearGradient, alignItems: Enable2FA ? "flex-end" : "flex-start" }}
+                            >
+                                <TouchableOpacity onPress={() => setEnable2FA(!Enable2FA)} style={{ height: 20, width: 20, borderRadius: 4, backgroundColor: "#fff" }} />
+                            </LinearGradient>
+
                         </View>
+
+
+                        <View style={[styles.CurrencyPRivacyCurrentLanUserSearchView, {
+                            flexDirection: 'row', flex: 1, marginHorizontal: 18,
+                            justifyContent: 'space-between'
+                        }]}>
+
+
+                            <Text style={[styles.headingText, { flex: 1 }]}> Enable Face ID/Touch ID</Text>
+
+                            <LinearGradient
+                                onPress={() => setEnableTouchID(!EnableTouchID)}
+                                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                                colors={["#70A2FF", "#F76E64"]}
+                                style={{ ...styles.LinearGradient, alignItems: EnableTouchID ? "flex-end" : "flex-start" }}
+                            >
+                                <TouchableOpacity onPress={() => setEnableTouchID(!EnableTouchID)} style={{ height: 20, width: 20, borderRadius: 4, backgroundColor: "#fff" }} />
+                            </LinearGradient>
+
+                        </View>
+
+
+                        <View style={[styles.CurrencyPRivacyCurrentLanUserSearchView, {
+                            flexDirection: 'row', flex: 1, marginHorizontal: 18,
+                            justifyContent: 'space-between'
+                        }]}>
+
+
+                            <Text style={[styles.headingText, { flex: 1 }]}> Get Incoming Transactions</Text>
+
+                            <LinearGradient
+                                onPress={() => setIncomming(!incomming)}
+                                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                                colors={["#70A2FF", "#F76E64"]}
+                                style={{ ...styles.LinearGradient, alignItems: incomming ? "flex-end" : "flex-start" }}
+                            >
+                                <TouchableOpacity onPress={() => setIncomming(!incomming)} style={{ height: 20, width: 20, borderRadius: 4, backgroundColor: "#fff" }} />
+                            </LinearGradient>
+
+                        </View>
+
+                        <Text style={[styles.descriptionText, { marginHorizontal: 20 }]}>
+                            Third party APIs (Etherscan are used to show {"\n"}your incoming transactions in the history.{"\n"}
+                            Turn off if you don’t want us to pull data{"\n"}from those service
+                            </Text>
+
 
                         {/* <View style={{ position: 'absolute', alignSelf: 'center', bottom: 10 }}> */}
                         <CustomButton text={"Update"} onPress={UpdateGeneralHandler} />
                         {/* </View> */}
-                    </View>
-                </ScrollView>
+                    </Content>
+                </Container>
             </Modal>
+
+            <TwoFAModal visible={Enable2FA} setVisible={Enable2FAHandler} />
             <KycModal visible={showverificationModal} navigation={navigation} setVisible={setShowVerificatonModal} />
             <CurrencyModal visible={languagemodal} setVisible={setCurrencyModal} />
             <LanguageModal visible={currencymodal} setVisible={setLanguageModal} />
@@ -376,6 +482,21 @@ const Preferences = ({ navigation }) => {
 export default Preferences
 
 const styles = StyleSheet.create({
+    mainview: {
+        height: height / 1,
+        flex: 1,
+        width: width,
+        bottom: 0,
+        alignSelf: 'center',
+        backgroundColor: BackgroundColor,
+        width: width,
+        borderTopRightRadius: 10,
+        borderTopLeftRadius: 10
+    },
+    contentContainerStyle: {
+        alignItems: "center",
+        flexGrow: 1
+    },
     CurrencyPRivacyCurrentLanUserSearchView: {
         marginVertical: 10, marginLeft: 20, marginRight: 20
     },

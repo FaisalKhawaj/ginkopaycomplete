@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Content, Linking, Item, Thumbnail, Input, Label } from 'native-base'
-import { View, Text, Image, TouchableOpacity, Dimensions, Share, StyleSheet, TextInput, Platform } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Dimensions, Share, StyleSheet, TextInput, Platform, TouchableHighlight } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Modal from 'react-native-modal';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ImagePicker from 'react-native-image-crop-picker';
 
-import { BackgroundColor, graycolor, LinearGradientColorOne, LinearGradientColorTwo } from '../../constants/colors';
+import { BackgroundColor, graycolor, lightWhite, LinearGradientColorOne, LinearGradientColorTwo, orange } from '../../constants/colors';
 
 import SettingsWithImgTextIcon from '../../components/SettingsImgTextArrowBtn';
 import { BlurView } from "@react-native-community/blur";
@@ -17,9 +17,15 @@ import { simpletext } from '../../constants/fonts';
 const { width, height } = Dimensions.get('window');
 import * as Actions from './../../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
+import HeaderBackTextCloseBtn from '../../components/HeaderBackTextClose';
+import CustomText from '../../components/Text';
 
 const Settings = ({ navigation }) => {
-    
+    const [showQRCode, setShowQRCode] = useState(false)
+
+    const QRCodeHandler = () => {
+        setShowQRCode(!showQRCode)
+    }
     const dispatch = useDispatch();
     const EditProfileHandler = () => {
         setShowEditProfileModal(!showEditProfileModal)
@@ -106,7 +112,16 @@ const Settings = ({ navigation }) => {
                         </LinearGradient>
                     </View>
                 </TouchableOpacity>
+                <View style={{ marginHorizontal: 20 }}>
+                    <Text style={{ color: lightWhite, fontFamily: 'Poppins-Regular' }}>Invite your friends</Text>
+                    <TouchableOpacity style={{ flexDirection: 'row' }}>
+                        <Text style={{ color: orange }}>https://dege.app.link/send/0xBBB6...21jq</Text>
+                        <Image resizeMode="contain" style={{ tintColor: orange, width: 22, height: 22 }} source={require('../../assets/shareAddress.png')} />
 
+                    </TouchableOpacity>
+
+
+                </View>
 
                 <SettingsWithImgTextIcon
                     name="Edit profile"
@@ -121,17 +136,22 @@ const Settings = ({ navigation }) => {
                     img={require('../../assets/eye.png')}
                     name=" Change Password" handler={ChangePasswordHandler} />
 
+
+                <SettingsWithImgTextIcon
+                    img={require('../../assets/QRCode.png')}
+                    name="QR code " handler={QRCodeHandler} />
                 <SettingsWithImgTextIcon
                     img={require('../../assets/settingLayer.png')}
-                    name="Preferences" handler={PreferenceHandler} />
+                    name="Settings" handler={PreferenceHandler} />
 
                 <SettingsWithImgTextIcon
                     img={require('../../assets/headphone.png')}
                     name="Get Help" handler={GetHelpHandler} />
 
-                <SettingsWithImgTextIcon
+
+                {/* <SettingsWithImgTextIcon
                     img={require('../../assets/messageDot.png')}
-                    name="Send Feed back " handler={SEndFeedBack} />
+                    name="Send Feed back " handler={SEndFeedBack} /> */}
 
 
                 <SettingsWithImgTextIcon
@@ -198,6 +218,47 @@ const Settings = ({ navigation }) => {
                         reducedTransparencyFallbackColor="#222531"
                     />
                     : null}
+
+                <Modal
+                    isVisible={showQRCode}
+                    animationIn="fadeInRight"
+                    deviceHeight={Dimensions.get("screen").height * 2}
+                    transparent={true}
+                    style={mystylesComp.modal}
+                    coverScreen={true}
+                    animationOut="slideOutDown"
+                    onBackdropPress={() => QRCodeHandler()}
+                    onBackButtonPress={() => QRCodeHandler()}
+                    useNativeDriver={true}
+                    hasBackdrop={true}
+                    backdropColor="#1D1F27"
+                    backdropOpacity={.85}
+                >
+                    <Container style={mystylesComp.mainview}>
+                        <HeaderBackTextCloseBtn
+                            text="QR CODE"
+                            backhandler={() => { QRCodeHandler() }}
+                            closeModal={() => { QRCodeHandler() }}
+                        />
+                        <Content
+                            contentContainerStyle={[mystylesComp.contentContainerStyle, { justifyContent: 'center', alignItems: 'center', paddingHorizontal: 15 }]}
+                            style={{ flexGrow: 1 }}>
+
+
+
+                            <Image resizeMode="contain" source={require('../../assets/LargeQRCode.png')} />
+
+                            <TouchableOpacity style={{ alignSelf: 'center', alignItems: 'center', flexDirection: 'row', marginVertical: hp(2) }}>
+                                <Image resizeMode="contain" source={require('../../assets/UpShareGradient.png')} />
+                                <CustomText text={"Share"} locations={[0, 1]} colors={["#70A2FF", "#F76E64"]}
+                                    style={{ fontSize: 20, fontWeight: "bold", marginHorizontal: 5, textAlign: "center" }} />
+                            </TouchableOpacity>
+
+
+                        </Content>
+                    </Container>
+                </Modal>
+
 
 
             </Content>
@@ -275,5 +336,23 @@ const mystylesComp = StyleSheet.create({
         color: '#FFF',
         height: 50,
         backgroundColor: 'transparent'
+    },
+    modal: {
+        margin: 0
+    },
+    contentContainerStyle: {
+        alignItems: "center",
+        flexGrow: 1
+    },
+    mainview: {
+        height: height / 1,
+        flex: 1,
+        width: width,
+        bottom: 0,
+        alignSelf: 'center',
+        backgroundColor: BackgroundColor,
+        width: width,
+        borderTopRightRadius: 10,
+        borderTopLeftRadius: 10
     },
 })
