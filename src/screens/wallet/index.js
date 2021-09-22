@@ -100,6 +100,11 @@ const Home = ({ navigation }) => {
   const [requestPayment, setRequestPayment] = useState(false)
   const [withdrawAmount, setWithdrawAmount] = useState(false)
   const [tokenmodal, setTokenModal] = useState(false)
+  const [showAccountDetail, setShowAccountDetails] = useState(false)
+  const [BankAccountName, setBankAccountName] = useState('')
+  const [AccountBIC, setAccountBIC] = useState('');
+  const [AccountIBAN, setAccountIBAN] = useState('');
+  const [AccountAddress, setAccountAddress] = useState('');
   const [tokenmodal2, setTokenModal2] = useState(false)
   const [BankAccountModal, setBankAccountModal] = useState(false)
   const [InsertBankAccountDetails, setInsertBankAccountDetails] = useState(false)
@@ -208,6 +213,10 @@ const Home = ({ navigation }) => {
   const AddBankAccountHandler = () => {
     setBankAccountModal(false)
     setInsertBankAccountDetails(true)
+  }
+  const InsertBankAccountHandler = () => {
+    setInsertBankAccountDetails(false)
+    setShowAccountDetails(true)
   }
   const transcitioncompletefunction = (data) => {
     settranssubmitted(true)
@@ -397,8 +406,8 @@ const Home = ({ navigation }) => {
           style={styles.modal}
           coverScreen={true}
           animationOut="slideOutDown"
-          onBackdropPress={() => setInsertBankAccountDetails(false)}
-          onBackButtonPress={() => setInsertBankAccountDetails(false)}
+          onBackdropPress={() => InsertBankAccountHandler()}
+          onBackButtonPress={() => InsertBankAccountHandler()}
           useNativeDriver={true}
           hasBackdrop={true}
           backdropColor="#1D1F27"
@@ -407,8 +416,8 @@ const Home = ({ navigation }) => {
           <Container style={styles.mainview}>
             <HeaderBackTextCloseBtn
               text="BANK ACCOUNT"
-              backhandler={() => { setInsertBankAccountDetails(false) }}
-              closeModal={() => { setInsertBankAccountDetails(false) }}
+              backhandler={() => { InsertBankAccountHandler() }}
+              closeModal={() => { InsertBankAccountHandler() }}
             />
             <Content
               contentContainerStyle={styles.contentContainerStyle}
@@ -424,8 +433,8 @@ const Home = ({ navigation }) => {
                     placeholderTextColor="#fff"
                     style={styles.textinput}
                     textColor="#fff"
-                  // value={name}
-                  // onChangeText={text => setName(text)}
+                    // value={name}
+                    onChangeText={text => setAccountAddress(text)}
                   />
                 </Item>
 
@@ -440,8 +449,8 @@ const Home = ({ navigation }) => {
                     placeholderTextColor="#fff"
                     style={styles.textinput}
                     textColor="#fff"
-                  // value={name}
-                  // onChangeText={text => setName(text)}
+                    // value={name}
+                    onChangeText={text => setAccountBIC(text)}
                   />
                 </Item>
 
@@ -456,8 +465,8 @@ const Home = ({ navigation }) => {
                     placeholderTextColor="#fff"
                     style={styles.textinput}
                     textColor="#fff"
-                  // value={name}
-                  // onChangeText={text => setName(text)}
+                    // value={name}
+                    onChangeText={text => setAccountIBAN(text)}
                   />
                 </Item>
 
@@ -472,15 +481,15 @@ const Home = ({ navigation }) => {
                     placeholderTextColor="#fff"
                     style={styles.textinput}
                     textColor="#fff"
-                  // value={name}
-                  // onChangeText={text => setName(text)}
+                    // value={name}
+                    onChangeText={text => setAccountAddress(text)}
                   />
                 </Item>
 
               </View>
 
 
-              <TouchableOpacity style={styles.saveBtn}>
+              <TouchableOpacity onPress={() => InsertBankAccountHandler()} style={styles.saveBtn}>
                 <CustomText
                   text={"Save"}
                   locations={[0, 1]}
@@ -490,6 +499,95 @@ const Home = ({ navigation }) => {
               </TouchableOpacity>
 
 
+
+
+
+
+              <View style={{ alignSelf: 'center', position: 'absolute', bottom: 20, flexDirection: 'row', width: width - 80, }}>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: lightWhite }}>
+                  In order to change the value of your bank{'\n'}
+   account you need to contact us at our{'\n'}
+   support   <CustomText
+                    text={"example@example.com"}
+                    locations={[0, 1]}
+                    colors={["#A9CDFF", "#A9CDFF"]}
+                    style={{ fontSize: 12, fontFamily: boldtext, }}
+                  />
+                  <Text style={{ color: lightWhite }}> or at our number</Text>
+                  <CustomText
+                    text={"+391234567890"}
+                    locations={[0, 1]}
+                    colors={["#A9CDFF", "#A9CDFF"]}
+                    style={{ fontSize: 12, fontFamily: boldtext, }}
+                  />
+                </Text>
+              </View>
+
+
+
+
+
+
+            </Content>
+          </Container>
+        </Modal>
+
+
+        <Modal
+          isVisible={showAccountDetail}
+          animationIn="fadeInRight"
+          deviceHeight={Dimensions.get("screen").height * 2}
+          transparent={true}
+          style={styles.modal}
+          coverScreen={true}
+          animationOut="slideOutDown"
+          onBackdropPress={() => setShowAccountDetails(false)}
+          onBackButtonPress={() => setShowAccountDetails(false)}
+          useNativeDriver={true}
+          hasBackdrop={true}
+          backdropColor="#1D1F27"
+          backdropOpacity={.85}
+        >
+          <Container style={styles.mainview}>
+            <HeaderBackTextCloseBtn
+              text="BANK ACCOUNT"
+              backhandler={() => { setShowAccountDetails(false) }}
+              closeModal={() => { setShowAccountDetails(false) }}
+            />
+            <Content
+              contentContainerStyle={[styles.contentContainerStyle, { alignItems: 'flex-start', paddingHorizontal: 15 }]}
+              style={{ flexGrow: 1 }}>
+
+
+
+
+              <View style={{ marginVertical: hp(2) }}>
+                <Text style={{ color: '#FFFF' }}>Account holder</Text>
+                <Text style={{ color: lightWhite }}>Ginko service technology LLC</Text>
+              </View>
+
+
+
+              <View style={{ marginVertical: hp(2) }}>
+                <Text style={{ color: '#FFFF' }}>BIC</Text>
+                <Text style={{ color: lightWhite }}>TRWIBEB1XXX</Text>
+              </View>
+
+              <View style={{ marginVertical: hp(2) }}>
+                <Text style={{ color: '#FFFF' }}>IBAN</Text>
+                <Text style={{ color: lightWhite }}>
+                  BE93 9672 0280 8067
+
+</Text>
+              </View>
+
+
+              <View style={{ marginVertical: hp(2) }}>
+                <Text style={{ color: '#FFFF' }}>Address</Text>
+                <Text style={{ color: lightWhite }}>
+                  Avenue Louise 54, Room S52   Brussels, 1050 , Belgium
+</Text>
+              </View>
 
 
 

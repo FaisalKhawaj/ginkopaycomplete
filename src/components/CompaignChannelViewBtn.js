@@ -5,19 +5,30 @@ import {
 } from 'react-native'
 
 const CompaignChannelViewBtn = ({ item, handler }) => {
+    console.log('item', item)
     return (
         <TouchableOpacity
             onPress={() => handler()}
             style={styles.CompaignChannelBtn}>
             <ImageBackground style={styles.ImageBackgroundStyle}
-                source={{uri: item.pictureUrl}}>
+                source={{ uri: item.pictureUrl }}>
                 <View style={styles.TitleUrlView}>
                     <Text style={styles.TitleText}>
                         {item.userName}
                     </Text>
-                    <Text style={styles.UrlText}>
-                        {item.walletAdder}
-                    </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        {item.walletAdder ?
+                            <Text style={styles.UrlText}>
+                                {item.walletAdder}
+                            </Text>
+                            : <Text style={styles.UrlText}>
+                                http://ginkopay.com/username
+                        </Text>}
+                        <TouchableOpacity>
+                            <Image resizeMode="contain" style={{ width: 22, height: 22 }} source={require('../assets/shareAddress.png')} />
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
             </ImageBackground>
         </TouchableOpacity>

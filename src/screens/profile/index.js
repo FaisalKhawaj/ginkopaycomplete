@@ -91,7 +91,11 @@ const Profile = ({ navigation }) => {
     const [ReferalModal, setReferalModal] = useState(false)
     const [profileImg, setProfileImg] = useState(null)
     const [cloudImageUrl, setCloudImageUrl] = useState(null)
+    const [changeCompaignModal, setChangeCompaignModal] = useState(false);
 
+    const ChangeCompaignBtnHandler = () => {
+        setChangeCompaignModal(false)
+    }
     const CompaignHandler = () => {
         console.log(showCompaign)
         setShowCompaign(!showCompaign)
@@ -106,7 +110,7 @@ const Profile = ({ navigation }) => {
 
     }
     const AddCompaignHandler = () => {
-      
+
         setShowCompaignModal(!showCompaignModal)
         console.log('Compaign')
     }
@@ -115,7 +119,8 @@ const Profile = ({ navigation }) => {
 
             dispatch(Actions.createCompaign(compaignTitle1, 'description', compaignAddress1, cloudImageUrl))
         }
-        setShowDonationDialog(!showDonationDialog)
+        setShowCompaignModal(false)
+        // setShowDonationDialog(!showDonationDialog)
     }
     const DonationNextBtnHandler = () => {
         setShowDonationDialog(false)
@@ -225,7 +230,7 @@ const Profile = ({ navigation }) => {
                         </Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => {
+                    {/* <TouchableOpacity onPress={() => {
                         setBtnSelect('Channels')
                         setShowCompaign(false)
                     }}
@@ -236,7 +241,7 @@ const Profile = ({ navigation }) => {
                         <Text style={[mystyles.TopRatedRecentBtnText, {
                             color: btnSelect === 'Channels' ? '#FFFF' : '#888DAA'
                         }]}>Channels</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
 
                 {btnSelect === 'Compaign' && showCompaign != true ?
@@ -254,7 +259,7 @@ const Profile = ({ navigation }) => {
                     </View>
                     : null
                 }
-                {btnSelect === 'Channels' && showCompaign != true
+                {/* {btnSelect === 'Channels' && showCompaign != true
                     ?
                     <View>
                         <FlatList
@@ -267,22 +272,78 @@ const Profile = ({ navigation }) => {
                     </View>
 
                     : null
-                }
+                } */}
 
                 {btnSelect === 'Compaign' && showCompaign ?
-                    <Compaign setShowCompaign={setShowCompaign} />
+                    <View style={{ margin: 10, }}>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <TouchableOpacity style={{ alignSelf: 'center' }}>
+                                <Icon name="chevron-back-outline" size={20} color="#FFFF" />
+                            </TouchableOpacity>
+
+                            <CustomText text={"As Rom Campaign"} locations={[0, 1]} colors={["#72F6D1", "#FFD505"]}
+                                style={{ fontSize: 20, fontWeight: "bold", textAlign: "center" }} />
+                            <TouchableOpacity style={{ alignSelf: 'center' }}>
+                                < Icon name="chevron-forward-outline" size={20} color="#FFFF" />
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={styles.compaignLargeImg}>
+                            <Image resizeMode="cover" source={require('../../assets/backgroundPeople.png')} />
+                        </View>
+
+                        <View style={{ alignSelf: 'center' }}>
+                            <Text style={styles.newsText}>
+                                Amet minim mollit non deserunt{'\n'}ullamco est sit aliqua dolor do amet{'\n'} sint. Velit officia consequat duis enim{'\n'}velit mollit. Exercitation veniam{'\n'}consequat sunt nostrud amet.
+                              </Text>
+                        </View>
+
+                        <View style={{ marginVertical: 10, marginLeft: 35, flexDirection: 'row', }}>
+                            <Image
+                                //  style={{ alignSelf: 'center' }} 
+                                source={require('../../assets/yellowDot.png')} />
+                            <Text style={styles.BTCHoursAgoSource}>GDC</Text>
+                            <Text style={styles.BTCHoursAgoSource}>16h ago</Text>
+                            <Text style={[styles.BTCHoursAgoSource, {}]}>News Source</Text>
+                            <View style={{ flex: 1, alignSelf: 'center' }}>
+                                <TouchableOpacity onPress={() => alert('Liked')} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                    <Image style={{ width: 15, height: 15 }} resizeMode="contain" source={require('../../assets/gradientLike.png')} />
+                                    <Text style={[styles.BTCHoursAgoSource, {}]}>1 Likes</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                        </View>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                            <TouchableOpacity onPress={() => setChangeCompaignModal(true)} style={styles.changeShareBtn}>
+                                <Image resizeMode="contain" style={{ width: 15, alignSelf: 'center', marginHorizontal: 2, height: 15 }} source={require('../../assets/editGradient.png')} />
+                                <CustomText text={"Change"} locations={[0, 1]} colors={["#A9CDFF", "#FAA49E"]}
+                                    style={{ fontSize: 20, fontWeight: "bold", textAlign: "center" }} />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => ShareMyPublicAddressHandler()} style={styles.changeShareBtn}>
+                                <Image resizeMode="contain" style={{ alignSelf: 'center', width: 15, marginHorizontal: 2, height: 15 }} source={require('../../assets/shareGradient.png')} />
+                                <CustomText text={"Send Link"} locations={[0, 1]} colors={["#A9CDFF", "#FAA49E"]}
+                                    style={{ fontSize: 20, fontWeight: "bold", textAlign: "center" }} />
+                            </TouchableOpacity>
+                        </View>
+
+
+                    </View>
                     : null
                 }
 
+                {/* 
                 {btnSelect === 'Channels' && showCompaign ?
                     <Compaign setShowCompaign={setShowCompaign} />
                     : null
-                }
+                } */}
 
                 <Modal
                     animationType="slide"
                     transparent={true}
-                    style={{ alignSelf: 'center', backgroundColor: '#17171A', width: '100%' }}
+                    style={{ alignSelf: 'center', margin: 0, backgroundColor: '#17171A', width: '100%' }}
                     coverScreen={true}
                     visible={showCompaignModal}
                     hasBackdrop={true}
@@ -308,7 +369,7 @@ const Profile = ({ navigation }) => {
                             </Text>
                         </View>
 
-                        <ImageBackground style={{ width: '100%', height: 190 }} source={{ uri: profileImg }}>
+                        <ImageBackground style={{ width: '100%', height: 190 }} source={profileImg ? { uri: profileImg } : require('../../assets/LargeKeyboardBg.png')}>
                             <TouchableOpacity onPress={() => { openPicker() }} style={styles.plusUploadBtn}>
                                 <Image style={{ marginHorizontal: 5 }} source={require('../../assets/plusSquare.png')} />
                                 <Text style={styles.uploadText}>Upload</Text>
@@ -346,6 +407,88 @@ const Profile = ({ navigation }) => {
 
                         <View style={{ marginVertical: 10 }}>
                             <CustomButton text={"Create your compaign"} onPress={CreateCompaignHandler} />
+                        </View>
+
+                    </View>
+                    {ReferalModal && showDonationDialog ?
+                        <BlurView
+                            style={mystyles.absolute}
+                            blurType="light"
+                            blurRadius={10}
+                            blurAmount={10}
+                            reducedTransparencyFallbackColor="#222531"
+                        />
+                        : null}
+                </Modal>
+
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    style={{ alignSelf: 'center', margin: 0, backgroundColor: '#17171A', width: '100%' }}
+                    coverScreen={true}
+                    visible={changeCompaignModal}
+                    hasBackdrop={true}
+                    onBackdropPress={() => ChangeCompaignBtnHandler()}
+                >
+
+
+                    <View style={{ flex: 1, justifyContent: 'center', }}>
+
+                        <TouchableOpacity style={styles.circleCloseBtn}
+                            onPress={() => ChangeCompaignBtnHandler()}>
+                            <Image style={{ tintColor: "#FFFF" }}
+                                source={require('../../assets/closecircle.png')} />
+                        </TouchableOpacity>
+
+                        <CustomText text="Create your own compaign"
+                            locations={[0, 1,]} colors={["#72F6D1", "#FED365"]}
+                            style={{ fontSize: 18, fontWeight: "bold", textAlign: "center" }} />
+
+                        <View style={{ marginVertical: 8 }}>
+                            <Text style={styles.createYourOwnDescription}>
+                                Create your own campaign to raise coins for{'\n'}your project. Please upload your banner{'\n'}and add a description
+                            </Text>
+                        </View>
+
+                        <ImageBackground style={{ width: '100%', height: 190 }} source={profileImg ? { uri: profileImg } : require('../../assets/LargeKeyboardBg.png')}>
+                            <TouchableOpacity onPress={() => { openPicker() }} style={styles.plusUploadBtn}>
+                                <Image style={{ marginHorizontal: 5 }} source={require('../../assets/plusSquare.png')} />
+                                <Text style={styles.uploadText}>Upload</Text>
+                            </TouchableOpacity>
+                        </ImageBackground>
+
+                        <View style={{ marginTop: 20, marginLeft: 15 }}>
+                            <Text style={{
+                                fontSize: 16, fontFamily: 'Poppins-Regular',
+                                color: '#FFFF'
+                            }}>Compaign Title</Text>
+                        </View>
+
+                        <TextInput placeholder="Add a title"
+                            placeholderTextColor="#888DAA"
+                            style={mystyles.simpleTextInput}
+                        // value={compaignTitle1}
+                        // onChangeText={setCompaignTitle1}
+
+                        />
+
+                        <TextInput
+                            multiline
+                            textAlignVertical="top"
+                            numberOfLines={5}
+                            placeholderTextColor="#888DAA"
+                            placeholder="Add a description"
+                            value={compaignAddress1}
+                            // onChangeText={setCompaignAddress1}
+                            style={[mystyles.simpleTextInput, {
+                                backgroundColor: '#222531',
+                                borderColor: '#222531',
+                            }]}
+                        />
+
+                        <View style={{ marginVertical: 10 }}>
+                            <CustomButton text={"Change your compaign"} onPress={() => ChangeCompaignBtnHandler()} />
                         </View>
 
                     </View>
@@ -519,7 +662,7 @@ const Profile = ({ navigation }) => {
                 </Modal>
 
 
-                <Modal
+                {/* <Modal
                     animationType="slide"
                     transparent={true}
                     style={{
@@ -663,7 +806,7 @@ const Profile = ({ navigation }) => {
 
                     </View>
 
-                </Modal>
+                </Modal> */}
 
                 {ReferalModal && showDonationDialog ?
                     <BlurView
@@ -792,6 +935,34 @@ const styles = StyleSheet.create({
         fontSize: 12,
         alignSelf: 'center'
     },
+    compaignLargeImg:
+    {
+        marginVertical: 10,
+        alignSelf: 'center'
+    },
+    newsText:
+    {
+        fontSize: 16,
+        fontFamily: 'Poppins-Regular',
+        color: '#FFFF'
+    },
+    BTCHoursAgoSource:
+    {
+        marginHorizontal: 8,
+        fontFamily: 'Poppins-Medium',
+        fontSize: 12,
+        color: '#FFFF'
+    },
+    changeShareBtn: {
+        borderWidth: 1,
+        borderColor: '#2A2D3C',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignSelf: 'center',
+        borderRadius: 10,
+        paddingHorizontal: wp(6),
+        paddingVertical: hp(1)
+    }
 
 
 })
