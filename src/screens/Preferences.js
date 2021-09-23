@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { Container, Content, Thumbnail } from 'native-base'
 import { View, Text, ScrollView, Dimensions, SafeAreaView, TouchableOpacity, StyleSheet } from 'react-native'
 import { RadioButton } from 'react-native-paper';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-import { BackgroundColor } from '../constants/colors';
+import { BackgroundColor, lightWhite } from '../constants/colors';
 import Modal from 'react-native-modal';
 import DropDownPicker from 'react-native-dropdown-picker';
 import BackBtnWithMiddleText from '../components/BackBtnMiddleText';
 import PreferencesTitleDescriptionArrowBtn from '../components/PreferencesTitleDescriptionArrowBtn';
 import HeaderBackTextCloseBtn from '../components/HeaderBackTextClose';
 import CustomButton from '../components/Button';
-import { boldtext, simpletext } from '../constants/fonts';
+import { boldtext, fontmedium, simpletext } from '../constants/fonts';
 import KycModal from '../components/kYCModal'
 import CurrencyModal from '../components/CurrencyModal';
 import LanguageModal from '../components/LanguageModal'
@@ -20,7 +21,9 @@ const { width, height } = Dimensions.get('window')
 import * as Actions from './../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
 import TwoFAModal from '../components/2FAModal';
-
+import Icon from 'react-native-vector-icons/Ionicons'
+import BaseCurrencyModal from '../components/BaseCurrencyModal';
+import CurrentLanguageModal from '../components/CurrentLanguageModa';
 const Preferences = ({ navigation }) => {
 
     const dispatch = useDispatch();
@@ -36,8 +39,24 @@ const Preferences = ({ navigation }) => {
     const [incomming, setIncomming] = useState(false)
     const [Modal2FA, setModal2FA] = useState(false)
     const [metametric, setMetaMetric] = useState(false)
-    const [currencymodal, setCurrencyModal] = useState(false)
+    const [currencyName, setCurrencyName] = useState('USD-United State Dollar')
     const [languagemodal, setLanguageModal] = useState(false)
+    const [currencymodal, setCurrencyModal] = useState(false)
+    const [CurrencyData, setCurrencyData] = useState([
+        { id: 0, label: 'EUR', value: 'Euro' },
+        { id: 1, label: 'USD', value: 'United State Dollar' },
+        { id: 2, label: 'GBR', value: 'British Pound' },
+        { id: 3, label: 'AUD', value: 'Australian Dollar' },
+        { id: 4, label: 'KRW', value: 'South Korean Wan' },
+        { id: 5, label: 'JPY', value: 'Japanese Yan' },
+    ])
+
+    const closeBaseCurrencyHandler = () => {
+        setCurrencyModal(!currencymodal)
+    }
+    const CurrencyHandler = (item) => {
+        setCurrencyName(item.label + "-" + item.value)
+    }
     const BackBtnHandler = () => {
         navigation.goBack()
     }
@@ -62,47 +81,57 @@ const Preferences = ({ navigation }) => {
 
         setShowVerificatonModal(!showverificationModal)
     }
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
-    const [CurrencyDropDown, setCurrencyDropDown] = useState([
-        { label: 'Dollar', value: 'USD-United State Dollar' },
-        { label: 'XLM - Stellar Lumen', value: 'XLM - Stellar Lumen' },
-        { label: 'STORJ - Storj', value: 'STORJ - Storj' },
-        { label: 'PAY - TenX', value: 'PAY - TenX' },
-        { label: 'TKN - TokenCard', value: 'TKN - TokenCard' },
-        { label: 'UAH - Ukrainian Hryvnia', value: 'UAH - Ukrainian Hryvnia' },
-        { label: 'USD - United State Dollar', value: 'USD - United State Dollar' },
-        { label: 'TRST - WeTrust', value: 'TRST - WeTrust' },
-        { label: 'ZEC - Zcash', value: 'ZEC - Zcash' },
-    ]);
-    const [openLanguage, setOpenLanguage] = useState(false)
-    const [valueLanguage, setValueLanguage] = useState(null)
-    const [LanguageDropDown, setLanguageDropDown] = useState([
-        { label: "Čeština", value: 'Čeština' },
-        { label: "Dansk", value: "Dansk" },
-        { label: "Deutsch", value: "Deutsch" },
-        { label: "ελληνικά", value: "ελληνικά" },
+    const LanguageModalCloseHandler = () => {
+        setOpenLanguageModal(false)
+    }
+    // const [open, setOpen] = useState(false);
+    // const [value, setValue] = useState(null);
+    // const [CurrencyDropDown, setCurrencyDropDown] = useState([
+    //     { label: 'EUR', value: 'Euro' },
+    //     { label: 'USD', value: 'United State Dollar' },
+    //     { label: 'GBR', value: 'British Pound' },
+    //     { label: 'AUD', value: 'Australian Dollar' },
+    //     { label: 'KRW', value: 'South Korean Wan' },
+    //     { label: 'JPY', value: 'Japanese Yan' },
 
-        { label: "English", value: "English" },
-        { label: "Español (Latin America)", value: "Español (Latin America)" },
-        { label: "Estonian", value: "Estonian" },
+    // ]);
 
+    const [selectedLanguage, setSelectedLanguage] = useState('Dansk');
+    const [openLanguageModal, setOpenLanguageModal] = useState(false)
+    // const [valueLanguage, setValueLanguage] = useState(null)
+    // const [LanguageDropDown, setLanguageDropDown] = useState([
+    //     { label: "Čeština", value: 'Čeština' },
+    //     { label: "Dansk", value: "Dansk" },
+    //     { label: "Deutsch", value: "Deutsch" },
+    //     { label: "ελληνικά", value: "ελληνικά" },
 
-    ]);
+    //     { label: "English", value: "English" },
+    //     { label: "Español (Latin America)", value: "Español (Latin America)" },
+    //     { label: "Estonian", value: "Estonian" },
+    // ]);
+    const [Languages, setLanguages] = useState([
+        { value: 'Čeština' },
+        { value: "Dansk" },
+        { value: "Deutsch" },
+        { value: "ελληνικά" },
+        { value: "English" },
+        { value: "Español (Latin America)" },
+        { value: "Estonian" },
+    ])
 
 
     return (
         <Container style={{ backgroundColor: BackgroundColor, flex: 1 }}>
             <Content contentContainerStyle={{ backgroundColor: BackgroundColor }} >
 
-                <BackBtnWithMiddleText text="Preferences" backBtn={BackBtnHandler} navigation={navigation} />
-                <View style={{ marginTop: 40 }}>
-                    <PreferencesTitleDescriptionArrowBtn
-                        title="General"
-                        showModal={closeModalHandler}
-                        description={"Currency conversion, primary currency\n,language and search engine"}
-                    />
-                </View>
+                <BackBtnWithMiddleText text="Settings" backBtn={BackBtnHandler} navigation={navigation} />
+
+                <PreferencesTitleDescriptionArrowBtn
+                    title="General"
+                    showModal={closeModalHandler}
+                    description={"Currency conversion, primary currency\n,language and search engine"}
+                />
+
 
                 <PreferencesTitleDescriptionArrowBtn
                     title="Security & Privacy"
@@ -115,6 +144,12 @@ const Preferences = ({ navigation }) => {
                     description={"In order to use the service of GinkoPay\nyou will need to verify your identy"}
                 />
 
+
+                <PreferencesTitleDescriptionArrowBtn
+                    title="Bank Account"
+                    showModal={functionshowverificationmodal}
+                    description={"Display your bank informations or change it"}
+                />
 
             </Content>
 
@@ -140,8 +175,14 @@ const Preferences = ({ navigation }) => {
                                 Display fiat values in using o specific currency throughout the application
                          </Text>
                         </View>
+                        <TouchableOpacity
+                            onPress={() => setCurrencyModal(true)}
+                            style={styles.LanguageOpenerBtn}>
 
-                        <DropDownPicker
+                            <Text style={styles.headingText}>{currencyName}</Text>
+                            <Icon name="chevron-down-outline" size={20} color="#FFF" />
+                        </TouchableOpacity>
+                        {/* <DropDownPicker
                             open={open}
                             value={value}
                             items={CurrencyDropDown}
@@ -171,16 +212,15 @@ const Preferences = ({ navigation }) => {
                             setValue={setValue}
                             setItems={setCurrencyDropDown}
                             setOpen={setOpen}
-                        />
+                        /> */}
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
-                            <Text style={styles.headingText}>Privacy Currency</Text>
+                            <Text style={styles.headingText}>Privacy Policy</Text>
                             <Text style={styles.descriptionText}>
-                                Select Native to prioritize displaying values{'\n'}in the native currency of the chain (e.g. ETH).{'\n'} Select Fiat to prioritize displaying values in{'\n'}your selected fiat currency
-                             </Text>
+                                Ginkopay's Privacy Policy describes how{'\n'}Ginkopay collects, uses and shares your{'\n'}personal data.                             </Text>
                         </View>
 
-                        <View style={{ marginLeft: 15, flexDirection: 'row' }}>
+                        {/* <View style={{ marginLeft: 15, flexDirection: 'row' }}>
 
                             <RadioButton
                                 color="#FEBF32"
@@ -201,17 +241,27 @@ const Preferences = ({ navigation }) => {
                                 />
                                 <Text style={{ alignSelf: 'center', color: '#FFFF' }}>Flat</Text>
                             </View>
-                        </View>
-
+                        </View> */}
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <Text style={styles.headingText}>Current Language</Text>
                             <Text style={styles.descriptionText}>
-                                Translate the application to a different{'\n'}Supported language
-                             </Text>
+                                Translate the application to a different{'\n'}supported language                         </Text>
                         </View>
 
-                        <DropDownPicker
+                        <TouchableOpacity
+                            onPress={() => setOpenLanguageModal(true)}
+                            style={styles.LanguageOpenerBtn}>
+
+                            <Text style={{
+                                fontWeight: '400',
+                                color: '#FFFF',
+                                fontFamily: 'Poppins-Bold',
+                            }}>{selectedLanguage}</Text>
+                            <Icon name="chevron-down-outline" size={20} color="#FFF" />
+                        </TouchableOpacity>
+
+                        {/* <DropDownPicker
                             open={openLanguage}
                             value={valueLanguage}
                             items={LanguageDropDown}
@@ -240,7 +290,7 @@ const Preferences = ({ navigation }) => {
                             setValue={setValueLanguage}
                             setItems={setLanguageDropDown}
                             setOpen={setOpenLanguage}
-                        />
+                        /> */}
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <Text style={styles.headingText}>User can search my profile </Text>
@@ -471,11 +521,76 @@ const Preferences = ({ navigation }) => {
                     </Content>
                 </Container>
             </Modal>
-
+            <BaseCurrencyModal
+                visible={currencymodal}
+                setCurrencyName={setCurrencyData}
+                setVisible={closeBaseCurrencyHandler}
+                data={CurrencyData} currencyHandler={CurrencyHandler} />
             <TwoFAModal visible={Enable2FA} setVisible={Enable2FAHandler} />
             <KycModal visible={showverificationModal} navigation={navigation} setVisible={setShowVerificatonModal} />
             <CurrencyModal visible={languagemodal} setVisible={setCurrencyModal} />
-            <LanguageModal visible={currencymodal} setVisible={setLanguageModal} />
+            {/* <LanguageModal visible={currencymodal} setVisible={setLanguageModal} /> */}
+
+            <CurrentLanguageModal visible={openLanguageModal} setVisible={LanguageModalCloseHandler}
+                data={Languages} setSelectedLanguage={setSelectedLanguage}
+            />
+
+
+            <Modal
+                isVisible={openLanguageModal}
+                animationIn="fadeInRight"
+                deviceHeight={Dimensions.get("screen").height * 2}
+                transparent={true}
+                style={styles.modal}
+                coverScreen={true}
+                animationOut="slideOutDown"
+                onBackdropPress={() => setOpenLanguageModal(false)}
+                onBackButtonPress={() => setOpenLanguageModal(false)}
+                useNativeDriver={true}
+                hasBackdrop={true}
+                backdropColor="#1D1F27"
+            // backdropOpacity={.85}
+            >
+                {/* <Container style={{}} > */}
+                <View style={[styles.mainview, { height: height / 1.6 }]} >
+                    <View style={{ backgroundColor: "#ffffff", alignSelf: 'center', height: 4, width: 50, borderRadius: 5 }} />
+                    <Text style={styles.currencyName}> Current Language</Text>
+                    {Languages.map((item, index) => (
+                        <TouchableOpacity
+                            onPress={() => setSelectedLanguage(item.value)}
+                            style={{
+                                // flexDirection: "row",
+                                // marginVertical: 10,
+                                // justifyContent: "center", alignItems: "center",
+                                // backgroundColor: "#2A2D3C",
+                                //  height: 40,
+                                //  minWidth: 100,
+                                paddingHorizontal: 20,
+                                borderRadius: 10
+                            }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <Text style={{
+                                    color: lightWhite,
+                                    marginVertical: hp(2),
+                                    fontSize: 15,
+                                    fontFamily: fontmedium
+                                }}>{item.value} </Text>
+                                {index == item.id &&
+                                    <Image resizeMode="contain"
+                                        source={require('../assets/greenCheckMark.png')} />
+
+                                }
+                            </View>
+
+
+
+                        </TouchableOpacity>
+                    ))}
+
+                </View>
+                {/* </Container> */}
+            </Modal>
+
         </Container>
     )
 }
@@ -512,6 +627,23 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         paddingHorizontal: 8,
         borderRadius: 8
+    },
+    currencyName: {
+        color: "#fff",
+        margin: 10,
+        textAlign: 'center',
+        fontSize: 15,
+        fontFamily: fontmedium
+    },
+    LanguageOpenerBtn: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: '#17171A',
+        borderColor: '#FFFF', width: '90%',
+        paddingHorizontal: 10,
+        marginLeft: wp(3),
+        paddingVertical: hp(2),
+        borderRadius: 10,
     }
 
 })
