@@ -403,7 +403,7 @@ const Preferences = ({ navigation }) => {
 
                         <Text style={[styles.descriptionText, { marginHorizontal: 18 }]}>
                             Clear Priacy data so all websites must{'\n'}request access to view account information {'\n'}again
-                            </Text>
+                        </Text>
 
 
                         {/* <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
@@ -891,11 +891,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: '#17171A',
-        borderColor: '#FFFF', width: '90%',
+        width: '90%',
+        alignItems: 'center',
         paddingHorizontal: 10,
         marginLeft: wp(3),
         paddingVertical: hp(2),
         borderRadius: 10,
+        borderWidth: 1,
+        borderColor: lightWhite,
     }, textinputmaincontainer: {
         width: width - 30,
         alignSelf: "center",
