@@ -107,7 +107,7 @@ const Preferences = ({ navigation }) => {
         setOpenLanguageModal(false)
     }
     const BankAccountModalOpener = () => {
-
+        setBankAccountModal(true)
     }
     // const [open, setOpen] = useState(false);
     // const [value, setValue] = useState(null);
