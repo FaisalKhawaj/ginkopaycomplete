@@ -10,7 +10,7 @@ import { boldtext, fontmedium, simpletext } from '../constants/fonts';
 import HeaderBackTextCloseBtn from './HeaderBackTextClose';
 import Modal from 'react-native-modal'
 const buttontextcolor = "#FEBF32"
-const SliderScreenOne = ({ visible, navigation, setVisible }) => {
+const SliderScreenOne = ({ visible, backhandler, navigation, setVisible }) => {
   StatusBar.setHidden(true)
   const [copiedText, setCopiedText] = useState('');
   const link = 'https://ginkopay.app.link/send/0xBBB6A12945aC14C84185a17C6BD2eAe96e/value=21jq'
@@ -46,7 +46,7 @@ const SliderScreenOne = ({ visible, navigation, setVisible }) => {
       hasBackdrop={true}
       backdropColor="#1D1F27"
       backdropOpacity={1}>
-      <HeaderBackTextCloseBtn text="Security & Privacy" backhandler={BackBtnHandler} setShowBannerModal={setVisible} closeModal={setVisible} />
+      <HeaderBackTextCloseBtn text="Security & Privacy" backhandler={backhandler} setShowBannerModal={setVisible} closeModal={setVisible} />
       <Content style={{ flexGrow: 1 }}
         contentContainerStyle={styles.contentContainerStyle}  >
 

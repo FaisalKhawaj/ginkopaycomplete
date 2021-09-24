@@ -32,7 +32,11 @@ const BaseCurrencyModal = ({ visible, setVisible, data, setCurrencyName, currenc
                 <Text style={styles.currencyName}> Base Currency</Text>
                 {data.map((item, index) => (
                     <TouchableOpacity
-                        onPress={() => currencyHandler(item)}
+                        onPress={() => {
+                            currencyHandler(item)
+
+                        }
+                        }
                         style={{
                             // flexDirection: "row",
                             // marginVertical: 10,
@@ -50,10 +54,10 @@ const BaseCurrencyModal = ({ visible, setVisible, data, setCurrencyName, currenc
                                 fontSize: 15,
                                 fontFamily: fontmedium
                             }}>{item.label}-{item.value} </Text>
-                            {index == item.id ?
+                            {item.id == index &&
                                 <Image resizeMode="contain"
                                     source={require('../assets/greenCheckMark.png')} />
-                                : null
+
                             }
                         </View>
 

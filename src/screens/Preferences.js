@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Content, Thumbnail } from 'native-base'
+import { Container, Content, Item, Input, Label } from 'native-base'
 import { View, Text, ScrollView, Dimensions, SafeAreaView, TouchableOpacity, StyleSheet } from 'react-native'
 import { RadioButton } from 'react-native-paper';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-import { BackgroundColor, lightWhite } from '../constants/colors';
+import { BackgroundColor, graycolor, lightWhite } from '../constants/colors';
 import Modal from 'react-native-modal';
 import DropDownPicker from 'react-native-dropdown-picker';
 import BackBtnWithMiddleText from '../components/BackBtnMiddleText';
@@ -24,6 +24,8 @@ import TwoFAModal from '../components/2FAModal';
 import Icon from 'react-native-vector-icons/Ionicons'
 import BaseCurrencyModal from '../components/BaseCurrencyModal';
 import CurrentLanguageModal from '../components/CurrentLanguageModa';
+import MyBankAccountModal from '../components/BankAccountModal';
+import CustomText from '../components/Text';
 const Preferences = ({ navigation }) => {
 
     const dispatch = useDispatch();
@@ -42,6 +44,13 @@ const Preferences = ({ navigation }) => {
     const [currencyName, setCurrencyName] = useState('USD-United State Dollar')
     const [languagemodal, setLanguageModal] = useState(false)
     const [currencymodal, setCurrencyModal] = useState(false)
+    const [BankAccountModal, setBankAccountModal] = useState(false)
+    const [InsertBankAccountDetails, setInsertBankAccountDetails] = useState(false)
+    const [showAccountDetail, setShowAccountDetails] = useState(false)
+    const [BankAccountName, setBankAccountName] = useState('')
+    const [AccountBIC, setAccountBIC] = useState('');
+    const [AccountIBAN, setAccountIBAN] = useState('');
+    const [AccountAddress, setAccountAddress] = useState('');
     const [CurrencyData, setCurrencyData] = useState([
         { id: 0, label: 'EUR', value: 'Euro' },
         { id: 1, label: 'USD', value: 'United State Dollar' },
@@ -51,6 +60,16 @@ const Preferences = ({ navigation }) => {
         { id: 5, label: 'JPY', value: 'Japanese Yan' },
     ])
 
+    const AddBankAccountHandler = () => {
+        setBankAccountModal(false)
+        setInsertBankAccountDetails(true)
+    }
+
+    const InsertBankAccountHandler = () => {
+        setInsertBankAccountDetails(false)
+        setShowAccountDetails(true)
+    }
+
     const closeBaseCurrencyHandler = () => {
         setCurrencyModal(!currencymodal)
     }
@@ -59,6 +78,9 @@ const Preferences = ({ navigation }) => {
     }
     const BackBtnHandler = () => {
         navigation.goBack()
+    }
+    const closeShowVerificationModal = () => {
+        setShowVerificatonModal(false)
     }
 
 
@@ -83,6 +105,9 @@ const Preferences = ({ navigation }) => {
     }
     const LanguageModalCloseHandler = () => {
         setOpenLanguageModal(false)
+    }
+    const BankAccountModalOpener = () => {
+
     }
     // const [open, setOpen] = useState(false);
     // const [value, setValue] = useState(null);
@@ -147,7 +172,7 @@ const Preferences = ({ navigation }) => {
 
                 <PreferencesTitleDescriptionArrowBtn
                     title="Bank Account"
-                    showModal={functionshowverificationmodal}
+                    showModal={BankAccountModalOpener}
                     description={"Display your bank informations or change it"}
                 />
 
@@ -168,7 +193,7 @@ const Preferences = ({ navigation }) => {
                         backgroundColor: "#17171A"
                     }}>
                         {/* <View style={{ height: height / 1,backgroundColor: '#17171A' }}> */}
-                        <HeaderBackTextCloseBtn text="General" closeModal={closeModalHandler} setShowBannerModal={closeModalHandler} />
+                        <HeaderBackTextCloseBtn text="General" closeModal={closeModalHandler} backhandler={closeModalHandler} />
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <Text style={styles.headingText}>Currency Conversion</Text>
                             <Text style={styles.descriptionText}>
@@ -330,6 +355,7 @@ const Preferences = ({ navigation }) => {
 
 
             </Modal>
+
 
 
             <Modal
@@ -527,13 +553,239 @@ const Preferences = ({ navigation }) => {
                 setVisible={closeBaseCurrencyHandler}
                 data={CurrencyData} currencyHandler={CurrencyHandler} />
             <TwoFAModal visible={Enable2FA} setVisible={Enable2FAHandler} />
-            <KycModal visible={showverificationModal} navigation={navigation} setVisible={setShowVerificatonModal} />
+            <KycModal visible={showverificationModal} navigation={navigation} backhandler={closeShowVerificationModal} setVisible={setShowVerificatonModal} />
             <CurrencyModal visible={languagemodal} setVisible={setCurrencyModal} />
             {/* <LanguageModal visible={currencymodal} setVisible={setLanguageModal} /> */}
 
             <CurrentLanguageModal visible={openLanguageModal} setVisible={LanguageModalCloseHandler}
                 data={Languages} setSelectedLanguage={setSelectedLanguage}
             />
+
+
+            <MyBankAccountModal visible={BankAccountModal} setVisible={AddBankAccountHandler} />
+
+            <Modal
+                isVisible={InsertBankAccountDetails}
+                animationIn="fadeInRight"
+                deviceHeight={Dimensions.get("screen").height * 2}
+                transparent={true}
+                style={styles.modal}
+                coverScreen={true}
+                animationOut="slideOutDown"
+                onBackdropPress={() => InsertBankAccountHandler()}
+                onBackButtonPress={() => InsertBankAccountHandler()}
+                useNativeDriver={true}
+                hasBackdrop={true}
+                backdropColor="#1D1F27"
+                backdropOpacity={.85}
+            >
+                <Container style={styles.mainview}>
+                    <HeaderBackTextCloseBtn
+                        text="BANK ACCOUNT"
+                        backhandler={() => { InsertBankAccountHandler() }}
+                        closeModal={() => { InsertBankAccountHandler() }}
+                    />
+                    <Content
+                        contentContainerStyle={styles.contentContainerStyle}
+                        style={{ flexGrow: 1 }}>
+
+
+                        <View style={styles.textinputmaincontainer}>
+                            <Item stackedLabel
+                                style={styles.textinputcontainer}>
+                                <Label style={{ color: graycolor, fontFamily: simpletext, fontSize: 14, }}>Account holder</Label>
+                                <Input
+                                    placeholder="Enter your bank account name"
+                                    placeholderTextColor="#fff"
+                                    style={styles.textinput}
+                                    textColor="#fff"
+                                    // value={name}
+                                    onChangeText={text => setAccountAddress(text)}
+                                />
+                            </Item>
+
+                        </View>
+
+                        <View style={styles.textinputmaincontainer}>
+                            <Item stackedLabel
+                                style={styles.textinputcontainer}>
+                                <Label style={{ color: graycolor, fontFamily: simpletext, fontSize: 14, }}>BIC </Label>
+                                <Input
+                                    placeholder="Enter your bank identifier code"
+                                    placeholderTextColor="#fff"
+                                    style={styles.textinput}
+                                    textColor="#fff"
+                                    // value={name}
+                                    onChangeText={text => setAccountBIC(text)}
+                                />
+                            </Item>
+
+                        </View>
+
+                        <View style={styles.textinputmaincontainer}>
+                            <Item stackedLabel
+                                style={styles.textinputcontainer}>
+                                <Label style={{ color: graycolor, fontFamily: simpletext, fontSize: 14, }}>IBAN </Label>
+                                <Input
+                                    placeholder="Enter your IBAN"
+                                    placeholderTextColor="#fff"
+                                    style={styles.textinput}
+                                    textColor="#fff"
+                                    // value={name}
+                                    onChangeText={text => setAccountIBAN(text)}
+                                />
+                            </Item>
+
+                        </View>
+
+                        <View style={styles.textinputmaincontainer}>
+                            <Item stackedLabel
+                                style={styles.textinputcontainer}>
+                                <Label style={{ color: graycolor, fontFamily: simpletext, fontSize: 14, }}>Address </Label>
+                                <Input
+                                    placeholder="Enter your full Address"
+                                    placeholderTextColor="#fff"
+                                    style={styles.textinput}
+                                    textColor="#fff"
+                                    // value={name}
+                                    onChangeText={text => setAccountAddress(text)}
+                                />
+                            </Item>
+
+                        </View>
+
+
+                        <TouchableOpacity onPress={() => InsertBankAccountHandler()} style={styles.saveBtn}>
+                            <CustomText
+                                text={"Save"}
+                                locations={[0, 1]}
+                                colors={["#70A2FF", "#F76E64"]}
+                                style={{ fontSize: 12, fontFamily: boldtext, }}
+                            />
+                        </TouchableOpacity>
+
+
+
+
+
+
+                        <View style={{ alignSelf: 'center', position: 'absolute', bottom: 20, flexDirection: 'row', width: width - 80, }}>
+                            <Text style={{ fontFamily: 'Poppins-Regular', color: lightWhite }}>
+                                In order to change the value of your bank{'\n'}
+   account you need to contact us at our{'\n'}
+   support   <CustomText
+                                    text={"example@example.com"}
+                                    locations={[0, 1]}
+                                    colors={["#A9CDFF", "#A9CDFF"]}
+                                    style={{ fontSize: 12, fontFamily: boldtext, }}
+                                />
+                                <Text style={{ color: lightWhite }}> or at our number</Text>
+                                <CustomText
+                                    text={"+391234567890"}
+                                    locations={[0, 1]}
+                                    colors={["#A9CDFF", "#A9CDFF"]}
+                                    style={{ fontSize: 12, fontFamily: boldtext, }}
+                                />
+                            </Text>
+                        </View>
+
+
+
+
+
+
+                    </Content>
+                </Container>
+            </Modal>
+
+
+            <Modal
+                isVisible={showAccountDetail}
+                animationIn="fadeInRight"
+                deviceHeight={Dimensions.get("screen").height * 2}
+                transparent={true}
+                style={styles.modal}
+                coverScreen={true}
+                animationOut="slideOutDown"
+                onBackdropPress={() => setShowAccountDetails(false)}
+                onBackButtonPress={() => setShowAccountDetails(false)}
+                useNativeDriver={true}
+                hasBackdrop={true}
+                backdropColor="#1D1F27"
+                backdropOpacity={.85}
+            >
+                <Container style={styles.mainview}>
+                    <HeaderBackTextCloseBtn
+                        text="BANK ACCOUNT"
+                        backhandler={() => { setShowAccountDetails(false) }}
+                        closeModal={() => { setShowAccountDetails(false) }}
+                    />
+                    <Content
+                        contentContainerStyle={[styles.contentContainerStyle, { alignItems: 'flex-start', paddingHorizontal: 15 }]}
+                        style={{ flexGrow: 1 }}>
+
+
+
+
+                        <View style={{ marginVertical: hp(2) }}>
+                            <Text style={{ color: '#FFFF' }}>Account holder</Text>
+                            <Text style={{ color: lightWhite }}>Ginko service technology LLC</Text>
+                        </View>
+
+
+
+                        <View style={{ marginVertical: hp(2) }}>
+                            <Text style={{ color: '#FFFF' }}>BIC</Text>
+                            <Text style={{ color: lightWhite }}>TRWIBEB1XXX</Text>
+                        </View>
+
+                        <View style={{ marginVertical: hp(2) }}>
+                            <Text style={{ color: '#FFFF' }}>IBAN</Text>
+                            <Text style={{ color: lightWhite }}>
+                                BE93 9672 0280 8067
+
+</Text>
+                        </View>
+
+
+                        <View style={{ marginVertical: hp(2) }}>
+                            <Text style={{ color: '#FFFF' }}>Address</Text>
+                            <Text style={{ color: lightWhite }}>
+                                Avenue Louise 54, Room S52   Brussels, 1050 , Belgium
+</Text>
+                        </View>
+
+
+
+
+                        <View style={{ alignSelf: 'center', position: 'absolute', bottom: 20, flexDirection: 'row', width: width - 80, }}>
+                            <Text style={{ fontFamily: 'Poppins-Regular', color: lightWhite }}>
+                                In order to change the value of your bank{'\n'}
+   account you need to contact us at our{'\n'}
+   support   <CustomText
+                                    text={"example@example.com"}
+                                    locations={[0, 1]}
+                                    colors={["#A9CDFF", "#A9CDFF"]}
+                                    style={{ fontSize: 12, fontFamily: boldtext, }}
+                                />
+                                <Text style={{ color: lightWhite }}> or at our number</Text>
+                                <CustomText
+                                    text={"+391234567890"}
+                                    locations={[0, 1]}
+                                    colors={["#A9CDFF", "#A9CDFF"]}
+                                    style={{ fontSize: 12, fontFamily: boldtext, }}
+                                />
+                            </Text>
+                        </View>
+
+
+
+
+
+
+                    </Content>
+                </Container>
+            </Modal>
 
 
             <Modal
@@ -644,6 +896,31 @@ const styles = StyleSheet.create({
         marginLeft: wp(3),
         paddingVertical: hp(2),
         borderRadius: 10,
-    }
+    }, textinputmaincontainer: {
+        width: width - 30,
+        alignSelf: "center",
+        marginVertical: 10,
+    },
+    textinputcontainer: {
+        borderColor: graycolor,
+        borderTopWidth: .5,
+        borderLeftWidth: .5,
+        borderRightWidth: .5,
+        borderBottomWidth: .5,
+        width: width - 30,
+        alignSelf: "center",
+        borderTopLeftRadius: 10,
+        paddingHorizontal: 15,
+        borderTopRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        backgroundColor: 'transparent'
+    },
+    textinput: {
+        fontFamily: simpletext,
+        fontSize: 14,
+        color: '#FFF',
+        height: 40,
+    },
 
 })
