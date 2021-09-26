@@ -28,13 +28,13 @@ const recievedModal = ({ title, description, address, btnName, visible, setVisib
         setWithdrawAmount(!withdrawAmount)
     }
     const navigatetoroot = () => {
-        // setCopyLink(false)
+        setCopyLink(false)
         // setVisible()
     }
     const closeallmodals = () => {
-        setCopyLink(true)
         setRequestPayment(false)
-        setVisible();
+        setCopyLink(true)
+        // setVisible();
         // transcitioncompletefunction()
     }
     return (
@@ -72,7 +72,7 @@ const recievedModal = ({ title, description, address, btnName, visible, setVisib
                     </View>
                 </Content>
             </Container>
-            <CopyLinkModal visible={copylink} setVisible={() => navigatetoroot()} />
+            <CopyLinkModal visible={copylink} setVisible={navigatetoroot} />
             <RequestPaymentModal
                 visible={requestPayment}
                 setVisible={() => closeallmodals()} setVisible2={() => alert("set visible 2")} />

@@ -100,7 +100,7 @@ const Settings = ({ navigation }) => {
         <Container style={{ backgroundColor: BackgroundColor }}>
             <Content contentContainerStyle={{ backgroundColor: BackgroundColor }}>
 
-                <TouchableOpacity style={{ marginVertical: 20, alignSelf: 'center' }}>
+                <TouchableOpacity onPress={() => navigation.navigate('DashBoardScreen', { screen: 'Profile' })} style={{ marginVertical: 20, alignSelf: 'center' }}>
                     <Thumbnail large
                         source={require('../../assets/profilePic.png')} />
                     <View style={mystylesComp.arrowCircleGradientView}>
@@ -114,7 +114,7 @@ const Settings = ({ navigation }) => {
                 </TouchableOpacity>
                 <View style={{ marginHorizontal: 20 }}>
                     <Text style={{ color: lightWhite, fontFamily: 'Poppins-Regular' }}>Invite your friends</Text>
-                    <TouchableOpacity style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity onPress={() => ShareMyPublicAddressHandler()} style={{ flexDirection: 'row' }}>
                         <Text style={{ color: orange }}>https://dege.app.link/send/0xBBB6...21jq</Text>
                         <Image resizeMode="contain" style={{ tintColor: orange, width: 22, height: 22 }} source={require('../../assets/shareAddress.png')} />
 
@@ -128,9 +128,9 @@ const Settings = ({ navigation }) => {
                     img={require('../../assets/profilecircle.png')}
                     handler={EditProfileHandler} />
 
-                <SettingsWithImgTextIcon
+                {/* <SettingsWithImgTextIcon
                     img={require('../../assets/shareAddress.png')}
-                    name="Share My Public Address" handler={ShareMyPublicAddressHandler} />
+                    name="Share My Public Address" handler={ShareMyPublicAddressHandler} /> */}
 
                 <SettingsWithImgTextIcon
                     img={require('../../assets/eye.png')}

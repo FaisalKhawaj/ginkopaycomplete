@@ -109,31 +109,9 @@ const Preferences = ({ navigation }) => {
     const BankAccountModalOpener = () => {
         setBankAccountModal(true)
     }
-    // const [open, setOpen] = useState(false);
-    // const [value, setValue] = useState(null);
-    // const [CurrencyDropDown, setCurrencyDropDown] = useState([
-    //     { label: 'EUR', value: 'Euro' },
-    //     { label: 'USD', value: 'United State Dollar' },
-    //     { label: 'GBR', value: 'British Pound' },
-    //     { label: 'AUD', value: 'Australian Dollar' },
-    //     { label: 'KRW', value: 'South Korean Wan' },
-    //     { label: 'JPY', value: 'Japanese Yan' },
-
-    // ]);
 
     const [selectedLanguage, setSelectedLanguage] = useState('Dansk');
     const [openLanguageModal, setOpenLanguageModal] = useState(false)
-    // const [valueLanguage, setValueLanguage] = useState(null)
-    // const [LanguageDropDown, setLanguageDropDown] = useState([
-    //     { label: "Čeština", value: 'Čeština' },
-    //     { label: "Dansk", value: "Dansk" },
-    //     { label: "Deutsch", value: "Deutsch" },
-    //     { label: "ελληνικά", value: "ελληνικά" },
-
-    //     { label: "English", value: "English" },
-    //     { label: "Español (Latin America)", value: "Español (Latin America)" },
-    //     { label: "Estonian", value: "Estonian" },
-    // ]);
     const [Languages, setLanguages] = useState([
         { value: 'Čeština' },
         { value: "Dansk" },
@@ -242,7 +220,12 @@ const Preferences = ({ navigation }) => {
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <Text style={styles.headingText}>Privacy Policy</Text>
                             <Text style={styles.descriptionText}>
-                                Ginkopay's Privacy Policy describes how{'\n'}Ginkopay collects, uses and shares your{'\n'}personal data.                             </Text>
+                                Ginkopay's   <CustomText
+                                    text={"Privacy Policy"}
+                                    locations={[0, 1]}
+                                    colors={["#70A2FF", "#F76E64"]}
+                                    style={{ fontSize: 12, fontFamily: boldtext, }}
+                                />  describes how{'\n'}Ginkopay collects, uses and shares your{'\n'}personal data.                             </Text>
                         </View>
 
                         {/* <View style={{ marginLeft: 15, flexDirection: 'row' }}>
@@ -286,36 +269,6 @@ const Preferences = ({ navigation }) => {
                             <Icon name="chevron-down-outline" size={20} color="#FFF" />
                         </TouchableOpacity>
 
-                        {/* <DropDownPicker
-                            open={openLanguage}
-                            value={valueLanguage}
-                            items={LanguageDropDown}
-                            searchable={false}
-                            placeholder="English"
-                            style={{
-                                backgroundColor: '#131313',
-                                borderColor: '#17171A',
-                                borderRadius: 10,
-                                // width: wp('90%'),
-                                // alignSelf: 'center'
-                            }}
-                            showArrowIcon={true}
-                            arrowIconStyle={{ tintColor: open ? 'green' : '#FFFFFF' }}
-                            dropDownContainerStyle={{
-                                backgroundColor: '#131313',
-                                borderColor: '#272727',
-                            }}
-                            textStyle={{
-                                fontSize: 15,
-                                fontWeight: '400',
-                                color: '#FFFF',
-                                fontFamily: 'Poppins-Bold',
-                            }}
-                            containerStyle={{ width: '90%', alignSelf: 'center', height: 44 }}
-                            setValue={setValueLanguage}
-                            setItems={setLanguageDropDown}
-                            setOpen={setOpenLanguage}
-                        /> */}
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <Text style={styles.headingText}>User can search my profile </Text>

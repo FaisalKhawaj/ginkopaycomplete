@@ -1,11 +1,13 @@
 
 import React, { useState } from 'react';
 import { View, FlatList, StatusBar, Dimensions, StyleSheet, Image, Text, TouchableOpacity, Touchable, SafeAreaView } from 'react-native';
-import { Container, Content, Item, Input, Label } from 'native-base'
+import { Container, Content, Item, Thumbnail, Input, Label } from 'native-base'
 import Feather from 'react-native-vector-icons/Feather';
 import { boldtext, fontmedium, simpletext } from '../../constants/fonts';
-import { BackgroundColor, graycolor, green, lightWhite } from '../../constants/colors';
+import { BackgroundColor, graycolor, green, lightWhite, LinearGradientColorOne, LinearGradientColorTwo } from '../../constants/colors';
 import CustomText from '../../components/Text';
+import LinearGradient from 'react-native-linear-gradient'
+
 import Modal from 'react-native-modal'
 import SENT from '../../assets/sent.svg'
 import RECIEVED from '../../assets/recieved.svg'
@@ -236,17 +238,31 @@ const Home = ({ navigation }) => {
         <StatusBar hidden />
 
         <View style={styles.header}>
-          <TouchableOpacity style={styles.profile}>
-            <Image style={styles.profileimage} source={{ uri: "https://i.pinimg.com/564x/de/fe/c1/defec1130775ba6b3db467359cc7599e.jpg" }} />
+
+          <TouchableOpacity onPress={() => navigation.navigate('DashBoardScreen', { screen: 'Profile' })}
+            style={{ marginVertical: 2, alignSelf: 'center' }}>
+            <Thumbnail medium
+              source={require('../../assets/profilePic.png')} />
+            <View style={styles.arrowCircleGradientView}>
+              {/* <LinearGradient
+                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                colors={[LinearGradientColorTwo, LinearGradientColorOne]}
+                style={styles.LinearGradientCircleView}> */}
+              <Image resizeMode="contain" style={{ alignSelf: 'center', }} source={require('../../assets/yellowCircleProfile.png')} />
+              {/* </LinearGradient> */}
+            </View>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity style={styles.profile}>
+            <Image style={styles.profileimage} source={{ uri: "https://i.pinimg.com/564x/de/fe/c1/defec1130775ba6b3db467359cc7599e.jpg" }} />
+          </TouchableOpacity> */}
+          {/* <TouchableOpacity
             onPress={() => showModal("assets")}
             style={{ flexDirection: 'row', alignSelf: 'center' }}>
             <Text style={{ color: '#fff', fontFamily: simpletext, marginRight: 10, fontSize: 14 }}>
               My Assets
                 </Text>
             <Feather name="chevron-down" color="#fff" size={22} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         <View style={styles.mainView}>
@@ -668,6 +684,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: "space-between"
+  },
+  arrowCircleGradientView:
+  {
+    position: 'absolute', bottom: 0, right: 0
+  },
+  LinearGradientCircleView:
+  {
+    width: 25,
+    borderRadius: 25,
+    justifyContent: 'center',
+    height: 25
   },
   profile: {
     height: 35,

@@ -54,7 +54,7 @@ const BaseCurrencyModal = ({ visible, setVisible, data, setCurrencyName, currenc
                                 fontSize: 15,
                                 fontFamily: fontmedium
                             }}>{item.label}-{item.value} </Text>
-                            {item.id == index &&
+                            {item.id === index &&
                                 <Image resizeMode="contain"
                                     source={require('../assets/greenCheckMark.png')} />
 

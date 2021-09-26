@@ -7,7 +7,7 @@ import HeaderBackTextClose from './HeaderBackTextClose'
 const { width, height } = Dimensions.get("window");
 import CustomButton from './Button'
 import CustomText from './Text'
-const MarketBuySellConfirmAmountModal = ({ visible, btnText, closeModal }) => {
+const MarketBuySellConfirmAmountModal = ({ visible, btnText, Amount, Total, closeModal }) => {
 
 
 
@@ -57,25 +57,25 @@ const MarketBuySellConfirmAmountModal = ({ visible, btnText, closeModal }) => {
                         </View>
 
 
-                        <Text style={[styles.buttontext, { textAlign: 'center' }]}>Balance : 19.2377</Text>
+                        <Text style={[styles.buttontext, { textAlign: 'center' }]}>Balance : 19.2377 GDC</Text>
 
 
                         <View style={styles.textinputarea}>
                             <View style={styles.amount}>
                                 <View style={{ flexDirection: "row", width: width - 100, alignSelf: "center", justifyContent: "space-between" }}>
-                                    <Text style={styles.text}>Amount</Text>
-                                    <Text style={styles.text}>0.2405 BNB</Text>
+                                    <Text style={styles.text}>{Amount}</Text>
+                                    <Text style={styles.text}>0.2405 GDC</Text>
                                 </View>
 
                             </View>
                             <View style={styles.total}>
                                 <View style={{ flexDirection: "row", width: width - 100, alignSelf: "center", justifyContent: "space-between" }}>
-                                    <Text style={styles.text}>Total </Text>
-                                    <Text style={styles.text}>0.3605 BNB</Text>
+                                    <Text style={styles.text}>{Total} </Text>
+                                    <Text style={styles.text}>0.3605 GDC</Text>
                                 </View>
                                 <View style={{ flexDirection: "row", width: width - 100, alignSelf: "center", justifyContent: "space-between" }}>
                                     <Text style={styles.text}></Text>
-                                    <Text style={{ fontFamily: simpletext, fontSize: 10, color: graycolor }}>0.3605 BNB</Text>
+                                    <Text style={{ fontFamily: simpletext, fontSize: 10, color: graycolor }}>$84.43</Text>
                                 </View>
                             </View>
                         </View>

@@ -387,19 +387,36 @@ const Home = ({ navigation }) => {
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
             <View style={{ height: 13, width: 13, borderRadius: 13, backgroundColor: "#F7931A" }} />
-            <Text style={styles.text}>
-              {item.coin}
-            </Text>
-            <Text style={styles.text}>
-              {item.time}
-            </Text>
-            <Text style={styles.text}>
-              {item.source}
-            </Text>
+            {item.coin ?
+              <Text style={styles.text}>
+                {item.coin}
+              </Text>
+              : <Text style={styles.text}>
+                GDC
+            </Text>}
+            {item.time ?
+              <Text style={styles.text}>
+                {item.time}
+              </Text>
+              :
+              <Text style={styles.text}>
+                16h ago
+         </Text>}
+            {item.source ?
+              <Text style={styles.text}>
+                {item.source}
+              </Text> :
+              <Text style={styles.text}>
+                News Source
+            </Text>}
           </View>
         </View>
         <View style={{ backgroundColor: 'transparent', marginRight: 20, }}>
-          <Image source={{ uri: item.pictureUrl }} style={{ height: 60, width: 60, backgroundColor: "transparent", resizeMode: "cover" }} />
+          <Image resizeMode="cover" source={{ uri: item.pictureUrl }}
+            style={{
+              height: 60, width: 60, borderRadius: 5,
+              backgroundColor: "transparent", resizeMode: "cover"
+            }} />
         </View>
       </TouchableOpacity>
     )
@@ -553,12 +570,15 @@ const Home = ({ navigation }) => {
             visible={showSellConfirmAmountModal}
             btnText="SELL"
             closeModal={MarketSellConfirmAmountModalHandler}
-
+            Amount="SELL"
+            Total="Receive"
           />
 
           <MarketBuySellConfirmAmountModal
             visible={showBuyConfirmAmountModal}
             btnText="BUY"
+            Amount="Amount"
+            Total="Total"
             closeModal={MarketBuyConfirmAmountModalHandler}
 
           />

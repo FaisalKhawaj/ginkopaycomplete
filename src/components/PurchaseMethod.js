@@ -119,7 +119,7 @@ const SentModal = ({ visible, navigation, setVisible }) => {
 
                 <View style={styles.roundedCardNumView}>
                     <TextInput placeholder="Card Number" placeholderTextColor={graycolor} style={{ flex: 1, fontFamily: 'Poppins-Regular', color: graycolor }} />
-                    <View style={{ flexDirection: 'row' }}>
+                    <View style={{ flexDirection: 'row', }}>
                         <TextInput placeholderTextColor={graycolor} placeholder="MM"
                             style={{ fontFamily: 'Poppins-Regular', color: graycolor }}
                         />
@@ -129,7 +129,7 @@ const SentModal = ({ visible, navigation, setVisible }) => {
                         />
 
                         <TextInput placeholderTextColor={graycolor} placeholder="CVC"
-                            style={{ fontFamily: 'Poppins-Regular', color: graycolor }}
+                            style={{ fontFamily: 'Poppins-Regular', width: 40, color: graycolor }}
                         />
                     </View>
 
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     roundedCardNumView: {
         borderWidth: 1, borderColor: '#FFFF', flexDirection: 'row',
         justifyContent: 'center',
-        paddingHorizontal: 10, width: width - 80, borderRadius: 25,
+        paddingHorizontal: 10, width: width - 85, borderRadius: 25,
     }
 
 })
