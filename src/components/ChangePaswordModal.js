@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import { Button, Text, Dimensions, SafeAreaView, StyleSheet, View } from 'react-native';
+import { Button, Text, Dimensions, SafeAreaView, StyleSheet, View, Alert } from 'react-native';
 import Modal from 'react-native-modal';
 import { BackgroundColor, graycolor } from '../constants/colors';
 import { boldtext, simpletext } from '../constants/fonts';
 import CustomButton from './Button'
 import * as Actions from './../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
+import Toast from 'react-native-root-toast';
 
 const { width, height } = Dimensions.get("window");
-import { Container, Content, Item, Input, Label } from 'native-base'
+import { Container, Content, Item, Input, Label, } from 'native-base'
 const ChnagePasswordModal = ({ isModalVisible, setModalVisible, toggleModal }) => {
   const dispatch = useDispatch();
 
   const [password, setPassword] = useState("")
-
+console.log('pass', password);
   return (
     <Modal
       isVisible={isModalVisible}
@@ -40,16 +41,19 @@ const ChnagePasswordModal = ({ isModalVisible, setModalVisible, toggleModal }) =
                 secureTextEntry={true}
                 style={styles.textinput}
                 value={password}
-                onChangeText={text => setPassword(text)}
+                onChangeText={setPassword}
               />
             </Item>
 
           </View>
           <CustomButton text={"I Got it"} onPress={() => {
             if (password) {
-              dispatch(Actions.changePassword(password))
+              setModalVisible()
+
+            } else {
+              Alert.alert("Enter correct old password")
+              // Toast.show('Enter correct old password', { textColor: 'grey', duration: Toast.durations.SHORT });
             }
-            setModalVisible()
           }} />
         </View>
       </Content>

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, StatusBar, Text, Dimensions, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StatusBar, Text, Dimensions, SafeAreaView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Container, Content, Item, Input, Label } from 'native-base'
 import { Checkbox } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient'
@@ -13,53 +13,67 @@ import { boldtext, fontmedium, simpletext } from '../../constants/fonts';
 import Modal from 'react-native-modal';
 import LottieView from 'lottie-react-native';
 import { mystyles } from '../../styles';
+import * as Actions from './../../redux/actions'
+import { useSelector, useDispatch } from 'react-redux';
+import Toast from 'react-native-root-toast';
+
 const { width, height } = Dimensions.get("window");
 
 const CreateAccountScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [password, setPassword] = useState("")
   const [passowrderror, setPasswordError] = useState("")
   const [ispasswordVisible, setispasswordVisible] = useState(false);
-
+  
   const [confrimpassword, setConfirmPassword] = useState("")
   const [confirmpasswordwrror, setConfirmPassordError] = useState("")
-
+  
   const [isconfirmpasswordvisible, setisconfirmpasswordvisible] = useState(false);
-
-
+  
+  
   const [checked, setChecked] = React.useState(false);
-
+  
   const [isModalVisible, setModalVisible] = useState(true);
   const [LoadChangingPassword, setLoadChangingPassword] = useState(false);
   const [privaytoggle, setPrivacyToggle] = useState(false)
 
 
-
-
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
+  
+  
   const toggleModal = () => {
     setModalVisible(false);
     setLoadChangingPassword(true)
     setTimeout(() => {
       setLoadChangingPassword(false)
-
+      
     }, 3000);
   };
-
+  
   const btnBackHandler = () => {
     navigation.goBack()
   }
   const gotonextScreen = () => {
-    setModalVisible(false);
-    setLoadChangingPassword(true)
-    setTimeout(() => {
-      setLoadChangingPassword(false)
-      navigation.navigate("Login")
-    }, 3000);
+    
+    if (password != confrimpassword) {
+      Alert.alert('password does not match')
+    } else {
+      setModalVisible(false);
+      setLoadChangingPassword(true)
+      dispatch(Actions.changePassword(password))
+      Toast.show('Password has been changed', { textColor: 'grey', duration: Toast.durations.SHORT });
+      dispatch(Actions.logoutUser())
+    }
+
+    // setTimeout(() => {
+    //   setLoadChangingPassword(false)
+    //   navigation.navigate("Login")
+    // }, 3000);
     // navigation.goBack();
   }
 
