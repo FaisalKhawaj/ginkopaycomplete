@@ -25,7 +25,7 @@ const ChnagePasswordModal = ({ isModalVisible, setModalVisible, toggleModal }) =
         <View style={{ backgroundColor: BackgroundColor, justifyContent: "center", paddingBottom: 20, flex: .6, alignItems: "center" }}>
           <Text style={{ color: "#fff", fontSize: 16, marginVertical: 20, fontFamily: boldtext }}>Confirm your password</Text>
           <Text style={styles.graytext}>
-            Do not save your password automaticly on your browser.
+            Do not save your password automatically on your browser.
           </Text>
           <Text style={styles.graytext}>
             <Text style={{ color: "#EA3943" }}>DO NOT</Text> share this password with anyone! These words can be used to steal all your accounts
