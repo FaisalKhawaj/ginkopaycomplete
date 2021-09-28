@@ -22,7 +22,6 @@ import CustomText from '../../components/Text';
 
 const Settings = ({ navigation }) => {
     const [showQRCode, setShowQRCode] = useState(false)
-
     const QRCodeHandler = () => {
         setShowQRCode(!showQRCode)
     }
@@ -70,9 +69,9 @@ const Settings = ({ navigation }) => {
     }
     const UpdateHandler = () => {
         if (Platform.OS == 'ios')
-            setShowEditProfileModal(!showEditProfileModal)
+            setShowEditProfileModal(!showEditProfileModal);
         else
-            Linking.openURL('https://play.google.com/store/apps/details?id=com.ubercab')
+            setShowEditProfileModal(!showEditProfileModal);
     }
 
     const BackBtnHandler = () => {
