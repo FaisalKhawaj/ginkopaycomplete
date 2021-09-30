@@ -13,7 +13,7 @@ import CopyLinkModal from './LinkCopyModal';
 const { width, height } = Dimensions.get("window");
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const WithdrawAmount = ({ visible, setVisible, }) => {
+const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
     const [value, setValue] = React.useState("")
     return (
         <Modal
@@ -24,8 +24,8 @@ const WithdrawAmount = ({ visible, setVisible, }) => {
             style={styles.modal}
             coverScreen={true}
             animationOut="slideOutDown"
-            onBackdropPress={() => setVisible()}
-            onBackButtonPress={() => setVisible()}
+            onBackdropPress={() => closeWithdraw()}
+            onBackButtonPress={() => closeWithdraw()}
             useNativeDriver={true}
             hasBackdrop={true}
             backdropColor="#1D1F27"
@@ -34,8 +34,8 @@ const WithdrawAmount = ({ visible, setVisible, }) => {
             <Container style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="Amount"
-                    backhandler={() => { setVisible() }}
-                    closeModal={() => { setVisible() }}
+                    backhandler={() => setVisible()}
+                    closeModal={() => setVisible()}
                 />
                 <Content
                     contentContainerStyle={styles.contentContainerStyle}

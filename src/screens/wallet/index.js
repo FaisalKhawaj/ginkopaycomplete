@@ -212,6 +212,9 @@ const Home = ({ navigation }) => {
     setWithdrawAmount(false)
     setBankAccountModal(true)
   }
+  const closeWithdrawAmountHandler = () => {
+    setWithdrawAmount(false)
+  }
   const AddBankAccountHandler = () => {
     setBankAccountModal(false)
     setInsertBankAccountDetails(true)
@@ -409,6 +412,7 @@ const Home = ({ navigation }) => {
         />
         <WithdrawAmount visible={withdrawAmount}
           setVisible={WithdrawAmountHandler}
+          closeWithdraw={closeWithdrawAmountHandler}
         />
 
         <MyBankAccountModal visible={BankAccountModal} setVisible={AddBankAccountHandler} />
