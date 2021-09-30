@@ -52,7 +52,7 @@ const MarketBuySellConfirmAmountModal = ({ visible, btnText, Amount, Total, clos
                         </View>
 
                         <View style={styles.amountupdown}>
-                            <Text style={styles.buttontext}>$455.555</Text>
+                            <Text style={styles.buttontext}>0.2456 GDC</Text>
                             <Image source={require("../assets/updown.png")} style={{ width: 15, height: 15 }} />
                         </View>
 

@@ -319,13 +319,13 @@ const Profile = ({ navigation }) => {
                             <TouchableOpacity onPress={() => setChangeCompaignModal(true)} style={styles.changeShareBtn}>
                                 <Image resizeMode="contain" style={{ width: 15, alignSelf: 'center', marginHorizontal: 2, height: 15 }} source={require('../../assets/editGradient.png')} />
                                 <CustomText text={"Change"} locations={[0, 1]} colors={["#A9CDFF", "#FAA49E"]}
-                                    style={{ fontSize: 20, fontWeight: "bold", textAlign: "center" }} />
+                                    style={{ fontSize: 15, fontWeight: "bold", textAlign: "center" }} />
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => ShareMyPublicAddressHandler()} style={styles.changeShareBtn}>
                                 <Image resizeMode="contain" style={{ alignSelf: 'center', width: 15, marginHorizontal: 2, height: 15 }} source={require('../../assets/shareGradient.png')} />
                                 <CustomText text={"Send Link"} locations={[0, 1]} colors={["#A9CDFF", "#FAA49E"]}
-                                    style={{ fontSize: 20, fontWeight: "bold", textAlign: "center" }} />
+                                    style={{ fontSize: 15, fontWeight: "bold", textAlign: "center" }} />
                             </TouchableOpacity>
                         </View>
 

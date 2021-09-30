@@ -54,7 +54,7 @@ const SentModalConfirm = ({ visible, sentconfrimbackpress, setVisible, transitio
                                         Binance Coin
                                     </Text>
                                     <Text style={{ color: graycolor, fontFamily: simpletext, fontSize: 12 }}>
-                                        Balance: 19.2371 BNB
+                                        Balance: 19.2371 GDC
                                     </Text>
                                 </View>
                             </View>
@@ -82,21 +82,21 @@ const SentModalConfirm = ({ visible, sentconfrimbackpress, setVisible, transitio
                             <View style={styles.amount}>
                                 <View style={{ flexDirection: "row", width: width - 100, alignSelf: "center", justifyContent: "space-between" }}>
                                     <Text style={styles.text}>Amount</Text>
-                                    <Text style={styles.text}>0.2405 BNB</Text>
+                                    <Text style={styles.text}>0.2405 GDC</Text>
                                 </View>
                                 <View style={{ flexDirection: "row", width: width - 100, alignSelf: "center", justifyContent: "space-between" }}>
                                     <Text style={styles.text}>Network fee</Text>
-                                    <Text style={styles.text}>0.12 BNB</Text>
+                                    <Text style={styles.text}>0.12 GDC</Text>
                                 </View>
                             </View>
                             <View style={styles.total}>
                                 <View style={{ flexDirection: "row", width: width - 100, alignSelf: "center", justifyContent: "space-between" }}>
                                     <Text style={styles.text}>Total Amount</Text>
-                                    <Text style={styles.text}>0.3605 BNB</Text>
+                                    <Text style={styles.text}>0.3605 GDC</Text>
                                 </View>
                                 <View style={{ flexDirection: "row", width: width - 100, alignSelf: "center", justifyContent: "space-between" }}>
                                     <Text style={styles.text}></Text>
-                                    <Text style={{ fontFamily: simpletext, fontSize: 10, color: graycolor }}>0.3605 BNB</Text>
+                                    <Text style={{ fontFamily: simpletext, fontSize: 10, color: graycolor }}>$84.43</Text>
                                 </View>
                             </View>
                         </View>

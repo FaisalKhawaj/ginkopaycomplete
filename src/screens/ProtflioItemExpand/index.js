@@ -231,9 +231,15 @@ const ProtfilioItemExpanded = ({ navigation }) => {
               colors={["#A9CDFF", "#72F6D1", "#A0ED8D", "#FED365", "#FAA49E"]}
               style={{ color: "#fff", fontFamily: simpletext, fontSize: 30, }}
             />
-            <Text style={{ color: '#fff', marginTop: 10, fontFamily: simpletext }}>
-              $4360.234
-                </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 1 }}>
+              <Text style={{ color: '#fff', fontFamily: simpletext }}>
+                234.45345$
+                    </Text>
+              <Text style={{ color: green, fontFamily: simpletext, marginHorizontal: 10 }}>
+                23.43%
+                    </Text>
+            </View>
+
           </View>
           <View style={{}}>
             <CURRECO />

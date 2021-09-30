@@ -76,12 +76,12 @@ const DashboardBuy = ({ visible, text, setVisible, setVisible2 }) => {
 
 
                     <View style={styles.amountupdown}>
-                        <Text style={styles.buttontext}>$455.555</Text>
+                        <Text style={styles.buttontext}>24.9876 CPXT</Text>
                         <Image source={require("../assets/updown.png")} style={{ width: 15, height: 15 }} />
                     </View>
 
 
-                    <Text style={styles.buttontext}>Balance : 19.2377</Text>
+                    <Text style={styles.buttontext}>Balance : 19.2377 GDC</Text>
 
 
 
