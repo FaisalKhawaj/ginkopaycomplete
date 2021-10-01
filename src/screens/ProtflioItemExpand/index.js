@@ -158,9 +158,41 @@ const ProtfilioItemExpanded = ({ navigation }) => {
   const setPurchaseModall = () => {
     setPurchaseModal(!pruchasemodal)
   }
+  const ReceiveModalHandler = () => {
+    setRecievedModal(false)
+    setRequestPayment(true)
+  }
+  const navigatetoroot = () => {
+    setCopyLink(false)
+    // setVisible()
+  }
+  const openRequestModal = () => {
+    setRequestPayment(true)
+  }
+  const OpenLinkModal = () => {
+    setCopyLink(true)
+  }
+  const requestPaymentHandler = () => {
+    setRequestPayment(false)
+    setCopyLink(true)
+    // setVisible();
+    // transcitioncompletefunction()
+  }
+  const closePayment = () => {
+    setRequestPayment(false)
+  }
+
+
   const closeWithDrawModal = () => {
     setWithdrawModal(false)
     setWithdrawAmount(true)
+  }
+  const closeBankAccountModal = () => {
+    setBankAccountModal(false)
+  }
+  const closeWithdrawAmountHandler = () => {
+    setWithdrawModal(false)
+    setWithdrawAmount(false)
   }
   const WithdrawAmountHandler = () => {
     setWithdrawAmount(false)
@@ -170,16 +202,27 @@ const ProtfilioItemExpanded = ({ navigation }) => {
     setInsertBankAccountDetails(false)
     setShowAccountDetails(true)
   }
-  const BackBtnHandler = () => {
-    navigation.goBack()
-  }
   const AddBankAccountHandler = () => {
     setBankAccountModal(false)
     setInsertBankAccountDetails(true)
   }
-  const transcitioncompletefunction = (data) => {
-    navigation.navigate("Wallet")
+
+  const closeInsertBankAccountHandler = () => {
+    setInsertBankAccountDetails(false)
   }
+  const transcitioncompletefunction = (data) => {
+    settranssubmitted(true)
+    setTimeout(() => {
+      settranssubmitted(false)
+      settranconfirm(true)
+    }, 2000);
+
+    setTimeout(() => {
+      settranconfirm(false)
+    }, 3000);
+  }
+
+
 
   const renderHistoryItem = ({ item }) => {
 
@@ -217,7 +260,9 @@ const ProtfilioItemExpanded = ({ navigation }) => {
     setItemView(true)
     setdata(item)
   }
-
+  const BackBtnHandler = () => {
+    navigation.goBack()
+  }
   return (
     <SafeAreaView style={[mystyles.container, { width: width }]}>
       <Content contentContainerStyle={{ width: width, backgroundColor: "#17171A" }}>
@@ -296,11 +341,16 @@ const ProtfilioItemExpanded = ({ navigation }) => {
           btnName="Request Payment"
           address="0x3Dc6...DfCE"
           visible={recievemodal}
-          setVisible={setRecievedModal}
-          setCopyLink={setCopyLink}
-          setRequestPayment={setRequestPayment}
-          transcitioncompletefunction={transcitioncompletefunction}
+          setVisible={ReceiveModalHandler}
+        // setCopyLink={setCopyLink}
+        // setRequestPayment={setRequestPayment}
+        // transcitioncompletefunction={transcitioncompletefunction}
         />
+
+        <RequestPaymentModal
+          visible={requestPayment}
+          setVisible={requestPaymentHandler} closePayment={closePayment} />
+        <CopyLinkModal visible={copylink} setVisible={navigatetoroot} />
 
         <MyWithdrawModal
           title="Withdraw"
@@ -308,20 +358,24 @@ const ProtfilioItemExpanded = ({ navigation }) => {
           btnName="Withdraw"
           visible={WithdrawModal}
           setVisible={closeWithDrawModal}
-          setCopyLink={setCopyLink}
-          // setWithdrawAmount={setWithdrawAmount}
-          // setRequestPayment={setRequestPayment}
-          transcitioncompletefunction={transcitioncompletefunction}
+        // setCopyLink={setCopyLink}
+        // setWithdrawAmount={setWithdrawAmount}
+        // setRequestPayment={setRequestPayment}
+        // transcitioncompletefunction={transcitioncompletefunction}
         />
         <PurchaseMethod navigation={navigation} visible={pruchasemodal} setVisible={setPurchaseModall}
 
         />
+
+
         <WithdrawAmount visible={withdrawAmount}
           setVisible={WithdrawAmountHandler}
+          closeWithdraw={closeWithdrawAmountHandler}
         />
-        <MyBankAccountModal
-          visible={BankAccountModal}
-          setVisible={AddBankAccountHandler} />
+
+        <MyBankAccountModal visible={BankAccountModal} setVisible={AddBankAccountHandler}
+          closeBankAccount={closeBankAccountModal}
+        />
 
 
         <Modal
@@ -332,8 +386,8 @@ const ProtfilioItemExpanded = ({ navigation }) => {
           style={styles.modal}
           coverScreen={true}
           animationOut="slideOutDown"
-          onBackdropPress={() => InsertBankAccountHandler()}
-          onBackButtonPress={() => InsertBankAccountHandler()}
+          onBackdropPress={() => closeInsertBankAccountHandler()}
+          onBackButtonPress={() => closeInsertBankAccountHandler()}
           useNativeDriver={true}
           hasBackdrop={true}
           backdropColor="#1D1F27"
@@ -342,8 +396,8 @@ const ProtfilioItemExpanded = ({ navigation }) => {
           <Container style={styles.mainview}>
             <HeaderBackTextCloseBtn
               text="BANK ACCOUNT"
-              backhandler={() => { InsertBankAccountHandler() }}
-              closeModal={() => { InsertBankAccountHandler() }}
+              backhandler={() => { closeInsertBankAccountHandler() }}
+              closeModal={() => { closeInsertBankAccountHandler() }}
             />
             <Content
               contentContainerStyle={styles.contentContainerStyle}

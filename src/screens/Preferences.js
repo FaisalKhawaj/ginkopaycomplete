@@ -64,10 +64,16 @@ const Preferences = ({ navigation }) => {
         setBankAccountModal(false)
         setInsertBankAccountDetails(true)
     }
+    const closeBankAccountModal = () => {
+        setBankAccountModal(false)
+    }
 
     const InsertBankAccountHandler = () => {
         setInsertBankAccountDetails(false)
         setShowAccountDetails(true)
+    }
+    const closeInsertBankAccountHandler = () => {
+        setInsertBankAccountDetails(false)
     }
 
     const closeBaseCurrencyHandler = () => {
@@ -515,7 +521,10 @@ const Preferences = ({ navigation }) => {
             />
 
 
-            <MyBankAccountModal visible={BankAccountModal} setVisible={AddBankAccountHandler} />
+            <MyBankAccountModal visible={BankAccountModal}
+                setVisible={AddBankAccountHandler}
+                closeBankAccount={closeBankAccountModal}
+            />
 
             <Modal
                 isVisible={InsertBankAccountDetails}
@@ -525,8 +534,8 @@ const Preferences = ({ navigation }) => {
                 style={styles.modal}
                 coverScreen={true}
                 animationOut="slideOutDown"
-                onBackdropPress={() => InsertBankAccountHandler()}
-                onBackButtonPress={() => InsertBankAccountHandler()}
+                onBackdropPress={() => closeInsertBankAccountHandler()}
+                onBackButtonPress={() => closeInsertBankAccountHandler()}
                 useNativeDriver={true}
                 hasBackdrop={true}
                 backdropColor="#1D1F27"
@@ -535,8 +544,8 @@ const Preferences = ({ navigation }) => {
                 <Container style={styles.mainview}>
                     <HeaderBackTextCloseBtn
                         text="BANK ACCOUNT"
-                        backhandler={() => { InsertBankAccountHandler() }}
-                        closeModal={() => { InsertBankAccountHandler() }}
+                        backhandler={() => { closeInsertBankAccountHandler() }}
+                        closeModal={() => { closeInsertBankAccountHandler() }}
                     />
                     <Content
                         contentContainerStyle={styles.contentContainerStyle}
@@ -641,10 +650,6 @@ const Preferences = ({ navigation }) => {
                                 />
                             </Text>
                         </View>
-
-
-
-
 
 
                     </Content>

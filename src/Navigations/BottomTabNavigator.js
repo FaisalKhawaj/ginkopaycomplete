@@ -24,6 +24,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import CustomText from '../components/Text';
 import { simpletext } from '../constants/fonts';
 import { BackgroundColor } from '../constants/colors';
+import WalletStack from './WalletStack';
 function MyTabBar({ state, descriptors, navigation }) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
 
@@ -106,7 +107,7 @@ function BottomTabs() {
   return (
     <Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Wallet" component={WalletScreen} />
+      <Tab.Screen name="Wallet" component={WalletStack} />
       <Tab.Screen name="Compaign" component={CompaignScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
