@@ -202,19 +202,26 @@ const Home = ({ navigation }) => {
     setWithdrawModal(false)
     setWithdrawAmount(true)
   }
-
-
-  const setPurchaseModall = () => {
-    setPurchaseModal(!pruchasemodal)
-  }
+  console.log("Withdraw Modal  :  " + WithdrawModal)
+  console.log("Withdraw Amount " + withdrawAmount)
 
   const WithdrawAmountHandler = () => {
     setWithdrawAmount(false)
     setBankAccountModal(true)
   }
+  const closeBankAccountModal = () => {
+    setBankAccountModal(false)
+  }
   const closeWithdrawAmountHandler = () => {
+    setWithdrawModal(false)
     setWithdrawAmount(false)
   }
+
+  const setPurchaseModall = () => {
+    setPurchaseModal(!pruchasemodal)
+  }
+
+
   const AddBankAccountHandler = () => {
     setBankAccountModal(false)
     setInsertBankAccountDetails(true)
@@ -222,6 +229,9 @@ const Home = ({ navigation }) => {
   const InsertBankAccountHandler = () => {
     setInsertBankAccountDetails(false)
     setShowAccountDetails(true)
+  }
+  const closeInsertBankAccountHandler = () => {
+    setInsertBankAccountDetails(false)
   }
   const transcitioncompletefunction = (data) => {
     settranssubmitted(true)
@@ -234,6 +244,7 @@ const Home = ({ navigation }) => {
       settranconfirm(false)
     }, 3000);
   }
+
 
   return (
     <SafeAreaView style={[mystyles.container, { width: width }]}>
@@ -401,10 +412,10 @@ const Home = ({ navigation }) => {
           btnName="Withdraw"
           visible={WithdrawModal}
           setVisible={closeWithDrawModal}
-          setCopyLink={setCopyLink}
-          // setWithdrawAmount={setWithdrawAmount}
-          // setRequestPayment={setRequestPayment}
-          transcitioncompletefunction={transcitioncompletefunction}
+        // setCopyLink={setCopyLink}
+        // setWithdrawAmount={setWithdrawAmount}
+        // setRequestPayment={setRequestPayment}
+        // transcitioncompletefunction={transcitioncompletefunction}
         />
         {/* <WithdrawModal /> */}
         <PurchaseMethod navigation={navigation} visible={pruchasemodal} setVisible={setPurchaseModall}
@@ -415,7 +426,9 @@ const Home = ({ navigation }) => {
           closeWithdraw={closeWithdrawAmountHandler}
         />
 
-        <MyBankAccountModal visible={BankAccountModal} setVisible={AddBankAccountHandler} />
+        <MyBankAccountModal visible={BankAccountModal} setVisible={AddBankAccountHandler}
+          closeBankAccount={closeBankAccountModal}
+        />
 
 
         <Modal
@@ -426,8 +439,8 @@ const Home = ({ navigation }) => {
           style={styles.modal}
           coverScreen={true}
           animationOut="slideOutDown"
-          onBackdropPress={() => InsertBankAccountHandler()}
-          onBackButtonPress={() => InsertBankAccountHandler()}
+          onBackdropPress={() => closeInsertBankAccountHandler()}
+          onBackButtonPress={() => closeInsertBankAccountHandler()}
           useNativeDriver={true}
           hasBackdrop={true}
           backdropColor="#1D1F27"
@@ -436,8 +449,8 @@ const Home = ({ navigation }) => {
           <Container style={styles.mainview}>
             <HeaderBackTextCloseBtn
               text="BANK ACCOUNT"
-              backhandler={() => { InsertBankAccountHandler() }}
-              closeModal={() => { InsertBankAccountHandler() }}
+              backhandler={() => { closeInsertBankAccountHandler() }}
+              closeModal={() => { closeInsertBankAccountHandler() }}
             />
             <Content
               contentContainerStyle={styles.contentContainerStyle}

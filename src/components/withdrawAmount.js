@@ -34,8 +34,8 @@ const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
             <Container style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="Amount"
-                    backhandler={() => setVisible()}
-                    closeModal={() => setVisible()}
+                    backhandler={() => closeWithdraw()}
+                    closeModal={() => closeWithdraw()}
                 />
                 <Content
                     contentContainerStyle={styles.contentContainerStyle}

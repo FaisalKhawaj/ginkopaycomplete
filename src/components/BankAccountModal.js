@@ -10,7 +10,7 @@ import HeaderBackTextCloseBtn from './HeaderBackTextClose';
 import { BackgroundColor, graycolor, lightWhite } from '../constants/colors';
 import { boldtext, fontmedium } from '../constants/fonts';
 import CustomText from './Text';
-const MyBankAccountModal = ({ visible, setVisible }) => {
+const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
     var obj = [
         {
             key: 1,
@@ -72,8 +72,8 @@ const MyBankAccountModal = ({ visible, setVisible }) => {
             style={styles.modal}
             coverScreen={true}
             animationOut="slideOutDown"
-            onBackdropPress={() => setVisible()}
-            onBackButtonPress={() => setVisible()}
+            onBackdropPress={() => closeBankAccount()}
+            onBackButtonPress={() => closeBankAccount()}
             useNativeDriver={true}
             hasBackdrop={true}
             backdropColor="#1D1F27"
@@ -82,8 +82,8 @@ const MyBankAccountModal = ({ visible, setVisible }) => {
             <Container style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="BANK ACCOUNT"
-                    backhandler={() => { setVisible() }}
-                    closeModal={() => { setVisible() }}
+                    backhandler={() => { closeBankAccount() }}
+                    closeModal={() => { closeBankAccount() }}
                 />
                 <Content
                     contentContainerStyle={styles.contentContainerStyle}
