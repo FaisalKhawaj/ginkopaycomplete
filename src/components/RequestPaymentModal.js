@@ -12,7 +12,7 @@ import CustomText from './Text';
 import CopyLinkModal from './LinkCopyModal';
 const { width, height } = Dimensions.get("window");
 
-const RequestPaymentModal = ({ visible, setVisible, }) => {
+const RequestPaymentModal = ({ visible, setVisible, closePayment }) => {
     const [value, setValue] = React.useState("")
     return (
         <Modal
@@ -23,8 +23,8 @@ const RequestPaymentModal = ({ visible, setVisible, }) => {
             style={styles.modal}
             coverScreen={true}
             animationOut="slideOutDown"
-            onBackdropPress={() => setVisible()}
-            onBackButtonPress={() => setVisible()}
+            onBackdropPress={() => closePayment()}
+            onBackButtonPress={() => closePayment()}
             useNativeDriver={true}
             hasBackdrop={true}
             backdropColor="#1D1F27"
@@ -33,8 +33,8 @@ const RequestPaymentModal = ({ visible, setVisible, }) => {
             <Container style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="Amount"
-                    backhandler={() => { setVisible() }}
-                    closeModal={() => { setVisible() }}
+                    backhandler={() => { closePayment() }}
+                    closeModal={() => { closePayment() }}
                 />
                 <Content
                     contentContainerStyle={styles.contentContainerStyle}

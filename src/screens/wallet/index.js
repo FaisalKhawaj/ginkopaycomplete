@@ -244,8 +244,29 @@ const Home = ({ navigation }) => {
       settranconfirm(false)
     }, 3000);
   }
-
-
+  const ReceiveModalHandler = () => {
+    setRecievedModal(false)
+    setRequestPayment(true)
+  }
+  const navigatetoroot = () => {
+    setCopyLink(false)
+    // setVisible()
+  }
+  const openRequestModal = () => {
+    setRequestPayment(true)
+  }
+  const OpenLinkModal = () => {
+    setCopyLink(true)
+  }
+  const requestPaymentHandler = () => {
+    setRequestPayment(false)
+    setCopyLink(true)
+    // setVisible();
+    // transcitioncompletefunction()
+  }
+  const closePayment = () => {
+    setRequestPayment(false)
+  }
   return (
     <SafeAreaView style={[mystyles.container, { width: width }]}>
       <Content contentContainerStyle={{ width: width, backgroundColor: "#17171A" }}>
@@ -401,11 +422,16 @@ const Home = ({ navigation }) => {
           btnName="Request Payment"
           address="0x3Dc6...DfCE"
           visible={recievemodal}
-          setVisible={setRecievedModal}
-          setCopyLink={setCopyLink}
-          setRequestPayment={setRequestPayment}
-          transcitioncompletefunction={transcitioncompletefunction}
+          setVisible={ReceiveModalHandler}
+        // setCopyLink={setCopyLink}
+        // setRequestPayment={setRequestPayment}
+        // transcitioncompletefunction={transcitioncompletefunction}
         />
+        <RequestPaymentModal
+          visible={requestPayment}
+          setVisible={requestPaymentHandler} closePayment={closePayment} />
+        <CopyLinkModal visible={copylink} setVisible={navigatetoroot} />
+
         <MyWithdrawModal
           title="Withdraw"
           description={"You can withdraw your coins on your\nlast Deposit method"}
@@ -421,6 +447,7 @@ const Home = ({ navigation }) => {
         <PurchaseMethod navigation={navigation} visible={pruchasemodal} setVisible={setPurchaseModall}
 
         />
+
         <WithdrawAmount visible={withdrawAmount}
           setVisible={WithdrawAmountHandler}
           closeWithdraw={closeWithdrawAmountHandler}
