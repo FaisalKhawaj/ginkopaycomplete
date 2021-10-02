@@ -263,6 +263,9 @@ const ProtfilioItemExpanded = ({ navigation }) => {
   const BackBtnHandler = () => {
     navigation.goBack()
   }
+  const setRecievedModalHandler = () => {
+    setRecievedModal(false)
+  }
   return (
     <SafeAreaView style={[mystyles.container, { width: width }]}>
       <Content contentContainerStyle={{ width: width, backgroundColor: "#17171A" }}>
@@ -341,7 +344,7 @@ const ProtfilioItemExpanded = ({ navigation }) => {
           btnName="Request Payment"
           address="0x3Dc6...DfCE"
           visible={recievemodal}
-          setVisible={ReceiveModalHandler}
+          setVisible={setRecievedModalHandler}
         // setCopyLink={setCopyLink}
         // setRequestPayment={setRequestPayment}
         // transcitioncompletefunction={transcitioncompletefunction}
