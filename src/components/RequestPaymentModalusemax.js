@@ -36,7 +36,6 @@ const RequestPaymentModal = ({ visible, setVisible, backbuttonFunctionpaymentMod
             isVisible={visible}
             animationIn="fadeInRight"
             deviceHeight={Dimensions.get("window").height}
-
             style={styles.modal}
             coverScreen={true}
             animationOut="slideOutDown"
@@ -106,8 +105,8 @@ const RequestPaymentModal = ({ visible, setVisible, backbuttonFunctionpaymentMod
             <TokenModal2 visible={tokenmodal2} setVisible={() => alert("set visible")} opensendmodal={() => closeTokenModal2andopensend()} />
             <SentModalConfirm
                 visible={sendmodalconfirm}
-                setVisible={(data) => alert("setVisible" + data)}
-                sentconfrimbackpress={(data) => alert("sentconfrimbackpress" + data)}
+                setVisible={(data) => setSendModalConfirm(false)}
+                sentconfrimbackpress={() => setSendModalConfirm(false)}
                 transitioncomplete={(data) => { setSendModalConfirm(false), backbuttonFunctionpaymentModaluseMax("complete") }}
             />
         </Modal>
