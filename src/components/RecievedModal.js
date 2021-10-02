@@ -15,26 +15,38 @@ const { width, height } = Dimensions.get("window");
 
 
 const recievedModal = ({ title, description, address, btnName, visible, setVisible, }) => {
-
-    // const openRequestModal = () => {
-    //     setRequestPayment(true)
-    // }
-    // const OpenLinkModal = () => {
-    //     setCopyLink(true)
-    // }
-    // const withdrawAmountHandler = () => {
-    //     setWithdrawAmount(!withdrawAmount)
-    // }
-    // const navigatetoroot = () => {
-    //     setCopyLink(false)
-    //     // setVisible()
-    // }
-    // const closeallmodals = () => {
+    const [copylink, setCopyLink] = useState(false)
+    const [requestPayment, setRequestPayment] = useState(false)
+    const openRequestModal = () => {
+        setRequestPayment(true)
+    }
+    const closeRequestModal = () => {
+        setVisible()
+        setRequestPayment(false)
+    }
+    const OpenLinkModal = () => {
+        setCopyLink(true)
+    }
+    // const requestPaymentHandler = () => {
     //     setRequestPayment(false)
     //     setCopyLink(true)
     //     // setVisible();
     //     // transcitioncompletefunction()
     // }
+    // const withdrawAmountHandler = () => {
+    //     setWithdrawAmount(!withdrawAmount)
+    // }
+    const navigatetoroot = () => {
+        setVisible()
+        setCopyLink(false)
+    }
+    const closeallmodals = () => {
+        setVisible()
+        setRequestPayment(false)
+        // setCopyLink(true)
+        // setVisible();
+        // transcitioncompletefunction()
+    }
     return (
         <Modal
             isVisible={visible}
@@ -59,18 +71,31 @@ const recievedModal = ({ title, description, address, btnName, visible, setVisib
                     <Text style={[styles.otherassets, { textAlign: 'center' }]}>{description}</Text>
 
                     <TouchableOpacity
-                        // onPress={() => OpenLinkModal()}
+                        onPress={() => OpenLinkModal()}
                         style={{ flexDirection: "row", marginVertical: 10, justifyContent: "center", alignItems: "center", backgroundColor: "#2A2D3C", height: 40, minWidth: 100, paddingHorizontal: 20, borderRadius: 10 }}>
                         <Text style={styles.Receive}> {address}</Text>
                         <COPY />
                     </TouchableOpacity>
 
                     <View style={{ position: "absolute", bottom: 20 }}>
-                        <CustomButton text={btnName} onPress={() => setVisible()} />
+                        <CustomButton text={btnName} onPress={() => {
+                            setVisible
+                            openRequestModal()
+
+                        }
+                        } />
                     </View>
                 </Content>
             </Container>
 
+            <RequestPaymentModal
+                visible={requestPayment}
+                setVisible={closeallmodals}
+                closePayment={closeRequestModal}
+
+            />
+            <CopyLinkModal visible={copylink}
+                setVisible={navigatetoroot} />
             {/* <WithdrawAmount visible={withdrawAmount}
                 setVisible={() => withdrawAmountHandler()}
             /> */}

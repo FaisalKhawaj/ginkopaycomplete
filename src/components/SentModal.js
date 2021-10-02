@@ -171,7 +171,8 @@ const SentModal = ({ visible, setVisible, transcitioncompletefunction }) => {
                     </ScrollView> */}
                 </Content>
             </SafeAreaView>
-            <TokenModal visible={tokenmodal} setVisible={setTokenModal} closesendmodal={() => setVisible(false)} />
+            <TokenModal visible={tokenmodal} setVisible={setTokenModal}
+                closesendmodal={() => setVisible(false)} />
             <SentModalMessage
                 visible={sendmessagemodal}
                 setVisible={(data) => CloseallModals(data)}

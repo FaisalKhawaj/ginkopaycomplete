@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Text, Image, Dimensions, SafeAreaView, StyleSheet, View, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
-import GifImage from '@lowkey/react-native-gif';
-
 import { Content, Container } from 'native-base'
 import { BackgroundColor, graycolor, lightWhite } from '../constants/colors';
 import { mystyles } from '../styles';

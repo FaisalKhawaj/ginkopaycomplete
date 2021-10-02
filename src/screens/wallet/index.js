@@ -267,6 +267,9 @@ const Home = ({ navigation }) => {
   const closePayment = () => {
     setRequestPayment(false)
   }
+  const setRecievedModalHandler = () => {
+    setRecievedModal(false)
+  }
   return (
     <SafeAreaView style={[mystyles.container, { width: width }]}>
       <Content contentContainerStyle={{ width: width, backgroundColor: "#17171A" }}>
@@ -422,15 +425,16 @@ const Home = ({ navigation }) => {
           btnName="Request Payment"
           address="0x3Dc6...DfCE"
           visible={recievemodal}
-          setVisible={ReceiveModalHandler}
+          setVisible={setRecievedModalHandler}
         // setCopyLink={setCopyLink}
         // setRequestPayment={setRequestPayment}
         // transcitioncompletefunction={transcitioncompletefunction}
         />
-        <RequestPaymentModal
+        {/* <RequestPaymentModal
           visible={requestPayment}
-          setVisible={requestPaymentHandler} closePayment={closePayment} />
-        <CopyLinkModal visible={copylink} setVisible={navigatetoroot} />
+          setVisible={requestPaymentHandler} closePayment={closePayment} /> */}
+
+        {/* <CopyLinkModal visible={copylink} setVisible={navigatetoroot} /> */}
 
         <MyWithdrawModal
           title="Withdraw"

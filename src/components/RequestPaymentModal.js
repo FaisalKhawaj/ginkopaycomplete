@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dimensions, StyleSheet, Text, TextInput, Image, TouchableOpacity, View } from "react-native";
 import { Container, Content, Item, Input, Label } from 'native-base'
 import Modal from 'react-native-modal';
@@ -14,6 +14,11 @@ const { width, height } = Dimensions.get("window");
 
 const RequestPaymentModal = ({ visible, setVisible, closePayment }) => {
     const [value, setValue] = React.useState("")
+    const [copylink, setCopyLink] = useState(false)
+    const navigatetoroot = () => {
+        setCopyLink(false)
+        setVisible()
+    }
     return (
         <Modal
             isVisible={visible}
@@ -33,8 +38,8 @@ const RequestPaymentModal = ({ visible, setVisible, closePayment }) => {
             <Container style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="Amount"
-                    backhandler={() => { closePayment() }}
-                    closeModal={() => { closePayment() }}
+                    backhandler={closePayment}
+                    closeModal={closePayment}
                 />
                 <Content
                     contentContainerStyle={styles.contentContainerStyle}
@@ -72,11 +77,18 @@ const RequestPaymentModal = ({ visible, setVisible, closePayment }) => {
                     </View>
 
                     <View style={{ position: "absolute", bottom: 20 }}>
-                        <CustomButton text={"Next"} onPress={() => setVisible()} />
+                        <CustomButton text={"Next"} onPress={() => {
+
+                            setCopyLink(true)
+                            setVisible
+                        }} />
                     </View>
+                    <CopyLinkModal visible={copylink}
+                        setVisible={navigatetoroot} />
                 </Content>
             </Container>
         </Modal>
+
 
     )
 }
