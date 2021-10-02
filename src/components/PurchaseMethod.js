@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, FlatList, Dimensions, StyleSheet, Image, Text, TouchableOpacity, Touchable, StatusBar, TextInput } from 'react-native';
+import { View, FlatList, Dimensions, StyleSheet, Image, Text, TouchableOpacity, Touchable, StatusBar, TextInput, Platform } from 'react-native';
 import Modal from 'react-native-modal';
 import { boldtext, fontmedium, simpletext } from '../constants/fonts';
 import { graycolor, green } from '../constants/colors';
@@ -117,7 +117,7 @@ const SentModal = ({ visible, navigation, setVisible }) => {
                     style={{ fontSize: 15, fontFamily: boldtext, }}
                 />
 
-                <View style={styles.roundedCardNumView}>
+                <View style={[styles.roundedCardNumView, { height: Platform.OS == 'ios' ? 40 : null }]}>
                     <TextInput placeholder="Card Number" placeholderTextColor={graycolor} style={{ flex: 1, fontFamily: 'Poppins-Regular', color: graycolor }} />
                     <View style={{ flexDirection: 'row', }}>
                         <TextInput placeholderTextColor={graycolor} placeholder="MM"
@@ -129,7 +129,7 @@ const SentModal = ({ visible, navigation, setVisible }) => {
                         />
 
                         <TextInput placeholderTextColor={graycolor} placeholder="CVC"
-                            style={{ fontFamily: 'Poppins-Regular', width: 40, color: graycolor }}
+                            style={{ fontFamily: 'Poppins-Regular', marginLeft: 5, width: 40, color: graycolor }}
                         />
                     </View>
 
@@ -254,9 +254,11 @@ const styles = StyleSheet.create({
         marginRight: 20
     },
     roundedCardNumView: {
-        borderWidth: 1, borderColor: '#FFFF', flexDirection: 'row',
+        borderWidth: 1, borderColor: '#FFFF',
+        flexDirection: 'row',
         justifyContent: 'center',
-        paddingHorizontal: 10, width: width - 85, borderRadius: 25,
+        paddingHorizontal: 10, width: width - 80,
+        borderRadius: 25,
     }
 
 })
