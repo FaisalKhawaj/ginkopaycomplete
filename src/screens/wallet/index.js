@@ -444,8 +444,11 @@ const Home = ({ navigation }) => {
         // transcitioncompletefunction={transcitioncompletefunction}
         />
         {/* <WithdrawModal /> */}
-        <PurchaseMethod navigation={navigation} visible={pruchasemodal} setVisible={setPurchaseModall}
 
+        <PurchaseMethod navigation={navigation}
+          visible={pruchasemodal}
+          setVisible={setPurchaseModall}
+        // closePurchase={closePurchase}
         />
 
         <WithdrawAmount visible={withdrawAmount}

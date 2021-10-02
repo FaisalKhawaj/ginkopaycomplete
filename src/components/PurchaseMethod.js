@@ -43,13 +43,13 @@ var obj = [
 const SentModal = ({ visible, navigation, setVisible }) => {
     const [buymodal, setBuyModal] = useState(false);
     const BuyModallHandler = () => {
-
         setBuyModal(!buymodal)
     }
     const BuyCloseModalHandler = () => {
-        setVisible
-        setBuyModal(!buymodal)
-        navigation.navigate('Home')
+        setVisible()
+        setBuyModal(false)
+        console.log("Prev", setVisible + "send your " + buymodal)
+        // navigation.navigate('Home')
     }
     const renderItem = (item) => {
         return (
@@ -60,7 +60,7 @@ const SentModal = ({ visible, navigation, setVisible }) => {
                     padding: item.item.key === 1 ? 1 : 0, borderRadius: 10,
                     marginBottom: 10,
                 }}>
-                <TouchableOpacity style={styles.verticalListItem} onPress={() => setVisible, BuyModallHandler}>
+                <TouchableOpacity style={styles.verticalListItem} onPress={() => setVisible(), BuyModallHandler}>
                     <Image style={styles.verticalListIconBackground} source={item.item.image} />
                     <View style={{ flexDirection: 'column', }}>
                         <Text style={{ color: '#fff', fontFamily: fontmedium, fontSize: 16 }}>

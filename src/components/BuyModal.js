@@ -36,8 +36,8 @@ const PurchaseMethodBankModal = ({ visible, backHandler, closeHandler }) => {
             style={styles.modal}
             coverScreen={true}
             animationOut="slideOutDown"
-            onBackdropPress={() => setVisible()}
-            onBackButtonPress={() => setVisible()}
+            onBackdropPress={() => backHandler()}
+            onBackButtonPress={() => closeHandler()}
             useNativeDriver={true}
             hasBackdrop={true}
             backdropColor="#1D1F27"
