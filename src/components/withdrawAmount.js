@@ -1,5 +1,5 @@
-import React from 'react'
-import { Dimensions, StyleSheet, Text, TextInput, Image, TouchableOpacity, View } from "react-native";
+import React, { useState } from 'react'
+import { Dimensions, StyleSheet, Text, TextInput, Image, TouchableOpacity, View, SafeAreaView, ScrollView } from "react-native";
 import { Container, Content, Item, Input, Label } from 'native-base'
 import Modal from 'react-native-modal';
 import { boldtext, simpletext } from '../constants/fonts';
@@ -12,9 +12,18 @@ import CustomText from './Text';
 import CopyLinkModal from './LinkCopyModal';
 const { width, height } = Dimensions.get("window");
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import MyBankAccountModal from './BankAccountModal';
 
 const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
     const [value, setValue] = React.useState("")
+    const [BankAccountModal, setBankAccountModal] = useState(false)
+    const AddBankAccountHandler = () => {
+        setBankAccountModal(false)
+        // setInsertBankAccountDetails(true)
+    }
+    const closeBankAccountModal = () => {
+        setBankAccountModal(false)
+    }
     return (
         <Modal
             isVisible={visible}
@@ -31,13 +40,13 @@ const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
             backdropColor="#1D1F27"
             backdropOpacity={.85}
         >
-            <Container style={styles.mainview}>
+            <SafeAreaView style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="Amount"
-                    backhandler={() => closeWithdraw()}
-                    closeModal={() => closeWithdraw()}
+                    backhandler={() => closeWithdraw(false)}
+                    closeModal={() => closeWithdraw(false)}
                 />
-                <Content
+                <ScrollView
                     contentContainerStyle={styles.contentContainerStyle}
                     style={{ flexGrow: 1 }}>
 
@@ -92,8 +101,12 @@ const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
                     <View style={{ position: "absolute", bottom: 20 }}>
                         <CustomButton text={"Next"} onPress={() => setVisible()} />
                     </View>
-                </Content>
-            </Container>
+                </ScrollView>
+                <MyBankAccountModal visible={BankAccountModal}
+                    setVisible={AddBankAccountHandler}
+                    closeBankAccount={closeBankAccountModal}
+                />
+            </SafeAreaView>
         </Modal>
 
     )

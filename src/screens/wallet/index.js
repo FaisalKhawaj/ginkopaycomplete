@@ -100,7 +100,7 @@ const Home = ({ navigation }) => {
   const [sendmessagemodal, setSendMessageModal] = useState(false)
   const [copylink, setCopyLink] = useState(false)
   const [requestPayment, setRequestPayment] = useState(false)
-  const [withdrawAmount, setWithdrawAmount] = useState(false)
+  // const [withdrawAmount, setWithdrawAmount] = useState(false)
   const [tokenmodal, setTokenModal] = useState(false)
   const [showAccountDetail, setShowAccountDetails] = useState(false)
   const [BankAccountName, setBankAccountName] = useState('')
@@ -198,34 +198,34 @@ const Home = ({ navigation }) => {
 
     setSentModal(data)
   }
-  const closeWithDrawModal = () => {
-    setWithdrawModal(false)
-    setWithdrawAmount(true)
-  }
+  // const closeWithDrawModal = () => {
+  //   setWithdrawModal(false)
+  //   setWithdrawAmount(true)
+  // }
   console.log("Withdraw Modal  :  " + WithdrawModal)
-  console.log("Withdraw Amount " + withdrawAmount)
+  // console.log("Withdraw Amount " + withdrawAmount)
 
-  const WithdrawAmountHandler = () => {
-    setWithdrawAmount(false)
-    setBankAccountModal(true)
-  }
+  // const WithdrawAmountHandler = () => {
+  //   setWithdrawAmount(false)
+  //   setBankAccountModal(true)
+  // }
   const closeBankAccountModal = () => {
     setBankAccountModal(false)
   }
-  const closeWithdrawAmountHandler = () => {
-    setWithdrawModal(false)
-    setWithdrawAmount(false)
-  }
+  // const closeWithdrawAmountHandler = () => {
+  //   setWithdrawModal(false)
+  //   setWithdrawAmount(false)
+  // }
 
   const setPurchaseModall = () => {
     setPurchaseModal(!pruchasemodal)
   }
 
 
-  const AddBankAccountHandler = () => {
-    setBankAccountModal(false)
-    setInsertBankAccountDetails(true)
-  }
+  // const AddBankAccountHandler = () => {
+  //   setBankAccountModal(false)
+  //   setInsertBankAccountDetails(true)
+  // }
   const InsertBankAccountHandler = () => {
     setInsertBankAccountDetails(false)
     setShowAccountDetails(true)
@@ -441,7 +441,7 @@ const Home = ({ navigation }) => {
           description={"You can withdraw your coins on your\nlast Deposit method"}
           btnName="Withdraw"
           visible={WithdrawModal}
-          setVisible={closeWithDrawModal}
+          setVisible={setWithdrawModal}
         // setCopyLink={setCopyLink}
         // setWithdrawAmount={setWithdrawAmount}
         // setRequestPayment={setRequestPayment}
@@ -455,10 +455,10 @@ const Home = ({ navigation }) => {
         // closePurchase={closePurchase}
         />
 
-        <WithdrawAmount visible={withdrawAmount}
+        {/* <WithdrawAmount visible={withdrawAmount}
           setVisible={WithdrawAmountHandler}
           closeWithdraw={closeWithdrawAmountHandler}
-        />
+        /> */}
 
         <MyBankAccountModal visible={BankAccountModal}
           setVisible={AddBankAccountHandler}
