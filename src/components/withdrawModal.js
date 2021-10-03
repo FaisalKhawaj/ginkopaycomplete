@@ -42,11 +42,11 @@ const MyWithdrawModal = ({ title, description, address, btnName, visible, setVis
     //     setBankAccountModal(true)
     // }
     const closeWithDrawModal = () => {
-        setVisible()
+        // setVisible(false)
         setWithdrawAmount(true)
     }
     const closeWithdrawAmountHandler = () => {
-        setVisible()
+        // setVisible(false)
         setWithdrawAmount(false)
     }
 
@@ -81,7 +81,10 @@ const MyWithdrawModal = ({ title, description, address, btnName, visible, setVis
                         </TouchableOpacity> : null
                     } */}
                     <View style={{ position: "absolute", bottom: 20 }}>
-                        <CustomButton text={btnName} onPress={closeWithDrawModal} />
+                        <CustomButton text={btnName} onPress={() => {
+
+                            closeWithDrawModal()
+                        }} />
                     </View>
                 </Content>
             </Container>

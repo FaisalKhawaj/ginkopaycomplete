@@ -16,11 +16,16 @@ import MyBankAccountModal from './BankAccountModal';
 
 const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
     const [value, setValue] = React.useState("")
+    console.log("Withdraw Amount  modal Add Bank Account:      ")
     const [BankAccountModal, setBankAccountModal] = useState(false)
-    // const AddBankAccountHandler = () => {
-    //     setBankAccountModal(false)
-    //     // setInsertBankAccountDetails(true)
-    // }
+    const AddBankAccountHandler = () => {
+        setBankAccountModal(false)
+        // setInsertBankAccountDetails(true)
+    }
+    const withdrawAmountHandler = () => {
+        setVisible(false)
+        setBankAccountModal(true)
+    }
     const closeBankAccountModal = () => {
         setBankAccountModal(false)
     }
@@ -33,8 +38,8 @@ const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
             style={styles.modal}
             coverScreen={true}
             animationOut="slideOutDown"
-            onBackdropPress={() => closeWithdraw()}
-            onBackButtonPress={() => closeWithdraw()}
+            onBackdropPress={() => setVisible()}
+            onBackButtonPress={() => setVisible()}
             useNativeDriver={true}
             hasBackdrop={true}
             backdropColor="#1D1F27"
@@ -43,8 +48,8 @@ const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
             <SafeAreaView style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="Amount"
-                    backhandler={() => closeWithdraw(false)}
-                    closeModal={() => closeWithdraw(false)}
+                    backhandler={() => setVisible(false)}
+                    closeModal={() => setVisible(false)}
                 />
                 <ScrollView
                     contentContainerStyle={styles.contentContainerStyle}
@@ -87,7 +92,7 @@ const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
                             <Image resizeMode="contain"
                                 style={{ alignSelf: 'center', width: 15, height: 15, }}
                                 source={require('../assets/addGradient.png')} />
-                            <TouchableOpacity onPress={() => setVisible()} >
+                            <TouchableOpacity onPress={() => withdrawAmountHandler()} >
                                 <CustomText
                                     text="Add Bank Account"
                                     locations={[0, 1]}
@@ -99,12 +104,12 @@ const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
                     </View>
 
                     <View style={{ position: "absolute", bottom: 20 }}>
-                        <CustomButton text={"Next"} onPress={() => setVisible()} />
+                        <CustomButton text={"Next"} onPress={() => withdrawAmountHandler()} />
                     </View>
                 </ScrollView>
                 <MyBankAccountModal visible={BankAccountModal}
                     setVisible={setBankAccountModal}
-                    closeBankAccount={closeBankAccountModal}
+                    closeBankAccount={setBankAccountModal}
                 />
             </SafeAreaView>
         </Modal>

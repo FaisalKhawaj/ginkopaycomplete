@@ -226,13 +226,13 @@ const Home = ({ navigation }) => {
   //   setBankAccountModal(false)
   //   setInsertBankAccountDetails(true)
   // }
-  const InsertBankAccountHandler = () => {
-    setInsertBankAccountDetails(false)
-    setShowAccountDetails(true)
-  }
-  const closeInsertBankAccountHandler = () => {
-    setInsertBankAccountDetails(false)
-  }
+  // const InsertBankAccountHandler = () => {
+  //   setInsertBankAccountDetails(false)
+  //   setShowAccountDetails(true)
+  // }
+  // const closeInsertBankAccountHandler = () => {
+  //   setInsertBankAccountDetails(false)
+  // }
   const transcitioncompletefunction = (data) => {
     settranssubmitted(true)
     setTimeout(() => {
@@ -466,7 +466,7 @@ const Home = ({ navigation }) => {
         /> */}
 
 
-        <Modal
+        {/* <Modal
           isVisible={InsertBankAccountDetails}
           animationIn="fadeInRight"
           deviceHeight={Dimensions.get("screen").height * 2}
@@ -598,7 +598,7 @@ const Home = ({ navigation }) => {
 
             </Content>
           </Container>
-        </Modal>
+        </Modal> */}
 
 
         <Modal
