@@ -23,7 +23,7 @@ const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
         // setInsertBankAccountDetails(true)
     }
     const withdrawAmountHandler = () => {
-        setVisible(false)
+        setVisible
         setBankAccountModal(true)
     }
     const closeBankAccountModal = () => {
@@ -107,11 +107,12 @@ const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
                         <CustomButton text={"Next"} onPress={() => withdrawAmountHandler()} />
                     </View>
                 </ScrollView>
-                <MyBankAccountModal visible={BankAccountModal}
-                    setVisible={setBankAccountModal}
-                    closeBankAccount={setBankAccountModal}
-                />
+
             </SafeAreaView>
+            <MyBankAccountModal visible={BankAccountModal}
+                setVisible={setBankAccountModal}
+                closeBankAccount={setBankAccountModal}
+            />
         </Modal>
 
     )

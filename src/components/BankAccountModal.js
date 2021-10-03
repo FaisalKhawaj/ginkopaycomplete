@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, FlatList, StatusBar, Dimensions, StyleSheet, Image, Text, TouchableOpacity, Touchable, SafeAreaView } from 'react-native';
+import { View, FlatList, StatusBar, Dimensions, StyleSheet, Image, Text, TouchableOpacity, Touchable, SafeAreaView, ScrollView, Platform } from 'react-native';
 import { Container, Content, Item, Thumbnail, Input, Label } from 'native-base'
 import Modal from 'react-native-modal'
 const { width, height } = Dimensions.get("window");
@@ -14,9 +14,16 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
     const [InsertBankAccountDetails, setInsertBankAccountDetails] = useState(false)
     console.log("setVisible" + setVisible + "insert bank " + InsertBankAccountDetails)
     const BankAccountModalHandler = () => {
-        closeBankAccount(false)
+        // setVisible(false)
         setInsertBankAccountDetails(true)
         // setShowAccountDetails(true)
+    }
+    const InsertBankAccountHandler = () => {
+        setInsertBankAccountDetails(false)
+        // setShowAccountDetails(true)
+    }
+    const closeInsertBankAccountHandler = () => {
+        setInsertBankAccountDetails(false)
     }
     //   const closeInsertBankAccountHandler = () => {
     //     setInsertBankAccountDetails(false)
@@ -60,7 +67,7 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
                     borderRadius: 10,
                     marginBottom: 10,
                 }}>
-                <TouchableOpacity style={styles.verticalListItem} onPress={() => closeBankAccount(false)}>
+                <TouchableOpacity style={styles.verticalListItem} onPress={() => BankAccountModalHandler()}>
                     <Image style={styles.verticalListIconBackground} source={item.item.image} />
                     <View style={{ flexDirection: 'column', }}>
                         <Text style={{ color: '#fff', fontFamily: fontmedium, fontSize: 16 }}>
@@ -82,20 +89,20 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
             style={styles.modal}
             coverScreen={true}
             animationOut="slideOutDown"
-            onBackdropPress={() => closeBankAccount(false)}
-            onBackButtonPress={() => closeBankAccount(false)}
+            onBackdropPress={() => setVisible()}
+            onBackButtonPress={() => setVisible()}
             useNativeDriver={true}
             hasBackdrop={true}
             backdropColor="#1D1F27"
             backdropOpacity={.85}
         >
-            <Container style={styles.mainview}>
+            <SafeAreaView style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="BANK ACCOUNT"
-                    backhandler={() => closeBankAccount(false)}
-                    closeModal={() => closeBankAccount(false)}
+                    backhandler={() => setVisible()}
+                    closeModal={() => setVisible()}
                 />
-                <Content
+                <ScrollView
                     contentContainerStyle={styles.contentContainerStyle}
                     style={{ flexGrow: 1 }}>
 
@@ -143,15 +150,14 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
                         useNativeDriver={true}
                         hasBackdrop={true}
                         backdropColor="#1D1F27"
-                        backdropOpacity={.85}
-                    >
-                        <Container style={styles.mainview}>
+                        backdropOpacity={.85}  >
+                        <SafeAreaView style={styles.mainview}>
                             <HeaderBackTextCloseBtn
                                 text="BANK ACCOUNT"
-                            //   backhandler={() => { closeInsertBankAccountHandler() }}
-                            //   closeModal={() => { closeInsertBankAccountHandler() }}
+                                backhandler={() => { closeInsertBankAccountHandler() }}
+                                closeModal={() => { closeInsertBankAccountHandler() }}
                             />
-                            <Content
+                            <ScrollView
                                 contentContainerStyle={styles.contentContainerStyle}
                                 style={{ flexGrow: 1 }}>
 
@@ -222,8 +228,8 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
 
 
                                 <TouchableOpacity
-                                    //   onPress={() => InsertBankAccountHandler()}
-                                    style={styles.saveBtn}>
+                                    onPress={() => InsertBankAccountHandler()}
+                                    style={[styles.saveBtn, { height: Platform.OS == 'ios' ? 40 : null }]}>
                                     <CustomText
                                         text={"Save"}
                                         locations={[0, 1]}
@@ -262,16 +268,16 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
 
 
 
-                            </Content>
-                        </Container>
+                            </ScrollView>
+                        </SafeAreaView>
                     </Modal>
 
 
 
 
 
-                </Content>
-            </Container>
+                </ScrollView>
+            </SafeAreaView>
         </Modal>
     )
 }
@@ -312,6 +318,16 @@ const styles = StyleSheet.create({
         width: 35,
         borderRadius: 35,
         marginRight: 20
+    },
+    saveBtn: {
+        alignSelf: 'center',
+        width: wp('25%'),
+        padding: 5,
+        marginVertical: hp(3),
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#000',
+        borderRadius: 10
     },
     roundedCardNumView: {
         borderWidth: 1, borderColor: '#FFFF', flexDirection: 'row',
