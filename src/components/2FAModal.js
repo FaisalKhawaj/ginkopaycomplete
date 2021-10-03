@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, TextInput, Dimensions, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TextInput, Dimensions, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
 import Modal from 'react-native-modal'
 import CustomButton from './Button'
 import { Container, Content, Item, Input, Label } from 'native-base'
@@ -27,9 +27,9 @@ const TwoFAModal = ({ visible, setVisible }) => {
             backdropColor="#1D1F27"
             backdropOpacity={.85}
         >
-            <Container style={styles.mainview}>
+            <SafeAreaView style={styles.mainview}>
 
-                <Content
+                <ScrollView
                     contentContainerStyle={styles.contentContainerStyle}
                 // style={{ flexGrow: 1 }}
                 >
@@ -73,8 +73,8 @@ NVS2309oiweP</Text>
                         <CustomButton text={"Proceed to Verify"} onPress={() => setVisible()} />
                     </View>
 
-                </Content>
-            </Container>
+                </ScrollView>
+            </SafeAreaView>
         </Modal>
     )
 }

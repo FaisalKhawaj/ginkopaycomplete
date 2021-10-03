@@ -308,6 +308,17 @@ const Preferences = ({ navigation }) => {
                         <CustomButton text={"Update"} onPress={closeModalHandler}
                         />
 
+
+                        <BaseCurrencyModal
+                            visible={currencymodal}
+                            setCurrencyName={setCurrencyData}
+                            setVisible={closeBaseCurrencyHandler}
+                            data={CurrencyData} currencyHandler={CurrencyHandler} />
+                        <CurrentLanguageModal visible={openLanguageModal} setVisible={LanguageModalCloseHandler}
+                            data={Languages} setSelectedLanguage={setSelectedLanguage}
+                        />
+
+
                         {/* </View> */}
                     </Content>
                 </SafeAreaView>
@@ -418,7 +429,7 @@ const Preferences = ({ navigation }) => {
 
 
 
-                        <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
+                        {/* <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <View style={{ position: "absolute", zIndex: 20, alignSelf: "flex-end" }}>
                                 <LinearGradient
                                     start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
@@ -432,7 +443,30 @@ const Preferences = ({ navigation }) => {
                             <Text style={styles.descriptionText}>
                                 Participate in MetaMetrics to help us make GinkoPay better
                             </Text>
+                        </View> */}
+
+                        <View style={[styles.CurrencyPRivacyCurrentLanUserSearchView, {
+                            flexDirection: 'row', flex: 1, marginHorizontal: 18,
+                            justifyContent: 'space-between'
+                        }]}>
+
+
+                            <Text style={[styles.headingText, { flex: 1 }]}> Participate in MetaMetrics</Text>
+
+                            <LinearGradient
+                                onPress={() => setMetaMetric(!metametric)}
+                                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                                colors={["#70A2FF", "#F76E64"]}
+                                style={{ ...styles.LinearGradient, alignItems: metametric ? "flex-end" : "flex-start" }}
+                            >
+                                <TouchableOpacity onPress={() => setMetaMetric(!metametric)} style={{ height: 20, width: 20, borderRadius: 4, backgroundColor: "#fff" }} />
+                            </LinearGradient>
+
                         </View>
+
+                        <Text style={[styles.descriptionText, { marginHorizontal: 18 }]}>
+                            Participate in MetaMetrics to help us make GinkoPay better
+                        </Text>
 
 
                         <View style={[styles.CurrencyPRivacyCurrentLanUserSearchView, {
@@ -506,19 +540,13 @@ const Preferences = ({ navigation }) => {
                     </Content>
                 </Container>
             </Modal>
-            <BaseCurrencyModal
-                visible={currencymodal}
-                setCurrencyName={setCurrencyData}
-                setVisible={closeBaseCurrencyHandler}
-                data={CurrencyData} currencyHandler={CurrencyHandler} />
+
             <TwoFAModal visible={Enable2FA} setVisible={Enable2FAHandler} />
             <KycModal visible={showverificationModal} navigation={navigation} backhandler={closeShowVerificationModal} setVisible={setShowVerificatonModal} />
             <CurrencyModal visible={languagemodal} setVisible={setCurrencyModal} />
             {/* <LanguageModal visible={currencymodal} setVisible={setLanguageModal} /> */}
 
-            <CurrentLanguageModal visible={openLanguageModal} setVisible={LanguageModalCloseHandler}
-                data={Languages} setSelectedLanguage={setSelectedLanguage}
-            />
+
 
 
             <MyBankAccountModal visible={BankAccountModal}
@@ -534,20 +562,19 @@ const Preferences = ({ navigation }) => {
                 style={styles.modal}
                 coverScreen={true}
                 animationOut="slideOutDown"
-                onBackdropPress={() => closeInsertBankAccountHandler()}
-                onBackButtonPress={() => closeInsertBankAccountHandler()}
+                //   onBackdropPress={() => closeInsertBankAccountHandler()}
+                //   onBackButtonPress={() => closeInsertBankAccountHandler()}
                 useNativeDriver={true}
                 hasBackdrop={true}
                 backdropColor="#1D1F27"
-                backdropOpacity={.85}
-            >
-                <Container style={styles.mainview}>
+                backdropOpacity={.85}  >
+                <SafeAreaView style={styles.mainview}>
                     <HeaderBackTextCloseBtn
                         text="BANK ACCOUNT"
                         backhandler={() => { closeInsertBankAccountHandler() }}
                         closeModal={() => { closeInsertBankAccountHandler() }}
                     />
-                    <Content
+                    <ScrollView
                         contentContainerStyle={styles.contentContainerStyle}
                         style={{ flexGrow: 1 }}>
 
@@ -561,8 +588,8 @@ const Preferences = ({ navigation }) => {
                                     placeholderTextColor="#fff"
                                     style={styles.textinput}
                                     textColor="#fff"
-                                    // value={name}
-                                    onChangeText={text => setAccountAddress(text)}
+                                // value={name}
+                                // onChangeText={text => setAccountAddress(text)}
                                 />
                             </Item>
 
@@ -577,8 +604,8 @@ const Preferences = ({ navigation }) => {
                                     placeholderTextColor="#fff"
                                     style={styles.textinput}
                                     textColor="#fff"
-                                    // value={name}
-                                    onChangeText={text => setAccountBIC(text)}
+                                // value={name}
+                                // onChangeText={text => setAccountBIC(text)}
                                 />
                             </Item>
 
@@ -593,8 +620,8 @@ const Preferences = ({ navigation }) => {
                                     placeholderTextColor="#fff"
                                     style={styles.textinput}
                                     textColor="#fff"
-                                    // value={name}
-                                    onChangeText={text => setAccountIBAN(text)}
+                                // value={name}
+                                // onChangeText={text => setAccountIBAN(text)}
                                 />
                             </Item>
 
@@ -609,15 +636,17 @@ const Preferences = ({ navigation }) => {
                                     placeholderTextColor="#fff"
                                     style={styles.textinput}
                                     textColor="#fff"
-                                    // value={name}
-                                    onChangeText={text => setAccountAddress(text)}
+                                // value={name}
+                                // onChangeText={text => setAccountAddress(text)}
                                 />
                             </Item>
 
                         </View>
 
 
-                        <TouchableOpacity onPress={() => InsertBankAccountHandler()} style={styles.saveBtn}>
+                        <TouchableOpacity
+                            onPress={() => InsertBankAccountHandler()}
+                            style={[styles.saveBtn, { height: Platform.OS == 'ios' ? 40 : null }]}>
                             <CustomText
                                 text={"Save"}
                                 locations={[0, 1]}
@@ -651,99 +680,96 @@ const Preferences = ({ navigation }) => {
                             </Text>
                         </View>
 
-
-                    </Content>
-                </Container>
-            </Modal>
-
-
-            <Modal
-                isVisible={showAccountDetail}
-                animationIn="fadeInRight"
-                deviceHeight={Dimensions.get("screen").height * 2}
-                transparent={true}
-                style={styles.modal}
-                coverScreen={true}
-                animationOut="slideOutDown"
-                onBackdropPress={() => setShowAccountDetails(false)}
-                onBackButtonPress={() => setShowAccountDetails(false)}
-                useNativeDriver={true}
-                hasBackdrop={true}
-                backdropColor="#1D1F27"
-                backdropOpacity={.85}
-            >
-                <Container style={styles.mainview}>
-                    <HeaderBackTextCloseBtn
-                        text="BANK ACCOUNT"
-                        backhandler={() => { setShowAccountDetails(false) }}
-                        closeModal={() => { setShowAccountDetails(false) }}
-                    />
-                    <Content
-                        contentContainerStyle={[styles.contentContainerStyle, { alignItems: 'flex-start', paddingHorizontal: 15 }]}
-                        style={{ flexGrow: 1 }}>
+                        <Modal
+                            isVisible={showAccountDetail}
+                            animationIn="fadeInRight"
+                            deviceHeight={Dimensions.get("screen").height * 2}
+                            transparent={true}
+                            style={styles.modal}
+                            coverScreen={true}
+                            animationOut="slideOutDown"
+                            onBackdropPress={() => setShowAccountDetails(false)}
+                            onBackButtonPress={() => setShowAccountDetails(false)}
+                            useNativeDriver={true}
+                            hasBackdrop={true}
+                            backdropColor="#1D1F27"
+                            backdropOpacity={.85}
+                        >
+                            <Container style={styles.mainview}>
+                                <HeaderBackTextCloseBtn
+                                    text="BANK ACCOUNT"
+                                    backhandler={() => { setShowAccountDetails(false) }}
+                                    closeModal={() => { setShowAccountDetails(false) }}
+                                />
+                                <Content
+                                    contentContainerStyle={[styles.contentContainerStyle, { alignItems: 'flex-start', paddingHorizontal: 15 }]}
+                                    style={{ flexGrow: 1 }}>
 
 
 
 
-                        <View style={{ marginVertical: hp(2) }}>
-                            <Text style={{ color: '#FFFF' }}>Account holder</Text>
-                            <Text style={{ color: lightWhite }}>Ginko service technology LLC</Text>
-                        </View>
+                                    <View style={{ marginVertical: hp(2) }}>
+                                        <Text style={{ color: '#FFFF' }}>Account holder</Text>
+                                        <Text style={{ color: lightWhite }}>Ginko service technology LLC</Text>
+                                    </View>
 
 
 
-                        <View style={{ marginVertical: hp(2) }}>
-                            <Text style={{ color: '#FFFF' }}>BIC</Text>
-                            <Text style={{ color: lightWhite }}>TRWIBEB1XXX</Text>
-                        </View>
+                                    <View style={{ marginVertical: hp(2) }}>
+                                        <Text style={{ color: '#FFFF' }}>BIC</Text>
+                                        <Text style={{ color: lightWhite }}>TRWIBEB1XXX</Text>
+                                    </View>
 
-                        <View style={{ marginVertical: hp(2) }}>
-                            <Text style={{ color: '#FFFF' }}>IBAN</Text>
-                            <Text style={{ color: lightWhite }}>
-                                BE93 9672 0280 8067
+                                    <View style={{ marginVertical: hp(2) }}>
+                                        <Text style={{ color: '#FFFF' }}>IBAN</Text>
+                                        <Text style={{ color: lightWhite }}>
+                                            BE93 9672 0280 8067
 
 </Text>
-                        </View>
+                                    </View>
 
 
-                        <View style={{ marginVertical: hp(2) }}>
-                            <Text style={{ color: '#FFFF' }}>Address</Text>
-                            <Text style={{ color: lightWhite }}>
-                                Avenue Louise 54, Room S52   Brussels, 1050 , Belgium
+                                    <View style={{ marginVertical: hp(2) }}>
+                                        <Text style={{ color: '#FFFF' }}>Address</Text>
+                                        <Text style={{ color: lightWhite }}>
+                                            Avenue Louise 54, Room S52   Brussels, 1050 , Belgium
 </Text>
-                        </View>
+                                    </View>
 
 
 
 
-                        <View style={{ alignSelf: 'center', position: 'absolute', bottom: 20, flexDirection: 'row', width: width - 80, }}>
-                            <Text style={{ fontFamily: 'Poppins-Regular', color: lightWhite }}>
-                                In order to change the value of your bank{'\n'}
+                                    <View style={{ alignSelf: 'center', position: 'absolute', bottom: 20, flexDirection: 'row', width: width - 80, }}>
+                                        <Text style={{ fontFamily: 'Poppins-Regular', color: lightWhite }}>
+                                            In order to change the value of your bank{'\n'}
    account you need to contact us at our{'\n'}
    support   <CustomText
-                                    text={"example@example.com"}
-                                    locations={[0, 1]}
-                                    colors={["#A9CDFF", "#A9CDFF"]}
-                                    style={{ fontSize: 12, fontFamily: boldtext, }}
-                                />
-                                <Text style={{ color: lightWhite }}> or at our number</Text>
-                                <CustomText
-                                    text={"+391234567890"}
-                                    locations={[0, 1]}
-                                    colors={["#A9CDFF", "#A9CDFF"]}
-                                    style={{ fontSize: 12, fontFamily: boldtext, }}
-                                />
-                            </Text>
-                        </View>
+                                                text={"example@example.com"}
+                                                locations={[0, 1]}
+                                                colors={["#A9CDFF", "#A9CDFF"]}
+                                                style={{ fontSize: 12, fontFamily: boldtext, }}
+                                            />
+                                            <Text style={{ color: lightWhite }}> or at our number</Text>
+                                            <CustomText
+                                                text={"+391234567890"}
+                                                locations={[0, 1]}
+                                                colors={["#A9CDFF", "#A9CDFF"]}
+                                                style={{ fontSize: 12, fontFamily: boldtext, }}
+                                            />
+                                        </Text>
+                                    </View>
 
-
-
-
-
-
-                    </Content>
-                </Container>
+                                </Content>
+                            </Container>
+                        </Modal>
+                    </ScrollView>
+                </SafeAreaView>
             </Modal>
+
+
+
+
+
 
 
             <Modal

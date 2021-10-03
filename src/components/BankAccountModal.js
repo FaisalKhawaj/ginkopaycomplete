@@ -353,11 +353,6 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
                                     </Text>
                                 </View>
 
-
-
-
-
-
                             </Content>
                         </Container>
                     </Modal>

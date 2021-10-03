@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Content, Linking, Item, Thumbnail, Input, Label } from 'native-base'
-import { View, Text, Image, TouchableOpacity, Dimensions, Share, StyleSheet, TextInput, Platform, TouchableHighlight } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Dimensions, Share, StyleSheet, TextInput, Platform, TouchableHighlight, SafeAreaView, ScrollView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Modal from 'react-native-modal';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -233,13 +233,13 @@ const Settings = ({ navigation }) => {
                     backdropColor="#1D1F27"
                     backdropOpacity={.85}
                 >
-                    <Container style={mystylesComp.mainview}>
+                    <SafeAreaView style={mystylesComp.mainview}>
                         <HeaderBackTextCloseBtn
                             text="QR CODE"
                             backhandler={() => { QRCodeHandler() }}
                             closeModal={() => { QRCodeHandler() }}
                         />
-                        <Content
+                        <ScrollView
                             contentContainerStyle={[mystylesComp.contentContainerStyle, { justifyContent: 'center', alignItems: 'center', paddingHorizontal: 15 }]}
                             style={{ flexGrow: 1 }}>
 
@@ -254,8 +254,8 @@ const Settings = ({ navigation }) => {
                             </TouchableOpacity>
 
 
-                        </Content>
-                    </Container>
+                        </ScrollView>
+                    </SafeAreaView>
                 </Modal>
 
 
