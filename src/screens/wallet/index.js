@@ -102,7 +102,7 @@ const Home = ({ navigation }) => {
   const [requestPayment, setRequestPayment] = useState(false)
   // const [withdrawAmount, setWithdrawAmount] = useState(false)
   const [tokenmodal, setTokenModal] = useState(false)
-  const [showAccountDetail, setShowAccountDetails] = useState(false)
+  // const [showAccountDetail, setShowAccountDetails] = useState(false)
   const [BankAccountName, setBankAccountName] = useState('')
   const [AccountBIC, setAccountBIC] = useState('');
   const [AccountIBAN, setAccountIBAN] = useState('');
@@ -601,7 +601,7 @@ const Home = ({ navigation }) => {
         </Modal> */}
 
 
-        <Modal
+        {/* <Modal
           isVisible={showAccountDetail}
           animationIn="fadeInRight"
           deviceHeight={Dimensions.get("screen").height * 2}
@@ -687,7 +687,7 @@ const Home = ({ navigation }) => {
 
             </Content>
           </Container>
-        </Modal>
+        </Modal> */}
 
 
       </Content>

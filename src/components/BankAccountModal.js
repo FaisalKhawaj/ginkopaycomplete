@@ -12,6 +12,8 @@ import { boldtext, fontmedium, simpletext } from '../constants/fonts';
 import CustomText from './Text';
 const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
     const [InsertBankAccountDetails, setInsertBankAccountDetails] = useState(false)
+    const [showAccountDetail, setShowAccountDetails] = useState(false)
+
     console.log("setVisible" + setVisible + "insert bank " + InsertBankAccountDetails)
     const BankAccountModalHandler = () => {
         // setVisible(false)
@@ -20,7 +22,7 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
     }
     const InsertBankAccountHandler = () => {
         setInsertBankAccountDetails(false)
-        // setShowAccountDetails(true)
+        setShowAccountDetails(true)
     }
     const closeInsertBankAccountHandler = () => {
         setInsertBankAccountDetails(false)
@@ -271,6 +273,95 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
                             </ScrollView>
                         </SafeAreaView>
                     </Modal>
+
+                    <Modal
+                        isVisible={showAccountDetail}
+                        animationIn="fadeInRight"
+                        deviceHeight={Dimensions.get("screen").height * 2}
+                        transparent={true}
+                        style={styles.modal}
+                        coverScreen={true}
+                        animationOut="slideOutDown"
+                        onBackdropPress={() => setShowAccountDetails(false)}
+                        onBackButtonPress={() => setShowAccountDetails(false)}
+                        useNativeDriver={true}
+                        hasBackdrop={true}
+                        backdropColor="#1D1F27"
+                        backdropOpacity={.85}
+                    >
+                        <Container style={styles.mainview}>
+                            <HeaderBackTextCloseBtn
+                                text="BANK ACCOUNT"
+                                backhandler={() => { setShowAccountDetails(false) }}
+                                closeModal={() => { setShowAccountDetails(false) }}
+                            />
+                            <Content
+                                contentContainerStyle={[styles.contentContainerStyle, { alignItems: 'flex-start', paddingHorizontal: 15 }]}
+                                style={{ flexGrow: 1 }}>
+
+
+
+
+                                <View style={{ marginVertical: hp(2) }}>
+                                    <Text style={{ color: '#FFFF' }}>Account holder</Text>
+                                    <Text style={{ color: lightWhite }}>Ginko service technology LLC</Text>
+                                </View>
+
+
+
+                                <View style={{ marginVertical: hp(2) }}>
+                                    <Text style={{ color: '#FFFF' }}>BIC</Text>
+                                    <Text style={{ color: lightWhite }}>TRWIBEB1XXX</Text>
+                                </View>
+
+                                <View style={{ marginVertical: hp(2) }}>
+                                    <Text style={{ color: '#FFFF' }}>IBAN</Text>
+                                    <Text style={{ color: lightWhite }}>
+                                        BE93 9672 0280 8067
+
+</Text>
+                                </View>
+
+
+                                <View style={{ marginVertical: hp(2) }}>
+                                    <Text style={{ color: '#FFFF' }}>Address</Text>
+                                    <Text style={{ color: lightWhite }}>
+                                        Avenue Louise 54, Room S52   Brussels, 1050 , Belgium
+</Text>
+                                </View>
+
+
+
+
+                                <View style={{ alignSelf: 'center', position: 'absolute', bottom: 20, flexDirection: 'row', width: width - 80, }}>
+                                    <Text style={{ fontFamily: 'Poppins-Regular', color: lightWhite }}>
+                                        In order to change the value of your bank{'\n'}
+   account you need to contact us at our{'\n'}
+   support   <CustomText
+                                            text={"example@example.com"}
+                                            locations={[0, 1]}
+                                            colors={["#A9CDFF", "#A9CDFF"]}
+                                            style={{ fontSize: 12, fontFamily: boldtext, }}
+                                        />
+                                        <Text style={{ color: lightWhite }}> or at our number</Text>
+                                        <CustomText
+                                            text={"+391234567890"}
+                                            locations={[0, 1]}
+                                            colors={["#A9CDFF", "#A9CDFF"]}
+                                            style={{ fontSize: 12, fontFamily: boldtext, }}
+                                        />
+                                    </Text>
+                                </View>
+
+
+
+
+
+
+                            </Content>
+                        </Container>
+                    </Modal>
+
 
 
 

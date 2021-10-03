@@ -42,7 +42,7 @@ const MyWithdrawModal = ({ title, description, address, btnName, visible, setVis
     //     setBankAccountModal(true)
     // }
     const closeWithDrawModal = () => {
-        // setVisible()
+        setVisible
         setWithdrawAmount(true)
     }
     const closeWithdrawAmountHandler = () => {
