@@ -262,18 +262,18 @@ const Home = ({ navigation }) => {
       <View style={styles.mainView}>
         <Image style={styles.iconBackground} source={require('../../assets/btc.png')} />
         <View style={{ flexDirection: 'column', flex: 1 }}>
-          <Text style={{ color: '#fff', fontFamily: simpletext, fontSize: 16 }}>
+          <Text style={watchList.title}>
             {item.name}
           </Text>
-          <Text style={{ color: '#fff', fontFamily: simpletext, fontSize: 12 }}>
+          <Text style={watchList.type}>
             {item.Heading}
           </Text>
         </View>
         <View style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
-          <Text style={{ color: '#fff', fontFamily: simpletext }}>
+          <Text style={watchList.amount}>
             {item.amount}
           </Text>
-          <Text style={{ color: green, }}>
+          <Text style={watchList.percent}>
             {item.percent}
           </Text>
         </View>
@@ -587,7 +587,20 @@ const Home = ({ navigation }) => {
   );
 };
 export default Home;
-
+const watchList = StyleSheet.create({
+  title: {
+    color: '#fff', fontFamily: simpletext, fontSize: hp('1.6%')
+  },
+  amount: {
+    color: '#fff', fontSize: hp('1.6%'), fontFamily: simpletext
+  },
+  percent: {
+    color: green, fontSize: hp('1.4%'),
+  },
+  type: {
+    color: lightWhite, fontFamily: simpletext, fontSize: hp('1.4%')
+  }
+})
 const styles = StyleSheet.create({
   container: {
     flex: 1,
