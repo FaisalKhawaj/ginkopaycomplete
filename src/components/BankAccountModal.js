@@ -10,6 +10,7 @@ import HeaderBackTextCloseBtn from './HeaderBackTextClose';
 import { BackgroundColor, graycolor, lightWhite } from '../constants/colors';
 import { boldtext, fontmedium, simpletext } from '../constants/fonts';
 import CustomText from './Text';
+import PurchaseMethodBankModal from './BuyModal';
 const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
     const [InsertBankAccountDetails, setInsertBankAccountDetails] = useState(false)
     const [showAccountDetail, setShowAccountDetails] = useState(false)
@@ -268,11 +269,18 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
 
 
 
+                                {/* <PurchaseMethodBankModal visible={showAccountDetail}
+                                    backHandler={setShowAccountDetails}
+                                    closeHandler={setShowAccountDetails} /> */}
 
 
                             </ScrollView>
                         </SafeAreaView>
                     </Modal>
+
+
+
+
 
                     <Modal
                         isVisible={showAccountDetail}
@@ -293,7 +301,7 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
                             <HeaderBackTextCloseBtn
                                 text="BANK ACCOUNT"
                                 backhandler={() => { setShowAccountDetails(false) }}
-                                closeModal={() => { setShowAccountDetails(false) }}
+                                closeModal={() => setShowAccountDetails(false)}
                             />
                             <Content
                                 contentContainerStyle={[styles.contentContainerStyle, { alignItems: 'flex-start', paddingHorizontal: 15 }]}
@@ -356,9 +364,6 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
                             </Content>
                         </Container>
                     </Modal>
-
-
-
 
 
 

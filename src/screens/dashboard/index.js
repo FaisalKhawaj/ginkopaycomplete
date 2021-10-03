@@ -553,7 +553,10 @@ const Home = ({ navigation }) => {
               }
             </>
           }
-          <MarketModal item={market} showMarketModal={showMarketModal} setShowMarketModal={setShowMarketModal} />
+          <MarketModal item={market}
+            showMarketModal={showMarketModal}
+            setShowMarketModal={setShowMarketModal} />
+
           <DashboardBuy
             visible={dashboardBuyModal}
             text="BUY CPXT"
