@@ -9,7 +9,7 @@ import CustomButton from './Button'
 import CustomText from './Text'
 const MarketBuySellConfirmAmountModal = ({ visible, btnText, Amount, Total, closeModal }) => {
 
-
+    // const type=btnText==='BUY'?
 
     return (
         <Modal

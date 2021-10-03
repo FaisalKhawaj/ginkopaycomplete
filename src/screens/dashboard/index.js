@@ -202,7 +202,7 @@ const Home = ({ navigation }) => {
   const [itemView, setItemView] = useState(false)
   const [dashboardBuyModal, setDashboardBuyModal] = useState(false)
   const [dashboardSellModal, setDashboardSellModal] = useState(false)
-  const [showBuyConfirmAmountModal, setShowBuyConfirmAmountModal] = useState(false)
+  // const [showBuyConfirmAmountModal, setShowBuyConfirmAmountModal] = useState(false)
   const [showSellConfirmAmountModal, setShowSellConfirmAmountModal] = useState(false)
   const news = useSelector(state => state.home?.news);
   const newsDetail = useSelector(state => state.home?.newsDetail);
@@ -213,10 +213,10 @@ const Home = ({ navigation }) => {
   const closeSellModals = () => {
     setDashboardSellModal(false)
   }
-  const DashboardBuyBtnHandler = () => {
-    setDashboardBuyModal(false)
-    setShowBuyConfirmAmountModal(true)
-  }
+  // const DashboardBuyBtnHandler = () => {
+  //   setDashboardBuyModal(false)
+  //   setShowBuyConfirmAmountModal(true)
+  // }
   const DashboardSellBtnHandler = () => {
     setDashboardSellModal(false)
     setShowSellConfirmAmountModal(true)
@@ -558,7 +558,7 @@ const Home = ({ navigation }) => {
             visible={dashboardBuyModal}
             text="BUY CPXT"
             setVisible={closeBuyModals}
-            setVisible2={DashboardBuyBtnHandler} />
+            setVisible2={setDashboardBuyModal} />
 
           <DashboardBuy
             visible={dashboardSellModal}
@@ -566,22 +566,21 @@ const Home = ({ navigation }) => {
             setVisible={closeSellModals}
             setVisible2={DashboardSellBtnHandler} />
 
-          <MarketBuySellConfirmAmountModal
+          {/* <MarketBuySellConfirmAmountModal
             visible={showSellConfirmAmountModal}
             btnText="SELL"
             closeModal={MarketSellConfirmAmountModalHandler}
             Amount="SELL"
             Total="Receive"
-          />
+          /> */}
 
-          <MarketBuySellConfirmAmountModal
+          {/* <MarketBuySellConfirmAmountModal
             visible={showBuyConfirmAmountModal}
             btnText="BUY"
             Amount="Amount"
             Total="Total"
             closeModal={MarketBuyConfirmAmountModalHandler}
-
-          />
+          /> */}
         </View>
       </Content>
     </SafeAreaView>

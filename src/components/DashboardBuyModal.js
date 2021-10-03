@@ -1,5 +1,5 @@
-import React from 'react'
-import { Dimensions, StyleSheet, Text, TextInput, Image, TouchableOpacity, View } from "react-native";
+import React, { useState } from 'react'
+import { Dimensions, StyleSheet, Text, TextInput, Image, TouchableOpacity, View, SafeAreaView, ScrollView } from "react-native";
 import { Container, Content, Item, Input, Label } from 'native-base'
 import Modal from 'react-native-modal';
 import { boldtext, simpletext } from '../constants/fonts';
@@ -8,10 +8,31 @@ import HeaderBackTextCloseBtn from './HeaderBackTextClose'
 import ARROWDOWN from '../assets/arrowdown.svg'
 import CustomButton from './Button'
 import CustomText from './Text';
+import MarketBuySellConfirmAmountModal from './BuySellConfirmAmoutModal';
 const { width, height } = Dimensions.get("window");
 
 const DashboardBuy = ({ visible, text, setVisible, setVisible2 }) => {
     const [value, setValue] = React.useState("")
+    const [showBuyConfirmAmountModal, setShowBuyConfirmAmountModal] = useState(false)
+    const [showSellConfirmAmountModal, setShowSellConfirmAmountModal] = useState(false)
+
+    const MarketBuyConfirmAmountModalHandler = () => {
+        setVisible2
+        setShowBuyConfirmAmountModal(false)
+    }
+
+    const DashboardBuyBtnHandler = () => {
+        setVisible2
+        setShowBuyConfirmAmountModal(true)
+    }
+    const DashboardSellBtnHandler = () => {
+        setVisible2
+        setShowSellConfirmAmountModal(true)
+    }
+    const MarketSellConfirmAmountModalHandler = () => {
+        setVisible2
+        setShowSellConfirmAmountModal(false)
+    }
     return (
         <Modal
             isVisible={visible}
@@ -28,13 +49,13 @@ const DashboardBuy = ({ visible, text, setVisible, setVisible2 }) => {
             backdropColor="#1D1F27"
             backdropOpacity={.85}
         >
-            <Container style={styles.mainview}>
+            <SafeAreaView style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="Amount"
                     backhandler={() => { setVisible() }}
                     closeModal={() => { setVisible() }}
                 />
-                <Content
+                <ScrollView
                     contentContainerStyle={styles.contentContainerStyle}
                     style={{ flexGrow: 1 }}>
 
@@ -86,11 +107,28 @@ const DashboardBuy = ({ visible, text, setVisible, setVisible2 }) => {
 
 
                     <View style={{ position: "absolute", bottom: 20 }}>
-                        <CustomButton text={"Next"} onPress={() => setVisible2()} />
+                        <CustomButton text={"Next"} onPress={() => { text === 'BUY CPXT' ? DashboardBuyBtnHandler() : DashboardSellBtnHandler() }} />
                     </View>
-                </Content>
-            </Container>
+
+                    <MarketBuySellConfirmAmountModal
+                        visible={showBuyConfirmAmountModal}
+                        btnText="BUY"
+                        Amount="Amount"
+                        Total="Total"
+                        closeModal={MarketBuyConfirmAmountModalHandler}
+                    />
+
+                    <MarketBuySellConfirmAmountModal
+                        visible={showSellConfirmAmountModal}
+                        btnText="SELL"
+                        closeModal={MarketSellConfirmAmountModalHandler}
+                        Amount="SELL"
+                        Total="Receive"
+                    />
+                </ScrollView>
+            </SafeAreaView>
         </Modal>
+
     )
 }
 
