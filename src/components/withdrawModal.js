@@ -67,12 +67,15 @@ const MyWithdrawModal = ({ title, description, address, btnName, visible, setVis
             backdropOpacity={.85}
         >
             <Container style={{ flex: 1, backgroundColor: 'red' }} >
-                <Content style={styles.mainview} contentContainerStyle={{ alignItems: "center", flexGrow: 1 }}>
-                    <View style={{ backgroundColor: "#ffffff", height: 4, width: 50, borderRadius: 5 }} />
-                    <Text style={styles.Receive}> {title}</Text>
-                    <Image source={require("../assets/wallet.png")} style={{ width: 150, height: 150 }} />
-                    <Text style={[styles.otherassets, { textAlign: 'center' }]}>{description}</Text>
-                    {/* {address ?
+                <Content style={styles.mainview} contentContainerStyle={{ flexGrow: 1 }}>
+                    <TouchableOpacity style={{ flex: 1, alignItems: "center", }} onPress={() => setVisible()}>
+
+
+                        <View style={{ backgroundColor: "#ffffff", height: 4, width: 50, borderRadius: 5 }} />
+                        <Text style={styles.Receive}> {title}</Text>
+                        <Image source={require("../assets/wallet.png")} style={{ width: 150, height: 150 }} />
+                        <Text style={[styles.otherassets, { textAlign: 'center' }]}>{description}</Text>
+                        {/* {address ?
                         <TouchableOpacity
                             onPress={() => OpenLinkModal()}
                             style={{ flexDirection: "row", marginVertical: 10, justifyContent: "center", alignItems: "center", backgroundColor: "#2A2D3C", height: 40, minWidth: 100, paddingHorizontal: 20, borderRadius: 10 }}>
@@ -80,11 +83,13 @@ const MyWithdrawModal = ({ title, description, address, btnName, visible, setVis
                             <COPY />
                         </TouchableOpacity> : null
                     } */}
-                    <View style={{ position: "absolute", bottom: 20 }}>
-                        <CustomButton text={btnName} onPress={() => closeWithDrawModal()} />
-                    </View>
+                        <View style={{ position: "absolute", bottom: 20 }}>
+                            <CustomButton text={btnName} onPress={() => closeWithDrawModal()} />
+                        </View>
+                    </TouchableOpacity>
                 </Content>
             </Container>
+
             <WithdrawAmount visible={withdrawAmount}
                 setVisible={setWithdrawAmount}
                 closeWithdraw={setWithdrawAmount}

@@ -64,27 +64,30 @@ const recievedModal = ({ title, description, address, btnName, visible, setVisib
             backdropOpacity={.85}
         >
             <Container style={{ flex: 1, backgroundColor: 'red' }} >
-                <Content style={styles.mainview} contentContainerStyle={{ alignItems: "center", flexGrow: 1 }}>
-                    <View style={{ backgroundColor: "#ffffff", height: 4, width: 50, borderRadius: 5 }} />
-                    <Text style={styles.Receive}> {title}</Text>
-                    <Image source={require("../assets/wallet.png")} style={{ width: 150, height: 150 }} />
-                    <Text style={[styles.otherassets, { textAlign: 'center' }]}>{description}</Text>
+                <Content style={styles.mainview} contentContainerStyle={{ flexGrow: 1 }}>
+                    <TouchableOpacity style={{ flex: 1, alignItems: "center", }} onPress={() => setVisible()}>
 
-                    <TouchableOpacity
-                        onPress={() => OpenLinkModal()}
-                        style={{ flexDirection: "row", marginVertical: 10, justifyContent: "center", alignItems: "center", backgroundColor: "#2A2D3C", height: 40, minWidth: 100, paddingHorizontal: 20, borderRadius: 10 }}>
-                        <Text style={styles.Receive}> {address}</Text>
-                        <COPY />
+                        <View style={{ backgroundColor: "#ffffff", height: 4, width: 50, borderRadius: 5 }} />
+                        <Text style={styles.Receive}> {title}</Text>
+                        <Image source={require("../assets/wallet.png")} style={{ width: 150, height: 150 }} />
+                        <Text style={[styles.otherassets, { textAlign: 'center' }]}>{description}</Text>
+
+                        <TouchableOpacity
+                            onPress={() => OpenLinkModal()}
+                            style={{ flexDirection: "row", marginVertical: 10, justifyContent: "center", alignItems: "center", backgroundColor: "#2A2D3C", height: 40, minWidth: 100, paddingHorizontal: 20, borderRadius: 10 }}>
+                            <Text style={styles.Receive}> {address}</Text>
+                            <COPY />
+                        </TouchableOpacity>
+
+                        <View style={{ position: "absolute", bottom: 20 }}>
+                            <CustomButton text={btnName} onPress={() => {
+                                setVisible
+                                openRequestModal()
+
+                            }
+                            } />
+                        </View>
                     </TouchableOpacity>
-
-                    <View style={{ position: "absolute", bottom: 20 }}>
-                        <CustomButton text={btnName} onPress={() => {
-                            setVisible
-                            openRequestModal()
-
-                        }
-                        } />
-                    </View>
                 </Content>
             </Container>
 
