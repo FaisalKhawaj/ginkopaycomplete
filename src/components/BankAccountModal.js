@@ -26,6 +26,7 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
         setShowAccountDetails(true)
     }
     const closeInsertBankAccountHandler = () => {
+        setVisible()
         setInsertBankAccountDetails(false)
     }
     //   const closeInsertBankAccountHandler = () => {
@@ -269,9 +270,9 @@ const MyBankAccountModal = ({ visible, setVisible, closeBankAccount }) => {
 
 
 
-                                {/* <PurchaseMethodBankModal visible={showAccountDetail}
+                                <PurchaseMethodBankModal visible={showAccountDetail}
                                     backHandler={setShowAccountDetails}
-                                    closeHandler={setShowAccountDetails} /> */}
+                                    closeHandler={setShowAccountDetails} />
 
 
                             </ScrollView>
