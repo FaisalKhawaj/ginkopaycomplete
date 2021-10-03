@@ -17,7 +17,7 @@ const { width, height } = Dimensions.get("window");
 const MyWithdrawModal = ({ title, description, address, btnName, visible, setVisible, }) => {
     // const [copylink, setCopyLink] = useState(false)
     // const [requestPayment, setRequestPayment] = useState(false)
-    // const [withdrawAmount, setWithdrawAmount] = useState(false)
+    const [withdrawAmount, setWithdrawAmount] = useState(false)
     // const openRequestModal = () => {
     //     setRequestPayment(true)
     // }
@@ -37,6 +37,19 @@ const MyWithdrawModal = ({ title, description, address, btnName, visible, setVis
     //     setVisible();
     //     // transcitioncompletefunction()
     // }
+    const WithdrawAmountHandler = () => {
+        setVisible()
+        setBankAccountModal(true)
+    }
+    const closeWithDrawModal = () => {
+        setVisible()
+        setWithdrawAmount(true)
+    }
+    const closeWithdrawAmountHandler = () => {
+        setVisible()
+        setWithdrawAmount(false)
+    }
+
     return (
         <Modal
             isVisible={visible}
@@ -68,10 +81,14 @@ const MyWithdrawModal = ({ title, description, address, btnName, visible, setVis
                         </TouchableOpacity> : null
                     } */}
                     <View style={{ position: "absolute", bottom: 20 }}>
-                        <CustomButton text={btnName} onPress={() => setVisible()} />
+                        <CustomButton text={btnName} onPress={closeWithDrawModal} />
                     </View>
                 </Content>
             </Container>
+            <WithdrawAmount visible={withdrawAmount}
+                setVisible={setWithdrawAmount}
+                closeWithdraw={setWithdrawAmount}
+            />
             {/* <CopyLinkModal visible={copylink} setVisible={() => navigatetoroot()} />
             <RequestPaymentModal
                 visible={requestPayment}
