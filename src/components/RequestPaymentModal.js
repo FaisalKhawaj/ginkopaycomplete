@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dimensions, StyleSheet, Text, TextInput, Image, TouchableOpacity, View } from "react-native";
+import { Dimensions, StyleSheet, Text, TextInput, Image, TouchableOpacity, View, SafeAreaView, ScrollView } from "react-native";
 import { Container, Content, Item, Input, Label } from 'native-base'
 import Modal from 'react-native-modal';
 import { boldtext, simpletext } from '../constants/fonts';
@@ -35,13 +35,13 @@ const RequestPaymentModal = ({ visible, setVisible, closePayment }) => {
             backdropColor="#1D1F27"
             backdropOpacity={.85}
         >
-            <Container style={styles.mainview}>
+            <SafeAreaView style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="Amount"
                     backhandler={closePayment}
                     closeModal={closePayment}
                 />
-                <Content
+                <ScrollView
                     contentContainerStyle={styles.contentContainerStyle}
                     style={{ flexGrow: 1 }}>
 
@@ -85,8 +85,8 @@ const RequestPaymentModal = ({ visible, setVisible, closePayment }) => {
                     </View>
                     <CopyLinkModal visible={copylink}
                         setVisible={navigatetoroot} />
-                </Content>
-            </Container>
+                </ScrollView>
+            </SafeAreaView>
         </Modal>
 
 

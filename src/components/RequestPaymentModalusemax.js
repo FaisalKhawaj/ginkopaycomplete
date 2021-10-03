@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dimensions, StyleSheet, Text, TextInput, Image, TouchableOpacity, View } from "react-native";
+import { Dimensions, StyleSheet, Text, TextInput, SafeAreaView, ScrollView, Image, TouchableOpacity, View } from "react-native";
 import { Container, Content, Item, Input, Label } from 'native-base'
 import Modal from 'react-native-modal';
 import { boldtext, simpletext } from '../constants/fonts';
@@ -46,13 +46,13 @@ const RequestPaymentModal = ({ visible, setVisible, backbuttonFunctionpaymentMod
             backdropColor="#1D1F27"
             backdropOpacity={.85}
         >
-            <Container style={styles.mainview}>
+            <SafeAreaView style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="Amount"
                     backhandler={() => backbuttonFunctionpaymentModaluseMax("back")}
                     closeModal={() => backbuttonFunctionpaymentModaluseMax("close")}
                 />
-                <Content
+                <ScrollView
                     contentContainerStyle={styles.contentContainerStyle}
                     style={{ flexGrow: 1 }}>
                     <View style={{ flexDirection: "row", justifyContent: "space-between", width: width / 2, marginLeft: width / 4 }}>
@@ -96,12 +96,12 @@ const RequestPaymentModal = ({ visible, setVisible, backbuttonFunctionpaymentMod
                     <Text style={{ color: "#ffffff", fontFamily: simpletext, marginVertical: 10 }}>BALANCE 12.343 GDC</Text>
 
 
-                </Content>
+                </ScrollView>
                 <View style={{ position: "absolute", bottom: 20, alignSelf: "center" }}>
                     <CustomButton text={"Next"} onPress={() => setSendModalConfirm(true)} />
                 </View>
 
-            </Container>
+            </SafeAreaView>
             <TokenModal2 visible={tokenmodal2} setVisible={() => alert("set visible")} opensendmodal={() => closeTokenModal2andopensend()} />
             <SentModalConfirm
                 visible={sendmodalconfirm}
