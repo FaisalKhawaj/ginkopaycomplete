@@ -17,10 +17,10 @@ import MyBankAccountModal from './BankAccountModal';
 const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
     const [value, setValue] = React.useState("")
     const [BankAccountModal, setBankAccountModal] = useState(false)
-    const AddBankAccountHandler = () => {
-        setBankAccountModal(false)
-        // setInsertBankAccountDetails(true)
-    }
+    // const AddBankAccountHandler = () => {
+    //     setBankAccountModal(false)
+    //     // setInsertBankAccountDetails(true)
+    // }
     const closeBankAccountModal = () => {
         setBankAccountModal(false)
     }
@@ -103,7 +103,7 @@ const WithdrawAmount = ({ visible, setVisible, closeWithdraw }) => {
                     </View>
                 </ScrollView>
                 <MyBankAccountModal visible={BankAccountModal}
-                    setVisible={AddBankAccountHandler}
+                    setVisible={setBankAccountModal}
                     closeBankAccount={closeBankAccountModal}
                 />
             </SafeAreaView>

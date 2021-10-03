@@ -460,10 +460,10 @@ const Home = ({ navigation }) => {
           closeWithdraw={closeWithdrawAmountHandler}
         /> */}
 
-        <MyBankAccountModal visible={BankAccountModal}
+        {/* <MyBankAccountModal visible={BankAccountModal}
           setVisible={AddBankAccountHandler}
           closeBankAccount={closeBankAccountModal}
-        />
+        /> */}
 
 
         <Modal

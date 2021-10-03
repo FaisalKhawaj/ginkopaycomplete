@@ -37,10 +37,10 @@ const MyWithdrawModal = ({ title, description, address, btnName, visible, setVis
     //     setVisible();
     //     // transcitioncompletefunction()
     // }
-    const WithdrawAmountHandler = () => {
-        setVisible()
-        setBankAccountModal(true)
-    }
+    // const WithdrawAmountHandler = () => {
+    //     setVisible()
+    //     setBankAccountModal(true)
+    // }
     const closeWithDrawModal = () => {
         setVisible()
         setWithdrawAmount(true)
