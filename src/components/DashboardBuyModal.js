@@ -52,8 +52,8 @@ const DashboardBuy = ({ visible, text, setVisible, setVisible2 }) => {
             <SafeAreaView style={styles.mainview}>
                 <HeaderBackTextCloseBtn
                     text="Amount"
-                    backhandler={() => { setVisible() }}
-                    closeModal={() => { setVisible() }}
+                    backhandler={() => setVisible()}
+                    closeModal={() => setVisible()}
                 />
                 <ScrollView
                     contentContainerStyle={styles.contentContainerStyle}
