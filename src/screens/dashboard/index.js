@@ -27,7 +27,7 @@ let marketdata = [
     dollar: "$226.69",
     percent: +2,
     title: "19.2371 CPXT/GDC",
-    DetailImg: require('../../assets/Apex.gif'),
+    DetailImg: require('../../assets/Apexx.gif'),
     DetailName: 'APEX LEGEND',
     DetailDescription: 'Apex Legends is a free-to-play battle royale developed by Respawn Entertainment and published by Electronic Arts. Set in the same universe as Titanfall, the game was released for Microsoft Windows, PlayStation 4 and Xbox One on February 4th 2019. On March 10th  2021, the game has also landed on Nintendo Switch.\n Apex coin is the official currency of the Apex universe, with which you can buy bundles and skins for customize your LEGEND.'
 
@@ -73,7 +73,7 @@ let marketdata = [
     dollar: "$20.83",
     percent: -1.3,
     title: "12.74 VRT/GDC",
-    DetailImg: require('../../assets/Valorant.gif'),
+    DetailImg: require('../../assets/Valorantt.gif'),
     DetailName: 'VALORANT',
     DetailDescription: 'Valorant is a free-to-play first-person shooter developed and published by Riot Games, for Microsoft Windows.\nWith the Valorant official currency players will be able to unlock new weapon models on the official shop. '
 
